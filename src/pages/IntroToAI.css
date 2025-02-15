@@ -1,0 +1,508 @@
+.objective-section {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.main-objective {
+  font-size: 1.1rem;
+  color: #1a365d;
+  margin: 1.5rem 0;
+  line-height: 1.6;
+}
+
+.key-outcomes {
+  background-color: #f8fafc;
+  padding: 1.5rem 2rem;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.key-outcomes h3 {
+  color: #2563eb;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.key-outcomes ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.key-outcomes li {
+  padding: 0.5rem 0 0.5rem 1.75rem;
+  position: relative;
+  line-height: 1.5;
+  color: #4a5568;
+}
+
+.key-outcomes li:before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #2563eb;
+  font-weight: bold;
+}
+
+.approach {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #4a5568;
+  margin-top: 1.5rem;
+  padding: 0 0.5rem;
+}
+
+.section {
+  margin-bottom: 2.5rem;
+  max-width: 800px;
+}
+
+.section h2 {
+  color: #1a365d;
+  margin-bottom: 1.5rem;
+  font-size: 1.75rem;
+  font-weight: 600;
+}
+
+.requirements-list, .resources-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.requirements-list > div {
+  margin-top: 0.5rem;
+}
+
+.requirements-list strong {
+  display: block;
+  color: #2563eb;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.requirements-list ul {
+  margin: 0;
+  padding-left: 1.25rem;
+  list-style-type: none;
+}
+
+.requirements-list li {
+  position: relative;
+  padding: 0.25rem 0;
+  color: #4a5568;
+}
+
+.requirements-list li:before {
+  content: "•";
+  position: absolute;
+  left: -1.25rem;
+  color: #2563eb;
+}
+
+.requirements-list li[data-type="note"] {
+  margin: 0.25rem 0;
+  padding: 0.5rem 0.75rem;
+  background: #f7f7f7;
+  border-radius: 0.25rem;
+  font-style: italic;
+  color: #666;
+}
+
+.requirements-list li[data-type="note"]:before {
+  display: none;
+}
+
+.requirements-list li[data-type="tip"] {
+  margin-top: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  background: #f0f9ff;
+  border-left: 3px solid #3b82f6;
+  border-radius: 0.25rem;
+}
+
+.requirements-list li[data-type="tip"]:before {
+  display: none;
+}
+
+.requirements-list strong:contains("Important Setup Information") {
+  color: #1a365d;
+  font-size: 1.15rem;
+}
+
+.requirements-list strong:contains("Important Setup Information") + ul li {
+  color: #2d3748;
+  line-height: 1.5;
+}
+
+.requirements-list ul li, .resources-list ul li {
+  position: relative;
+  padding: 0.4rem 0;
+  color: #4a5568;
+}
+
+.requirements-list ul li:before, .resources-list ul li:before {
+  content: "•";
+  position: absolute;
+  left: -1.25rem;
+  color: #2563eb;
+}
+
+.overview-content {
+  max-width: 100%;
+  padding: 2rem;
+}
+
+.accordion {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  background: white;
+}
+
+.accordion:hover {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.accordion-header {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.accordion-header:hover {
+  background-color: #f8fafc;
+}
+
+.accordion-header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1a365d;
+}
+
+.accordion-icon {
+  font-size: 1.5rem;
+  color: #2563eb;
+  font-weight: 300;
+  transition: transform 0.2s ease;
+}
+
+.accordion.open .accordion-icon {
+  transform: rotate(180deg);
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+  padding: 0 1.5rem;
+}
+
+.accordion-content.show {
+  max-height: 2000px;
+  padding: 0.5rem 1.5rem 1.5rem;
+}
+
+.worksheet-container {
+  margin-top: 1rem;
+}
+
+.worksheet-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  background: #f8fafc;
+  border-radius: 8px;
+}
+
+.worksheet-name {
+  font-size: 1.1rem;
+  color: #1a365d;
+  margin: 0;
+  font-weight: 600;
+}
+
+.worksheet-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  text-decoration: none;
+  color: white;
+  background: #2563eb;
+  transition: all 0.2s ease;
+}
+
+.worksheet-download:hover {
+  background: #1d4ed8;
+}
+
+.worksheet-download svg {
+  width: 16px;
+  height: 16px;
+}
+
+.worksheet-preview {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+  margin-bottom: 2rem;
+}
+
+.worksheet-preview iframe {
+  display: block;
+  width: 100%;
+  border: none;
+  background: white;
+}
+
+.worksheets-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.worksheet-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem;
+  border-radius: 8px;
+  background: #f8fafc;
+  margin: 0.5rem 0;
+}
+
+.worksheet-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.worksheet-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.worksheet-link.preview {
+  color: #2563eb;
+  background: white;
+}
+
+.worksheet-link.preview:hover {
+  background: #eff6ff;
+}
+
+.worksheet-link.download {
+  color: white;
+  background: #2563eb;
+}
+
+.worksheet-link.download:hover {
+  background: #1d4ed8;
+}
+
+.worksheet-link svg {
+  width: 16px;
+  height: 16px;
+}
+
+.day-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.day-content h2 {
+  color: #2563eb;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+}
+
+.day-content section {
+  margin-bottom: 2rem;
+  background: white;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.day-content h3 {
+  color: #1e40af;
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+}
+
+.day-content h4 {
+  color: #374151;
+  margin: 1rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.lesson-section {
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.lesson-section:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.lesson-section h4 {
+  color: #2563eb;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.lesson-section h5 {
+  color: #374151;
+  font-size: 1.1rem;
+  margin: 1rem 0;
+}
+
+.lesson-section p {
+  margin: 0.5rem 0;
+  color: #4b5563;
+}
+
+.lesson-section ul, .lesson-section ol {
+  padding-left: 1.5rem;
+  margin: 0.5rem 0;
+}
+
+.lesson-section ul {
+  list-style-type: disc;
+}
+
+.lesson-section ol {
+  list-style-type: decimal;
+}
+
+.lesson-section ul ul {
+  list-style-type: circle;
+  margin-left: 1rem;
+}
+
+.example-block {
+  background: #f8fafc;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 0.5rem;
+  border-left: 3px solid #2563eb;
+}
+
+.example-block h5 {
+  margin-top: 0;
+  color: #1e40af;
+}
+
+.example-block ul {
+  margin-bottom: 0;
+}
+
+.resources a {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.resources a:hover {
+  text-decoration: underline;
+}
+
+.teacher-tips {
+  background: #f0f9ff !important;
+  border-left: 3px solid #3b82f6;
+}
+
+.pre-setup {
+  background: #f7f7f7 !important;
+}
+
+.presentation-preview {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #f8fafc;
+  border-radius: 0.5rem;
+  border: 1px solid #e2e8f0;
+}
+
+.presentation-preview iframe {
+  width: 100%;
+  height: 400px;
+  border: none;
+  border-radius: 0.25rem;
+}
+
+@media screen and (max-width: 768px) {
+  .overview-content {
+    padding: 1rem;
+  }
+  
+  .accordion-header {
+    padding: 1rem;
+  }
+  
+  .accordion-content.show {
+    padding: 1rem 1rem;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .worksheet-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .worksheet-download {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .worksheet-preview iframe {
+    height: 500px;
+  }
+  
+  .worksheet-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  
+  .worksheet-name {
+    margin-right: 0;
+  }
+  
+  .worksheet-actions {
+    width: 100%;
+  }
+  
+  .worksheet-link {
+    flex: 1;
+    justify-content: center;
+  }
+}
+
+@media screen and (min-width: 640px) {
+  /* Removed grid styles */
+}

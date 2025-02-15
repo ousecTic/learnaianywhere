@@ -1,4 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import '../styles/Timeline.css';
+import './IntroToAI.css';
+import Overview from '../components/course/week1/Overview';
+import DayOne from '../components/course/week1/DayOne';
+import DayTwo from '../components/course/week1/DayTwo';
+import DayThree from '../components/course/week1/DayThree';
+import DayFour from '../components/course/week1/DayFour';
+import DayFive from '../components/course/week1/DayFive';
 
 const IntroToAI = () => {
   const [activeTab, setActiveTab] = useState('overview');
@@ -25,127 +33,31 @@ const IntroToAI = () => {
     { id: 'day5', label: 'Day 5: Presentation' }
   ];
 
-  const weekContent = {
-    overview: {
-      title: "Introduction to Artificial Intelligence",
-      description: "This week's lessons provides students with a foundational understanding of artificial intelligence (AI) through hands-on experience.",
-      content: {
-        objectiveOverview: {
-          title: "Objective Overview",
-          text: [
-            "Over the course of the week, students will collaborate to build a personalized image classifier, exploring a theme of their choice. They will learn the essential steps involved in AI development, such as data collection, feature selection, and model training, while also examining the ethical implications of AI, including bias in datasets.",
-            "By the end of the course, students will gain both theoretical knowledge and practical skills, empowering them to create their own basic AI models and articulate the value of responsible AI usage."
-          ]
-        },
-        requirements: {
-          title: "Requirements",
-          items: [
-            {
-              text: "Computer with Display Capability: Ensure access to a computer or laptop with a screen large enough to display the PowerPoint presentation.",
-              subitems: []
-            },
-            {
-              text: "Whiteboard or Chalkboard: Use for additional explanations or illustrations during the lesson.",
-              subitems: []
-            },
-            {
-              text: "App Downloads: Install the following apps on all devices:",
-              subitems: [
-                "Offline Plant Disease Classifier",
-                "Offline Image Classifier"
-              ]
-            },
-            {
-              text: "Worksheets: Print out the worksheets for students to complete their projects. If a printer is unavailable, students can easily replicate the worksheet in their notebooks",
-              subitems: []
-            }
-          ]
-        },
-        optional: {
-          title: "Optional",
-          items: [
-            "Open Camera App: Use this app if teams prefer to save their photos in separate folders. If it's acceptable to mix photos from different teams, the native camera app can also be used"
-          ]
-        }
-      }
-    },
-    day1: {
-      title: "What is AI",
-      content: "Content for Day 1"
-    },
-    day2: {
-      title: "Components of Machine Learning",
-      content: "Content for Day 2"
-    },
-    day3: {
-      title: "How do Machines Learn?",
-      content: "Content for Day 3"
-    },
-    day4: {
-      title: "AI Bias",
-      content: "Content for Day 4"
-    },
-    day5: {
-      title: "Presentation Day",
-      content: "Content for Day 5"
-    }
-  };
-
-  const renderOverviewContent = () => {
-    const { objectiveOverview, requirements, optional } = weekContent.overview.content;
-    
-    return (
-      <div className="overview-content">
-        <div className="section">
-          <h2>{objectiveOverview.title}</h2>
-          {objectiveOverview.text.map((paragraph, index) => (
-            <p key={index}>{paragraph}</p>
-          ))}
-        </div>
-
-        <div className="section">
-          <h2>{requirements.title}</h2>
-          <ul>
-            {requirements.items.map((item, index) => (
-              <li key={index}>
-                {item.text}
-                {item.subitems.length > 0 && (
-                  <ul>
-                    {item.subitems.map((subitem, subIndex) => (
-                      <li key={subIndex}>{subitem}</li>
-                    ))}
-                  </ul>
-                )}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="section">
-          <h2>{optional.title}</h2>
-          <ul>
-            {optional.items.map((item, index) => (
-              <li key={index}>{item}</li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    );
-  };
-
   const renderContent = () => {
-    if (activeTab === 'overview') {
-      return renderOverviewContent();
+    switch (activeTab) {
+      case 'overview':
+        return <Overview />;
+      case 'day1':
+        return <DayOne />;
+      case 'day2':
+        return <DayTwo />;
+      case 'day3':
+        return <DayThree />;
+      case 'day4':
+        return <DayFour />;
+      case 'day5':
+        return <DayFive />;
+      default:
+        return <div>Content not found</div>;
     }
-    return <div>{weekContent[activeTab].content}</div>;
   };
 
   return (
     <div className="week-page">
       <div className="week-header">
         <div className="container">
-          <h1>{weekContent.overview.title}</h1>
-          <p>{weekContent.overview.description}</p>
+          <h1>Introduction to Artificial Intelligence</h1>
+          <p>This week's lessons provides students with a foundational understanding of artificial intelligence (AI) through hands-on experience.</p>
         </div>
       </div>
 
@@ -204,7 +116,6 @@ const IntroToAI = () => {
             ))}
           </div>
         )}
-
         <div className="tab-content">
           {renderContent()}
         </div>
