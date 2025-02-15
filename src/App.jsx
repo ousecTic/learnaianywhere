@@ -1,12 +1,15 @@
-import React from 'react'
-import { BrowserRouter as Router } from 'react-router-dom'
-import Navbar from './components/Navbar'
-import Hero from './components/Hero'
-import Features from './components/Features'
-import CurriculumFeatures from './components/CurriculumFeatures'
-import CallToAction from './components/CallToAction'
-import Footer from './components/Footer'
-import './App.css'
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import Home from './pages/Home';
+import Curriculum from './pages/Curriculum';
+import IntroToAI from './pages/IntroToAI';
+import IntroToGenerativeAI from './pages/IntroToGenerativeAI';
+import GetInvolved from './pages/GetInvolved';
+import AboutUs from './pages/AboutUs';
+import Contact from './pages/Contact';
+import './App.css';
 
 function App() {
   return (
@@ -14,15 +17,20 @@ function App() {
       <div className="app">
         <Navbar />
         <main>
-          <Hero />
-          <Features />
-          <CurriculumFeatures />
-          <CallToAction />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/curriculum" element={<Curriculum />} />
+            <Route path="/curriculum/intro-to-ai" element={<IntroToAI />} />
+            <Route path="/curriculum/intro-to-generative-ai" element={<IntroToGenerativeAI />} />
+            <Route path="/get-involved" element={<GetInvolved />} />
+            <Route path="/about" element={<AboutUs />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
         </main>
         <Footer />
       </div>
     </Router>
-  )
+  );
 }
 
-export default App
+export default App;

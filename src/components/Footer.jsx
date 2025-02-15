@@ -1,42 +1,46 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../assets/logo.svg';
 
 const Footer = () => {
-  const currentYear = new Date().getFullYear();
-
   return (
     <footer className="footer">
       <div className="container">
         <div className="footer-content">
           <div className="footer-section">
-            <Link to="/" className="footer-logo">
-              <img src={logo} alt="Learn AI Anywhere" />
-            </Link>
-            <p>Making AI education accessible to everyone,
-            everywhere.</p>
+            <h3>Learn AI Anywhere</h3>
+            <p>Bringing AI literacy to underserved communities worldwide.</p>
           </div>
+          
           <div className="footer-section">
-            <h4>Platform</h4>
-            <Link to="/curriculum">Our Curriculum</Link>
-            <Link to="/resources">Resources</Link>
-            <Link to="/about">About Us</Link>
+            <h3>Quick Links</h3>
+            <ul>
+              <li><Link to="/curriculum">Curriculum</Link></li>
+              <li><Link to="/get-involved">Get Involved</Link></li>
+              <li><Link to="/about">About Us</Link></li>
+              <li><Link to="/contact">Contact</Link></li>
+            </ul>
           </div>
+
           <div className="footer-section">
-            <h4>Resources</h4>
-            <Link to="/lesson-plans">Lesson Plans</Link>
-            <Link to="/activities">Activities</Link>
-            <Link to="/guides">Teacher Guides</Link>
+            <h3>Curriculum</h3>
+            <ul>
+              <li><Link to="/curriculum/intro-to-ai">Introduction to AI</Link></li>
+              <li><Link to="/curriculum/intro-to-generative-ai">Introduction to Generative AI</Link></li>
+            </ul>
           </div>
+
           <div className="footer-section">
-            <h4>Contact</h4>
-            <Link to="/contact">Get in Touch</Link>
-            <Link to="/support">Support</Link>
-            <Link to="/faqs">FAQs</Link>
+            <h3>Connect</h3>
+            <ul>
+              <li><Link to="/get-involved">Volunteer</Link></li>
+              <li><Link to="/get-involved">Partner with Us</Link></li>
+              <li><Link to="/contact">Contact Us</Link></li>
+            </ul>
           </div>
         </div>
+        
         <div className="footer-bottom">
-          <p className="text-center"> {currentYear} Learn AI Anywhere, an IRS 501(c)3 Public Charity (81-1631000). All rights reserved. Unless stated otherwise, the Learn AI Anywhere curriculum is licensed under a <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a> (the "Learn AI Anywhere Creative Commons license").</p>
+          <p>&copy; {new Date().getFullYear()} Learn AI Anywhere, an IRS 501(c)3 Public Charity (81-1631000). All rights reserved. Unless stated otherwise, the Learn AI Anywhere curriculum is licensed under a <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a> (the "Learn AI Anywhere Creative Commons license").</p>
         </div>
       </div>
     </footer>
