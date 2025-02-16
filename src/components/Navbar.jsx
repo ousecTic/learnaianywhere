@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../assets/logo.svg';
+import logo from '../assets/learnAIAnywhereLogo.png';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -39,7 +39,7 @@ const Navbar = () => {
     <nav className="navbar" ref={navRef}>
       <div className="container">
         <Link to="/" className="logo">
-          <img src={logo} alt="Learn AI Anywhere" />
+          <img src={logo} alt="Learn AI Anywhere" style={{ width: '180px', height: 'auto' }} />
         </Link>
 
         <button className="menu-btn" onClick={toggleMenu}>

@@ -1,4 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import '../styles/Timeline.css';
+import './IntroToAI.css';
+import Overview from '../components/course/week2/Overview';
+import DayOne from '../components/course/week2/DayOne';
+import DayTwo from '../components/course/week2/DayTwo';
+import DayThree from '../components/course/week2/DayThree';
+import DayFour from '../components/course/week2/DayFour';
+import DayFive from '../components/course/week2/DayFive';
 
 const IntroToGenerativeAI = () => {
   const [activeTab, setActiveTab] = useState('overview');
@@ -84,53 +92,23 @@ const IntroToGenerativeAI = () => {
     }
   };
 
-  const renderOverviewContent = () => {
-    const { objectiveOverview, requirements, optional } = weekContent.overview.content;
-    
-    return (
-      <div className="overview-content">
-        <div className="section">
-          <h2>{objectiveOverview.title}</h2>
-          {objectiveOverview.text.map((paragraph, index) => (
-            <p key={index}>{paragraph}</p>
-          ))}
-        </div>
-
-        <div className="section">
-          <h2>{requirements.title}</h2>
-          <ul>
-            {requirements.items.map((item, index) => (
-              <li key={index}>
-                {item.text}
-                {item.subitems.length > 0 && (
-                  <ul>
-                    {item.subitems.map((subitem, subIndex) => (
-                      <li key={subIndex}>{subitem}</li>
-                    ))}
-                  </ul>
-                )}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="section">
-          <h2>{optional.title}</h2>
-          <ul>
-            {optional.items.map((item, index) => (
-              <li key={index}>{item}</li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    );
-  };
-
   const renderContent = () => {
-    if (activeTab === 'overview') {
-      return renderOverviewContent();
+    switch (activeTab) {
+      case 'overview':
+        return <Overview />;
+      case 'day1':
+        return <DayOne />;
+      case 'day2':
+        return <DayTwo />;
+      case 'day3':
+        return <DayThree />;
+      case 'day4':
+        return <DayFour />;
+      case 'day5':
+        return <DayFive />;
+      default:
+        return <div>Content not found</div>;
     }
-    return <div>{weekContent[activeTab].content}</div>;
   };
 
   return (

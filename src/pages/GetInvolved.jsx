@@ -6,8 +6,7 @@ const GetInvolved = () => {
 
   const tabs = [
     { id: 'volunteers', label: 'Volunteers' },
-    { id: 'partnerships', label: 'Partnerships' },
-    { id: 'advisors', label: 'Advisors' }
+    { id: 'partnerships', label: 'Partnerships' }
   ];
 
   const volunteerRoles = [
@@ -100,52 +99,6 @@ const GetInvolved = () => {
                     <li>Academic Research: Partner with universities or research institutions to assess curriculum impact.</li>
                     <li>Localized Implementation Support: Work with nonprofits and NGOs to adapt the curriculum to cultural contexts.</li>
                   </ul>
-                </div>
-
-                <div className="role-card">
-                  <h3>Donors</h3>
-                  <p>Ensures curriculum relevance and alignment with educational goals.</p>
-                  <ul>
-                    <li>Financial support to scale the program to new regions and ensure long-term sustainability.</li>
-                    <li>Resources to enhance and expand the curriculum, including testing on diverse devices and developing new modules.</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {activeTab === 'advisors' && (
-            <div className="advisors-section">
-              <div className="section-intro">
-                <h2>Advisors</h2>
-                <p>At Learn AI Anywhere, our Advisors are integral to helping us deliver AI literacy education by bringing valuable expertise to guide our growth and ensure our solution meets the needs of the communities we serve.</p>
-                <p>By volunteering as an advisor, you'll play a key role in empowering students with the skills they need to thrive in an AI-driven world. Join us and make a meaningful impact on the future of education, no matter where students live.</p>
-              </div>
-
-              <div className="advisor-roles">
-                <div className="advisor-role">
-                  <h3>AI Literacy Advisor</h3>
-                  <p>Ensures curriculum relevance and alignment with educational goals.</p>
-                </div>
-
-                <div className="advisor-role">
-                  <h3>Fundraising and Strategic Partnerships Advisor</h3>
-                  <p>Guides funding strategies and collaborations.</p>
-                </div>
-
-                <div className="advisor-role">
-                  <h3>Regional and Cultural Advisor</h3>
-                  <p>Provides insights for localization and cultural relevance.</p>
-                </div>
-
-                <div className="advisor-role">
-                  <h3>Financial Advisor</h3>
-                  <p>Oversees budgeting and financial planning.</p>
-                </div>
-
-                <div className="advisor-role">
-                  <h3>Nonprofit Operations Advisor</h3>
-                  <p>Supports governance and scalability strategies.</p>
                 </div>
               </div>
             </div>
