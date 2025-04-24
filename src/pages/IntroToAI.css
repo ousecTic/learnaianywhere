@@ -212,6 +212,16 @@
   padding: 0.5rem 1.5rem 1.5rem;
 }
 
+/* Material notes with better spacing (from Week1.css) */
+.material-note {
+  display: block;
+  color: var(--subtext-color);
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+  margin-left: 1.5rem;
+  font-style: italic;
+}
+
 .worksheet-container {
   margin-top: 1rem;
 }
