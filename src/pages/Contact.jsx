@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
+import Toast from '../components/Toast';
 
 const Contact = () => {
   const email = 'contact@learnaianywhere.org';
-  const [copied, setCopied] = useState(false);
+  const [showToast, setShowToast] = useState(false);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(email);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    setShowToast(true);
   };
 
   return (
@@ -26,7 +26,7 @@ const Contact = () => {
                 className="copy-btn"
                 onClick={handleCopy}
               >
-                {copied ? 'Copied!' : 'Copy Email'}
+                Copy Email
               </button>
             </div>
 
@@ -42,6 +42,12 @@ const Contact = () => {
           </div>
         </div>
       </div>
+
+      <Toast 
+        message="Email copied to clipboard!" 
+        isVisible={showToast} 
+        onHide={() => setShowToast(false)} 
+      />
     </div>
   );
 };

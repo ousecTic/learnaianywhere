@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import ImageModal from '../components/ImageModal';
 
 const AboutUs = () => {
+  const [selectedImage, setSelectedImage] = useState(null);
+
   const operationsTeam = [
     {
       name: 'Henry Ly',
@@ -83,6 +86,39 @@ const AboutUs = () => {
     }
   ];
 
+  const galleryImages = [
+    {
+      src: 'https://picsum.photos/seed/workshop1/600/450',
+      caption: 'AI Workshop at Local High School',
+      alt: 'Students collaborating on AI project'
+    },
+    {
+      src: 'https://picsum.photos/seed/workshop2/600/450',
+      caption: 'Teacher Training Program',
+      alt: 'Teacher training session'
+    },
+    {
+      src: 'https://picsum.photos/seed/workshop3/600/450',
+      caption: 'Student Project Presentations',
+      alt: 'Students presenting their AI projects'
+    },
+    {
+      src: 'https://picsum.photos/seed/workshop4/600/450',
+      caption: 'Community Outreach Event',
+      alt: 'Community outreach event'
+    },
+    {
+      src: 'https://picsum.photos/seed/workshop5/600/450',
+      caption: 'Hands-on Learning Session',
+      alt: 'Hands-on AI learning session'
+    },
+    {
+      src: 'https://picsum.photos/seed/workshop6/600/450',
+      caption: 'Global Partnership Meeting',
+      alt: 'Global partnership meeting'
+    }
+  ];
+
   return (
     <div className="about-page">
       <div className="container">
@@ -93,6 +129,30 @@ const AboutUs = () => {
           <p>If you are a tech professional, student, teacher, parent, or staff member, we deliver our education and learn about AI. At the same time, we are building a community of people who want to learn and grow together.</p>
           <p>With help from tech companies and volunteers, we can scale our solutions to scale up more students to accessible tech careers. Here is a list who is helping us make our mission possible.</p>
         </section>
+
+        <section className="gallery-section">
+          <h2>Our Impact in Action</h2>
+          <div className="gallery-grid">
+            {galleryImages.map((image, index) => (
+              <div 
+                key={index} 
+                className="gallery-item"
+                onClick={() => setSelectedImage(image)}
+              >
+                <img src={image.src} alt={image.alt} />
+                <div className="gallery-caption">{image.caption}</div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {selectedImage && (
+          <ImageModal
+            image={selectedImage.src}
+            caption={selectedImage.caption}
+            onClose={() => setSelectedImage(null)}
+          />
+        )}
 
         <section className="team-section">
           <h2>Our Operations Team</h2>

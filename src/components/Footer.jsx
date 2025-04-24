@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import logo from '../assets/learnAIAnywhereLogo.png';
 
 const Footer = () => {
   return (
@@ -7,7 +8,9 @@ const Footer = () => {
       <div className="container">
         <div className="footer-content">
           <div className="footer-section">
-            <h3>Learn AI Anywhere</h3>
+            <Link to="/" className="footer-logo">
+              <img src={logo} alt="Learn AI Anywhere" />
+            </Link>
             <p>Bringing AI literacy to underserved communities worldwide.</p>
           </div>
           

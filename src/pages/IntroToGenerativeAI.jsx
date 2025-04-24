@@ -7,6 +7,7 @@ import DayTwo from '../components/course/week2/DayTwo';
 import DayThree from '../components/course/week2/DayThree';
 import DayFour from '../components/course/week2/DayFour';
 import DayFive from '../components/course/week2/DayFive';
+import { Link } from 'react-router-dom';
 
 const IntroToGenerativeAI = () => {
   const [activeTab, setActiveTab] = useState('overview');
@@ -184,8 +185,7 @@ const IntroToGenerativeAI = () => {
           <h2>Need Additional Support?</h2>
           <p>Our team is here to help you implement these resources effectively in your classroom.</p>
           <div className="support-buttons">
-            <button className="contact-btn">Contact Support</button>
-            <button className="primary-btn">View FAQ</button>
+            <Link to="/contact" className="primary-btn">Contact Support</Link>
           </div>
         </div>
       </div>

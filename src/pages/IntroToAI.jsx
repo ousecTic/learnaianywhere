@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import '../styles/Timeline.css';
 import './IntroToAI.css';
 import Overview from '../components/course/week1/Overview';
@@ -124,8 +125,7 @@ const IntroToAI = () => {
           <h2>Need Additional Support?</h2>
           <p>Our team is here to help you implement these resources effectively in your classroom.</p>
           <div className="support-buttons">
-            <button className="contact-btn">Contact Support</button>
-            <button className="primary-btn">View FAQ</button>
+            <Link to="/contact" className="primary-btn">Contact Support</Link>
           </div>
         </div>
       </div>

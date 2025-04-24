@@ -4,23 +4,23 @@ import logo from '../assets/learnAIAnywhereLogo.png';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const navRef = useRef(null);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      // Close menu if click is outside navbar and menu is open
-      if (navRef.current && !navRef.current.contains(event.target) && isMenuOpen) {
+      if (navRef.current && !navRef.current.contains(event.target)) {
         setIsMenuOpen(false);
+        setIsDropdownOpen(false);
       }
     };
 
-    // Close menu when clicking anywhere on mobile
     document.addEventListener('mousedown', handleClickOutside);
     
-    // Close menu when scrolling (common mobile pattern)
     const handleScroll = () => {
       if (isMenuOpen) {
         setIsMenuOpen(false);
+        setIsDropdownOpen(false);
       }
     };
     window.addEventListener('scroll', handleScroll);
@@ -33,6 +33,12 @@ const Navbar = () => {
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+    setIsDropdownOpen(false);
+  };
+
+  const toggleDropdown = (e) => {
+    e.preventDefault();
+    setIsDropdownOpen(!isDropdownOpen);
   };
 
   return (
@@ -51,8 +57,8 @@ const Navbar = () => {
         </button>
 
         <div className={`nav-links ${isMenuOpen ? 'open' : ''}`}>
-          <div className="nav-item-dropdown">
-            <Link to="/curriculum" className="nav-item">
+          <div className={`nav-item-dropdown ${isDropdownOpen ? 'open' : ''}`}>
+            <span className="nav-item" onClick={toggleDropdown}>
               Curriculum
               <svg 
                 xmlns="http://www.w3.org/2000/svg" 
@@ -65,18 +71,20 @@ const Navbar = () => {
                 strokeLinecap="round" 
                 strokeLinejoin="round"
                 className="dropdown-arrow"
+                style={{ transform: isDropdownOpen ? 'rotate(180deg)' : 'none' }}
               >
                 <polyline points="6 9 12 15 18 9"></polyline>
               </svg>
-            </Link>
+            </span>
             <div className="dropdown-content">
-              <Link to="/curriculum/intro-to-ai">Introduction to AI</Link>
-              <Link to="/curriculum/intro-to-generative-ai">Introduction to Generative AI</Link>
+              <Link to="/curriculum" onClick={() => setIsMenuOpen(false)}>Overview</Link>
+              <Link to="/curriculum/intro-to-ai" onClick={() => setIsMenuOpen(false)}>Introduction to AI</Link>
+              <Link to="/curriculum/intro-to-generative-ai" onClick={() => setIsMenuOpen(false)}>Introduction to Generative AI</Link>
             </div>
           </div>
-          <Link to="/get-involved" className="nav-link">Get Involved</Link>
-          <Link to="/about" className="nav-link">About Us</Link>
-          <Link to="/contact" className="contact-btn">Contact</Link>
+          <Link to="/get-involved" className="nav-link" onClick={() => setIsMenuOpen(false)}>Get Involved</Link>
+          <Link to="/about" className="nav-link" onClick={() => setIsMenuOpen(false)}>About Us</Link>
+          <Link to="/contact" className="contact-btn" onClick={() => setIsMenuOpen(false)}>Contact</Link>
         </div>
       </div>
     </nav>
