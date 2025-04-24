@@ -27,8 +27,8 @@ const Accordion = ({ title, children, defaultOpen = false }) => {
 const IntroToGenerativeAI = () => {
   // Course content data from Overview.jsx
   const content = {
-    objectiveOverview: {
-      title: "Course Objective",
+    overview: {
+      title: "Overview",
       mainObjective: "Students will gain a foundational understanding of generative AI, specifically language models, including their mechanics, applications, limitations, and ethical considerations.",
       keyOutcomes: [
         "Understand how language models work and their capabilities",
@@ -39,8 +39,8 @@ const IntroToGenerativeAI = () => {
       ],
       approach: "Through hands-on activities and guided experiments, students will learn to interact with language models, evaluate AI-generated content, and develop responsible AI usage habits. Each day builds towards creating a well-researched, ethically-sound trivia quiz project."
     },
-    requirements: {
-      title: "What You'll Need",
+    setup: {
+      title: "Setup",
       items: [
         {
           text: "Offline Research Tools",
@@ -89,8 +89,12 @@ const IntroToGenerativeAI = () => {
         }
       ]
     },
-    studentWorksheet: {
-      title: "Student Worksheet",
+    lessonPlan: {
+      title: "Lesson Plan",
+      presentationId: "1QiLjuxy-R_aQ91J_DgpMpAI3EK_-UfrBn9xXBJnPUCU" // GenAI presentation ID
+    },
+    projectWorksheet: {
+      title: "Project Worksheet",
       docId: "18Dzd7gR3w_l8j89xpUN8TV50UoU0171jUntqm3FbBok"
     }
   };
@@ -98,6 +102,11 @@ const IntroToGenerativeAI = () => {
   const getGoogleDocUrls = (docId) => ({
     pdf: `https://docs.google.com/document/d/${docId}/export?format=pdf`,
     embed: `https://docs.google.com/document/d/${docId}/preview`
+  });
+
+  const getGooglePresentationUrls = (presentationId) => ({
+    pptx: `https://docs.google.com/presentation/d/${presentationId}/export/pptx`,
+    embed: `https://docs.google.com/presentation/d/${presentationId}/preview`
   });
 
   const renderRequirementsList = (items) => {
@@ -110,8 +119,8 @@ const IntroToGenerativeAI = () => {
   };
 
   const renderWorksheetSection = () => {
-    const { studentWorksheet } = content;
-    const urls = getGoogleDocUrls(studentWorksheet.docId);
+    const { projectWorksheet } = content;
+    const urls = getGoogleDocUrls(projectWorksheet.docId);
     
     return (
       <div className="worksheet-container">
@@ -132,10 +141,44 @@ const IntroToGenerativeAI = () => {
         <div className="worksheet-preview">
           <iframe
             src={urls.embed}
-            title={studentWorksheet.title}
+            title={projectWorksheet.title}
             width="100%"
             height="842"
             frameBorder="0"
+          ></iframe>
+        </div>
+      </div>
+    );
+  };
+
+  const renderLessonPlanSection = () => {
+    const { lessonPlan } = content;
+    const urls = getGooglePresentationUrls(lessonPlan.presentationId);
+    
+    return (
+      <div className="lesson-plan-container">
+        <div className="presentation-header">
+          <a 
+            href={urls.pptx}
+            className="presentation-download"
+            download
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            Download PowerPoint
+          </a>
+        </div>
+        <div className="presentation-preview">
+          <iframe
+            src={urls.embed}
+            title={lessonPlan.title}
+            width="100%"
+            height="500"
+            frameBorder="0"
+            allowFullScreen
           ></iframe>
         </div>
       </div>
@@ -154,22 +197,22 @@ const IntroToGenerativeAI = () => {
       <div className="container">
         <div className="tab-content">
           <div className="overview-content">
-            <Accordion title={content.objectiveOverview.title} defaultOpen={true}>
-              <p className="main-objective">{content.objectiveOverview.mainObjective}</p>
+            <Accordion title={content.overview.title} defaultOpen={true}>
+              <p className="main-objective">{content.overview.mainObjective}</p>
               <div className="key-outcomes">
                 <h3>By the end of this course, you will:</h3>
                 <ul>
-                  {content.objectiveOverview.keyOutcomes.map((outcome, index) => (
+                  {content.overview.keyOutcomes.map((outcome, index) => (
                     <li key={index}>{outcome}</li>
                   ))}
                 </ul>
               </div>
-              <p className="approach">{content.objectiveOverview.approach}</p>
+              <p className="approach">{content.overview.approach}</p>
             </Accordion>
 
-            <Accordion title={content.requirements.title}>
+            <Accordion title={content.setup.title}>
               <div className="requirements-list">
-                {content.requirements.items.map((item, index) => (
+                {content.setup.items.map((item, index) => (
                   <div key={index}>
                     <strong>{item.text}</strong>
                     {item.subitems.length > 0 && (
@@ -182,7 +225,11 @@ const IntroToGenerativeAI = () => {
               </div>
             </Accordion>
 
-            <Accordion title={content.studentWorksheet.title}>
+            <Accordion title={content.lessonPlan.title}>
+              {renderLessonPlanSection()}
+            </Accordion>
+
+            <Accordion title={content.projectWorksheet.title}>
               {renderWorksheetSection()}
             </Accordion>
           </div>

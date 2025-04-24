@@ -27,8 +27,8 @@ const Accordion = ({ title, children, defaultOpen = false }) => {
 const IntroToAI = () => {
   // Course content data moved from Overview.jsx
   const content = {
-    objectiveOverview: {
-      title: "Course Objective",
+    overview: {
+      title: "Overview",
       mainObjective: "Students will learn to build their own AI image classifier while gaining hands-on experience with artificial intelligence concepts.",
       keyOutcomes: [
         "Build and train a custom image classifier",
@@ -38,8 +38,8 @@ const IntroToAI = () => {
       ],
       approach: "Through guided activities and hands-on projects, you'll learn AI concepts by doing, not just reading. Each day builds on the previous one, leading to your own working AI model."
     },
-    requirements: {
-      title: "What You'll Need",
+    setup: {
+      title: "Setup",
       items: [
         {
           text: "Basic Requirements",
@@ -55,20 +55,24 @@ const IntroToAI = () => {
           ]
         },
         {
-          text: "Setup",
+          text: "Preparation",
           subitems: [
             "Download required apps before class (works offline after installation)",
             "Ensure each student has the worksheet or can copy questions in their notebook",
             {
               type: "tip",
-              content: " Pro Tip: Review all lessons and download apps in advance for a smoother experience."
+              content: "Pro Tip: Review all lessons and download apps in advance for a smoother experience."
             }
           ]
         }
       ]
     },
-    studentWorksheet: {
-      title: "Student Worksheet",
+    lessonPlan: {
+      title: "Lesson Plan",
+      presentationId: "11iNuXRgu4ePFUKYEfFV2sB5xT_nTUuiFOwazv5z6QRg" // Day 1 presentation ID
+    },
+    projectWorksheet: {
+      title: "Project Worksheet",
       docId: "1rWrdbg78nggEbtYnVz0giyQDjm0KpjuuZDZ87i3JONo"
     }
   };
@@ -78,9 +82,14 @@ const IntroToAI = () => {
     embed: `https://docs.google.com/document/d/${docId}/preview`
   });
 
+  const getGooglePresentationUrls = (presentationId) => ({
+    pptx: `https://docs.google.com/presentation/d/${presentationId}/export/pptx`,
+    embed: `https://docs.google.com/presentation/d/${presentationId}/preview`
+  });
+
   const renderWorksheetSection = () => {
-    const { studentWorksheet } = content;
-    const urls = getGoogleDocUrls(studentWorksheet.docId);
+    const { projectWorksheet } = content;
+    const urls = getGoogleDocUrls(projectWorksheet.docId);
     
     return (
       <div className="worksheet-container">
@@ -101,10 +110,44 @@ const IntroToAI = () => {
         <div className="worksheet-preview">
           <iframe
             src={urls.embed}
-            title={studentWorksheet.title}
+            title={projectWorksheet.title}
             width="100%"
             height="842"
             frameBorder="0"
+          ></iframe>
+        </div>
+      </div>
+    );
+  };
+
+  const renderLessonPlanSection = () => {
+    const { lessonPlan } = content;
+    const urls = getGooglePresentationUrls(lessonPlan.presentationId);
+    
+    return (
+      <div className="lesson-plan-container">
+        <div className="presentation-header">
+          <a 
+            href={urls.pptx}
+            className="presentation-download"
+            download
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            Download PowerPoint
+          </a>
+        </div>
+        <div className="presentation-preview">
+          <iframe
+            src={urls.embed}
+            title={lessonPlan.title}
+            width="100%"
+            height="500"
+            frameBorder="0"
+            allowFullScreen
           ></iframe>
         </div>
       </div>
@@ -132,22 +175,22 @@ const IntroToAI = () => {
       <div className="container">
         <div className="tab-content">
           <div className="overview-content">
-            <Accordion title={content.objectiveOverview.title} defaultOpen={true}>
-              <p className="main-objective">{content.objectiveOverview.mainObjective}</p>
+            <Accordion title={content.overview.title} defaultOpen={true}>
+              <p className="main-objective">{content.overview.mainObjective}</p>
               <div className="key-outcomes">
                 <h3>By the end of this course, you will:</h3>
                 <ul>
-                  {content.objectiveOverview.keyOutcomes.map((outcome, index) => (
+                  {content.overview.keyOutcomes.map((outcome, index) => (
                     <li key={index}>{outcome}</li>
                   ))}
                 </ul>
               </div>
-              <p className="approach">{content.objectiveOverview.approach}</p>
+              <p className="approach">{content.overview.approach}</p>
             </Accordion>
 
-            <Accordion title={content.requirements.title}>
+            <Accordion title={content.setup.title}>
               <div className="requirements-list">
-                {content.requirements.items.map((item, index) => (
+                {content.setup.items.map((item, index) => (
                   <div key={index}>
                     <strong>{item.text}</strong>
                     {item.subitems.length > 0 && (
@@ -160,7 +203,11 @@ const IntroToAI = () => {
               </div>
             </Accordion>
 
-            <Accordion title={content.studentWorksheet.title}>
+            <Accordion title={content.lessonPlan.title}>
+              {renderLessonPlanSection()}
+            </Accordion>
+
+            <Accordion title={content.projectWorksheet.title}>
               {renderWorksheetSection()}
             </Accordion>
           </div>

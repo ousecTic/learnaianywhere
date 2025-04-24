@@ -279,6 +279,59 @@
   background: white;
 }
 
+/* Lesson Plan Styles */
+.lesson-plan-container {
+  margin-top: 1rem;
+}
+
+.presentation-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  background: #f8fafc;
+  border-radius: 8px;
+}
+
+.presentation-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  text-decoration: none;
+  color: white;
+  background: #2563eb;
+  transition: all 0.2s ease;
+}
+
+.presentation-download:hover {
+  background: #1d4ed8;
+}
+
+.presentation-download svg {
+  width: 16px;
+  height: 16px;
+}
+
+.presentation-preview {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+  margin-bottom: 2rem;
+  aspect-ratio: 16/9;
+}
+
+.presentation-preview iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: white;
+}
+
 .worksheets-grid {
   display: flex;
   flex-direction: column;
