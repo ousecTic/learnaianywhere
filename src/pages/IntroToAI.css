@@ -226,6 +226,27 @@
   margin-top: 1rem;
 }
 
+.worksheet-section {
+  margin-bottom: 2rem;
+}
+
+.worksheet-section:last-child {
+  margin-bottom: 0;
+}
+
+.worksheet-title {
+  font-size: 1.1rem;
+  color: #1a365d;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.example-section {
+  margin-top: 3rem;
+}
+
 .worksheet-header {
   display: flex;
   justify-content: flex-end;
@@ -251,12 +272,19 @@
   font-size: 0.9rem;
   text-decoration: none;
   color: white;
-  background: #2563eb;
   transition: all 0.2s ease;
 }
 
+.worksheet-download.pdf {
+  background: #f97316;
+}
+
+.worksheet-download.docx {
+  background: #3b82f6;
+}
+
 .worksheet-download:hover {
-  background: #1d4ed8;
+  opacity: 0.9;
 }
 
 .worksheet-download svg {

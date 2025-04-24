@@ -73,12 +73,14 @@ const IntroToAI = () => {
     },
     projectWorksheet: {
       title: "Project Worksheet",
-      docId: "1rWrdbg78nggEbtYnVz0giyQDjm0KpjuuZDZ87i3JONo"
+      docId: "1rWrdbg78nggEbtYnVz0giyQDjm0KpjuuZDZ87i3JONo",
+      exampleDocId: "1IrRP3hIivydP1WmO2JMeqd6gZgCLA43KK_JoOZONEf4"
     }
   };
 
   const getGoogleDocUrls = (docId) => ({
     pdf: `https://docs.google.com/document/d/${docId}/export?format=pdf`,
+    docx: `https://docs.google.com/document/d/${docId}/export?format=doc`,
     embed: `https://docs.google.com/document/d/${docId}/preview`
   });
 
@@ -91,32 +93,93 @@ const IntroToAI = () => {
   const renderWorksheetSection = () => {
     const { projectWorksheet } = content;
     const urls = getGoogleDocUrls(projectWorksheet.docId);
+    const exampleUrls = projectWorksheet.exampleDocId ? getGoogleDocUrls(projectWorksheet.exampleDocId) : null;
     
     return (
       <div className="worksheet-container">
-        <div className="worksheet-header">
-          <a 
-            href={urls.pdf}
-            className="worksheet-download"
-            download
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-              <polyline points="7 10 12 15 17 10"></polyline>
-              <line x1="12" y1="15" x2="12" y2="3"></line>
-            </svg>
-            Download PDF
-          </a>
+        <div className="worksheet-section">
+          <h3 className="worksheet-title">Blank Template</h3>
+          <div className="worksheet-header">
+            <div className="download-options">
+              <a 
+                href={urls.pdf}
+                className="worksheet-download pdf"
+                download
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                Download PDF
+              </a>
+              <a 
+                href={urls.docx}
+                className="worksheet-download docx"
+                download
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                Download Word
+              </a>
+            </div>
+          </div>
+          <div className="worksheet-preview">
+            <iframe
+              src={urls.embed}
+              title={projectWorksheet.title}
+              width="100%"
+              height="842"
+              frameBorder="0"
+            ></iframe>
+          </div>
         </div>
-        <div className="worksheet-preview">
-          <iframe
-            src={urls.embed}
-            title={projectWorksheet.title}
-            width="100%"
-            height="842"
-            frameBorder="0"
-          ></iframe>
-        </div>
+
+        {exampleUrls && (
+          <div className="worksheet-section example-section">
+            <h3 className="worksheet-title">Example (Filled Version)</h3>
+            <div className="worksheet-header">
+              <div className="download-options">
+                <a 
+                  href={exampleUrls.pdf}
+                  className="worksheet-download pdf"
+                  download
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                  </svg>
+                  Download PDF
+                </a>
+                <a 
+                  href={exampleUrls.docx}
+                  className="worksheet-download docx"
+                  download
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                  </svg>
+                  Download Word
+                </a>
+              </div>
+            </div>
+            <div className="worksheet-preview">
+              <iframe
+                src={exampleUrls.embed}
+                title="Example Worksheet"
+                width="100%"
+                height="842"
+                frameBorder="0"
+              ></iframe>
+            </div>
+          </div>
+        )}
       </div>
     );
   };

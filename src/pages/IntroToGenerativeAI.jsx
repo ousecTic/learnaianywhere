@@ -91,21 +91,24 @@ const IntroToGenerativeAI = () => {
     },
     lessonPlan: {
       title: "Lesson Plan",
-      presentationId: "1QiLjuxy-R_aQ91J_DgpMpAI3EK_-UfrBn9xXBJnPUCU" // GenAI presentation ID
+      presentationId: "1HC9RVzA5huGHU2tESsKlwqGMsiZxpfUxhBL3GbgDCDc" // Updated GenAI presentation ID
     },
     projectWorksheet: {
       title: "Project Worksheet",
-      docId: "18Dzd7gR3w_l8j89xpUN8TV50UoU0171jUntqm3FbBok"
+      docId: "1cNtWXnFO0BRAGrnYWZKVxbG7SaKFJi45KHEClGzyrEc",
+      exampleDocId: "14fzVQ66VjAzl3785UFFt59pM47NWUX6hXp78kdzsAO0"
     }
   };
 
   const getGoogleDocUrls = (docId) => ({
     pdf: `https://docs.google.com/document/d/${docId}/export?format=pdf`,
+    docx: `https://docs.google.com/document/d/${docId}/export?format=doc`,
     embed: `https://docs.google.com/document/d/${docId}/preview`
   });
 
   const getGooglePresentationUrls = (presentationId) => ({
     pptx: `https://docs.google.com/presentation/d/${presentationId}/export/pptx`,
+    pdf: `https://docs.google.com/presentation/d/${presentationId}/export/pdf`,
     embed: `https://docs.google.com/presentation/d/${presentationId}/preview`
   });
 
@@ -121,32 +124,93 @@ const IntroToGenerativeAI = () => {
   const renderWorksheetSection = () => {
     const { projectWorksheet } = content;
     const urls = getGoogleDocUrls(projectWorksheet.docId);
+    const exampleUrls = projectWorksheet.exampleDocId ? getGoogleDocUrls(projectWorksheet.exampleDocId) : null;
     
     return (
       <div className="worksheet-container">
-        <div className="worksheet-header">
-          <a 
-            href={urls.pdf}
-            className="worksheet-download"
-            download
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-              <polyline points="7 10 12 15 17 10"></polyline>
-              <line x1="12" y1="15" x2="12" y2="3"></line>
-            </svg>
-            Download PDF
-          </a>
+        <div className="worksheet-section">
+          <h3 className="worksheet-title">Blank Template</h3>
+          <div className="worksheet-header">
+            <div className="download-options">
+              <a 
+                href={urls.pdf}
+                className="worksheet-download pdf"
+                download
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                Download PDF
+              </a>
+              <a 
+                href={urls.docx}
+                className="worksheet-download docx"
+                download
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                Download Word
+              </a>
+            </div>
+          </div>
+          <div className="worksheet-preview">
+            <iframe
+              src={urls.embed}
+              title={projectWorksheet.title}
+              width="100%"
+              height="842"
+              frameBorder="0"
+            ></iframe>
+          </div>
         </div>
-        <div className="worksheet-preview">
-          <iframe
-            src={urls.embed}
-            title={projectWorksheet.title}
-            width="100%"
-            height="842"
-            frameBorder="0"
-          ></iframe>
-        </div>
+
+        {exampleUrls && (
+          <div className="worksheet-section example-section">
+            <h3 className="worksheet-title">Example (Filled Version)</h3>
+            <div className="worksheet-header">
+              <div className="download-options">
+                <a 
+                  href={exampleUrls.pdf}
+                  className="worksheet-download pdf"
+                  download
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                  </svg>
+                  Download PDF
+                </a>
+                <a 
+                  href={exampleUrls.docx}
+                  className="worksheet-download docx"
+                  download
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                  </svg>
+                  Download Word
+                </a>
+              </div>
+            </div>
+            <div className="worksheet-preview">
+              <iframe
+                src={exampleUrls.embed}
+                title="Example Worksheet"
+                width="100%"
+                height="842"
+                frameBorder="0"
+              ></iframe>
+            </div>
+          </div>
+        )}
       </div>
     );
   };
@@ -158,18 +222,32 @@ const IntroToGenerativeAI = () => {
     return (
       <div className="lesson-plan-container">
         <div className="presentation-header">
-          <a 
-            href={urls.pptx}
-            className="presentation-download"
-            download
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-              <polyline points="7 10 12 15 17 10"></polyline>
-              <line x1="12" y1="15" x2="12" y2="3"></line>
-            </svg>
-            Download PowerPoint
-          </a>
+          <div className="download-options">
+            <a 
+              href={urls.pptx}
+              className="presentation-download pptx"
+              download
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              Download PowerPoint
+            </a>
+            <a 
+              href={urls.pdf}
+              className="presentation-download pdf"
+              download
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              Download PDF
+            </a>
+          </div>
         </div>
         <div className="presentation-preview">
           <iframe
