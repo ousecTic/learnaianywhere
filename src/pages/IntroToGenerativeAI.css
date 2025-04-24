@@ -1,0 +1,270 @@
+.objective-section {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.main-objective {
+  font-size: 1.1rem;
+  color: #1a365d;
+  margin: 1.5rem 0;
+  line-height: 1.6;
+}
+
+.key-outcomes {
+  background-color: #f8fafc;
+  padding: 1.5rem 2rem;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.key-outcomes h3 {
+  color: #2563eb;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.key-outcomes ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.key-outcomes li {
+  padding: 0.5rem 0 0.5rem 1.75rem;
+  position: relative;
+  line-height: 1.5;
+  color: #4a5568;
+}
+
+.key-outcomes li:before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #2563eb;
+  font-weight: bold;
+}
+
+.approach {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #4a5568;
+  margin-top: 1.5rem;
+  padding: 0 0.5rem;
+}
+
+.section {
+  margin-bottom: 2.5rem;
+  max-width: 800px;
+}
+
+.section h2 {
+  color: #1a365d;
+  margin-bottom: 1.5rem;
+  font-size: 1.75rem;
+  font-weight: 600;
+}
+
+.requirements-list, .resources-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.requirements-list > div {
+  margin-top: 0.5rem;
+}
+
+.requirements-list strong {
+  display: block;
+  color: #2563eb;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.requirements-list ul {
+  margin: 0;
+  padding-left: 1.25rem;
+  list-style-type: none;
+}
+
+.requirements-list li {
+  position: relative;
+  padding: 0.25rem 0;
+  color: #4a5568;
+}
+
+.requirements-list li:before {
+  content: "•";
+  position: absolute;
+  left: -1.25rem;
+  color: #2563eb;
+}
+
+.requirements-list li[data-type="note"] {
+  margin: 0.25rem 0;
+  padding: 0.5rem 0.75rem;
+  background: #f7f7f7;
+  border-radius: 0.25rem;
+  font-style: italic;
+  color: #666;
+}
+
+.requirements-list li[data-type="note"]:before {
+  display: none;
+}
+
+.requirements-list li[data-type="tip"] {
+  margin-top: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  background: #f0f9ff;
+  border-left: 3px solid #3b82f6;
+  border-radius: 0.25rem;
+}
+
+.requirements-list li[data-type="tip"]:before {
+  display: none;
+}
+
+.requirements-list ul li, .resources-list ul li {
+  position: relative;
+  padding: 0.4rem 0;
+  color: #4a5568;
+}
+
+.requirements-list ul li:before, .resources-list ul li:before {
+  content: "•";
+  position: absolute;
+  left: -1.25rem;
+  color: #2563eb;
+}
+
+.overview-content {
+  max-width: 100%;
+  padding: 2rem;
+}
+
+.accordion {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  background: white;
+}
+
+.accordion:hover {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.accordion-header {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.accordion-header:hover {
+  background-color: #f8fafc;
+}
+
+.accordion-header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1a365d;
+}
+
+.accordion-icon {
+  font-size: 1.5rem;
+  color: #2563eb;
+  font-weight: 300;
+  transition: transform 0.2s ease;
+}
+
+.accordion.open .accordion-icon {
+  transform: rotate(180deg);
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+  padding: 0 1.5rem;
+}
+
+.accordion-content.show {
+  max-height: 2000px;
+  padding: 0.5rem 1.5rem 1.5rem;
+}
+
+/* Material notes with better spacing (from Week1.css) */
+.material-note {
+  display: block;
+  color: var(--subtext-color);
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+  margin-left: 1.5rem;
+  font-style: italic;
+}
+
+.worksheet-container {
+  margin-top: 1rem;
+}
+
+.worksheet-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  background: #f8fafc;
+  border-radius: 8px;
+}
+
+.worksheet-name {
+  font-size: 1.1rem;
+  color: #1a365d;
+  margin: 0;
+  font-weight: 600;
+}
+
+.worksheet-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  text-decoration: none;
+  color: white;
+  background: #2563eb;
+  transition: all 0.2s ease;
+}
+
+.worksheet-download:hover {
+  background: #1d4ed8;
+}
+
+.worksheet-download svg {
+  width: 16px;
+  height: 16px;
+}
+
+.worksheet-preview {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+  margin-bottom: 2rem;
+}
+
+.worksheet-preview iframe {
+  display: block;
+  width: 100%;
+  border: none;
+  background: white;
+}

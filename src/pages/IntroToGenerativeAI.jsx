@@ -1,184 +1,191 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/Timeline.css';
-import './IntroToAI.css';
-import Overview from '../components/course/week2/Overview';
-import DayOne from '../components/course/week2/DayOne';
-import DayTwo from '../components/course/week2/DayTwo';
-import DayThree from '../components/course/week2/DayThree';
-import DayFour from '../components/course/week2/DayFour';
-import DayFive from '../components/course/week2/DayFive';
+import './IntroToGenerativeAI.css';
 import { Link } from 'react-router-dom';
 
+// Accordion component for collapsible sections
+const Accordion = ({ title, children, defaultOpen = false }) => {
+  const [isOpen, setIsOpen] = useState(defaultOpen);
+
+  return (
+    <div className={`accordion ${isOpen ? 'open' : ''}`}>
+      <button 
+        className="accordion-header" 
+        onClick={() => setIsOpen(!isOpen)}
+        aria-expanded={isOpen}
+      >
+        <h2>{title}</h2>
+        <span className="accordion-icon">{isOpen ? '−' : '+'}</span>
+      </button>
+      <div className={`accordion-content ${isOpen ? 'show' : ''}`}>
+        {children}
+      </div>
+    </div>
+  );
+};
+
 const IntroToGenerativeAI = () => {
-  const [activeTab, setActiveTab] = useState('overview');
-  const [isMobile, setIsMobile] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
-
-  useEffect(() => {
-    const checkIfMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-
-    checkIfMobile();
-    window.addEventListener('resize', checkIfMobile);
-
-    return () => window.removeEventListener('resize', checkIfMobile);
-  }, []);
-
-  const tabs = [
-    { id: 'overview', label: 'Overview' },
-    { id: 'day1', label: 'Day 1: Intro to LLMs' },
-    { id: 'day2', label: 'Day 2: LLM Truth & Lies' },
-    { id: 'day3', label: 'Day 3: How LLMs Work' },
-    { id: 'day4', label: 'Day 4: LLM Ethics' },
-    { id: 'day5', label: 'Day 5: Presentation' }
-  ];
-
-  const weekContent = {
-    overview: {
-      title: "Introduction to Generative AI",
-      description: "This week's lessons introduce students to generative artificial intelligence, focusing on Large Language Models (LLMs) and their impact on society.",
-      content: {
-        objectiveOverview: {
-          title: "Objective Overview",
-          text: [
-            "Throughout this week, students will explore the fascinating world of generative AI, with a special focus on Large Language Models. They will learn how these models work, their capabilities and limitations, and the ethical considerations surrounding their use.",
-            "By the end of the week, students will understand how to interact responsibly with language models, recognize their potential biases, and develop critical thinking skills for evaluating AI-generated content."
-          ]
-        },
-        requirements: {
-          title: "Requirements",
-          items: [
+  // Course content data from Overview.jsx
+  const content = {
+    objectiveOverview: {
+      title: "Course Objective",
+      mainObjective: "Students will gain a foundational understanding of generative AI, specifically language models, including their mechanics, applications, limitations, and ethical considerations.",
+      keyOutcomes: [
+        "Understand how language models work and their capabilities",
+        "Create and evaluate AI-generated content responsibly",
+        "Develop critical thinking skills for fact-checking",
+        "Apply ethical decision-making in AI interactions",
+        "Create an engaging trivia quiz using AI tools"
+      ],
+      approach: "Through hands-on activities and guided experiments, students will learn to interact with language models, evaluate AI-generated content, and develop responsible AI usage habits. Each day builds towards creating a well-researched, ethically-sound trivia quiz project."
+    },
+    requirements: {
+      title: "What You'll Need",
+      items: [
+        {
+          text: "Offline Research Tools",
+          subitems: [
+            "Kiwix (offline Wikipedia) or similar offline wikis",
+            "Community-driven dictionaries for fact verification",
             {
-              text: "Computer with Internet Access: Required for accessing language model demonstrations.",
-              subitems: []
-            },
-            {
-              text: "Whiteboard or Chalkboard: For class discussions and concept visualization.",
-              subitems: []
-            },
-            {
-              text: "Worksheets: Students will need worksheets for hands-on activities and ethical discussions.",
-              subitems: []
+              type: "note",
+              content: "These tools are essential for cross-checking and basic fact verification when working with AI-generated content."
             }
           ]
         },
-        optional: {
-          title: "Optional",
-          items: [
-            "Access to ChatGPT or similar LLM (teacher-supervised): For demonstration purposes only"
+        {
+          text: "AI Tools",
+          subitems: [
+            "TinyLlama or Llama 3.2 1b (offline versions preferred)",
+            "Alternative generative AI tools for experimentation",
+            {
+              type: "tip",
+              content: "Having offline AI tools ensures reliable access throughout the course."
+            }
+          ]
+        },
+        {
+          text: "Group Work Materials",
+          subitems: [
+            "Paper and writing tools (pens/pencils)",
+            "Sticky notes or cut-up paper for activities",
+            "Notebooks for recreating project worksheets",
+            {
+              type: "note",
+              content: "Since printing may not be available, ensure students can easily copy materials into their notebooks."
+            }
+          ]
+        },
+        {
+          text: "Visual Aids",
+          subitems: [
+            "Projector or screen for displaying content",
+            "Access to presentation slides",
+            {
+              type: "tip",
+              content: "Visual aids are crucial for demonstrating AI interactions and sharing examples."
+            }
           ]
         }
-      }
+      ]
     },
-    day1: {
-      title: "Introduction to Language Models",
-      content: "Content for Day 1"
-    },
-    day2: {
-      title: "Truth and Lies in Language Models",
-      content: "Content for Day 2"
-    },
-    day3: {
-      title: "How Language Models Work",
-      content: "Content for Day 3"
-    },
-    day4: {
-      title: "Language Model Ethics",
-      content: "Content for Day 4"
-    },
-    day5: {
-      title: "Presentation Day",
-      content: "Content for Day 5"
+    studentWorksheet: {
+      title: "Student Worksheet",
+      docId: "18Dzd7gR3w_l8j89xpUN8TV50UoU0171jUntqm3FbBok"
     }
   };
 
-  const renderContent = () => {
-    switch (activeTab) {
-      case 'overview':
-        return <Overview />;
-      case 'day1':
-        return <DayOne />;
-      case 'day2':
-        return <DayTwo />;
-      case 'day3':
-        return <DayThree />;
-      case 'day4':
-        return <DayFour />;
-      case 'day5':
-        return <DayFive />;
-      default:
-        return <div>Content not found</div>;
-    }
+  const getGoogleDocUrls = (docId) => ({
+    pdf: `https://docs.google.com/document/d/${docId}/export?format=pdf`,
+    embed: `https://docs.google.com/document/d/${docId}/preview`
+  });
+
+  const renderRequirementsList = (items) => {
+    return items.map((item, index) => {
+      if (typeof item === 'string') {
+        return <li key={index}>{item}</li>;
+      }
+      return <li key={index} data-type={item.type}>{item.content}</li>;
+    });
+  };
+
+  const renderWorksheetSection = () => {
+    const { studentWorksheet } = content;
+    const urls = getGoogleDocUrls(studentWorksheet.docId);
+    
+    return (
+      <div className="worksheet-container">
+        <div className="worksheet-header">
+          <a 
+            href={urls.pdf}
+            className="worksheet-download"
+            download
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            Download PDF
+          </a>
+        </div>
+        <div className="worksheet-preview">
+          <iframe
+            src={urls.embed}
+            title={studentWorksheet.title}
+            width="100%"
+            height="842"
+            frameBorder="0"
+          ></iframe>
+        </div>
+      </div>
+    );
   };
 
   return (
     <div className="week-page">
       <div className="week-header">
         <div className="container">
-          <h1>{weekContent.overview.title}</h1>
-          <p>{weekContent.overview.description}</p>
+          <h1>Introduction to Generative AI</h1>
+          <p>A foundational course focused on generative AI, specifically Large Language Models (LLMs), and their impact on society.</p>
         </div>
       </div>
 
       <div className="container">
-        {isMobile ? (
-          <div className="tabs-dropdown">
-            <div className="custom-select">
-              <button 
-                className="select-button"
-                onClick={() => setIsOpen(!isOpen)}
-                type="button"
-              >
-                {tabs.find(tab => tab.id === activeTab)?.label}
-                <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  width="16" 
-                  height="16" 
-                  viewBox="0 0 24 24" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  strokeWidth="2" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round"
-                >
-                  <polyline points="6 9 12 15 18 9"></polyline>
-                </svg>
-              </button>
-              {isOpen && (
-                <div className="select-options">
-                  {tabs.map(tab => (
-                    <button
-                      key={tab.id}
-                      className={`select-option ${activeTab === tab.id ? 'active' : ''}`}
-                      onClick={() => {
-                        setActiveTab(tab.id);
-                        setIsOpen(false);
-                      }}
-                    >
-                      {tab.label}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
-        ) : (
-          <div className="tabs">
-            {tabs.map(tab => (
-              <button
-                key={tab.id}
-                className={`tab ${activeTab === tab.id ? 'active' : ''}`}
-                onClick={() => setActiveTab(tab.id)}
-              >
-                {tab.label}
-              </button>
-            ))}
-          </div>
-        )}
-
         <div className="tab-content">
-          {renderContent()}
+          <div className="overview-content">
+            <Accordion title={content.objectiveOverview.title} defaultOpen={true}>
+              <p className="main-objective">{content.objectiveOverview.mainObjective}</p>
+              <div className="key-outcomes">
+                <h3>By the end of this course, you will:</h3>
+                <ul>
+                  {content.objectiveOverview.keyOutcomes.map((outcome, index) => (
+                    <li key={index}>{outcome}</li>
+                  ))}
+                </ul>
+              </div>
+              <p className="approach">{content.objectiveOverview.approach}</p>
+            </Accordion>
+
+            <Accordion title={content.requirements.title}>
+              <div className="requirements-list">
+                {content.requirements.items.map((item, index) => (
+                  <div key={index}>
+                    <strong>{item.text}</strong>
+                    {item.subitems.length > 0 && (
+                      <ul>
+                        {renderRequirementsList(item.subitems)}
+                      </ul>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </Accordion>
+
+            <Accordion title={content.studentWorksheet.title}>
+              {renderWorksheetSection()}
+            </Accordion>
+          </div>
         </div>
 
         <div className="support-section">
