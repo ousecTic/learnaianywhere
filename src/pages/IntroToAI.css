@@ -293,6 +293,12 @@
   border-radius: 8px;
 }
 
+.download-options {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
 .presentation-download {
   display: inline-flex;
   align-items: center;
@@ -302,12 +308,19 @@
   font-size: 0.9rem;
   text-decoration: none;
   color: white;
-  background: #2563eb;
   transition: all 0.2s ease;
 }
 
+.presentation-download.pptx {
+  background: #2563eb;
+}
+
+.presentation-download.pdf {
+  background: #f97316;
+}
+
 .presentation-download:hover {
-  background: #1d4ed8;
+  opacity: 0.9;
 }
 
 .presentation-download svg {

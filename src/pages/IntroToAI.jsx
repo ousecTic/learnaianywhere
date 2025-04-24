@@ -69,7 +69,7 @@ const IntroToAI = () => {
     },
     lessonPlan: {
       title: "Lesson Plan",
-      presentationId: "11iNuXRgu4ePFUKYEfFV2sB5xT_nTUuiFOwazv5z6QRg" // Day 1 presentation ID
+      presentationId: "1fdyUyrwimfpUbtm3plBn_yMd7GElq5JGacIXnFJ7ry0" // Updated presentation ID
     },
     projectWorksheet: {
       title: "Project Worksheet",
@@ -84,6 +84,7 @@ const IntroToAI = () => {
 
   const getGooglePresentationUrls = (presentationId) => ({
     pptx: `https://docs.google.com/presentation/d/${presentationId}/export/pptx`,
+    pdf: `https://docs.google.com/presentation/d/${presentationId}/export/pdf`,
     embed: `https://docs.google.com/presentation/d/${presentationId}/preview`
   });
 
@@ -127,18 +128,32 @@ const IntroToAI = () => {
     return (
       <div className="lesson-plan-container">
         <div className="presentation-header">
-          <a 
-            href={urls.pptx}
-            className="presentation-download"
-            download
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-              <polyline points="7 10 12 15 17 10"></polyline>
-              <line x1="12" y1="15" x2="12" y2="3"></line>
-            </svg>
-            Download PowerPoint
-          </a>
+          <div className="download-options">
+            <a 
+              href={urls.pptx}
+              className="presentation-download pptx"
+              download
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              Download PowerPoint
+            </a>
+            <a 
+              href={urls.pdf}
+              className="presentation-download pdf"
+              download
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              Download PDF
+            </a>
+          </div>
         </div>
         <div className="presentation-preview">
           <iframe
