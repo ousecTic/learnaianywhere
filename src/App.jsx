@@ -1,10 +1,9 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 import Home from './pages/Home';
-import Curriculum from './pages/Curriculum';
 import IntroToAI from './pages/IntroToAI';
 import IntroToGenerativeAI from './pages/IntroToGenerativeAI';
 import GetInvolved from './pages/GetInvolved';
@@ -21,7 +20,7 @@ function App() {
         <main>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/curriculum" element={<Curriculum />} />
+            <Route path="/curriculum" element={<Navigate to="/curriculum/intro-to-ai" replace />} />
             <Route path="/curriculum/intro-to-ai" element={<IntroToAI />} />
             <Route path="/curriculum/intro-to-generative-ai" element={<IntroToGenerativeAI />} />
             <Route path="/get-involved" element={<GetInvolved />} />

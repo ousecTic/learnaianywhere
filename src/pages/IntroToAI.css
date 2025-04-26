@@ -46,12 +46,57 @@
   font-weight: bold;
 }
 
-.approach {
+.approach, .overview-text {
   font-size: 1rem;
   line-height: 1.6;
   color: #4a5568;
-  margin-top: 1.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
   padding: 0 0.5rem;
+}
+
+.section-subtitle {
+  color: #2563eb;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.lesson-objectives {
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.lesson-objective-group {
+  margin-bottom: 1.5rem;
+}
+
+.lesson-objective-group h4 {
+  color: #1a365d;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.lesson-objective-group ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0 0 0 0.5rem;
+}
+
+.lesson-objective-group li {
+  padding: 0.4rem 0 0.4rem 1.75rem;
+  position: relative;
+  line-height: 1.5;
+  color: #4a5568;
+}
+
+.lesson-objective-group li:before {
+  content: "•";
+  position: absolute;
+  left: 0.5rem;
+  color: #2563eb;
 }
 
 .section {
@@ -66,10 +111,106 @@
   font-weight: 600;
 }
 
-.requirements-list, .resources-list {
+.requirements-list, .resources-list, .setup-section {
   list-style-type: none;
   padding: 0;
   margin: 0;
+}
+
+.setup-subtitle {
+  color: #2563eb;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.setup-subtitle:first-child {
+  margin-top: 0;
+}
+
+.setup-important {
+  background-color: #fffbeb;
+  border-left: 3px solid #f59e0b;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.25rem;
+  color: #92400e;
+  font-weight: 500;
+  border-radius: 0.25rem;
+}
+
+.app-section {
+  margin-bottom: 1.5rem;
+}
+
+.platform-title {
+  color: #1a365d;
+  margin-bottom: 0.75rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.app-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0 0 1rem 0.5rem;
+}
+
+.app-item {
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+.app-download {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.app-download:hover {
+  text-decoration: underline;
+}
+
+.app-description {
+  color: #4a5568;
+}
+
+.setup-note {
+  font-style: italic;
+  color: #4a5568;
+  margin: 0.5rem 0 0 0.5rem;
+  font-size: 0.95rem;
+}
+
+.setup-paragraph {
+  color: #4a5568;
+  line-height: 1.6;
+  margin: 0.75rem 0 1.5rem;
+  padding: 0 0.5rem;
+}
+
+.setup-contact-buttons {
+  display: flex;
+  margin: 0.5rem 0 1.5rem;
+  padding: 0 0.5rem;
+}
+
+.contact-button {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  background-color: #2563eb;
+  color: white;
+  font-weight: 500;
+  border-radius: 0.375rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.contact-button:hover {
+  background-color: #1d4ed8;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .requirements-list > div {

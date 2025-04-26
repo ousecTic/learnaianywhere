@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import '../styles/Timeline.css';
 import './IntroToAI.css';
 
 // Accordion component moved from Overview.jsx
@@ -29,43 +28,77 @@ const IntroToAI = () => {
   const content = {
     overview: {
       title: "Overview",
-      mainObjective: "Students will learn to build their own AI image classifier while gaining hands-on experience with artificial intelligence concepts.",
-      keyOutcomes: [
-        "Build and train a custom image classifier",
-        "Understand core AI concepts through hands-on activities",
-        "Learn how to collect and prepare data for AI models",
-        "Gain practical experience with real AI tools"
-      ],
-      approach: "Through guided activities and hands-on projects, you'll learn AI concepts by doing, not just reading. Each day builds on the previous one, leading to your own working AI model."
-    },
-    setup: {
-      title: "Setup",
-      items: [
+      mainObjective: "By the end of this course, students will understand the fundamentals of AI, build their own image classifier, and develop critical thinking about AI's societal impacts.",
+      overviewText: "This Introduction to AI course explores three core concepts: What AI is, How AI works, and the Societal impacts of AI (both positive and negative). Students engage through interactive activities using completely offline apps that run on various devices - smart phones, tablets, or computers with a minimum of 3GB RAM.",
+      courseStructure: "The course consists of 4 lessons, each designed to be completed in 30 minutes. After each lesson, we recommend a 15-minute hands-on project where students progressively build their own image classifier, applying the concepts they've learned.",
+      lessonObjectives: [
         {
-          text: "Basic Requirements",
-          subitems: [
-            "Computer with PowerPoint for presentations",
-            "Android phones/tablets or computers for running apps",
-            {
-              type: "note",
-              content: "Students work in teams and can share devices. iOS/Apple devices have limited support."
-            },
-            "Internet connection for initial app downloads",
-            "Notebooks and writing materials"
+          title: "Lesson 1: Introduction to AI",
+          objectives: [
+            "Describe what artificial intelligence (AI) is",
+            "Identify what makes a tool or app an example of AI"
           ]
         },
         {
-          text: "Preparation",
-          subitems: [
-            "Download required apps before class (works offline after installation)",
-            "Ensure each student has the worksheet or can copy questions in their notebook",
-            {
-              type: "tip",
-              content: "Pro Tip: Review all lessons and download apps in advance for a smoother experience."
-            }
+          title: "Lesson 2: How AI Works - Data & Machine Learning",
+          objectives: [
+            "Name the three main parts of a machine learning system",
+            "Explain what each part does",
+            "Understand why good data is crucial for effective AI"
+          ]
+        },
+        {
+          title: "Lesson 3: Algorithms & Information Processing",
+          objectives: [
+            "Explain what algorithms are with real-life examples",
+            "Describe why algorithms are essential for machine learning",
+            "Outline how machines learn at a high level",
+            "Compare human vs. machine information processing"
+          ]
+        },
+        {
+          title: "Lesson 4: AI Ethics & Societal Impact",
+          objectives: [
+            "Explain how AI systems can make incorrect or unfair predictions",
+            "Describe the societal implications of algorithmic bias",
+            "Understand ways to identify and reduce bias in AI systems"
           ]
         }
-      ]
+      ],
+      approach: "Students complete the worksheet after each lesson, documenting their understanding while simultaneously building their image classifier step-by-step. By the end of Lesson 4, students will give a presentation showcasing the items they've classified, demonstrating their practical understanding of AI concepts."
+    },
+    setup: {
+      title: "Setup",
+      requiredApps: {
+        title: "Required Apps (Devices need minimum 3GB RAM)",
+        installNote: "Important: Both apps must be installed on EACH device students will use for this course, whether Android or Windows.",
+        androidApps: [
+          {
+            name: "Neuropocket",
+            description: "For building image classifiers",
+            url: "https://github.com/ousecTic/neuropocket/releases/download/v1.1.1/neuropocket-1.1.1.apk"
+          },
+          {
+            name: "Plant Diseases App",
+            description: "For demonstrating AI applications",
+            url: "https://github.com/ousecTic/offline-plant-diseases-detection/releases/download/v1.0.0-alpha.2/plant-diseases-detection.apk"
+          }
+        ],
+        windowsApps: [
+          {
+            name: "Neuropocket Desktop",
+            url: "https://github.com/ousecTic/neuropocket/releases/download/v1.1.1/Neuropocket.Setup.1.1.1.exe"
+          },
+          {
+            name: "Plant Diseases App",
+            url: "https://github.com/ousecTic/offline-plant-diseases-detection/releases/download/v1.0.0-alpha.2/plant-diseases-detection.apk"
+          }
+        ],
+        note: "Computers must have cameras to take pictures for the image classification activities."
+      },
+      internetNote: "If internet is limited, you can download these apps once to a USB drive and install them on each device. Currently, we focus on Android and Windows devices as they're most accessible in diverse learning environments.",
+      teacherPrep: "We've designed this curriculum without separate teacher or student guides. The presentations are self-contained and don't require prior AI knowledge—you can learn alongside your students. However, we strongly recommend reviewing the lesson and worksheet before class to understand the learning journey.",
+      contactNote: "If you encounter any difficulties with the setup process or have questions about implementing this course, please don't hesitate to contact us. We're here to help make your AI teaching experience successful."
     },
     lessonPlan: {
       title: "Lesson Plan",
@@ -254,30 +287,72 @@ const IntroToAI = () => {
         <div className="tab-content">
           <div className="overview-content">
             <Accordion title={content.overview.title} defaultOpen={true}>
+              <h3 className="section-subtitle">Course Goal</h3>
               <p className="main-objective">{content.overview.mainObjective}</p>
-              <div className="key-outcomes">
-                <h3>By the end of this course, you will:</h3>
-                <ul>
-                  {content.overview.keyOutcomes.map((outcome, index) => (
-                    <li key={index}>{outcome}</li>
-                  ))}
-                </ul>
+              
+              <h3 className="section-subtitle">Course Overview</h3>
+              <p className="overview-text">{content.overview.overviewText}</p>
+              
+              <h3 className="section-subtitle">Course Structure</h3>
+              <p className="overview-text">{content.overview.courseStructure}</p>
+              
+              <h3 className="section-subtitle">Learning Objectives</h3>
+              <div className="lesson-objectives">
+                {content.overview.lessonObjectives.map((lesson, lessonIndex) => (
+                  <div key={lessonIndex} className="lesson-objective-group">
+                    <h4>{lesson.title}</h4>
+                    <ul>
+                      {lesson.objectives.map((objective, objIndex) => (
+                        <li key={objIndex}>{objective}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
               </div>
+              
+              <h3 className="section-subtitle">Learning Approach</h3>
               <p className="approach">{content.overview.approach}</p>
             </Accordion>
 
             <Accordion title={content.setup.title}>
-              <div className="requirements-list">
-                {content.setup.items.map((item, index) => (
-                  <div key={index}>
-                    <strong>{item.text}</strong>
-                    {item.subitems.length > 0 && (
-                      <ul>
-                        {renderRequirementsList(item.subitems)}
-                      </ul>
-                    )}
-                  </div>
-                ))}
+              <div className="setup-section">
+                <h3 className="setup-subtitle">{content.setup.requiredApps.title}</h3>
+                <p className="setup-important">{content.setup.requiredApps.installNote}</p>
+                
+                <div className="app-section">
+                  <h4 className="platform-title">For Android devices:</h4>
+                  <ul className="app-list">
+                    {content.setup.requiredApps.androidApps.map((app, index) => (
+                      <li key={index} className="app-item">
+                        <a href={app.url} className="app-download" target="_blank" rel="noopener noreferrer">{app.name}</a>
+                        {app.description && <span className="app-description"> - {app.description}</span>}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                
+                <div className="app-section">
+                  <h4 className="platform-title">For Windows computers:</h4>
+                  <ul className="app-list">
+                    {content.setup.requiredApps.windowsApps.map((app, index) => (
+                      <li key={index} className="app-item">
+                        <a href={app.url} className="app-download" target="_blank" rel="noopener noreferrer">{app.name}</a>
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="setup-note">{content.setup.requiredApps.note}</p>
+                </div>
+                
+                <p className="setup-paragraph">{content.setup.internetNote}</p>
+                
+                <h3 className="setup-subtitle">Teacher Preparation</h3>
+                <p className="setup-paragraph">{content.setup.teacherPrep}</p>
+                
+                <h3 className="setup-subtitle">Need Help?</h3>
+                <p className="setup-paragraph">{content.setup.contactNote}</p>
+                <div className="setup-contact-buttons">
+                  <Link to="/contact" className="contact-button">Contact Us</Link>
+                </div>
               </div>
             </Accordion>
 
