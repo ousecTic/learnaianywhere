@@ -34,8 +34,8 @@ const Curriculum = () => {
     <div className="curriculum-page">
       <div className="curriculum-header">
         <div className="container">
-          <h1>Curriculum Overview</h1>
-          <p>Our AI literacy curriculum is designed for teachers to deliver engaging lessons in low-tech environments, focusing on core AI concepts and their real-world implications.</p>
+          <h1>AI Lessons Overview</h1>
+          <p>Our AI lessons are designed for teachers to deliver engaging content in low-tech environments, focusing on core AI concepts and their real-world implications. Completely beginner-friendly for both students and teachers.</p>
         </div>
       </div>
 
@@ -54,9 +54,9 @@ const Curriculum = () => {
                 </ul>
               </div>
               {index === 0 ? (
-                <Button to="/curriculum/intro-to-ai" variant="primary">View Module →</Button>
+                <Button to="/curriculum/intro-to-ai" variant="primary">View Lessons →</Button>
               ) : (
-                <Button to="/curriculum/intro-to-generative-ai" variant="primary">View Module →</Button>
+                <Button to="/curriculum/intro-to-generative-ai" variant="primary">View Lessons →</Button>
               )}
             </div>
           ))}

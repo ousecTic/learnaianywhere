@@ -11,16 +11,14 @@ const Footer = () => {
             <Link to="/" className="footer-logo">
               <img src={logo} alt="Learn AI Anywhere" />
             </Link>
-            <p>Bringing AI literacy to underserved communities worldwide.</p>
+            <p>Bringing AI literacy education Anywhere, even in areas with limited technology access.</p>
           </div>
           
           <div className="footer-section">
             <h3>Quick Links</h3>
             <ul>
-              <li><Link to="/curriculum">Curriculum</Link></li>
               <li><Link to="/get-involved">Get Involved</Link></li>
               <li><Link to="/about">About Us</Link></li>
-              <li><Link to="/contact">Contact</Link></li>
             </ul>
           </div>
 

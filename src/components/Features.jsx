@@ -6,30 +6,30 @@ const Features = () => {
     <section className="features">
       <div className="container">
         <h2>How Learn AI Anywhere Works</h2>
-        <p>Our offline-first, project-based, mobile-friendly curriculum empowers educators to teach AI - no prior AI experience needed. We provide comprehensive teaching guides and support every step of the way.</p>
+        <p>Our offline-first, project-based, mobile-friendly AI lessons empower educators to teach AI - completely beginner-friendly for both students and teachers</p>
         <div className="features-grid">
           <div className="feature-card">
-            <div className="feature-icon">📚</div>
-            <h3>No AI Experience Needed</h3>
-            <p>Step-by-step teaching guides and detailed lesson plans help you confidently teach AI concepts, even if you're new to the subject</p>
-            <Button to="/curriculum" variant="text">Get Started →</Button>
-          </div>
-          <div className="feature-card">
-            <div className="feature-icon">🤝</div>
-            <h3>Project-Based</h3>
-            <p>Guide students through collaborative team projects that develop real-world AI problem-solving skills</p>
+            <div className="feature-icon">🌐</div>
+            <h3>Offline-First</h3>
+            <p>Teach AI effectively in low-tech environments with minimal technical requirements and ready-to-use lesson plans</p>
             <Button to="/curriculum" variant="text">Get Started →</Button>
           </div>
           <div className="feature-card">
             <div className="feature-icon">📱</div>
             <h3>Mobile-Friendly</h3>
-            <p>Access and deliver the curriculum on any device - mobile, tablet, or desktop. Works offline once apps are downloaded</p>
+            <p>Access and deliver our AI lessons on any device - mobile, tablet, or desktop. Works offline once apps are downloaded</p>
             <Button to="/curriculum" variant="text">Get Started →</Button>
           </div>
           <div className="feature-card">
-            <div className="feature-icon">🌐</div>
-            <h3>Offline-First</h3>
-            <p>Teach AI effectively in low-tech environments with minimal technical requirements and ready-to-use lesson plans</p>
+            <div className="feature-icon">📝</div>
+            <h3>Progressive Worksheets</h3>
+            <p>Students build practical AI projects like image classifiers and learn how to effectively prompt and engage with language models through guided worksheets</p>
+            <Button to="/curriculum" variant="text">Get Started →</Button>
+          </div>
+          <div className="feature-card">
+            <div className="feature-icon">📚</div>
+            <h3>Beginner-Friendly</h3>
+            <p>Extremely accessible content that requires minimal AI knowledge. Educators should review materials beforehand, but no prior expertise is needed</p>
             <Button to="/curriculum" variant="text">Get Started →</Button>
           </div>
         </div>

@@ -11,7 +11,7 @@ const Hero = () => {
             <h1 className="text-4xl font-bold">AI Literacy for Low-Tech Environments</h1>
             <p className="text-lg">Learn AI Anywhere empowers educators to bring AI education to students, even in areas with limited technology access.</p>
             <div className="hero-buttons">
-              <Button to="/curriculum" variant="primary">View Curriculum</Button>
+              <Button to="/curriculum" variant="primary">View AI Lessons</Button>
               <Button to="/about" variant="secondary">About Us</Button>
             </div>
           </div>

@@ -38,7 +38,7 @@ const GetInvolved = () => {
       <div className="page-header">
         <div className="container">
           <h1>Get Involved</h1>
-          <p>Join us in our mission to make AI education accessible to everyone, everywhere. Whether you're an individual or an organization, there are many ways to contribute and make a difference.</p>
+          <p>Join us in our mission to make AI education accessible Anywhere. Whether you're an individual or an organization, there are many ways to contribute and make a difference.</p>
         </div>
       </div>
 
@@ -60,7 +60,7 @@ const GetInvolved = () => {
             <div className="volunteers-section">
               <div className="section-intro">
                 <h2>Volunteers</h2>
-                <p>Our volunteers are at the heart of advancing AI literacy in underserved communities. By helping to implement our curriculum, volunteers directly shape the educational experience for students who need it most.</p>
+                <p>Our volunteers are at the heart of bringing AI literacy education Anywhere. By helping to implement our AI lessons, volunteers directly shape the educational experience for students in areas with limited technology access.</p>
                 <p>Beyond classroom support, volunteers like translators or ambassadors help us build long-term relationships and expand the reach of our program.</p>
               </div>
 
@@ -109,7 +109,7 @@ const GetInvolved = () => {
         <div className="container">
           <div className="cta-section">
             <h2>Ready to Make a Difference?</h2>
-            <p>Join us in our mission to bring AI literacy to underserved communities worldwide.</p>
+            <p>Join us in bringing AI literacy education Anywhere, even in areas with limited technology access.</p>
             <div className="cta-buttons">
               <Button to="/contact" variant="primary">Contact Us</Button>
             </div>
