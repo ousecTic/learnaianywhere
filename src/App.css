@@ -4,11 +4,32 @@
 }
 
 :root {
+  /* Main brand colors */
   --primary-color: #258EC2;
+  --primary-dark: #1c6e99; /* Darker shade of primary for hover states */
+  --primary-light: #3ba3da; /* Lighter shade of primary */
+  
+  /* Text colors */
   --text-color: #000000;
+  --text-color-light: #FFFFFF;
   --subtext-color: #71717A;
+  
+  /* Background colors */
+  --bg-color: #F9FAFB;
+  --bg-color-white: #FFFFFF;
+  --light-bg: #F9FAFB;
+  
+  /* Border colors */
+  --border-color: #E5E7EB;
+  
+  /* Alert colors */
+  --success-color: #10B981;
+  --warning-color: #F59E0B;
+  --danger-color: #EF4444;
+  --info-color: #3B82F6;
+  
+  /* Layout variables */
   --container-width: 1280px;
-  --light-bg: #F8FAFC;
   --max-width: 100%;
 }
 

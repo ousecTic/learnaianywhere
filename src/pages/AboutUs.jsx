@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import Button from '../components/shared/Button';
 import ImageModal from '../components/ImageModal';
 
 const AboutUs = () => {
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImage, setSelectedImage] = React.useState(null);
 
   const operationsTeam = [
     {
@@ -200,7 +201,7 @@ const AboutUs = () => {
           <h2>Ready to Make a Difference?</h2>
           <p>Join us in our mission to bring AI literacy to underserved communities worldwide.</p>
           <div className="cta-buttons">
-            <Link to="/contact" className="btn-primary">Contact Us</Link>
+            <Button to="/contact" variant="primary">Contact Us</Button>
           </div>
         </div>
       </div>

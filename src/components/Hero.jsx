@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Button from './shared/Button';
 import homeVideo from '../assets/homevideo.gif';
 
 const Hero = () => {
@@ -11,8 +11,8 @@ const Hero = () => {
             <h1 className="text-4xl font-bold">AI Literacy for Low-Tech Environments</h1>
             <p className="text-lg">Learn AI Anywhere empowers educators to bring AI education to students, even in areas with limited technology access.</p>
             <div className="hero-buttons">
-              <Link to="/curriculum" className="primary-btn">View Curriculum</Link>
-              <Link to="/about" className="secondary-btn">About Us</Link>
+              <Button to="/curriculum" variant="primary">View Curriculum</Button>
+              <Button to="/about" variant="secondary">About Us</Button>
             </div>
           </div>
           <div className="hero-video">

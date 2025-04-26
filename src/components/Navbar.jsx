@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import Button from './shared/Button';
 import logo from '../assets/learnAIAnywhereLogo.png';
 
 const Navbar = () => {
@@ -83,7 +84,7 @@ const Navbar = () => {
           </div>
           <Link to="/get-involved" className="nav-link" onClick={() => setIsMenuOpen(false)}>Get Involved</Link>
           <Link to="/about" className="nav-link" onClick={() => setIsMenuOpen(false)}>About Us</Link>
-          <Link to="/contact" className="contact-btn" onClick={() => setIsMenuOpen(false)}>Contact</Link>
+          <Button to="/contact" variant="primary" size="small" onClick={() => setIsMenuOpen(false)}>Contact</Button>
         </div>
       </div>
     </nav>

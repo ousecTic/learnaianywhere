@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Toast from '../components/Toast';
+import Button from '../components/shared/Button';
 
 const Contact = () => {
   const email = 'contact@learnaianywhere.org';
@@ -22,12 +23,13 @@ const Contact = () => {
             
             <div className="email-container">
               <span className="email">{email}</span>
-              <button 
-                className="copy-btn"
+              <Button 
+                variant="primary"
+                size="small"
                 onClick={handleCopy}
               >
                 Copy Email
-              </button>
+              </Button>
             </div>
 
             <div className="contact-details">

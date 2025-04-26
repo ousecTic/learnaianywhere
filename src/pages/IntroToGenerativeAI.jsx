@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './IntroToGenerativeAI.css';
 import { Link } from 'react-router-dom';
+import Button from '../components/shared/Button';
 
 // Accordion component for collapsible sections
 const Accordion = ({ title, children, defaultOpen = false }) => {
@@ -164,9 +165,9 @@ const IntroToGenerativeAI = () => {
           <h3 className="worksheet-title">Blank Template</h3>
           <div className="worksheet-header">
             <div className="download-options">
-              <a 
+              <Button 
                 href={urls.pdf}
-                className="worksheet-download pdf"
+                variant="secondary"
                 download
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -175,10 +176,10 @@ const IntroToGenerativeAI = () => {
                   <line x1="12" y1="15" x2="12" y2="3"></line>
                 </svg>
                 Download PDF
-              </a>
-              <a 
+              </Button>
+              <Button 
                 href={urls.docx}
-                className="worksheet-download docx"
+                variant="primary"
                 download
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -187,7 +188,7 @@ const IntroToGenerativeAI = () => {
                   <line x1="12" y1="15" x2="12" y2="3"></line>
                 </svg>
                 Download Word
-              </a>
+              </Button>
             </div>
           </div>
           <div className="worksheet-preview">
@@ -196,7 +197,7 @@ const IntroToGenerativeAI = () => {
               title={projectWorksheet.title}
               width="100%"
               height="842"
-              frameBorder="0"
+
             ></iframe>
           </div>
         </div>
@@ -206,9 +207,9 @@ const IntroToGenerativeAI = () => {
             <h3 className="worksheet-title">Example (Filled Version)</h3>
             <div className="worksheet-header">
               <div className="download-options">
-                <a 
+                <Button 
                   href={exampleUrls.pdf}
-                  className="worksheet-download pdf"
+                  variant="secondary"
                   download
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -217,10 +218,10 @@ const IntroToGenerativeAI = () => {
                     <line x1="12" y1="15" x2="12" y2="3"></line>
                   </svg>
                   Download PDF
-                </a>
-                <a 
+                </Button>
+                <Button 
                   href={exampleUrls.docx}
-                  className="worksheet-download docx"
+                  variant="primary"
                   download
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -229,7 +230,7 @@ const IntroToGenerativeAI = () => {
                     <line x1="12" y1="15" x2="12" y2="3"></line>
                   </svg>
                   Download Word
-                </a>
+                </Button>
               </div>
             </div>
             <div className="worksheet-preview">
@@ -238,7 +239,7 @@ const IntroToGenerativeAI = () => {
                 title="Example Worksheet"
                 width="100%"
                 height="842"
-                frameBorder="0"
+  
               ></iframe>
             </div>
           </div>
@@ -255,9 +256,9 @@ const IntroToGenerativeAI = () => {
       <div className="lesson-plan-container">
         <div className="presentation-header">
           <div className="download-options">
-            <a 
+            <Button 
               href={urls.pptx}
-              className="presentation-download pptx"
+              variant="primary"
               download
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -266,10 +267,10 @@ const IntroToGenerativeAI = () => {
                 <line x1="12" y1="15" x2="12" y2="3"></line>
               </svg>
               Download PowerPoint
-            </a>
-            <a 
+            </Button>
+            <Button 
               href={urls.pdf}
-              className="presentation-download pdf"
+              variant="secondary"
               download
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -278,7 +279,7 @@ const IntroToGenerativeAI = () => {
                 <line x1="12" y1="15" x2="12" y2="3"></line>
               </svg>
               Download PDF
-            </a>
+            </Button>
           </div>
         </div>
         <div className="presentation-preview">
@@ -287,7 +288,7 @@ const IntroToGenerativeAI = () => {
             title={lessonPlan.title}
             width="100%"
             height="500"
-            frameBorder="0"
+
             allowFullScreen
           ></iframe>
         </div>
@@ -345,12 +346,12 @@ const IntroToGenerativeAI = () => {
                   <ul className="app-list">
                     {content.setup.requiredApps.androidApps.map((app, index) => (
                       <li key={index} className="app-item">
-                        <a href={app.url} className="app-download" target="_blank" rel="noopener noreferrer">{app.name}</a>
+                        <Button href={app.url} variant="text" target="_blank" rel="noopener noreferrer">{app.name}</Button>
                         {app.description && <span className="app-description"> - {app.description}</span>}
                         {app.additionalResource && (
                           <div className="additional-resource">
                             <p className="resource-description">{app.additionalResource.description}</p>
-                            <a href={app.additionalResource.url} className="resource-download" target="_blank" rel="noopener noreferrer">{app.additionalResource.name}</a>
+                            <Button href={app.additionalResource.url} variant="text" size="small" target="_blank" rel="noopener noreferrer">{app.additionalResource.name}</Button>
                           </div>
                         )}
                       </li>
@@ -363,11 +364,11 @@ const IntroToGenerativeAI = () => {
                   <ul className="app-list">
                     {content.setup.requiredApps.windowsApps.map((app, index) => (
                       <li key={index} className="app-item">
-                        <a href={app.url} className="app-download" target="_blank" rel="noopener noreferrer">{app.name}</a>
+                        <Button href={app.url} variant="text" target="_blank" rel="noopener noreferrer">{app.name}</Button>
                         {app.additionalResource && (
                           <div className="additional-resource">
                             <p className="resource-description">{app.additionalResource.description}</p>
-                            <a href={app.additionalResource.url} className="resource-download" target="_blank" rel="noopener noreferrer">{app.additionalResource.name}</a>
+                            <Button href={app.additionalResource.url} variant="text" size="small" target="_blank" rel="noopener noreferrer">{app.additionalResource.name}</Button>
                           </div>
                         )}
                       </li>
@@ -384,7 +385,7 @@ const IntroToGenerativeAI = () => {
                 <h3 className="setup-subtitle">Need Help?</h3>
                 <p className="setup-paragraph">{content.setup.contactNote}</p>
                 <div className="setup-contact-buttons">
-                  <Link to="/contact" className="contact-button">Contact Us</Link>
+                  <Button to="/contact" variant="primary">Contact Us</Button>
                 </div>
               </div>
             </Accordion>
@@ -403,7 +404,7 @@ const IntroToGenerativeAI = () => {
           <h2>Need Additional Support?</h2>
           <p>Our team is here to help you implement these resources effectively in your classroom.</p>
           <div className="support-buttons">
-            <Link to="/contact" className="primary-btn">Contact Support</Link>
+            <Button to="/contact" variant="primary">Contact Support</Button>
           </div>
         </div>
       </div>

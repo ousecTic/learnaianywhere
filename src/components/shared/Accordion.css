@@ -1,6 +1,6 @@
 .accordion {
   margin-bottom: 1.5rem;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--border-color);
   border-radius: 0.5rem;
   overflow: hidden;
 }
@@ -22,7 +22,7 @@
 }
 
 .accordion-header:hover {
-  background: #f1f5f9;
+  background: var(--bg-color);
 }
 
 .accordion-header h2 {
@@ -49,7 +49,7 @@
   visibility: hidden;
   overflow: hidden;
   transition: all 0.3s ease-out;
-  background: white;
+  background: var(--bg-color-white);
 }
 
 .accordion-content.show {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Button from './shared/Button';
 
 const Features = () => {
   return (
@@ -12,25 +12,25 @@ const Features = () => {
             <div className="feature-icon">📚</div>
             <h3>No AI Experience Needed</h3>
             <p>Step-by-step teaching guides and detailed lesson plans help you confidently teach AI concepts, even if you're new to the subject</p>
-            <Link to="/curriculum" className="view-more">Get Started →</Link>
+            <Button to="/curriculum" variant="text">Get Started →</Button>
           </div>
           <div className="feature-card">
             <div className="feature-icon">🤝</div>
             <h3>Project-Based</h3>
             <p>Guide students through collaborative team projects that develop real-world AI problem-solving skills</p>
-            <Link to="/curriculum" className="view-more">Get Started →</Link>
+            <Button to="/curriculum" variant="text">Get Started →</Button>
           </div>
           <div className="feature-card">
             <div className="feature-icon">📱</div>
             <h3>Mobile-Friendly</h3>
             <p>Access and deliver the curriculum on any device - mobile, tablet, or desktop. Works offline once apps are downloaded</p>
-            <Link to="/curriculum" className="view-more">Get Started →</Link>
+            <Button to="/curriculum" variant="text">Get Started →</Button>
           </div>
           <div className="feature-card">
             <div className="feature-icon">🌐</div>
             <h3>Offline-First</h3>
             <p>Teach AI effectively in low-tech environments with minimal technical requirements and ready-to-use lesson plans</p>
-            <Link to="/curriculum" className="view-more">Get Started →</Link>
+            <Button to="/curriculum" variant="text">Get Started →</Button>
           </div>
         </div>
       </div>

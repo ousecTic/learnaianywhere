@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Button from '../components/shared/Button';
 
 const Curriculum = () => {
   const weeks = [
@@ -53,9 +54,9 @@ const Curriculum = () => {
                 </ul>
               </div>
               {index === 0 ? (
-                <Link to="/curriculum/intro-to-ai" className="view-module-btn">View Module →</Link>
+                <Button to="/curriculum/intro-to-ai" variant="primary">View Module →</Button>
               ) : (
-                <Link to="/curriculum/intro-to-generative-ai" className="view-module-btn">View Module →</Link>
+                <Button to="/curriculum/intro-to-generative-ai" variant="primary">View Module →</Button>
               )}
             </div>
           ))}

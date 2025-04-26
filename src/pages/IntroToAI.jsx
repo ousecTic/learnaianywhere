@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Button from '../components/shared/Button';
 import './IntroToAI.css';
 
 // Accordion component moved from Overview.jsx
@@ -134,9 +135,9 @@ const IntroToAI = () => {
           <h3 className="worksheet-title">Blank Template</h3>
           <div className="worksheet-header">
             <div className="download-options">
-              <a 
+              <Button 
                 href={urls.pdf}
-                className="worksheet-download pdf"
+                variant="secondary"
                 download
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -145,10 +146,10 @@ const IntroToAI = () => {
                   <line x1="12" y1="15" x2="12" y2="3"></line>
                 </svg>
                 Download PDF
-              </a>
-              <a 
+              </Button>
+              <Button 
                 href={urls.docx}
-                className="worksheet-download docx"
+                variant="primary"
                 download
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -156,8 +157,8 @@ const IntroToAI = () => {
                   <polyline points="7 10 12 15 17 10"></polyline>
                   <line x1="12" y1="15" x2="12" y2="3"></line>
                 </svg>
-                Download Word
-              </a>
+                Download DOCX
+              </Button>
             </div>
           </div>
           <div className="worksheet-preview">
@@ -166,7 +167,7 @@ const IntroToAI = () => {
               title={projectWorksheet.title}
               width="100%"
               height="842"
-              frameBorder="0"
+
             ></iframe>
           </div>
         </div>
@@ -176,9 +177,9 @@ const IntroToAI = () => {
             <h3 className="worksheet-title">Example (Filled Version)</h3>
             <div className="worksheet-header">
               <div className="download-options">
-                <a 
+                <Button 
                   href={exampleUrls.pdf}
-                  className="worksheet-download pdf"
+                  variant="secondary"
                   download
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -187,10 +188,10 @@ const IntroToAI = () => {
                     <line x1="12" y1="15" x2="12" y2="3"></line>
                   </svg>
                   Download PDF
-                </a>
-                <a 
+                </Button>
+                <Button 
                   href={exampleUrls.docx}
-                  className="worksheet-download docx"
+                  variant="primary"
                   download
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -199,7 +200,7 @@ const IntroToAI = () => {
                     <line x1="12" y1="15" x2="12" y2="3"></line>
                   </svg>
                   Download Word
-                </a>
+                </Button>
               </div>
             </div>
             <div className="worksheet-preview">
@@ -208,7 +209,7 @@ const IntroToAI = () => {
                 title="Example Worksheet"
                 width="100%"
                 height="842"
-                frameBorder="0"
+
               ></iframe>
             </div>
           </div>
@@ -225,9 +226,9 @@ const IntroToAI = () => {
       <div className="lesson-plan-container">
         <div className="presentation-header">
           <div className="download-options">
-            <a 
+            <Button 
               href={urls.pptx}
-              className="presentation-download pptx"
+              variant="primary"
               download
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -236,10 +237,10 @@ const IntroToAI = () => {
                 <line x1="12" y1="15" x2="12" y2="3"></line>
               </svg>
               Download PowerPoint
-            </a>
-            <a 
+            </Button>
+            <Button 
               href={urls.pdf}
-              className="presentation-download pdf"
+              variant="secondary"
               download
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -248,7 +249,7 @@ const IntroToAI = () => {
                 <line x1="12" y1="15" x2="12" y2="3"></line>
               </svg>
               Download PDF
-            </a>
+            </Button>
           </div>
         </div>
         <div className="presentation-preview">
@@ -257,7 +258,6 @@ const IntroToAI = () => {
             title={lessonPlan.title}
             width="100%"
             height="500"
-            frameBorder="0"
             allowFullScreen
           ></iframe>
         </div>
@@ -324,7 +324,7 @@ const IntroToAI = () => {
                   <ul className="app-list">
                     {content.setup.requiredApps.androidApps.map((app, index) => (
                       <li key={index} className="app-item">
-                        <a href={app.url} className="app-download" target="_blank" rel="noopener noreferrer">{app.name}</a>
+                        <Button href={app.url} variant="text" target="_blank" rel="noopener noreferrer">{app.name}</Button>
                         {app.description && <span className="app-description"> - {app.description}</span>}
                       </li>
                     ))}
@@ -336,7 +336,7 @@ const IntroToAI = () => {
                   <ul className="app-list">
                     {content.setup.requiredApps.windowsApps.map((app, index) => (
                       <li key={index} className="app-item">
-                        <a href={app.url} className="app-download" target="_blank" rel="noopener noreferrer">{app.name}</a>
+                        <Button href={app.url} variant="text" target="_blank" rel="noopener noreferrer">{app.name}</Button>
                       </li>
                     ))}
                   </ul>
@@ -351,7 +351,7 @@ const IntroToAI = () => {
                 <h3 className="setup-subtitle">Need Help?</h3>
                 <p className="setup-paragraph">{content.setup.contactNote}</p>
                 <div className="setup-contact-buttons">
-                  <Link to="/contact" className="contact-button">Contact Us</Link>
+                  <Button to="/contact" variant="primary">Contact Us</Button>
                 </div>
               </div>
             </Accordion>
@@ -370,7 +370,7 @@ const IntroToAI = () => {
           <h2>Need Additional Support?</h2>
           <p>Our team is here to help you implement these resources effectively in your classroom.</p>
           <div className="support-buttons">
-            <Link to="/contact" className="primary-btn">Contact Support</Link>
+            <Button to="/contact" variant="primary">Contact Support</Button>
           </div>
         </div>
       </div>
