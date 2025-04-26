@@ -13,17 +13,17 @@ const GetInvolved = () => {
   const volunteerRoles = [
     {
       title: 'Teachers',
-      description: 'Ensures curriculum relevance and alignment with educational goals.',
+      description: 'Ensures AI lessons relevance and alignment with educational goals.',
       responsibilities: [
-        'Implement the curriculum in classrooms or community spaces.',
+        'Implement the AI lessons in classrooms or community spaces.',
         'Provide before and after feedback to measure student learning outcomes.',
-        'Share their own insights about the curriculum\'s usability and effectiveness.',
+        'Share their own insights about the AI lessons\' usability and effectiveness.',
         'Submit qualitative data, such as completed worksheets and presentation videos, to help refine lesson content and delivery.'
       ]
     },
     {
       title: 'Translators',
-      description: 'Adapt curriculum materials into local languages to enhance accessibility and cultural relevance.',
+      description: 'Adapt AI lesson materials into local languages to enhance accessibility and cultural relevance.',
       responsibilities: []
     },
     {
@@ -87,18 +87,18 @@ const GetInvolved = () => {
               <div className="section-intro">
                 <h2>Partnerships</h2>
                 <p>Even with a dedicated team and individual volunteers, we need strong partnerships to provide expertise, scalable solutions, and funding.</p>
-                <p>Partnerships are a cornerstone of sustainability, enabling us to expand testing, development, and adoption of our curriculum to reach more communities.</p>
+                <p>Partnerships are a cornerstone of sustainability, enabling us to expand testing, development, and adoption of our AI lessons to reach more communities.</p>
               </div>
 
               <div className="role-cards">
                 <div className="role-card">
                   <h3>Partners</h3>
-                  <p>Ensures curriculum relevance and alignment with educational goals.</p>
+                  <p>Ensures AI lessons relevance and alignment with educational goals.</p>
                   <ul>
-                    <li>Expert Guidance: Provide expertise in curriculum design, pedagogy, and implementation strategies.</li>
+                    <li>Expert Guidance: Provide expertise in educational design, pedagogy, and implementation strategies.</li>
                     <li>Technological Innovation: Collaborate on developing or improving offline-friendly educational tools.</li>
-                    <li>Academic Research: Partner with universities or research institutions to assess curriculum impact.</li>
-                    <li>Localized Implementation Support: Work with nonprofits and NGOs to adapt the curriculum to cultural contexts.</li>
+                    <li>Academic Research: Partner with universities or research institutions to assess educational impact.</li>
+                    <li>Localized Implementation Support: Work with nonprofits and NGOs to adapt the AI lessons to cultural contexts.</li>
                   </ul>
                 </div>
               </div>

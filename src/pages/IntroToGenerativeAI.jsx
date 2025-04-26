@@ -118,7 +118,7 @@ const IntroToGenerativeAI = () => {
         ]
       },
       internetNote: "If internet is limited, you can download these apps and model files once to a USB drive and install them on each device. Currently, we focus on Android and Windows devices as they're most accessible in diverse learning environments.",
-      teacherPrep: "We've designed this curriculum without separate teacher or student guides. The presentations are self-contained and don't require prior AI knowledge—you can learn alongside your students. However, we strongly recommend reviewing the lesson and worksheet before class to understand the learning journey.",
+      teacherPrep: "We've designed these AI lessons without separate teacher or student guides. The presentations are self-contained and don't require prior AI knowledge—you can learn alongside your students. However, we strongly recommend reviewing the lesson and worksheet before class to understand the learning journey.",
       contactNote: "If you encounter any difficulties with the setup process or have questions about implementing this course, please don't hesitate to contact us. We're here to help make your AI teaching experience successful."
     },
     lessonPlan: {

@@ -97,7 +97,7 @@ const AboutUs = () => {
       <div className="container">
         <section className="about-section">
           <h1>About Learn AI Anywhere</h1>
-          <p>This project started because we saw a gap in existing AI literacy curriculums. Most resources are designed mainly for developed countries and often assume you have constant access to computers, internet, and electricity. But that's not the reality for many communities around the world.</p>
+          <p>This project started because we saw a gap in existing AI literacy resources. Most AI lessons are designed mainly for developed countries and often assume you have constant access to computers, internet, and electricity. But that's not the reality for many communities around the world.</p>
           
           <div className="inspiration-photo-container">
             <img 

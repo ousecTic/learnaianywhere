@@ -23,7 +23,7 @@ const Footer = () => {
           </div>
 
           <div className="footer-section">
-            <h3>Curriculum</h3>
+            <h3>AI Lessons</h3>
             <ul>
               <li><Link to="/curriculum/intro-to-ai">Introduction to AI</Link></li>
               <li><Link to="/curriculum/intro-to-generative-ai">Introduction to Generative AI</Link></li>
@@ -41,7 +41,7 @@ const Footer = () => {
         </div>
         
         <div className="footer-bottom">
-          <p>&copy; {new Date().getFullYear()} Learn AI Anywhere, an IRS 501(c)3 Public Charity (81-1631000). All rights reserved. Unless stated otherwise, the Learn AI Anywhere curriculum is licensed under a <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a> (the "Learn AI Anywhere Creative Commons license").</p>
+          <p>&copy; {new Date().getFullYear()} Learn AI Anywhere, an IRS 501(c)3 Public Charity (81-1631000). All rights reserved. Unless stated otherwise, the Learn AI Anywhere AI lessons are licensed under a <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a> (the "Learn AI Anywhere Creative Commons license").</p>
         </div>
       </div>
     </footer>
