@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from './shared/Button';
-import homeVideo from '../assets/homevideo.gif';
+import homeVideo from '../assets/home-video.gif';
 
 const Hero = () => {
   return (

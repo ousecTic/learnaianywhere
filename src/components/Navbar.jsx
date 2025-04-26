@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Button from './shared/Button';
-import logo from '../assets/learnAIAnywhereLogo.png';
+import logo from '../assets/learnAIAnywhere-logo.png';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

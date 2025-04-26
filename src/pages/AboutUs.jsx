@@ -9,18 +9,18 @@ import futureUpgradeLogo from '../assets/images/about/partnerships/future-upgrad
 import nyansapoLogo from '../assets/images/about/partnerships/nyansapo-logo.jpg';
 
 // Import gallery images
-import gallery1 from '../assets/images/about/gallery/1742493972267.jpg';
-import gallery2 from '../assets/images/about/gallery/IMG_20241001_174000.jpg';
-import gallery3 from '../assets/images/about/gallery/IMG_20241001_174039 (2).jpg';
-import gallery4 from '../assets/images/about/gallery/WhatsApp Image 2025-04-26 at 18.38.51_cf3a6ec6.jpg';
-import gallery5 from '../assets/images/about/gallery/WhatsApp Image 2025-04-26 at 18.43.20_cbca0192.jpg';
-import gallery6 from '../assets/images/about/gallery/WhatsApp Image 2025-04-26 at 18.45.36_b15f29ba.jpg';
-import gallery7 from '../assets/images/about/gallery/WhatsApp Image 2025-04-26 at 18.47.12_ad19e985.jpg';
-import gallery8 from '../assets/images/about/gallery/WhatsApp Image 2025-04-26 at 18.48.35_2c57b657.jpg';
-import gallery9 from '../assets/images/about/gallery/WhatsApp Image 2025-04-26 at 18.49.38_fa3b03b2.jpg';
-import gallery10 from '../assets/images/about/gallery/WhatsApp Image 2025-04-26 at 18.52.07_781f0086.jpg';
-import gallery11 from '../assets/images/about/gallery/WhatsApp Image 2025-04-26 at 18.53.12_6b184c63.jpg';
-import gallery12 from '../assets/images/about/gallery/WhatsApp Image 2025-04-26 at 18.55.50_6baf4b6c.jpg';
+import gallery1 from '../assets/images/about/gallery/picture-1.jpg';
+import gallery2 from '../assets/images/about/gallery/picture-2.jpg';
+import gallery3 from '../assets/images/about/gallery/picture-3.jpg';
+import gallery4 from '../assets/images/about/gallery/picture-4.jpg';
+import gallery5 from '../assets/images/about/gallery/picture-5.jpg';
+import gallery6 from '../assets/images/about/gallery/picture-6.jpg';
+import gallery7 from '../assets/images/about/gallery/picture-7.jpg';
+import gallery8 from '../assets/images/about/gallery/picture-8.jpg';
+import gallery9 from '../assets/images/about/gallery/picture-9.jpg';
+import gallery10 from '../assets/images/about/gallery/picture-10.jpg';
+import gallery11 from '../assets/images/about/gallery/picture-11.jpg';
+import gallery12 from '../assets/images/about/gallery/picture-12.jpg';
 
 const AboutUs = () => {
   const [selectedImage, setSelectedImage] = React.useState(null);
