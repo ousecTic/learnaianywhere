@@ -2,24 +2,23 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../components/shared/Button';
 import './IntroToAI.css';
+import './CourseSection.css';
 
-// Accordion component moved from Overview.jsx
-const Accordion = ({ title, children, defaultOpen = false }) => {
+// Simple section component instead of accordion for mobile compatibility
+const CourseSection = ({ title, children, defaultOpen = false }) => {
   const [isOpen, setIsOpen] = useState(defaultOpen);
 
   return (
-    <div className={`accordion ${isOpen ? 'open' : ''}`}>
-      <button 
-        className="accordion-header" 
-        onClick={() => setIsOpen(!isOpen)}
-        aria-expanded={isOpen}
-      >
+    <div className="course-section">
+      <div className="section-header" onClick={() => setIsOpen(!isOpen)}>
         <h2>{title}</h2>
-        <span className="accordion-icon">{isOpen ? '−' : '+'}</span>
-      </button>
-      <div className={`accordion-content ${isOpen ? 'show' : ''}`}>
-        {children}
+        <span className="toggle-icon">{isOpen ? '−' : '+'}</span>
       </div>
+      {isOpen && (
+        <div className="section-content">
+          {children}
+        </div>
+      )}
     </div>
   );
 };
@@ -286,7 +285,7 @@ const IntroToAI = () => {
       <div className="container">
         <div className="tab-content">
           <div className="overview-content">
-            <Accordion title={content.overview.title} defaultOpen={true}>
+            <CourseSection title={content.overview.title} defaultOpen={true}>
               <h3 className="section-subtitle">Course Goal</h3>
               <p className="main-objective">{content.overview.mainObjective}</p>
               
@@ -312,9 +311,9 @@ const IntroToAI = () => {
               
               <h3 className="section-subtitle">Learning Approach</h3>
               <p className="approach">{content.overview.approach}</p>
-            </Accordion>
+            </CourseSection>
 
-            <Accordion title={content.setup.title}>
+            <CourseSection title={content.setup.title}>
               <div className="setup-section">
                 <h3 className="setup-subtitle">{content.setup.requiredApps.title}</h3>
                 <p className="setup-important">{content.setup.requiredApps.installNote}</p>
@@ -354,15 +353,15 @@ const IntroToAI = () => {
                   <Button to="/contact" variant="primary">Contact Us</Button>
                 </div>
               </div>
-            </Accordion>
+            </CourseSection>
 
-            <Accordion title={content.lessonPlan.title}>
+            <CourseSection title={content.lessonPlan.title}>
               {renderLessonPlanSection()}
-            </Accordion>
+            </CourseSection>
 
-            <Accordion title={content.projectWorksheet.title}>
+            <CourseSection title={content.projectWorksheet.title}>
               {renderWorksheetSection()}
-            </Accordion>
+            </CourseSection>
           </div>
         </div>
 

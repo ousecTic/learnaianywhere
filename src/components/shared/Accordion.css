@@ -44,17 +44,15 @@
 }
 
 .accordion-content {
-  max-height: 0;
+  display: none;
   opacity: 0;
   visibility: hidden;
-  overflow: hidden;
-  transition: all 0.3s ease-out;
   background: var(--bg-color-white);
 }
 
 .accordion-content.show {
-  max-height: none;
-  padding: 1rem;
+  display: block;
+  padding: 1.25rem;
   opacity: 1;
   visibility: visible;
 }

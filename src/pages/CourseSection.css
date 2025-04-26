@@ -1,0 +1,49 @@
+/* Styles for CourseSection component */
+.course-section {
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.course-section + .course-section {
+  margin-top: 1rem;
+}
+
+.section-header {
+  width: 100%;
+  padding: 1rem;
+  background: var(--light-bg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.section-header:hover {
+  background: var(--bg-color);
+}
+
+.section-header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.toggle-icon {
+  font-size: 1.5rem;
+  color: var(--subtext-color);
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+.section-content {
+  padding: 1.25rem;
+  background: var(--bg-color-white);
+}
