@@ -34,10 +34,6 @@ const AboutUs = () => {
     {
       name: 'Future Upgrade',
       logo: futureUpgradeLogo
-    },
-    {
-      name: 'Nyansapo',
-      logo: nyansapoLogo
     }
   ];
 
