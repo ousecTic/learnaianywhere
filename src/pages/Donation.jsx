@@ -48,7 +48,7 @@ const Donation = () => {
                 </div>
                 <div className="impact-content">
                   <h3>Student Materials</h3>
-                  <p>Covers printing 250 student worksheets for hands-on AI projects and activities.</p>
+                  <p>Covers printing 250 student worksheets for projects.</p>
                 </div>
               </div>
               <div className="impact-item">
@@ -58,7 +58,7 @@ const Donation = () => {
                 </div>
                 <div className="impact-content">
                   <h3>Workshop Day</h3>
-                  <p>Helps us run a full-day free student workshop, including travel and materials.</p>
+                  <p>Helps us run a full-day free AI Literacy student workshop.</p>
                 </div>
               </div>
               <div className="impact-item">
