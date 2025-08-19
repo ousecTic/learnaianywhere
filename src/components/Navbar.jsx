@@ -84,6 +84,7 @@ const Navbar = () => {
           </div>
           <Link to="/get-involved" className="nav-link" onClick={() => setIsMenuOpen(false)}>Get Involved</Link>
           <Link to="/about" className="nav-link" onClick={() => setIsMenuOpen(false)}>About Us</Link>
+          <Link to="/donate" className="nav-link" onClick={() => setIsMenuOpen(false)}>Donate</Link>
           <Button to="/contact" variant="primary" size="small" onClick={() => setIsMenuOpen(false)}>Contact</Button>
         </div>
       </div>

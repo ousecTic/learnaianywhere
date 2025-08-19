@@ -9,6 +9,7 @@ import IntroToGenerativeAI from './pages/IntroToGenerativeAI';
 import GetInvolved from './pages/GetInvolved';
 import AboutUs from './pages/AboutUs';
 import Contact from './pages/Contact';
+import Donation from './pages/Donation';
 import './App.css';
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
             <Route path="/get-involved" element={<GetInvolved />} />
             <Route path="/about" element={<AboutUs />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/donate" element={<Donation />} />
           </Routes>
         </main>
         <Footer />
