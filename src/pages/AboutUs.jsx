@@ -6,7 +6,6 @@ import ImageModal from '../components/ImageModal';
 // Import partnership logos
 import kiwixLogo from '../assets/images/about/partnerships/kiwix-logo.png';
 import futureUpgradeLogo from '../assets/images/about/partnerships/future-upgrade-logo.png';
-import nyansapoLogo from '../assets/images/about/partnerships/nyansapo-logo.jpg';
 
 // Import gallery images
 import gallery1 from '../assets/images/about/gallery/picture-1.jpg';
