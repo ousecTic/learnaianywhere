@@ -297,6 +297,16 @@ const IntroToGenerativeAI = () => {
 
   return (
     <div className="week-page">
+      {/* Under Development Banner */}
+      <div className="development-banner">
+        <div className="container">
+          <span className="banner-icon">🚧</span>
+          <span className="banner-text">
+            <strong>This course is currently under development.</strong> Content and resources may be updated. We appreciate your patience!
+          </span>
+        </div>
+      </div>
+
       <div className="week-header">
         <div className="container">
           <h1>Introduction to Generative AI</h1>

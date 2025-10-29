@@ -267,6 +267,7 @@ a:visited {
 .hero-buttons {
   display: flex;
   gap: 1rem;
+  justify-content: flex-start;
 }
 
 .hero-video {
