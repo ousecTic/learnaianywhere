@@ -1,0 +1,283 @@
+/* AI Literacy for Everyone Page */
+.ai-literacy-page {
+  min-height: 100vh;
+}
+
+/* Header Section */
+.page-header {
+  background: linear-gradient(180deg, #EFF6FF 0%, #FFFFFF 100%);
+  padding: 6rem 0 3rem;
+  text-align: center;
+}
+
+.header-badge {
+  display: inline-block;
+  background: var(--primary-color);
+  color: white;
+  padding: 0.375rem 1rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-bottom: 1rem;
+}
+
+.page-header h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin-bottom: 0.75rem;
+  line-height: 1.2;
+}
+
+.page-header .subtitle {
+  font-size: 1.25rem;
+  color: var(--subtext-color);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* Video Section */
+.video-section {
+  background: white;
+  padding: 3rem 0;
+}
+
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  height: 0;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 12px;
+}
+
+/* Main Content */
+.main-content {
+  padding: 4rem 0;
+  background: var(--bg-color);
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 3rem;
+  align-items: start;
+}
+
+/* Course Info (Left Column) */
+.course-info h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin-bottom: 1.5rem;
+}
+
+.course-info h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin: 2rem 0 1rem;
+}
+
+.course-info p {
+  font-size: 1.125rem;
+  color: var(--subtext-color);
+  line-height: 1.75;
+  margin-bottom: 1.5rem;
+}
+
+.course-info a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.course-info a:hover {
+  text-decoration: underline;
+}
+
+.features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem 0;
+}
+
+.features-list li {
+  font-size: 1.125rem;
+  color: var(--subtext-color);
+  padding: 0.75rem 0;
+  padding-left: 2rem;
+  position: relative;
+  line-height: 1.6;
+}
+
+.features-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0.5rem;
+  color: var(--primary-color);
+  font-size: 1.5rem;
+  line-height: 1.6;
+}
+
+.back-link {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.back-link p {
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* Signup Box (Right Column) */
+.signup-box {
+  position: sticky;
+  top: 2rem;
+}
+
+.signup-content {
+  background: white;
+  border: 2px solid var(--primary-color);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(37, 142, 194, 0.1);
+}
+
+.signup-content h3 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.signup-content > p {
+  font-size: 1rem;
+  color: var(--subtext-color);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.signup-benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.benefit-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: var(--light-bg);
+  border-radius: 8px;
+}
+
+.benefit-icon {
+  font-size: 1.5rem;
+}
+
+.benefit-item span:last-child {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.signup-button {
+  width: 100%;
+  text-align: center;
+  margin: 1.5rem 0 1rem;
+  padding: 1rem 1.5rem;
+  font-size: 1.125rem;
+}
+
+.deadline-note {
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--subtext-color);
+  margin: 0;
+  font-style: italic;
+}
+
+/* Mobile Responsive */
+@media (max-width: 1024px) {
+  .content-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .signup-box {
+    position: static;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-header {
+    padding: 4rem 0 2rem;
+  }
+
+  .page-header h1 {
+    font-size: 2rem;
+  }
+
+  .page-header .subtitle {
+    font-size: 1.125rem;
+  }
+
+  .video-section {
+    padding: 2rem 0;
+  }
+
+  .main-content {
+    padding: 2rem 0;
+  }
+
+  .course-info h2 {
+    font-size: 1.5rem;
+  }
+
+  .course-info h3 {
+    font-size: 1.25rem;
+  }
+
+  .course-info p,
+  .features-list li {
+    font-size: 1rem;
+  }
+
+  .signup-content {
+    padding: 1.5rem;
+  }
+
+  .signup-content h3 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-header h1 {
+    font-size: 1.75rem;
+  }
+
+  .header-badge {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.75rem;
+  }
+}

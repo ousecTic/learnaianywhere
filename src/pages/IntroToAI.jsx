@@ -80,7 +80,7 @@ const IntroToAI = () => {
             </div>
           </div>
           <div className="featured-content">
-            <p className="featured-description">Complete guide with everything you need: setup instructions, teaching tips, lesson structure, and learning objectives</p>
+            <p className="featured-description">Below you'll find a guide on how to teach this material. If you prefer to see the course in action, we have a video course of us teaching it which you can immediately share with students (ages 11+) or watch as an educator to see how we teach the lessons.</p>
             <div className="featured-actions">
               <Button onClick={() => setIsGuideModalOpen(true)} variant="secondary">
                 Preview
@@ -103,6 +103,9 @@ const IntroToAI = () => {
                   </div>
                 )}
               </div>
+              <Button to="/courses/ai-literacy-for-everyone" variant="primary">
+                Video Course →
+              </Button>
             </div>
           </div>
         </section>
