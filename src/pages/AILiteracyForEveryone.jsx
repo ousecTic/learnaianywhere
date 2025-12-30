@@ -42,8 +42,9 @@ const AILiteracyForEveryone = () => {
               <h2>About the Course</h2>
               <p>
                 If you prefer learning by watching, we've created a 1-hour video course based on this 
-                Introduction to AI curriculum. This is designed for ages 11+ and educators needing 
-                guidance on how to implement the course in their own environments.
+                Introduction to AI lesson. This course is designed for students ages 11+ to learn AI 
+                fundamentals. Educators can also use it to see how the lessons are taught and implement 
+                them in their own classrooms.
               </p>
               
               <p>
@@ -56,7 +57,7 @@ const AILiteracyForEveryone = () => {
               <ul className="features-list">
                 <li>Guided video lessons (we teach you)</li>
                 <li>Self-paced learning (1 hour total)</li>
-                <li>Designed for ages 11+ and educators</li>
+                <li>For students ages 11+ and educators</li>
                 <li>Works offline via Kolibri platform</li>
               </ul>
 
