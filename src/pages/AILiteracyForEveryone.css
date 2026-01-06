@@ -142,8 +142,31 @@
 }
 
 .back-link p {
-  font-size: 1rem;
-  margin: 0;
+  font-size: 1.125rem;
+  color: var(--subtext-color);
+  margin: 0 0 1.25rem 0;
+  line-height: 1.6;
+}
+
+.download-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #2563eb;
+  text-decoration: underline;
+  font-size: 1.125rem;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.download-link:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+.download-icon {
+  font-size: 1.125rem;
+  line-height: 1;
 }
 
 /* Signup Box (Right Column) */

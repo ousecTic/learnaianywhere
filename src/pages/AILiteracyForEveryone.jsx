@@ -41,10 +41,10 @@ const AILiteracyForEveryone = () => {
             <div className="course-info">
               <h2>About the Course</h2>
               <p>
-                If you prefer learning by watching, we've created a 1-hour video course based on this 
-                Introduction to AI lesson. This course is designed for students ages 11+ to learn AI 
-                fundamentals. Educators can also use it to see how the lessons are taught and implement 
-                them in their own classrooms.
+                We know circumstances vary, so we created an easy-to-access, downloadable video version
+                of our course. This one-hour video course is based on our Introduction to AI lessons and
+                is designed to help students ages 11 and up learn AI fundamentals. Educators can also use
+                this course to see how the lessons are taught and adapt them for their own classrooms.
               </p>
               
               <p>
@@ -55,16 +55,18 @@ const AILiteracyForEveryone = () => {
 
               <h3>What's Included:</h3>
               <ul className="features-list">
-                <li>Guided video lessons (we teach you)</li>
+                <li>Guided video lessons (we model it)</li>
                 <li>Self-paced learning (1 hour total)</li>
                 <li>For students ages 11+ and educators</li>
                 <li>Works offline via Kolibri platform</li>
               </ul>
 
               <div className="back-link">
-                <p>
-                  Prefer to teach it yourself? <Link to="/curriculum/intro-to-ai">Download the lesson materials</Link>
-                </p>
+                <p>Follow the written instructions, then give it a try!</p>
+                <Link to="/curriculum/intro-to-ai" className="download-link">
+                  <span className="download-icon">📥</span>
+                  Download the lesson materials
+                </Link>
               </div>
             </div>
 
