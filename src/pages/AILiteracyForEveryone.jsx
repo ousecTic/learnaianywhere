@@ -13,7 +13,6 @@ const AILiteracyForEveryone = () => {
       {/* Header */}
       <div className="page-header">
         <div className="container">
-          <div className="header-badge">BETA</div>
           <h1>AI Literacy for Everyone</h1>
           <p className="subtitle">A video course based on our Introduction to AI curriculum</p>
         </div>
@@ -70,29 +69,13 @@ const AILiteracyForEveryone = () => {
               </div>
             </div>
 
-            {/* Right Column - Beta Signup Box */}
+            {/* Right Column - Signup Box */}
             <div className="signup-box">
               <div className="signup-content">
-                <h3>Join Beta Testing</h3>
+                <h3>Access This Course</h3>
                 <p>
-                  Beta testers who complete the course and share feedback by <strong>February 13, 2026</strong> will 
-                  receive a contributor certificate and badge.
+                  Fill out this Google Form to access the course.
                 </p>
-                
-                <div className="signup-benefits">
-                  <div className="benefit-item">
-                    <span className="benefit-icon">🎓</span>
-                    <span>Contributor Certificate</span>
-                  </div>
-                  <div className="benefit-item">
-                    <span className="benefit-icon">🏅</span>
-                    <span>Digital Badge</span>
-                  </div>
-                  <div className="benefit-item">
-                    <span className="benefit-icon">🌟</span>
-                    <span>Early Access</span>
-                  </div>
-                </div>
 
                 <Button 
                   href="https://forms.gle/sazrZAv2E3xkEF2M6" 
@@ -101,12 +84,8 @@ const AILiteracyForEveryone = () => {
                   rel="noopener noreferrer"
                   className="signup-button"
                 >
-                  Sign Up for Beta Testing →
+                  Sign Up →
                 </Button>
-
-                <p className="deadline-note">
-                  Deadline: February 13, 2026
-                </p>
               </div>
             </div>
           </div>

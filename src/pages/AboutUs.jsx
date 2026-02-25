@@ -1,11 +1,14 @@
 import React from 'react';
 import Button from '../components/shared/Button';
 import ugandaClassroom from '../assets/images/about/uganda-classroom.jpg';
+import studentTestimony from '../assets/images/about/student-testimony.jpg';
 import ImageModal from '../components/ImageModal';
 
 // Import partnership logos
 import kiwixLogo from '../assets/images/about/partnerships/kiwix-logo.png';
 import futureUpgradeLogo from '../assets/images/about/partnerships/future-upgrade-logo.png';
+import learningEqualityLogo from '../assets/images/about/partnerships/learning-equality.png';
+import learningPassportLogo from '../assets/images/about/partnerships/learning-passport.jpeg';
 
 // Import gallery images
 import gallery1 from '../assets/images/about/gallery/picture-1.jpg';
@@ -33,6 +36,14 @@ const AboutUs = () => {
     {
       name: 'Future Upgrade',
       logo: futureUpgradeLogo
+    },
+    {
+      name: 'Learning Equality',
+      logo: learningEqualityLogo
+    },
+    {
+      name: 'Learning Passport',
+      logo: learningPassportLogo
     }
   ];
 
@@ -92,18 +103,24 @@ const AboutUs = () => {
       <div className="container">
         <section className="about-section">
           <h1>About Learn AI Anywhere</h1>
-          <p>This project started because we saw a gap in existing AI literacy resources. Most AI lessons are designed mainly for developed countries and often assume you have constant access to computers, internet, and electricity. But that's not the reality for many communities around the world.</p>
+          <p>We saw a gap in existing AI literacy resources. Most AI literacy lessons assume you have constant access to computers, internet, and electricity, but that is not the reality for many communities in the world.</p>
           
-          <div className="inspiration-photo-container">
-            <img 
-              src={ugandaClassroom} 
-              alt="Classroom in Uganda with limited technology resources" 
-              className="inspiration-photo"
-            />
-            <p className="photo-caption">This photo inspired our project. It shows the real world situation: many places face challenges with technology access, limited electricity, unreliable internet, and not enough computers. These communities often get overlooked by traditional educational resources.</p>
-          </div>
-          
-          <p>Our mission is to fill this gap by making high quality AI literacy education accessible to everyone, anywhere. Even if you only have a smartphone and limited internet, you can still learn AI anywhere.</p>
+          <img 
+            src={ugandaClassroom} 
+            alt="Classroom in Uganda with limited technology resources" 
+            className="about-photo"
+          />
+          <p className="image-caption">This picture was taken in Uganda where a single student is using a teacher's phone to play with ChatGPT. This photo is what inspired us to start developing an offline-first AI literacy curriculum.</p>
+
+          <p>We wanted to remove these barriers so anyone can develop AI literacy skills no matter what environment they are in. Even if you only have a smartphone and limited internet you can still learn AI anywhere.</p>
+
+          <p>This message from one of our first students in Uganda captures exactly what we hope every learner experiences. Today, we have learners in over 60 countries across the world:</p>
+
+          <img 
+            src={studentTestimony} 
+            alt="Handwritten student feedback about understanding AI" 
+            className="about-photo"
+          />
         </section>
 
         <section className="gallery-section">
@@ -130,9 +147,8 @@ const AboutUs = () => {
           />
         )}
 
-
         <section className="partners-section">
-          <h2>Our Partners</h2>
+          <h2>In Collaboration</h2>
           <div className="partners-grid">
             {partners.map((partner) => (
               <div key={partner.name} className="partner-card">

@@ -1,6 +1,7 @@
 import React from 'react';
 import Hero from '../components/Hero';
 import Features from '../components/Features';
+import GlobalImpact from '../components/GlobalImpact';
 import CallToAction from '../components/CallToAction';
 
 const Home = () => {
@@ -8,6 +9,7 @@ const Home = () => {
     <>
       <Hero />
       <Features />
+      <GlobalImpact />
       <CallToAction />
     </>
   );
