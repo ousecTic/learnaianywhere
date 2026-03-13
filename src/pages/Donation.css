@@ -117,8 +117,28 @@
   margin: 0;
 }
 
+.donation-image-container {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.donation-impact-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
+}
+
+.donation-image-caption {
+  font-size: 16px;
+  color: #6B7280;
+  font-style: italic;
+  margin-top: 0.5rem;
+}
+
 .impact-summary {
-  margin-top: 3rem;
+  margin-top: 2rem;
   padding: 2rem;
   background: var(--light-bg);
   border-radius: 8px;

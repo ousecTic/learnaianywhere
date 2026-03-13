@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import './Donation.css';
+import classroomWorkshop from '../assets/images/about/classroom-workshop.png';
 
 const Donation = () => {
   useEffect(() => {
@@ -38,43 +39,18 @@ const Donation = () => {
           <div className="donation-info">
             <h2>How Your Donation Helps</h2>
             <p className="donation-description">
-              Every dollar you contribute directly supports our mission to bring AI education to limited-resource communities. Here's the tangible impact of your generosity:
+              Your support enables our distributed team to continuously test and refine our curriculum across diverse environments worldwide, ensuring AI education works anywhere.
             </p>
-            <div className="impact-grid">
-              <div className="impact-item">
-                <div className="impact-visual">
-                  <div className="impact-amount">$10</div>
-                  <div className="impact-icon-large">📚</div>
-                </div>
-                <div className="impact-content">
-                  <h3>Student Materials</h3>
-                  <p>Covers printing 250 student worksheets for projects.</p>
-                </div>
-              </div>
-              <div className="impact-item">
-                <div className="impact-visual">
-                  <div className="impact-amount">$20</div>
-                  <div className="impact-icon-large">🎓</div>
-                </div>
-                <div className="impact-content">
-                  <h3>Workshop Day</h3>
-                  <p>Helps us run a full-day free AI Literacy student workshop.</p>
-                </div>
-              </div>
-              <div className="impact-item">
-                <div className="impact-visual">
-                  <div className="impact-amount">$30</div>
-                  <div className="impact-icon-large">📱</div>
-                </div>
-                <div className="impact-content">
-                  <h3>Testing & Donation</h3>
-                  <p>Buys a basic phone we use for testing, then donate to a school in need.</p>
-                </div>
-              </div>
+            <div className="donation-image-container">
+              <img 
+                src={classroomWorkshop} 
+                alt="Students in a classroom learning AI literacy" 
+                className="donation-impact-image"
+              />
+              <p className="donation-image-caption">One of our volunteer teachers teaching new resources</p>
             </div>
             <div className="impact-summary">
-              <h3>Making AI Education Accessible</h3>
-              <p>Your support helps us test our curriculum in real-world settings and provide resources directly to schools that need them most. Together, we're building a future where AI literacy is available to anyone, anywhere.</p>
+              <p>No matter the size, your contribution helps us reach more learners and ensure AI literacy is available to anyone, anywhere.</p>
             </div>
           </div>
 
