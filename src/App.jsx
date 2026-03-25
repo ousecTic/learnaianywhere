@@ -12,6 +12,11 @@ import GetInvolved from './pages/GetInvolved';
 import AboutUs from './pages/AboutUs';
 import Contact from './pages/Contact';
 import Donation from './pages/Donation';
+import AIOrNot from './pages/courses/ai-literacy-for-everyone/AIOrNot';
+import RecapQuiz1 from './pages/courses/ai-literacy-for-everyone/RecapQuiz1';
+import RecapQuiz2 from './pages/courses/ai-literacy-for-everyone/RecapQuiz2';
+import RecapQuiz3 from './pages/courses/ai-literacy-for-everyone/RecapQuiz3';
+import RecapQuiz4 from './pages/courses/ai-literacy-for-everyone/RecapQuiz4';
 import './App.css';
 
 function App() {
@@ -28,6 +33,11 @@ function App() {
             <Route path="/curriculum/intro-to-ai" element={<IntroToAI />} />
             <Route path="/curriculum/intro-to-generative-ai" element={<IntroToGenerativeAI />} />
             <Route path="/courses/ai-literacy-for-everyone" element={<AILiteracyForEveryone />} />
+            <Route path="/courses/ai-literacy-for-everyone/ai-or-not" element={<AIOrNot />} />
+            <Route path="/courses/ai-literacy-for-everyone/recap-quiz-1" element={<RecapQuiz1 />} />
+            <Route path="/courses/ai-literacy-for-everyone/recap-quiz-2" element={<RecapQuiz2 />} />
+            <Route path="/courses/ai-literacy-for-everyone/recap-quiz-3" element={<RecapQuiz3 />} />
+            <Route path="/courses/ai-literacy-for-everyone/recap-quiz-4" element={<RecapQuiz4 />} />
             <Route path="/get-involved" element={<GetInvolved />} />
             <Route path="/about" element={<AboutUs />} />
             <Route path="/contact" element={<Contact />} />
