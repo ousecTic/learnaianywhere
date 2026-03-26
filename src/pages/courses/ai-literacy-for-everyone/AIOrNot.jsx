@@ -6,44 +6,37 @@ const AIOrNot = () => {
     {
       id: 1,
       image: '/quiz-images/ai-or-not/question-1.jpg',
-      question: 'As you type a message on your phone, it shows words you might want to use next. These are based on how you have typed in the past.',
+      question: 'As you type a message to a friend, your phone suggests the next word you might want to use. It also fixes your spelling if you make a mistake.',
       correctAnswer: 'This Is AI',
-      explanation: 'Yes, it is Autonomous – It assists you by suggesting words independently.\n\nYes, it is Adaptive – It analyzes your past typing to suggest words that match your style.'
+      explanation: 'Yes, it is Autonomous – It catches your mistakes and offers a fix on its own before you even notice the typo.\n\nYes, it is Adaptive – It gets better at suggesting words based on what you typed before.'
     },
     {
       id: 2,
       image: '/quiz-images/ai-or-not/question-2.jpg',
-      question: 'A phone that lets you make calls or send messages, but only when you type the message or dial the number yourself',
+      question: 'A phone that lets you make calls only when you type or dial yourself',
       correctAnswer: 'This Is Not AI',
-      explanation: 'No, it is not Autonomous - It only does what you tell it. You have to manually do everything.\n\nNo, it is not Adaptive - It doesn\'t analyze new data to improve. It always works the same way.'
+      explanation: 'No, it is not Autonomous - You have to do everything yourself each time\n\nNo, it is not Adaptive - It doesn\'t analyze new data to improve. It always works the same way.'
     },
     {
       id: 3,
       image: '/quiz-images/ai-or-not/question-3.jpg',
       question: 'You can unlock your phone by showing your face. The more pictures it analyzes, the better it gets at recognizing you.',
       correctAnswer: 'This Is AI',
-      explanation: 'Yes, it is Autonomous - It unlocks the phone independently when it sees your face. You don\'t have to press anything.\n\nYes, it is Adaptive - It analyzes more pictures of your face to improve recognition, even if your appearance changes.'
+      explanation: 'Yes, it is Autonomous -  It assists you by unlocking your phone on its own. You don\'t even have to press a button!\n\nYes, it is Adaptive - It analyzes more pictures of your face to improve recognition, even if your appearance changes.'
     },
     {
       id: 4,
       image: '/quiz-images/ai-or-not/question-4.jpg',
-      question: 'When you watch videos online, the website shows you more videos based on what you watched in the past. It makes suggestions without you asking.',
-      correctAnswer: 'This Is AI',
-      explanation: 'Yes, it is Autonomous - It suggests videos on its own without you needing to search for them.\n\nYes, it is Adaptive - It looks at what you have watched before and uses that to suggest new videos that are similar or related.'
+      question: 'A motion sensor light turns on when it detects movement and turns off when no one is there. It reacts the same way every time',
+      correctAnswer: 'This Is Not AI',
+      explanation: 'Yes, it is Autonomous - It turns on and off on its own when it senses movement.\n\nNo, it is not Adaptive - It always reacts the same way, no matter what moves.'
     },
     {
       id: 5,
       image: '/quiz-images/ai-or-not/question-5.jpg',
-      question: 'A motion sensor light turns on when it detects movement and turns off when no one is there. It reacts the same way every time.',
-      correctAnswer: 'This Is Not AI',
-      explanation: 'Yes, it is Autonomous - It turns on and off independently when it senses movement. You don\'t have to control it.\n\nNo, it is not Adaptive - It always reacts the same way, no matter what moves.'
-    },
-    {
-      id: 6,
-      image: '/quiz-images/ai-or-not/question-6.jpg',
-      question: 'A technology you can have a conversation with. It replies based on what you say and changes its response depending on how you ask or what you\'ve said before.',
+      question: 'You talk to an app that helps you plan projects. You describe your project, and it suggests steps to complete it. It gets better at suggesting steps as you talk to it.',
       correctAnswer: 'This Is AI',
-      explanation: 'Yes, it is Autonomous - It gives replies independently without you telling it exactly what to say.\n\nYes, it is Adaptive - It changes its replies based on how you ask or what you\'ve said before.'
+      explanation: 'Yes, it is Autonomous - It assists you by creating a plan on its own based on your description.\n\nYes, it is Adaptive - It improves its suggestions as it learns more about your specific project and how you work.'
     }
   ];
 
@@ -189,7 +182,7 @@ const AIOrNot = () => {
 
               <div className="footer">
                 <p>Learn AI Anywhere</p>
-                <p>6 questions • Educational game</p>
+                <p>5 questions • Educational game</p>
               </div>
             </div>
           )}
