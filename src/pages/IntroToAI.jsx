@@ -19,7 +19,7 @@ const IntroToAI = () => {
       docId: "1HR-jHOO6u2KP2W7AmyYazaIJ5ZlI_Xb1PhFD84oGFXY"
     },
     lessonSlides: {
-      presentationId: "14hF7vPpGfGT2-WQZLJDNd4Jn673d5JvcXkzZ5CW4bw4"
+      presentationId: "1doNrQbeZj2uF44VZ14HBnOxUnAmetZrx9vbTNycjFBQ"
     },
     worksheets: {
       blankDocId: "1dftfmVrvqI3hYJMuCug9KmYF7ZWk1wJH3dpqpXJWju4",
