@@ -30,7 +30,7 @@ const AnnouncementBanner = () => {
       <div className="announcement-content" onClick={handleClick}>
         <span className="announcement-badge">NEW</span>
         <span className="announcement-text">
-          AI Literacy for Everyone - Video course now available
+          AI Literacy for Everyone - Now available online, offline, and as a download
         </span>
         <span className="announcement-arrow">→</span>
       </div>

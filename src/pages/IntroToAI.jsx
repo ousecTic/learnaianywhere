@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import Button from '../components/shared/Button';
 import './IntroToAI.css';
 import './CourseSection.css';
+import slidesPreview from '../assets/images/intro-to-ai/presentation-slide.jpg';
+import worksheetPreview from '../assets/images/intro-to-ai/worksheet.jpg';
+import appPreview from '../assets/images/intro-to-ai/neuropocket.jpg';
 
 const IntroToAI = () => {
   const [isGuideModalOpen, setIsGuideModalOpen] = useState(false);
@@ -115,7 +118,7 @@ const IntroToAI = () => {
           <h2>What You'll Need to Teach</h2>
           <div className="included-grid-three">
             <div className="included-card">
-              <div className="card-icon">💻</div>
+              <img src={slidesPreview} alt="Lesson Slides Preview" className="card-preview-image" />
               <h3>Lesson Slides</h3>
               <p>PowerPoint with all 4 lessons ready to teach</p>
               <div className="card-actions">
@@ -143,7 +146,7 @@ const IntroToAI = () => {
               </div>
             </div>
             <div className="included-card">
-              <div className="card-icon">📱</div>
+              <img src={appPreview} alt="Neuropocket App Preview" className="card-preview-image" />
               <h3>Neuropocket App</h3>
               <p>Students use this app to build their image classifier. Available for Windows and Android (requires 2GB RAM and camera)</p>
               <div className="card-actions">
@@ -153,7 +156,7 @@ const IntroToAI = () => {
               </div>
             </div>
             <div className="included-card">
-              <div className="card-icon">📝</div>
+              <img src={worksheetPreview} alt="Project Worksheet Preview" className="card-preview-image" />
               <h3>Project Worksheet <span className="optional-badge">(Optional)</span></h3>
               <p>Guides students through designing their classifier</p>
               <div className="card-actions">

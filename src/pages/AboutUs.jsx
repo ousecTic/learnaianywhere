@@ -9,6 +9,7 @@ import kiwixLogo from '../assets/images/about/partnerships/kiwix-logo.png';
 import futureUpgradeLogo from '../assets/images/about/partnerships/future-upgrade-logo.png';
 import learningEqualityLogo from '../assets/images/about/partnerships/learning-equality.png';
 import learningPassportLogo from '../assets/images/about/partnerships/learning-passport.jpeg';
+import aiLiteracyDayLogo from '../assets/images/about/partnerships/ai-literacy-day-logo.png';
 
 // Import gallery images
 import gallery1 from '../assets/images/about/gallery/picture-1.jpg';
@@ -44,6 +45,10 @@ const AboutUs = () => {
     {
       name: 'Learning Passport',
       logo: learningPassportLogo
+    },
+    {
+      name: 'AI Literacy Day',
+      logo: aiLiteracyDayLogo
     }
   ];
 

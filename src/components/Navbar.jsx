@@ -78,7 +78,8 @@ const Navbar = () => {
               </svg>
             </span>
             <div className="dropdown-content">
-              <Link to="/curriculum/intro-to-ai" onClick={() => setIsMenuOpen(false)}>Introduction to AI</Link>
+              <Link to="/curriculum/intro-to-ai" onClick={() => setIsMenuOpen(false)}>Introduction to AI (Lesson)</Link>
+              <Link to="/courses/ai-literacy-for-everyone" onClick={() => setIsMenuOpen(false)}>AI Literacy for Everyone (Video Version)</Link>
               <Link to="/curriculum/intro-to-generative-ai" onClick={() => setIsMenuOpen(false)}>Introduction to Generative AI</Link>
             </div>
           </div>
