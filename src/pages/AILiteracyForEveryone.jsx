@@ -112,7 +112,7 @@ const AILiteracyForEveryone = () => {
                   <h3>Download All Videos</h3>
                   <p>Get the ZIP file with all videos</p>
                   <Button 
-                    href="https://drive.google.com/file/d/1AaQcuZsPyWcudnxE1qIQ28pRfzo8xlEd/view?usp=sharing" 
+                    href="https://drive.google.com/file/d/1zRTVzgzZwVCtij55JnFTLtPFwsSlZo-t/view?usp=sharing" 
                     variant="primary" 
                     target="_blank" 
                     rel="noopener noreferrer"
