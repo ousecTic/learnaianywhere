@@ -8,8 +8,9 @@ import ImageModal from '../components/ImageModal';
 import kiwixLogo from '../assets/images/about/partnerships/kiwix-logo.png';
 import futureUpgradeLogo from '../assets/images/about/partnerships/future-upgrade-logo.png';
 import learningEqualityLogo from '../assets/images/about/partnerships/learning-equality.png';
-import learningPassportLogo from '../assets/images/about/partnerships/learning-passport.jpeg';
+import learningPassportLogo from '../assets/images/about/partnerships/learning-passport.jpg';
 import aiLiteracyDayLogo from '../assets/images/about/partnerships/ai-literacy-day-logo.png';
+import oliLogo from '../assets/images/about/partnerships/oli-logo.png';
 
 // Import gallery images
 import gallery1 from '../assets/images/about/gallery/picture-1.jpg';
@@ -20,7 +21,7 @@ import gallery5 from '../assets/images/about/gallery/picture-5.jpg';
 import gallery6 from '../assets/images/about/gallery/picture-6.jpg';
 import gallery7 from '../assets/images/about/gallery/picture-7.jpg';
 import gallery8 from '../assets/images/about/gallery/picture-8.jpg';
-import gallery9 from '../assets/images/about/gallery/picture-9.jpg';
+import gallery9 from '../assets/images/about/gallery/picture-9.jpeg';
 import gallery10 from '../assets/images/about/gallery/picture-10.jpg';
 import gallery11 from '../assets/images/about/gallery/picture-11.jpg';
 import gallery12 from '../assets/images/about/gallery/picture-12.jpg';
@@ -32,74 +33,96 @@ const AboutUs = () => {
   const partners = [
     {
       name: 'Kiwix',
-      logo: kiwixLogo
+      logo: kiwixLogo,
+      url: 'https://kiwix.org/'
     },
     {
       name: 'Future Upgrade',
-      logo: futureUpgradeLogo
+      logo: futureUpgradeLogo,
+      url: 'https://futureupgrades.org/'
     },
     {
       name: 'Learning Equality',
-      logo: learningEqualityLogo
+      logo: learningEqualityLogo,
+      url: 'https://learningequality.org/'
     },
     {
       name: 'Learning Passport',
-      logo: learningPassportLogo
+      logo: learningPassportLogo,
+      url: 'https://www.learningpassport.org/'
     },
     {
       name: 'AI Literacy Day',
-      logo: aiLiteracyDayLogo
+      logo: aiLiteracyDayLogo,
+      url: 'https://ailiteracyday.org/'
+    },
+    {
+      name: 'OLI',
+      logo: oliLogo,
+      url: 'https://www.offlineinternet.org/'
     }
   ];
 
   const galleryImages = [
     {
       src: gallery1,
-      alt: 'Students collaborating on AI projects'
+      alt: 'Students collaborating on AI projects',
+      caption: 'Students in Colombia diving into the fundamentals of artificial intelligence during the \'Intro to AI\' course led by Laura'
     },
     {
       src: gallery2,
-      alt: 'Students using mobile devices for AI learning'
+      alt: 'Students using mobile devices for AI learning',
+      caption: 'Students in Uganda getting hands-on experience with an introductory Generative AI app, exploring the core concepts using Markov chains'
     },
     {
       src: gallery3,
-      alt: 'Students working together'
+      alt: 'Students working together',
+      caption: 'Students in Uganda preparing to present the projects they developed using a local language model'
     },
     {
       src: gallery4,
-      alt: 'Teacher presenting to students'
+      alt: 'Teacher presenting to students',
+      caption: 'Sammy teaching the crucial concepts of misinformation and disinformation in our introductory Generative AI curriculum'
     },
     {
       src: gallery5,
-      alt: 'Students with project materials'
+      alt: 'Students with project materials',
+      caption: 'Sammy introducing the core mechanics of generative image models to students in our AI literacy program.'
     },
     {
       src: gallery6,
-      alt: 'Classroom AI learning'
+      alt: 'Classroom AI learning',
+      caption: 'Educators and students gathering local environmental data using the NeuroPocket app to build and train custom image classifiers offline'
     },
     {
       src: gallery7,
-      alt: 'Student engagement'
+      alt: 'Student engagement',
+      caption: 'Joseph explaining the rules of the interactive \'Acting like a language model\' game to the class'
     },
     {
       src: gallery8,
-      alt: 'Group discussion'
+      alt: 'Group discussion',
+      caption: 'Students verifying AI results by transcribing and double-checking text from a local language model'
     },
     {
       src: gallery9,
-      alt: 'Interactive lesson'
+      alt: 'Interactive lesson',
+      caption: 'Bernadete leading a train-the-trainer workshop on how to effectively deliver and implement our AI literacy lessons'
     },
     {
       src: gallery10,
-      alt: 'Students with generative AI'
+      alt: 'Students with generative AI',
+      caption: 'Bernadette teaching the importance of feature diversity for image classifiers during our introductory AI course'
     },
     {
       src: gallery11,
-      alt: 'AI tools in classroom'
+      alt: 'AI tools in classroom',
+      caption: 'Students cleaning and refining their image data to improve classifier performance.'
     },
     {
       src: gallery12,
-      alt: 'Student presentation'
+      alt: 'Student presentation',
+      caption: 'Students playing the \'describer-drawer\' game, where they must guide their partners to recreate an image using only verbal instructions'
     }
   ];
 
@@ -156,9 +179,15 @@ const AboutUs = () => {
           <h2>In Collaboration</h2>
           <div className="partners-grid">
             {partners.map((partner) => (
-              <div key={partner.name} className="partner-card">
+              <a 
+                key={partner.name} 
+                href={partner.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="partner-card"
+              >
                 <img src={partner.logo} alt={partner.name} />
-              </div>
+              </a>
             ))}
           </div>
         </section>

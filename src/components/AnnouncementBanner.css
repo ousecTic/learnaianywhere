@@ -18,11 +18,16 @@
   cursor: pointer;
   flex: 1;
   justify-content: center;
-  transition: opacity 0.2s ease;
+  transition: transform 0.2s ease, filter 0.2s ease;
 }
 
 .announcement-content:hover {
-  opacity: 0.9;
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+}
+
+.announcement-content:hover .announcement-text {
+  text-decoration: underline;
 }
 
 .announcement-badge {
@@ -39,12 +44,18 @@
   font-size: 0.9375rem;
   font-weight: 500;
   color: white;
+  transition: text-decoration 0.2s ease;
 }
 
 .announcement-arrow {
   font-size: 1.125rem;
   font-weight: 500;
   color: white;
+  transition: transform 0.2s ease;
+}
+
+.announcement-content:hover .announcement-arrow {
+  transform: translateX(3px);
 }
 
 .announcement-close {

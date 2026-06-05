@@ -1,0 +1,98 @@
+.mission {
+  padding: 4rem 0;
+  background: white;
+  width: 100%;
+}
+
+.mission-statement {
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--subtext-color);
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 3rem;
+  line-height: 1.5;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-bottom: 3rem;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.stat-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  text-align: center;
+  border: 1px solid #eaeaea;
+}
+
+.stat-number {
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+  line-height: 1;
+}
+
+.stat-description {
+  font-size: 14px;
+  color: var(--subtext-color);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.stat-description a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.stat-description a:hover {
+  color: var(--primary-dark);
+  text-decoration: underline;
+}
+
+.mission-solution {
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--subtext-color);
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .mission {
+    padding: 3rem 0;
+  }
+
+  .mission-statement {
+    font-size: 16px;
+    margin-bottom: 2rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .stat-number {
+    font-size: 40px;
+  }
+
+  .stat-description {
+    font-size: 13px;
+  }
+
+  .mission-solution {
+    font-size: 16px;
+  }
+}

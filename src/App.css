@@ -368,10 +368,10 @@ a:visited {
 
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
   margin-bottom: 4rem;
-  max-width: 900px;
+  max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -1337,6 +1337,41 @@ a:visited {
   text-decoration: underline;
 }
 
+.social-media {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.social-media a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #E5E7EB;
+  color: var(--text-color);
+  transition: all 0.3s ease;
+}
+
+.social-media a:hover {
+  background-color: #0077B5;
+  color: white;
+  transform: translateY(-2px);
+}
+
+.social-media svg {
+  width: 20px;
+  height: 20px;
+}
+
+@media (max-width: 640px) {
+  .social-media {
+    justify-content: center;
+  }
+}
+
 @media (max-width: 640px) {
   .footer-bottom {
     padding-left: 1.5rem;
@@ -1896,13 +1931,16 @@ a:visited {
   max-height: 90vh;
   background: white;
   border-radius: 8px;
-  overflow: hidden;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .modal-content img {
   max-width: 100%;
-  max-height: calc(90vh - 4rem);
+  max-height: calc(90vh - 8rem);
   object-fit: contain;
+  flex-shrink: 0;
 }
 
 .modal-close {
@@ -1929,11 +1967,15 @@ a:visited {
 }
 
 .modal-caption {
-  padding: 1rem;
+  padding: 1.5rem 2rem;
   background: white;
-  color: var(--text-color);
-  font-size: 1rem;
+  color: #333;
+  font-size: 0.95rem;
+  line-height: 1.6;
   text-align: center;
+  font-style: italic;
+  border-top: 1px solid #e0e0e0;
+  max-width: 100%;
 }
 
 /* Toast Notification */

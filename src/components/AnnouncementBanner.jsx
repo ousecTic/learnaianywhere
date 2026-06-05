@@ -31,7 +31,6 @@ const AnnouncementBanner = () => {
         <span className="announcement-text">
           AI Literacy for Everyone - Now available online, offline, and as a download
         </span>
-        <span className="announcement-arrow">→</span>
       </div>
       <button 
         className="announcement-close" 

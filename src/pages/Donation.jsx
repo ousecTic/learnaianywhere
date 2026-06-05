@@ -47,7 +47,7 @@ const Donation = () => {
                 alt="Students in a classroom learning AI literacy" 
                 className="donation-impact-image"
               />
-              <p className="donation-image-caption">One of our volunteer teachers teaching new resources</p>
+              <p className="donation-image-caption">One of our volunteer educators teaching new resources</p>
             </div>
             <div className="impact-summary">
               <p>No matter the size, your contribution helps us reach more learners and ensure AI literacy is available to anyone, anywhere.</p>
