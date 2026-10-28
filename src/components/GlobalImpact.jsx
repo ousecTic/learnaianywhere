@@ -8,7 +8,7 @@ const GlobalImpact = () => {
         <h2>Our Global Reach</h2>
         <p>We have learners in over 70 countries</p>
         <div className="world-map-container">
-          <img src={worldMap} alt="World map showing learners in over 60 countries" className="world-map" />
+          <img src={worldMap} alt="World map showing learners in over 70 countries" className="world-map" />
         </div>
       </div>
     </section>
