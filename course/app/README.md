@@ -55,6 +55,33 @@ cd android
 The APK is `android/app/build/outputs/apk/debug/app-debug.apk`. Debug builds are signed with
 a throwaway key: uninstall them before installing a release build.
 
+## Release the app
+
+GitHub builds and signs the APK (`.github/workflows/app-release.yml`) when you push a tag:
+
+```
+git tag app-v1.0.0
+git push origin app-v1.0.0
+```
+
+- `app-v1.0.0` publishes the release `app-v1.0.0` with `ai-literacy-1.0.0.apk`, and puts a
+  copy named `ai-literacy.apk` plus `app.json` on the `app-latest` release. Installed apps
+  find the new version there; the website can always link to
+  `releases/download/app-latest/ai-literacy.apk`.
+- `app-v1.0.0-test` (anything after the version) makes a draft release only, to check
+  before publishing. Delete the draft and the tag afterwards.
+
+Each version can be published once: tag a higher version for every change. The tag's version
+becomes the APK's version name, and its version code is major × 10000 + minor × 100 + patch.
+
+Every release is signed with the app's one permanent key, `ailiteracy-release.jks` (alias
+`ailiteracy`), kept in four repository secrets: `ANDROID_KEYSTORE_BASE64`,
+`ANDROID_KEYSTORE_PASSWORD`, `ANDROID_KEY_PASSWORD` and `ANDROID_KEY_ALIAS`. Android only
+installs an update signed with the same key as the installed app, so never lose or replace
+it: keep the file and its password backed up in two safe places. To sign locally, set
+`APP_KEYSTORE_FILE`, `APP_KEYSTORE_PASSWORD`, `APP_KEY_ALIAS` and `APP_KEY_PASSWORD`, then
+run `./gradlew assembleRelease` in `android/`.
+
 `npm run sync` copies `../downloads.json`, the logo and the font into `www/`, then copies
 `www/` into the Android project.
 
