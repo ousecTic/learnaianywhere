@@ -102,6 +102,8 @@
   .side-link.current { background: var(--brand-soft); color: var(--brand); }
   .side-progress { padding: 8px 12px 14px; font-size: 14px; color: var(--muted); }
   .side-version { padding: 14px 12px 0; font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); }
+  .app-settings { width: 100%; border: 0; border-top: 1px solid var(--line); border-radius: 0; background: transparent; cursor: pointer; font-weight: 500; text-align: start; }
+  .home-settings { margin: 12px 4px 0; }
   .bar { display: block; height: 8px; border-radius: 99px; background: var(--surface-2); overflow: hidden; margin-top: 6px; }
   .bar > span { display: block; height: 100%; border-radius: inherit; background: var(--done); transition: width .3s ease; }
   .group { border-top: 1px solid var(--line); padding: 6px 0; }
@@ -440,8 +442,31 @@
     home: '<path d="M4 11l8-7 8 7v9a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1z"/>',
     external: '<path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/>',
     full: '<path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/>',
-    play: '<path d="M8 5v14l11-7z" fill="currentColor" stroke="none"/>'
+    play: '<path d="M8 5v14l11-7z" fill="currentColor" stroke="none"/>',
+    settings: '<circle cx="12" cy="12" r="3"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"/>'
   };
+
+  // Inside the Android app (course/app), the page is served by the app, which adds the
+  // Capacitor bridge: it has app settings, and PDFs open in the phone's PDF viewer.
+  var cap = window.Capacitor;
+  var inApp = !!(cap && cap.nativePromise && cap.isNativePlatform && cap.isNativePlatform());
+  function appSettingsLink(cls) {
+    return inApp ? '<button class="' + cls + '" type="button" data-app-settings>' + icon('settings') + esc(t('appSettings')) + '</button>' : '';
+  }
+  document.addEventListener('click', function (e) {
+    if (!inApp) return;
+    if (e.target.closest('[data-app-settings]')) {
+      cap.nativePromise('CoursePack', 'openShell', { screen: 'settings' });
+      return;
+    }
+    var a = e.target.closest('a[href]');
+    var href = a && a.getAttribute('href');
+    if (href && /\.pdf$/i.test(href)) {
+      e.preventDefault();
+      cap.nativePromise('CoursePack', 'openFile', { path: decodeURIComponent(href), type: 'application/pdf' })
+        .catch(function (err) { if (err && err.code === 'noViewer') alert(t('noPdfViewer')); });
+    }
+  });
   function icon(name, cls) {
     return '<svg class="i' + (cls ? ' ' + cls : '') + '" viewBox="0 0 24 24" aria-hidden="true">' + (ICONS[name] || ICONS.Activity) + '</svg>';
   }
@@ -543,6 +568,7 @@
       });
       html += '</ol></div>';
     });
+    html += appSettingsLink('side-link app-settings');
     html += '<div class="side-version">' + esc(COURSE.courseName) + ' · ' + esc(t('version', { version: COURSE.version })) + '</div>';
     sideContent.innerHTML = html;
   }
@@ -604,7 +630,8 @@
         '<span class="card-meta">' + esc(t('sectionDone', { done: sd, total: len })) +
         '<span class="bar"><span style="width:' + (100 * sd / len) + '%"></span></span></span></a>';
     });
-    html += '</div><p class="home-version">' + esc(COURSE.courseName) + ' · ' + esc(t('version', { version: COURSE.version })) + '</p></div>';
+    html += '</div><p class="home-version">' + esc(COURSE.courseName) + ' · ' + esc(t('version', { version: COURSE.version })) + '</p>' +
+      appSettingsLink('chip-btn home-settings') + '</div>';
     return html;
   }
 

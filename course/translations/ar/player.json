@@ -37,6 +37,8 @@
     "tryChallenge": "جرّب التحدي",
     "backToCourse": "العودة إلى الدورة",
     "version": "الإصدار {version}",
+    "appSettings": "إعدادات التطبيق",
+    "noPdfViewer": "لا يوجد على هذا الهاتف تطبيق يفتح ملفات PDF. ثبّت تطبيقًا مثل Google Drive، ثم حاول مرة أخرى.",
     "kindVideo": "فيديو",
     "kindQuiz": "اختبار",
     "kindWorksheet": "ورقة عمل",

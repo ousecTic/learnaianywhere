@@ -37,6 +37,8 @@
     "tryChallenge": "Try the challenge",
     "backToCourse": "Back to course",
     "version": "Version {version}",
+    "appSettings": "App settings",
+    "noPdfViewer": "There is no app on this phone that opens PDF files. Install one, such as Google Drive, then try again.",
     "kindVideo": "Video",
     "kindQuiz": "Quiz",
     "kindWorksheet": "Worksheet",

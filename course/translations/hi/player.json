@@ -37,6 +37,8 @@
     "tryChallenge": "चुनौती आज़माएँ",
     "backToCourse": "कोर्स पर लौटें",
     "version": "संस्करण {version}",
+    "appSettings": "ऐप सेटिंग्स",
+    "noPdfViewer": "इस फ़ोन पर PDF फ़ाइलें खोलने वाला कोई ऐप नहीं है। Google Drive जैसा कोई ऐप इंस्टॉल करें, फिर दोबारा कोशिश करें।",
     "kindVideo": "वीडियो",
     "kindQuiz": "क्विज़",
     "kindWorksheet": "वर्कशीट",

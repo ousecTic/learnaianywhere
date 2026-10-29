@@ -37,6 +37,8 @@
     "tryChallenge": "چیلنج آزمائیں",
     "backToCourse": "کورس پر واپس",
     "version": "ورژن {version}",
+    "appSettings": "ایپ کی ترتیبات",
+    "noPdfViewer": "اس فون پر PDF فائلیں کھولنے والی کوئی ایپ نہیں ہے۔ Google Drive جیسی کوئی ایپ انسٹال کریں، پھر دوبارہ کوشش کریں۔",
     "kindVideo": "ویڈیو",
     "kindQuiz": "کوئز",
     "kindWorksheet": "ورک شیٹ",

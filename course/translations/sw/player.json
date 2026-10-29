@@ -37,6 +37,8 @@
     "tryChallenge": "Jaribu changamoto",
     "backToCourse": "Rudi kwenye kozi",
     "version": "Toleo {version}",
+    "appSettings": "Mipangilio ya programu",
+    "noPdfViewer": "Hakuna programu kwenye simu hii inayofungua faili za PDF. Sakinisha moja, kama Google Drive, kisha ujaribu tena.",
     "kindVideo": "Video",
     "kindQuiz": "Jaribio",
     "kindWorksheet": "Karatasi ya Kazi",

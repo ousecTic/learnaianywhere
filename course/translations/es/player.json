@@ -37,6 +37,8 @@
     "tryChallenge": "Probar el reto",
     "backToCourse": "Volver al curso",
     "version": "Versión {version}",
+    "appSettings": "Ajustes de la aplicación",
+    "noPdfViewer": "Ninguna aplicación de este teléfono abre archivos PDF. Instala una, como Google Drive, y vuelve a intentarlo.",
     "kindVideo": "Video",
     "kindQuiz": "Cuestionario",
     "kindWorksheet": "Hoja de trabajo",
