@@ -2,8 +2,11 @@
 """Builds the offline "AI Literacy for Everyone" course packages from Google Drive.
 
 Reads course/settings.json and works through the packages listed there. Each
-stage is its own command, so they can be run and checked one at a time:
+stage is its own command, so they can be run and checked one at a time, or
+all together with `all` (export, compress, download, assemble and zip; the
+release stays a separate step). See course/README.md for releasing a version.
 
+    python -I scripts/build_course.py all [--package ID ...] [--out build/course]
     python -I scripts/build_course.py export [--package ID ...] [--out build/course]
     python -I scripts/build_course.py compress [--package ID ...] [--out build/course]
     python -I scripts/build_course.py download [--package ID ...] [--out build/course]
@@ -709,7 +712,11 @@ def cmd_release(settings, publish, out):
     def gh(*args, check=True):
         return subprocess.run(["gh", *args, "--repo", rel["repo"]], check=check, capture_output=True, text=True)
 
-    if gh("release", "view", tag, check=False).returncode != 0:
+    existing = gh("release", "view", tag, "--json", "isDraft", check=False)
+    if existing.returncode == 0 and not json.loads(existing.stdout)["isDraft"]:
+        raise BuildError(f"{tag} is already published; people may have downloaded it. "
+                         "Change the version in course/settings.json and build again.")
+    if existing.returncode != 0:
         lines = [f"{settings['course']['name']}, version {version}: the offline course packages.", "",
                  "Unzip a package and open START HERE.html. Everything works without the internet.", ""]
         lines += [f"- {r['name']}: `{r['file']}` ({r['bytes'] / 1e6:.0f} MB)" for r in index["packages"]]
@@ -738,7 +745,7 @@ def cmd_release(settings, publish, out):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
-    ap.add_argument("command", choices=["export", "compress", "download", "assemble", "zip", "release"])
+    ap.add_argument("command", choices=["all", "export", "compress", "download", "assemble", "zip", "release"])
     ap.add_argument("--publish", action="store_true", help="release: publish instead of leaving a draft")
     ap.add_argument("--package", action="append", help="only this package id (repeatable)")
     ap.add_argument("--out", default=os.path.join(REPO, "build", "course"), help="output folder")
@@ -756,6 +763,24 @@ def main():
             ap.error("unknown package: " + ", ".join(sorted(unknown)))
         packages = [p for p in packages if p["id"] in args.package]
     try:
+        if args.command == "all":
+            # English is the reference for the course order, so its media is always fetched.
+            english = [p for p in settings["packages"] if p["id"] == "en"]
+            steps = [
+                ("export", lambda: cmd_export(settings, packages, args.out)),
+                ("compress", lambda: cmd_compress(packages, args.out)),
+                ("download", lambda: cmd_download(settings, english + [p for p in packages if p["id"] != "en"], args.out)),
+                ("assemble", lambda: cmd_assemble(settings, packages, args.out)),
+                ("zip", lambda: cmd_zip(settings, packages, args.out)),
+            ]
+            for name, step in steps:
+                print(f"--- {name}")
+                if step():
+                    print(f"Stopped at {name}.")
+                    return 1
+            print("--- done. Check the packages in build/course/packages, then run: "
+                  "python -I scripts/build_course.py release")
+            return 0
         if args.command == "compress":
             return cmd_compress(packages, args.out)
         if args.command == "download":
