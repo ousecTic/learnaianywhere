@@ -409,7 +409,16 @@
       border-left: 0;
       border-right: 3px solid #258EC2;
     }
+
+    /* Shown inside another page (the website): size to the content, not the window. */
+    html.embedded body {
+      min-height: 0;
+    }
   </style>
+  <script>
+    // Inside a frame (the website shows the apps this way), drop the full-window height.
+    try { if (window.self !== window.top) { document.documentElement.className += ' embedded'; } } catch (e) { document.documentElement.className += ' embedded'; }
+  </script>
 </head>
 <body>
   <div class="container">

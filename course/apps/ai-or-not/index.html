@@ -385,7 +385,16 @@
       border-left: 0;
       border-right: 2px solid #E5E7EB;
     }
+
+    /* Shown inside another page (the website): size to the content, not the window. */
+    html.embedded .quiz-container {
+      min-height: 0;
+    }
   </style>
+  <script>
+    // Inside a frame (the website shows the apps this way), drop the full-window height.
+    try { if (window.self !== window.top) { document.documentElement.className += ' embedded'; } } catch (e) { document.documentElement.className += ' embedded'; }
+  </script>
 </head>
 <body>
   <div id="root"></div>
