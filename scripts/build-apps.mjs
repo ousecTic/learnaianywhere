@@ -6,6 +6,7 @@
 //
 //   dist-course/apps/recap-quiz/index.html   (all 4 recap quizzes; ?quiz=1-4&lang=xx)
 //   dist-course/apps/ai-or-not/index.html    (+ images/; ?lang=xx)
+//   dist-course/apps/worksheet/index.html    (all 4 lessons; ?lesson=1-4&lang=xx)
 //
 // Any other files in an app's source folder (such as images/) are copied next to its page.
 //
@@ -60,12 +61,17 @@ function build(app, courseText) {
     (extras.length ? ` + ${extras.join(', ')}` : ''));
 }
 
-const recapQuizzes = readdirSync(join(translations, 'en'))
-  .map((f) => /^recap-quiz-(\d+)\.json$/.exec(f))
-  .filter(Boolean)
-  .map((m) => m[1])
-  .sort((a, b) => a - b);
-const quizzes = {};
-for (const n of recapQuizzes) quizzes[n] = textFor(`recap-quiz-${n}`);
-build('recap-quiz', { languages, quizzes });
+// Text for every numbered file "<prefix>-<n>.json" in English, keyed by n.
+function numbered(prefix) {
+  const byNumber = {};
+  for (const f of readdirSync(join(translations, 'en'))) {
+    const m = new RegExp(`^${prefix}-(\\d+)\\.json$`).exec(f);
+    if (m) byNumber[m[1]] = textFor(`${prefix}-${m[1]}`);
+  }
+  if (!Object.keys(byNumber).length) throw new Error(`No ${prefix}-<n>.json files in ${join(translations, 'en')}`);
+  return byNumber;
+}
+
+build('recap-quiz', { languages, quizzes: numbered('recap-quiz') });
 build('ai-or-not', { languages, text: textFor('ai-or-not') });
+build('worksheet', { languages, lessons: numbered('worksheet') });
