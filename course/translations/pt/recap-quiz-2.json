@@ -1,0 +1,74 @@
+{
+  "_note": "Do not translate keys. Preserve {placeholder} tokens exactly as written.",
+  "ui": {
+    "pageTitle": "Quiz de Revisão da Lição 2 - Aprenda IA em Qualquer Lugar",
+    "introTitle": "Quiz de Revisão da Lição 2",
+    "introSubtitle": "Teste seus conhecimentos sobre os fundamentos do Aprendizado de Máquina",
+    "startBtn": "Iniciar Quiz",
+    "footerTagline": "4 perguntas • Múltipla escolha",
+    "questionHeading": "Quiz de Revisão",
+    "correctAnswerLabel": "Resposta Correta:",
+    "nextBtn": "Próxima Pergunta",
+    "reviewTitle": "Quiz Concluído!",
+    "reviewSubtitle": "Veja como você se saiu",
+    "retakeBtn": "Refazer Quiz",
+    "footerComplete": "Ótimo trabalho ao concluir o quiz!",
+    "footerBrand": "Aprenda IA em Qualquer Lugar",
+    "progress": "Pergunta {n} de {total}",
+    "progressReview": "Pergunta {n} de {total} (Modo Revisão)",
+    "feedbackCorrect": "✓ Correto!",
+    "feedbackIncorrect": "✗ Incorreto",
+    "scoreDisplay": "Você acertou {score} de {total}! ({percent}%)",
+    "reviewQuestion": "Pergunta {n}",
+    "reviewCorrect": "✓ Correto",
+    "reviewIncorrect": "✗ Incorreto",
+    "reviewDetails": "Sua resposta: {userAnswer} | Resposta correta: {correctAnswer}",
+    "backToReview": "Voltar à Revisão"
+  },
+  "questions": [
+    {
+      "id": 1,
+      "question": "Quais são as quatro partes principais do Aprendizado de Máquina?",
+      "options": [
+        "Modelo, Dados, Treinamento e Modelo Treinado",
+        "Modelo, Dados, Programação e Hardware",
+        "Treinamento, Dados, Internet e Modelo",
+        "Modelo, Programação, Treinamento e Hardware"
+      ],
+      "correctAnswer": "Modelo, Dados, Treinamento e Modelo Treinado"
+    },
+    {
+      "id": 2,
+      "question": "Qual é o objetivo do \"treinamento\" no aprendizado de máquina?",
+      "options": [
+        "Armazenar dados para uso posterior",
+        "Enviar comandos à máquina",
+        "Encontrar padrões nos dados",
+        "Projetar como o usuário vai interagir"
+      ],
+      "correctAnswer": "Encontrar padrões nos dados"
+    },
+    {
+      "id": 3,
+      "question": "O que é um \"modelo treinado\" no aprendizado de máquina?",
+      "options": [
+        "Um diagrama de como a máquina foi construída",
+        "O processo em que a máquina é treinada com dados",
+        "Uma representação visual das etapas de treinamento",
+        "A parte final que faz previsões"
+      ],
+      "correctAnswer": "A parte final que faz previsões"
+    },
+    {
+      "id": 4,
+      "question": "Por que um classificador de IA pode dar uma previsão errada?",
+      "options": [
+        "Ele analisou uma quantidade limitada de dados",
+        "Ele não entendeu a pergunta",
+        "Ele não estava conectado à internet",
+        "Ele processou a entrada rápido demais"
+      ],
+      "correctAnswer": "Ele analisou uma quantidade limitada de dados"
+    }
+  ]
+}

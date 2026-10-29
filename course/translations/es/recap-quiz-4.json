@@ -1,0 +1,74 @@
+{
+  "_note": "Do not translate keys. Preserve {placeholder} tokens exactly as written.",
+  "ui": {
+    "pageTitle": "Cuestionario de Repaso Lección 4 - Aprende IA en Cualquier Lugar",
+    "introTitle": "Cuestionario de Repaso Lección 4",
+    "introSubtitle": "Pon a prueba tus conocimientos sobre la ética y la responsabilidad de la IA",
+    "startBtn": "Comenzar Cuestionario",
+    "footerTagline": "4 preguntas • Opción múltiple",
+    "questionHeading": "Cuestionario de Repaso",
+    "correctAnswerLabel": "Respuesta Correcta:",
+    "nextBtn": "Siguiente Pregunta",
+    "reviewTitle": "¡Cuestionario Completado!",
+    "reviewSubtitle": "Así te fue",
+    "retakeBtn": "Repetir Cuestionario",
+    "footerComplete": "¡Buen trabajo al completar el cuestionario!",
+    "footerBrand": "Aprende IA en Cualquier Lugar",
+    "progress": "Pregunta {n} de {total}",
+    "progressReview": "Pregunta {n} de {total} (Modo Revisión)",
+    "feedbackCorrect": "✓ ¡Correcto!",
+    "feedbackIncorrect": "✗ Incorrecto",
+    "scoreDisplay": "¡Respondiste {score} de {total} correctamente! ({percent}%)",
+    "reviewQuestion": "Pregunta {n}",
+    "reviewCorrect": "✓ Correcto",
+    "reviewIncorrect": "✗ Incorrecto",
+    "reviewDetails": "Tu respuesta: {userAnswer} | Respuesta correcta: {correctAnswer}",
+    "backToReview": "Volver a la Revisión"
+  },
+  "questions": [
+    {
+      "id": 1,
+      "question": "¿Por qué el sesgo en los datos puede llevar a predicciones incorrectas?",
+      "options": [
+        "La máquina se niega a procesar datos nuevos",
+        "El modelo se enfoca en sentimientos en lugar de números",
+        "La máquina basa su predicción en una perspectiva limitada",
+        "La máquina olvida su entrenamiento con el tiempo"
+      ],
+      "correctAnswer": "La máquina basa su predicción en una perspectiva limitada"
+    },
+    {
+      "id": 2,
+      "question": "¿Quién es responsable cuando una herramienta de IA comete un error perjudicial?",
+      "options": [
+        "La herramienta de IA",
+        "Los humanos que la crearon o la usaron",
+        "Los datos por sí solos",
+        "Nadie es responsable"
+      ],
+      "correctAnswer": "Los humanos que la crearon o la usaron"
+    },
+    {
+      "id": 3,
+      "question": "¿Cuáles son las formas en que los humanos pueden reducir el daño de las predicciones de IA?",
+      "options": [
+        "Dejar que la IA corrija sus propios errores",
+        "Verificar dos veces las predicciones de la IA",
+        "Ignorar los errores y esperar que mejoren",
+        "Usar más modelos de IA sin cambiar nada"
+      ],
+      "correctAnswer": "Verificar dos veces las predicciones de la IA"
+    },
+    {
+      "id": 4,
+      "question": "¿Cuál de los siguientes respeta la privacidad de los datos de las personas?",
+      "options": [
+        "Recopilar datos sin avisar a las personas",
+        "Compartir datos personales con cualquiera que lo pida",
+        "Obtener permiso y usar los datos para el motivo por el que se recopilaron",
+        "Usar datos aunque sean sensibles, siempre que ayuden a la IA"
+      ],
+      "correctAnswer": "Obtener permiso y usar los datos para el motivo por el que se recopilaron"
+    }
+  ]
+}

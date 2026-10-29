@@ -1,0 +1,74 @@
+{
+  "_note": "Do not translate keys. Preserve {placeholder} tokens exactly as written.",
+  "ui": {
+    "pageTitle": "Jaribio la Mapitio Somo la 4 - Jifunze AI Popote",
+    "introTitle": "Jaribio la Mapitio Somo la 4",
+    "introSubtitle": "Pima ujuzi wako wa maadili na uwajibikaji wa AI",
+    "startBtn": "Anza Jaribio",
+    "footerTagline": "Maswali 4 • Chaguo nyingi",
+    "questionHeading": "Jaribio la Mapitio",
+    "correctAnswerLabel": "Jibu Sahihi:",
+    "nextBtn": "Swali Linalofuata",
+    "reviewTitle": "Jaribio Limekamilika!",
+    "reviewSubtitle": "Hivi ndivyo ulivyofanya",
+    "retakeBtn": "Rudia Jaribio",
+    "footerComplete": "Kazi nzuri kukamilisha jaribio!",
+    "footerBrand": "Jifunze AI Popote",
+    "progress": "Swali {n} kati ya {total}",
+    "progressReview": "Swali {n} kati ya {total} (Hali ya Mapitio)",
+    "feedbackCorrect": "✓ Sahihi!",
+    "feedbackIncorrect": "✗ Si Sahihi",
+    "scoreDisplay": "Umepata {score} kati ya {total} sahihi! ({percent}%)",
+    "reviewQuestion": "Swali {n}",
+    "reviewCorrect": "✓ Sahihi",
+    "reviewIncorrect": "✗ Si Sahihi",
+    "reviewDetails": "Jibu lako: {userAnswer} | Jibu sahihi: {correctAnswer}",
+    "backToReview": "Rudi kwa Mapitio"
+  },
+  "questions": [
+    {
+      "id": 1,
+      "question": "Kwa nini upendeleo katika data unaweza kusababisha utabiri usio sahihi?",
+      "options": [
+        "Mashine inakataa kuchakata data mpya",
+        "Modeli inazingatia hisia badala ya nambari",
+        "Mashine inategemea mtazamo mdogo katika utabiri wake",
+        "Mashine inasahau mafunzo yake baada ya muda"
+      ],
+      "correctAnswer": "Mashine inategemea mtazamo mdogo katika utabiri wake"
+    },
+    {
+      "id": 2,
+      "question": "Nani anawajibika wakati zana ya AI inapofanya kosa lenye madhara?",
+      "options": [
+        "Zana ya AI",
+        "Wanadamu walioiunda au kuitumia",
+        "Data peke yake",
+        "Hakuna anayewajibika"
+      ],
+      "correctAnswer": "Wanadamu walioiunda au kuitumia"
+    },
+    {
+      "id": 3,
+      "question": "Ni njia zipi wanadamu wanaweza kupunguza madhara kutoka kwa utabiri wa AI?",
+      "options": [
+        "Acha AI irekebishe makosa yake yenyewe",
+        "Kagua utabiri wa AI mara mbili",
+        "Puuza makosa na utumaini yataboresha",
+        "Tumia modeli zaidi za AI bila kubadilisha chochote"
+      ],
+      "correctAnswer": "Kagua utabiri wa AI mara mbili"
+    },
+    {
+      "id": 4,
+      "question": "Ni kipi kati ya hivi kinachoheshimu faragha ya data ya watu?",
+      "options": [
+        "Kukusanya data bila kuwaambia watu",
+        "Kushiriki data binafsi na yeyote anayeuliza",
+        "Kupata ruhusa na kutumia data kwa sababu iliyokusanywa",
+        "Kutumia data hata kama ni nyeti, mradi inaisaidia AI"
+      ],
+      "correctAnswer": "Kupata ruhusa na kutumia data kwa sababu iliyokusanywa"
+    }
+  ]
+}

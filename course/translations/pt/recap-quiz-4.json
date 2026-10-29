@@ -1,0 +1,74 @@
+{
+  "_note": "Do not translate keys. Preserve {placeholder} tokens exactly as written.",
+  "ui": {
+    "pageTitle": "Quiz de Revisão da Lição 4 - Aprenda IA em Qualquer Lugar",
+    "introTitle": "Quiz de Revisão da Lição 4",
+    "introSubtitle": "Teste seus conhecimentos sobre ética e responsabilidade da IA",
+    "startBtn": "Iniciar Quiz",
+    "footerTagline": "4 perguntas • Múltipla escolha",
+    "questionHeading": "Quiz de Revisão",
+    "correctAnswerLabel": "Resposta Correta:",
+    "nextBtn": "Próxima Pergunta",
+    "reviewTitle": "Quiz Concluído!",
+    "reviewSubtitle": "Veja como você se saiu",
+    "retakeBtn": "Refazer Quiz",
+    "footerComplete": "Ótimo trabalho ao concluir o quiz!",
+    "footerBrand": "Aprenda IA em Qualquer Lugar",
+    "progress": "Pergunta {n} de {total}",
+    "progressReview": "Pergunta {n} de {total} (Modo Revisão)",
+    "feedbackCorrect": "✓ Correto!",
+    "feedbackIncorrect": "✗ Incorreto",
+    "scoreDisplay": "Você acertou {score} de {total}! ({percent}%)",
+    "reviewQuestion": "Pergunta {n}",
+    "reviewCorrect": "✓ Correto",
+    "reviewIncorrect": "✗ Incorreto",
+    "reviewDetails": "Sua resposta: {userAnswer} | Resposta correta: {correctAnswer}",
+    "backToReview": "Voltar à Revisão"
+  },
+  "questions": [
+    {
+      "id": 1,
+      "question": "Por que o viés nos dados pode levar a previsões erradas?",
+      "options": [
+        "A máquina se recusa a processar novos dados",
+        "O modelo foca em sentimentos em vez de números",
+        "A máquina baseia sua previsão em uma perspectiva limitada",
+        "A máquina esquece seu treinamento com o tempo"
+      ],
+      "correctAnswer": "A máquina baseia sua previsão em uma perspectiva limitada"
+    },
+    {
+      "id": 2,
+      "question": "Quem é responsável quando uma ferramenta de IA comete um erro prejudicial?",
+      "options": [
+        "A ferramenta de IA",
+        "Os humanos que a criaram ou usaram",
+        "Os dados sozinhos",
+        "Ninguém é responsável"
+      ],
+      "correctAnswer": "Os humanos que a criaram ou usaram"
+    },
+    {
+      "id": 3,
+      "question": "Quais são as formas como os humanos podem reduzir os danos das previsões de IA?",
+      "options": [
+        "Deixar a IA corrigir seus próprios erros",
+        "Verificar duas vezes as previsões da IA",
+        "Ignorar os erros e torcer para que melhorem",
+        "Usar mais modelos de IA sem mudar nada"
+      ],
+      "correctAnswer": "Verificar duas vezes as previsões da IA"
+    },
+    {
+      "id": 4,
+      "question": "Qual das opções a seguir respeita a privacidade dos dados das pessoas?",
+      "options": [
+        "Coletar dados sem avisar as pessoas",
+        "Compartilhar dados pessoais com qualquer um que pedir",
+        "Obter permissão e usar os dados para o motivo pelo qual foram coletados",
+        "Usar dados mesmo que sejam sensíveis, desde que ajudem a IA"
+      ],
+      "correctAnswer": "Obter permissão e usar os dados para o motivo pelo qual foram coletados"
+    }
+  ]
+}

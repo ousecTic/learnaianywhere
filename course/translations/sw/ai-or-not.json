@@ -1,0 +1,88 @@
+{
+  "_note": "Do not translate keys or the correctAnswer values ('ai' / 'not_ai'). Preserve {placeholder} tokens exactly as written.",
+  "ui": {
+    "pageTitle": "Mchezo: AI au Sivyo? - Jifunze AI Popote",
+    "title": "Tucheze AI au Sivyo?!",
+    "subtitle": "Jaribu uelewa wako wa dhana za AI",
+    "introStep1": "Nitaelezea hali fulani",
+    "introStep2": "Angalia kama inahusisha uhuru na uwezo wa kubadilika",
+    "introStep3": "Amua kama ni AI au Sivyo",
+    "introStep4": "Shiriki mawazo yako",
+    "startBtn": "Anza Mchezo",
+    "questionHeading": "AI au Sivyo?",
+    "progress": "Raundi {n} kati ya {total}",
+    "progressReview": "Raundi {n} kati ya {total} (Hali ya Mapitio)",
+    "answerAi": "Hii Ni AI",
+    "answerNotAi": "Hii Si AI",
+    "imageAlt": "Mchoro wa swali {n}",
+    "feedbackCorrect": "✓ Sahihi! {answer}.",
+    "feedbackIncorrect": "✗ Sivyo. Jibu sahihi ni: {answer}.",
+    "explanationHeading": "Maelezo:",
+    "nextBtn": "Swali Lijalo",
+    "gameComplete": "Mchezo Umekamilika!",
+    "hereIsHowYouDid": "Hivi ndivyo ulivyofanya",
+    "scoreDisplay": "Ulijibu {score} kati ya {total} kwa usahihi!",
+    "reviewRound": "Raundi {n}",
+    "reviewCorrect": "✓ Sahihi",
+    "reviewIncorrect": "✗ Sivyo",
+    "reviewYourAnswer": "Jibu lako: {userAnswer} | Jibu sahihi: {correctAnswer}",
+    "playAgainBtn": "Cheza Tena",
+    "backToReviewBtn": "Rudi Mapitioni",
+    "footerBrand": "Jifunze AI Popote",
+    "footerTagline": "Maswali 5 • Mchezo wa elimu",
+    "footerKeepLearning": "Endelea kujifunza kuhusu AI!"
+  },
+  "explanationLabels": {
+    "autonomous_positive": "Uhuru: Ndiyo, ina Uhuru",
+    "autonomous_negative": "Uhuru: Hapana, haina Uhuru",
+    "adaptive_positive": "Uwezo wa Kubadilika: Ndiyo, inaweza Kubadilika",
+    "adaptive_negative": "Uwezo wa Kubadilika: Hapana, haiwezi Kubadilika"
+  },
+  "questions": [
+    {
+      "id": 1,
+      "question": "Unapokuwa ukiandika ujumbe kwa rafiki yako, simu yako inapendekeza neno lijalo ambalo unaweza kutaka kutumia. Pia inasahihisha tahajia yako ukifanya kosa.",
+      "correctAnswer": "ai",
+      "explanation": {
+        "autonomous": { "positive": true,  "content": "Inagundua makosa yako na kutoa usahihishaji yenyewe kabla hujagundua hitilafu." },
+        "adaptive":   { "positive": true,  "content": "Inaboresha mapendekezo ya maneno kulingana na ulichoandika awali." }
+      }
+    },
+    {
+      "id": 2,
+      "question": "Simu inayokuruhusu kupiga simu tu unapochapisha au kupiga nambari mwenyewe",
+      "correctAnswer": "not_ai",
+      "explanation": {
+        "autonomous": { "positive": false, "content": "Lazima ufanye kila kitu mwenyewe kila wakati." },
+        "adaptive":   { "positive": false, "content": "Haichambui data mpya ili kuboresha. Inafanya kazi kwa njia ile ile daima." }
+      }
+    },
+    {
+      "id": 3,
+      "question": "Unaweza kufungua simu yako kwa kuonyesha uso wako. Picha zaidi ikichanganua, ndivyo inavyokuwa bora zaidi kukutambua.",
+      "correctAnswer": "ai",
+      "explanation": {
+        "autonomous": { "positive": true,  "content": "Inakusaidia kwa kufungua simu yako yenyewe. Huhitaji hata kubonyeza kitufe!" },
+        "adaptive":   { "positive": true,  "content": "Inachambua picha zaidi za uso wako ili kuboresha utambuzi, hata kama mwonekano wako unabadilika." }
+      }
+    },
+    {
+      "id": 4,
+      "question": "Taa yenye kihisi cha mwendo inawaka inapogundua mwendo na kuzima hakuna mtu. Inaitikia kwa njia ile ile kila wakati.",
+      "correctAnswer": "not_ai",
+      "explanation": {
+        "autonomous": { "positive": true,  "content": "Inawaka na kuzima yenyewe inapohisi mwendo." },
+        "adaptive":   { "positive": false, "content": "Inaitikia kwa njia ile ile daima, bila kujali kinachosogea." }
+      }
+    },
+    {
+      "id": 5,
+      "question": "Unazungumza na programu inayokusaidia kupanga miradi. Unaelezea mradi wako, nayo inapendekeza hatua za kukamilisha. Inaboresha mapendekezo yake kadri unavyozungumza nayo.",
+      "correctAnswer": "ai",
+      "explanation": {
+        "autonomous": { "positive": true,  "content": "Inakusaidia kwa kuunda mpango yenyewe kulingana na maelezo yako." },
+        "adaptive":   { "positive": true,  "content": "Inaboresha mapendekezo yake kadri inavyojifunza zaidi kuhusu mradi wako maalum na jinsi unavyofanya kazi." }
+      }
+    }
+  ]
+}

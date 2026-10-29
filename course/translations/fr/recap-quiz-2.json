@@ -1,0 +1,74 @@
+{
+  "_note": "Do not translate keys. Preserve {placeholder} tokens exactly as written.",
+  "ui": {
+    "pageTitle": "Quiz Récapitulatif Leçon 2 - Apprendre l'IA Partout",
+    "introTitle": "Quiz Récapitulatif Leçon 2",
+    "introSubtitle": "Testez vos connaissances sur les fondamentaux de l'Apprentissage Automatique",
+    "startBtn": "Commencer le Quiz",
+    "footerTagline": "4 questions • Choix multiple",
+    "questionHeading": "Quiz Récapitulatif",
+    "correctAnswerLabel": "Bonne Réponse :",
+    "nextBtn": "Question Suivante",
+    "reviewTitle": "Quiz Terminé !",
+    "reviewSubtitle": "Voici votre résultat",
+    "retakeBtn": "Refaire le Quiz",
+    "footerComplete": "Bravo d'avoir terminé le quiz !",
+    "footerBrand": "Apprendre l'IA Partout",
+    "progress": "Question {n} sur {total}",
+    "progressReview": "Question {n} sur {total} (Mode Révision)",
+    "feedbackCorrect": "✓ Correct !",
+    "feedbackIncorrect": "✗ Incorrect",
+    "scoreDisplay": "Vous avez obtenu {score} sur {total} bonnes réponses ! ({percent}%)",
+    "reviewQuestion": "Question {n}",
+    "reviewCorrect": "✓ Correct",
+    "reviewIncorrect": "✗ Incorrect",
+    "reviewDetails": "Votre réponse : {userAnswer} | Bonne réponse : {correctAnswer}",
+    "backToReview": "Retour à la Révision"
+  },
+  "questions": [
+    {
+      "id": 1,
+      "question": "Quelles sont les quatre parties clés de l'Apprentissage Automatique ?",
+      "options": [
+        "Modèle, Données, Entraînement et Modèle Entraîné",
+        "Modèle, Données, Programmation et Matériel",
+        "Entraînement, Données, Internet et Modèle",
+        "Modèle, Programmation, Entraînement et Matériel"
+      ],
+      "correctAnswer": "Modèle, Données, Entraînement et Modèle Entraîné"
+    },
+    {
+      "id": 2,
+      "question": "Quel est le but de l'« entraînement » dans l'apprentissage automatique ?",
+      "options": [
+        "Stocker des données pour une utilisation ultérieure",
+        "Envoyer des commandes à la machine",
+        "Trouver des motifs dans les données",
+        "Concevoir comment l'utilisateur interagira"
+      ],
+      "correctAnswer": "Trouver des motifs dans les données"
+    },
+    {
+      "id": 3,
+      "question": "Qu'est-ce qu'un « modèle entraîné » dans l'apprentissage automatique ?",
+      "options": [
+        "Un schéma de la façon dont la machine a été construite",
+        "Le processus par lequel la machine est entraînée sur des données",
+        "Une représentation visuelle des étapes d'entraînement",
+        "La partie finale qui fait des prédictions"
+      ],
+      "correctAnswer": "La partie finale qui fait des prédictions"
+    },
+    {
+      "id": 4,
+      "question": "Pourquoi un classificateur d'IA pourrait-il donner une mauvaise prédiction ?",
+      "options": [
+        "Il a analysé une quantité limitée de données",
+        "Il n'a pas compris la question",
+        "Il n'était pas connecté à internet",
+        "Il a traité l'entrée trop rapidement"
+      ],
+      "correctAnswer": "Il a analysé une quantité limitée de données"
+    }
+  ]
+}

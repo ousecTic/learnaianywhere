@@ -1,0 +1,74 @@
+{
+  "_note": "Do not translate keys. Preserve {placeholder} tokens exactly as written.",
+  "ui": {
+    "pageTitle": "Jaribio la Mapitio Somo la 2 - Jifunze AI Popote",
+    "introTitle": "Jaribio la Mapitio Somo la 2",
+    "introSubtitle": "Pima ujuzi wako wa misingi ya Ujifunzaji wa Mashine",
+    "startBtn": "Anza Jaribio",
+    "footerTagline": "Maswali 4 • Chaguo nyingi",
+    "questionHeading": "Jaribio la Mapitio",
+    "correctAnswerLabel": "Jibu Sahihi:",
+    "nextBtn": "Swali Linalofuata",
+    "reviewTitle": "Jaribio Limekamilika!",
+    "reviewSubtitle": "Hivi ndivyo ulivyofanya",
+    "retakeBtn": "Rudia Jaribio",
+    "footerComplete": "Kazi nzuri kukamilisha jaribio!",
+    "footerBrand": "Jifunze AI Popote",
+    "progress": "Swali {n} kati ya {total}",
+    "progressReview": "Swali {n} kati ya {total} (Hali ya Mapitio)",
+    "feedbackCorrect": "✓ Sahihi!",
+    "feedbackIncorrect": "✗ Si Sahihi",
+    "scoreDisplay": "Umepata {score} kati ya {total} sahihi! ({percent}%)",
+    "reviewQuestion": "Swali {n}",
+    "reviewCorrect": "✓ Sahihi",
+    "reviewIncorrect": "✗ Si Sahihi",
+    "reviewDetails": "Jibu lako: {userAnswer} | Jibu sahihi: {correctAnswer}",
+    "backToReview": "Rudi kwa Mapitio"
+  },
+  "questions": [
+    {
+      "id": 1,
+      "question": "Ni zipi sehemu nne kuu za Ujifunzaji wa Mashine?",
+      "options": [
+        "Modeli, Data, Mafunzo, na Modeli Iliyofunzwa",
+        "Modeli, Data, Uandishi wa Msimbo, na Maunzi",
+        "Mafunzo, Data, Intaneti, na Modeli",
+        "Modeli, Uandishi wa Msimbo, Mafunzo, na Maunzi"
+      ],
+      "correctAnswer": "Modeli, Data, Mafunzo, na Modeli Iliyofunzwa"
+    },
+    {
+      "id": 2,
+      "question": "Kusudi la \"mafunzo\" katika ujifunzaji wa mashine ni nini?",
+      "options": [
+        "Kuhifadhi data kwa matumizi ya baadaye",
+        "Kutuma amri kwa mashine",
+        "Kupata mifumo katika data",
+        "Kubuni jinsi mtumiaji atakavyoshirikiana"
+      ],
+      "correctAnswer": "Kupata mifumo katika data"
+    },
+    {
+      "id": 3,
+      "question": "\"Modeli iliyofunzwa\" katika ujifunzaji wa mashine ni nini?",
+      "options": [
+        "Mchoro wa jinsi mashine ilivyojengwa",
+        "Mchakato ambapo mashine inafunzwa kwa data",
+        "Uwakilishi wa kuona wa hatua za mafunzo",
+        "Sehemu ya mwisho inayofanya utabiri"
+      ],
+      "correctAnswer": "Sehemu ya mwisho inayofanya utabiri"
+    },
+    {
+      "id": 4,
+      "question": "Kwa nini kiainishaji cha AI kinaweza kutoa utabiri usio sahihi?",
+      "options": [
+        "Kilichambua kiasi kidogo cha data",
+        "Hakikuelewa swali",
+        "Hakikuwa kimeunganishwa na intaneti",
+        "Kilichakata ingizo haraka sana"
+      ],
+      "correctAnswer": "Kilichambua kiasi kidogo cha data"
+    }
+  ]
+}

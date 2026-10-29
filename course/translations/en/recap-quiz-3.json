@@ -1,0 +1,74 @@
+{
+  "_note": "Do not translate keys. Preserve {placeholder} tokens exactly as written.",
+  "ui": {
+    "pageTitle": "Lesson 3 Recap Quiz - Learn AI Anywhere",
+    "introTitle": "Lesson 3 Recap Quiz",
+    "introSubtitle": "Test your knowledge of algorithms and training",
+    "startBtn": "Start Quiz",
+    "footerTagline": "4 questions • Multiple choice",
+    "questionHeading": "Recap Quiz",
+    "correctAnswerLabel": "Correct Answer:",
+    "nextBtn": "Next Question",
+    "reviewTitle": "Quiz Complete!",
+    "reviewSubtitle": "Here's how you did",
+    "retakeBtn": "Retake Quiz",
+    "footerComplete": "Great job completing the quiz!",
+    "footerBrand": "Learn AI Anywhere",
+    "progress": "Question {n} of {total}",
+    "progressReview": "Question {n} of {total} (Review Mode)",
+    "feedbackCorrect": "✓ Correct!",
+    "feedbackIncorrect": "✗ Incorrect",
+    "scoreDisplay": "You got {score} out of {total} correct! ({percent}%)",
+    "reviewQuestion": "Question {n}",
+    "reviewCorrect": "✓ Correct",
+    "reviewIncorrect": "✗ Incorrect",
+    "reviewDetails": "Your answer: {userAnswer} | Correct answer: {correctAnswer}",
+    "backToReview": "Back to Review"
+  },
+  "questions": [
+    {
+      "id": 1,
+      "question": "What is an algorithm?",
+      "options": [
+        "A type of computer",
+        "A random guess a machine makes",
+        "A step-by-step way to complete a task",
+        "A rule that never changes"
+      ],
+      "correctAnswer": "A step-by-step way to complete a task"
+    },
+    {
+      "id": 2,
+      "question": "Why does a machine need clear and detailed algorithms?",
+      "options": [
+        "So it can talk with humans naturally",
+        "Because it can't understand like humans and needs exact steps to follow",
+        "So it can decide on its own without help",
+        "So it can work quickly without clear instructions"
+      ],
+      "correctAnswer": "Because it can't understand like humans and needs exact steps to follow"
+    },
+    {
+      "id": 3,
+      "question": "What happens during training for a machine?",
+      "options": [
+        "It memorizes every example without checking for mistakes",
+        "It waits for humans to fix errors and tell it the right answers",
+        "It calculates a prediction, measures its error, and adjusts its equation",
+        "It keeps making the same prediction without improving"
+      ],
+      "correctAnswer": "It calculates a prediction, measures its error, and adjusts its equation"
+    },
+    {
+      "id": 4,
+      "question": "How do humans and machines process features differently?",
+      "options": [
+        "Humans focus on what feels important, and machines use numbers",
+        "Humans turn features into numbers, and machines rely on feeling",
+        "Humans and machines both guess randomly",
+        "Machines understand emotions better than humans"
+      ],
+      "correctAnswer": "Humans focus on what feels important, and machines use numbers"
+    }
+  ]
+}
