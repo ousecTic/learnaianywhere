@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<!--
+  AI or Not quiz (Lesson 1) of AI Literacy for Everyone, in every course language.
+  Source page: scripts/build-apps.mjs replaces COURSE_TEXT below with the text in
+  course/translations/<lang>/ai-or-not.json and copies images/ next to the built page,
+  which then works offline from a folder (file://).
+
+  Open with ?lang=<code> to pick the language (default: the last language chosen in the
+  menu, else English).
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI or Not Quiz - Learn AI Anywhere</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .quiz-container {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+      line-height: 1.6;
+      color: #000000;
+      background: white;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .quiz-container .container {
+      max-width: 800px;
+      width: 100%;
+    }
+
+    .quiz-container .card {
+      background: #FFFFFF;
+      border: 1px solid #E5E7EB;
+      border-radius: 16px;
+      padding: 3rem 2rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+
+    .quiz-container .lang-selector {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 0.75rem;
+    }
+
+    .quiz-container .lang-selector select {
+      font-size: 0.8rem;
+      border: 1px solid #E5E7EB;
+      border-radius: 6px;
+      padding: 0.25rem 0.5rem;
+      color: #71717A;
+      background: white;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .quiz-container .lang-selector select:hover {
+      border-color: #258EC2;
+      color: #258EC2;
+    }
+
+    .quiz-container .header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .quiz-container h1 {
+      color: #258EC2;
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .quiz-container .subtitle {
+      color: #71717A;
+      font-size: 1.125rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .quiz-container .progress {
+      text-align: center;
+      color: #71717A;
+      font-size: 0.875rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .quiz-container .intro-list {
+      background: #F9FAFB;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      border-left: 3px solid #258EC2;
+    }
+
+    .quiz-container .intro-list ol {
+      margin-left: 1.25rem;
+    }
+
+    .quiz-container .intro-list li {
+      margin-bottom: 0.75rem;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .quiz-container .question-image {
+      width: 100%;
+      max-width: 500px;
+      height: auto;
+      border-radius: 12px;
+      margin: 1.5rem auto;
+      display: block;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .quiz-container .question-text {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: #000000;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .quiz-container .answer-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin: 1.5rem 0;
+    }
+
+    .quiz-container .answer-btn {
+      padding: 1rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border: 2px solid #E5E7EB;
+      border-radius: 8px;
+      background: #FFFFFF;
+      color: #000000;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: inherit;
+      width: 100%;
+      text-align: center;
+    }
+
+    .quiz-container .answer-btn:hover:not(:disabled) {
+      background: #F9FAFB;
+      border-color: #258EC2;
+    }
+
+    .quiz-container .answer-btn:disabled {
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+
+    .quiz-container .answer-btn.correct {
+      background: #D1FAE5;
+      border-color: #6EE7B7;
+      color: #065F46;
+    }
+
+    .quiz-container .answer-btn.incorrect {
+      background: #FEE2E2;
+      border-color: #FCA5A5;
+      color: #991B1B;
+    }
+
+    .quiz-container .feedback-message {
+      text-align: center;
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0 1rem;
+      border-radius: 8px;
+      font-size: 1.125rem;
+      font-weight: 700;
+    }
+
+    .quiz-container .feedback-message.correct {
+      background: #D1FAE5;
+      color: #065F46;
+      border: 2px solid #6EE7B7;
+    }
+
+    .quiz-container .feedback-message.incorrect {
+      background: #FEE2E2;
+      color: #991B1B;
+      border: 2px solid #FCA5A5;
+    }
+
+    .quiz-container .explanation {
+      background: #F9FAFB;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      border-left: 3px solid #258EC2;
+    }
+
+    .quiz-container .explanation h3 {
+      color: #258EC2;
+      font-size: 1.125rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .quiz-container .explanation-item {
+      margin-bottom: 1rem;
+      padding-left: 1rem;
+      border-left: 2px solid #E5E7EB;
+    }
+
+    .quiz-container .explanation-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .quiz-container .explanation-label {
+      font-weight: 700;
+      color: #258EC2;
+      margin-bottom: 0.25rem;
+      font-size: 0.9375rem;
+    }
+
+    .quiz-container .explanation-label.positive {
+      color: #065F46;
+    }
+
+    .quiz-container .explanation-label.negative {
+      color: #991B1B;
+    }
+
+    .quiz-container .explanation-content {
+      color: #000000;
+      font-size: 0.9375rem;
+      line-height: 1.6;
+    }
+
+    .quiz-container .btn-primary {
+      padding: 0.75rem 2rem;
+      background: #258EC2;
+      color: #FFFFFF;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      font-family: inherit;
+      display: block;
+      margin: 1.5rem auto 0;
+    }
+
+    .quiz-container .btn-primary:hover {
+      background: #1c6e99;
+    }
+
+    .quiz-container .score-display {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #258EC2;
+      margin: 1.5rem 0;
+    }
+
+    .quiz-container .review-list {
+      margin: 1.5rem 0;
+    }
+
+    .quiz-container .review-item {
+      background: #F9FAFB;
+      border: 1px solid #E5E7EB;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .quiz-container .review-item:hover {
+      border-color: #258EC2;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .quiz-container .review-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .quiz-container .review-item-title {
+      font-weight: 600;
+      color: #000000;
+      font-size: 1rem;
+    }
+
+    .quiz-container .review-item-result {
+      font-weight: 600;
+      font-size: 0.875rem;
+    }
+
+    .quiz-container .review-item-result.correct {
+      color: #065F46;
+    }
+
+    .quiz-container .review-item-result.incorrect {
+      color: #991B1B;
+    }
+
+    .quiz-container .review-item-details {
+      font-size: 0.875rem;
+      color: #71717A;
+      line-height: 1.5;
+    }
+
+    .quiz-container .hidden {
+      display: none;
+    }
+
+    .quiz-container .footer {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #E5E7EB;
+      text-align: center;
+      color: #71717A;
+      font-size: 0.875rem;
+    }
+
+    @media (max-width: 640px) {
+      .quiz-container {
+        padding: 0.75rem;
+      }
+
+      .quiz-container .card {
+        padding: 1.5rem 1rem;
+      }
+
+      .quiz-container h1 {
+        font-size: 1.35rem;
+      }
+
+      .quiz-container .subtitle {
+        font-size: 1rem;
+      }
+
+      .quiz-container .question-text {
+        font-size: 1rem;
+      }
+
+      .quiz-container .answer-btn {
+        padding: 1rem;
+        font-size: 1rem;
+      }
+
+      .quiz-container .feedback-message {
+        font-size: 1rem;
+        padding: 0.75rem 1rem;
+      }
+
+      .quiz-container .score-display {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script>
+    // Filled in by scripts/build-apps.mjs:
+    // { languages: [{ code, label, dir }], text: { en: {...}, fr: {...}, ... } }
+    var COURSE_TEXT = /*COURSE_TEXT*/null;
+
+    // One picture per question id; the same pictures in every language.
+    var QUESTION_IMAGES = {
+      1: 'images/question-1.jpg',
+      2: 'images/question-2.jpg',
+      3: 'images/question-3.jpg',
+      4: 'images/question-4.jpg',
+      5: 'images/question-5.jpg'
+    };
+
+    var translations = COURSE_TEXT.text;
+    var LANGUAGES = COURSE_TEXT.languages;
+
+    function readParam(name) {
+      var m = new RegExp('[?&]' + name + '=([^&#]*)').exec(window.location.search);
+      return m ? decodeURIComponent(m[1]) : null;
+    }
+
+    // localStorage can be missing or blocked (private windows, some file:// setups).
+    function loadSavedLang() {
+      try { return window.localStorage.getItem('quiz_lang'); } catch (e) { return null; }
+    }
+    function saveLang(lang) {
+      try { window.localStorage.setItem('quiz_lang', lang); } catch (e) { /* not saved */ }
+    }
+
+    function isKnownLang(code) { return !!(code && translations[code]); }
+    function isRtl(code) {
+      for (var i = 0; i < LANGUAGES.length; i++) {
+        if (LANGUAGES[i].code === code) { return LANGUAGES[i].dir === 'rtl'; }
+      }
+      return false;
+    }
+    function applyDirection(code) {
+      document.documentElement.lang = code;
+      document.documentElement.dir = isRtl(code) ? 'rtl' : 'ltr';
+    }
+
+    var currentLang = isKnownLang(readParam('lang')) ? readParam('lang')
+      : isKnownLang(loadSavedLang()) ? loadSavedLang() : 'en';
+    applyDirection(currentLang);
+
+    function t(key) {
+      var parts = key.split('.');
+      var lang = translations[currentLang] || translations.en;
+      var val = lang[parts[0]] && lang[parts[0]][parts[1]];
+      return val || (translations.en[parts[0]] && translations.en[parts[0]][parts[1]]) || key;
+    }
+
+    function tFmt(key, vars) {
+      var str = t(key);
+      Object.keys(vars).forEach(function(k) {
+        str = str.split('{' + k + '}').join(String(vars[k]));
+      });
+      return str;
+    }
+
+    function getQuizData() {
+      return (translations[currentLang] && translations[currentLang].questions)
+        ? translations[currentLang].questions
+        : translations.en.questions;
+    }
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      saveLang(lang);
+      applyDirection(lang);
+      currentScreen = 'intro';
+      currentQuestionIndex = 0;
+      userAnswers = [];
+      score = 0;
+      selectedAnswer = null;
+      showFeedback = false;
+      render();
+    }
+
+    function langSelectorHTML() {
+      var options = LANGUAGES.filter(function(l) { return translations[l.code]; }).map(function(l) {
+        return '<option value="' + l.code + '"' + (currentLang === l.code ? ' selected' : '') + '>' + l.label + '</option>';
+      }).join('');
+      return '<div class="lang-selector"><select onchange="setLanguage(this.value)">' + options + '</select></div>';
+    }
+
+    var currentScreen = 'intro';
+    var currentQuestionIndex = 0;
+    var userAnswers = [];
+    var score = 0;
+    var selectedAnswer = null;
+    var showFeedback = false;
+
+    function formatExplanation(explanation) {
+      var html = '';
+      ['autonomous', 'adaptive'].forEach(function(aspect) {
+        var item = explanation[aspect];
+        var labelKey = 'explanationLabels.' + aspect + '_' + (item.positive ? 'positive' : 'negative');
+        var labelClass = item.positive ? 'positive' : 'negative';
+        html += '<div class="explanation-item">' +
+          '<div class="explanation-label ' + labelClass + '">' + t(labelKey) + '</div>' +
+          '<div class="explanation-content">' + item.content + '</div>' +
+          '</div>';
+      });
+      return html;
+    }
+
+    function startQuiz() {
+      currentScreen = 'question';
+      currentQuestionIndex = 0;
+      userAnswers = [];
+      score = 0;
+      selectedAnswer = null;
+      showFeedback = false;
+      render();
+    }
+
+    function handleAnswer(answer) {
+      var question = getQuizData()[currentQuestionIndex];
+      var isCorrect = answer === question.correctAnswer;
+
+      selectedAnswer = answer;
+      showFeedback = true;
+
+      userAnswers.push({
+        questionId: question.id,
+        userAnswer: answer,
+        correctAnswer: question.correctAnswer,
+        isCorrect: isCorrect
+      });
+
+      if (isCorrect) {
+        score++;
+      }
+
+      render();
+    }
+
+    function nextQuestion() {
+      if (currentQuestionIndex < getQuizData().length - 1) {
+        currentQuestionIndex++;
+        selectedAnswer = null;
+        showFeedback = false;
+      } else {
+        currentScreen = 'review';
+      }
+      render();
+    }
+
+    function viewQuestionFromReview(index) {
+      currentQuestionIndex = index;
+      currentScreen = 'reviewQuestion';
+      render();
+    }
+
+    function backToReview() {
+      currentScreen = 'review';
+      render();
+    }
+
+    function answerLabel(key) {
+      return key === 'ai' ? t('ui.answerAi') : t('ui.answerNotAi');
+    }
+
+    function render() {
+      var root = document.getElementById('root');
+      var quizData = getQuizData();
+      var question = quizData[currentQuestionIndex];
+      var answer = userAnswers[currentQuestionIndex];
+
+      document.title = t('ui.pageTitle');
+
+      if (currentScreen === 'intro') {
+        root.innerHTML =
+          '<div class="quiz-container">' +
+            '<div class="container">' +
+              '<div class="card">' +
+                langSelectorHTML() +
+                '<div class="header">' +
+                  '<h1>' + t('ui.title') + '</h1>' +
+                  '<p class="subtitle">' + t('ui.subtitle') + '</p>' +
+                '</div>' +
+                '<div class="intro-list">' +
+                  '<ol>' +
+                    '<li>' + t('ui.introStep1') + '</li>' +
+                    '<li>' + t('ui.introStep2') + '</li>' +
+                    '<li>' + t('ui.introStep3') + '</li>' +
+                    '<li>' + t('ui.introStep4') + '</li>' +
+                  '</ol>' +
+                '</div>' +
+                '<button class="btn-primary" onclick="startQuiz()">' + t('ui.startBtn') + '</button>' +
+                '<div class="footer">' +
+                  '<p>' + t('ui.footerBrand') + '</p>' +
+                  '<p>' + t('ui.footerTagline') + '</p>' +
+                '</div>' +
+              '</div>' +
+            '</div>' +
+          '</div>';
+
+      } else if (currentScreen === 'question') {
+        var aiClass = selectedAnswer === 'ai'
+          ? (selectedAnswer === question.correctAnswer ? 'correct' : 'incorrect')
+          : (selectedAnswer && question.correctAnswer === 'ai' ? 'correct' : '');
+        var notAiClass = selectedAnswer === 'not_ai'
+          ? (selectedAnswer === question.correctAnswer ? 'correct' : 'incorrect')
+          : (selectedAnswer && question.correctAnswer === 'not_ai' ? 'correct' : '');
+        var disabledAttr = selectedAnswer !== null ? 'disabled' : '';
+
+        var feedbackHTML = '';
+        if (showFeedback) {
+          var isCorrect = selectedAnswer === question.correctAnswer;
+          var feedbackLabel = isCorrect
+            ? tFmt('ui.feedbackCorrect', { answer: answerLabel(question.correctAnswer) })
+            : tFmt('ui.feedbackIncorrect', { answer: answerLabel(question.correctAnswer) });
+          feedbackHTML =
+            '<div class="feedback-message ' + (isCorrect ? 'correct' : 'incorrect') + '">' + feedbackLabel + '</div>' +
+            '<div class="explanation">' +
+              '<h3>' + t('ui.explanationHeading') + '</h3>' +
+              formatExplanation(question.explanation) +
+            '</div>' +
+            '<button class="btn-primary" onclick="nextQuestion()">' + t('ui.nextBtn') + '</button>';
+        }
+
+        root.innerHTML =
+          '<div class="quiz-container">' +
+            '<div class="container">' +
+              '<div class="card">' +
+                langSelectorHTML() +
+                '<p class="progress">' + tFmt('ui.progress', { n: currentQuestionIndex + 1, total: quizData.length }) + '</p>' +
+                '<div class="header">' +
+                  '<h1>' + t('ui.questionHeading') + '</h1>' +
+                '</div>' +
+                '<img src="' + QUESTION_IMAGES[question.id] + '" alt="' + tFmt('ui.imageAlt', { n: currentQuestionIndex + 1 }) + '" class="question-image">' +
+                '<p class="question-text">' + question.question + '</p>' +
+                '<div class="answer-buttons">' +
+                  '<button class="answer-btn ' + aiClass + '" onclick="handleAnswer(\'ai\')" ' + disabledAttr + '>' +
+                    t('ui.answerAi') +
+                  '</button>' +
+                  '<button class="answer-btn ' + notAiClass + '" onclick="handleAnswer(\'not_ai\')" ' + disabledAttr + '>' +
+                    t('ui.answerNotAi') +
+                  '</button>' +
+                '</div>' +
+                feedbackHTML +
+              '</div>' +
+            '</div>' +
+          '</div>';
+
+      } else if (currentScreen === 'review') {
+        var reviewItems = quizData.map(function(q, index) {
+          var ans = userAnswers[index];
+          return '<div class="review-item" onclick="viewQuestionFromReview(' + index + ')">' +
+            '<div class="review-item-header">' +
+              '<div class="review-item-title">' + tFmt('ui.reviewRound', { n: index + 1 }) + '</div>' +
+              '<div class="review-item-result ' + (ans.isCorrect ? 'correct' : 'incorrect') + '">' +
+                (ans.isCorrect ? t('ui.reviewCorrect') : t('ui.reviewIncorrect')) +
+              '</div>' +
+            '</div>' +
+            '<div class="review-item-details">' +
+              tFmt('ui.reviewYourAnswer', {
+                userAnswer: answerLabel(ans.userAnswer),
+                correctAnswer: answerLabel(ans.correctAnswer)
+              }) +
+            '</div>' +
+          '</div>';
+        }).join('');
+
+        root.innerHTML =
+          '<div class="quiz-container">' +
+            '<div class="container">' +
+              '<div class="card">' +
+                langSelectorHTML() +
+                '<div class="header">' +
+                  '<h1>' + t('ui.gameComplete') + '</h1>' +
+                  '<p class="subtitle">' + t('ui.hereIsHowYouDid') + '</p>' +
+                '</div>' +
+                '<div class="score-display">' +
+                  tFmt('ui.scoreDisplay', { score: score, total: quizData.length }) +
+                '</div>' +
+                '<div class="review-list">' + reviewItems + '</div>' +
+                '<button class="btn-primary" onclick="startQuiz()">' + t('ui.playAgainBtn') + '</button>' +
+                '<div class="footer">' +
+                  '<p>' + t('ui.footerBrand') + '</p>' +
+                  '<p>' + t('ui.footerKeepLearning') + '</p>' +
+                '</div>' +
+              '</div>' +
+            '</div>' +
+          '</div>';
+
+      } else if (currentScreen === 'reviewQuestion') {
+        var reviewAnswer = userAnswers[currentQuestionIndex];
+        var reviewAiClass = reviewAnswer.userAnswer === 'ai'
+          ? (reviewAnswer.isCorrect ? 'correct' : 'incorrect')
+          : (question.correctAnswer === 'ai' ? 'correct' : '');
+        var reviewNotAiClass = reviewAnswer.userAnswer === 'not_ai'
+          ? (reviewAnswer.isCorrect ? 'correct' : 'incorrect')
+          : (question.correctAnswer === 'not_ai' ? 'correct' : '');
+
+        var reviewFeedbackLabel = reviewAnswer.isCorrect
+          ? tFmt('ui.feedbackCorrect', { answer: answerLabel(question.correctAnswer) })
+          : tFmt('ui.feedbackIncorrect', { answer: answerLabel(question.correctAnswer) });
+
+        root.innerHTML =
+          '<div class="quiz-container">' +
+            '<div class="container">' +
+              '<div class="card">' +
+                langSelectorHTML() +
+                '<p class="progress">' + tFmt('ui.progressReview', { n: currentQuestionIndex + 1, total: quizData.length }) + '</p>' +
+                '<div class="header">' +
+                  '<h1>' + t('ui.questionHeading') + '</h1>' +
+                '</div>' +
+                '<img src="' + QUESTION_IMAGES[question.id] + '" alt="' + tFmt('ui.imageAlt', { n: currentQuestionIndex + 1 }) + '" class="question-image">' +
+                '<p class="question-text">' + question.question + '</p>' +
+                '<div class="answer-buttons">' +
+                  '<button class="answer-btn ' + reviewAiClass + '" disabled>' + t('ui.answerAi') + '</button>' +
+                  '<button class="answer-btn ' + reviewNotAiClass + '" disabled>' + t('ui.answerNotAi') + '</button>' +
+                '</div>' +
+                '<div class="feedback-message ' + (reviewAnswer.isCorrect ? 'correct' : 'incorrect') + '">' +
+                  reviewFeedbackLabel +
+                '</div>' +
+                '<div class="explanation">' +
+                  '<h3>' + t('ui.explanationHeading') + '</h3>' +
+                  formatExplanation(question.explanation) +
+                '</div>' +
+                '<button class="btn-primary" onclick="backToReview()">' + t('ui.backToReviewBtn') + '</button>' +
+              '</div>' +
+            '</div>' +
+          '</div>';
+      }
+    }
+
+    render();
+  </script>
+</body>
+</html>
