@@ -1,0 +1,8 @@
+{
+  "_note": "Course settings for the offline packages. NeuroPocket is pinned by hand: to use a newer release, change version and sha256 (the fingerprint of that release's file). The package build downloads https://github.com/ousecTic/neuropocket/releases/download/v<version>/<file> and stops if the fingerprint doesn't match.",
+  "neuropocket": {
+    "version": "1.8.0",
+    "file": "neuropocket-offline.html",
+    "sha256": "68d3fc8e15ea73718ed699a94833f977536cf51d687048f3f862f65dcde56f20"
+  }
+}
