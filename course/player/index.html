@@ -142,6 +142,7 @@
     padding-block: 8px calc(8px + env(safe-area-inset-bottom));
     padding-inline: max(12px, env(safe-area-inset-left)) max(12px, env(safe-area-inset-right));
     background: var(--surface); border-top: 1px solid var(--line);
+    position: relative; z-index: 25; /* above NeuroPocket, which follows its slot as the view scrolls */
   }
   .pager[hidden] { display: none; }
   .pg-btn {
@@ -247,6 +248,7 @@
   .np:fullscreen .np-bar { display: none; }
 
   .scrim { display: none; }
+  .steps { display: none; }
 
   /* ---------- Mobile ---------- */
   @media (max-width: 899px) {
@@ -268,10 +270,35 @@
     .item h1 { font-size: 1.25rem; }
     .stage-video { flex: none; }
     .stage-video video { height: auto; max-height: 70vh; }
-    .stage-frame, .stage-app, .stage-card { min-height: 60vh; }
+    /* A set height, since the item grows with its content: the space between the bars, less the title. */
+    .stage-frame, .stage-app, .stage-card {
+      flex: none; height: max(60vh, calc(var(--app-h, 100vh) - var(--header-h) - var(--pager-h) - 120px));
+    }
     .pg-sub, .pg-pos-wide { display: none; }
     .pg-btn { max-width: none; }
     .hero { padding: 22px; }
+    /* The lesson's steps follow the content, so the item grows and the view scrolls. */
+    .item { height: auto; min-height: 100%; }
+    .steps {
+      display: block; flex: none; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 4px 6px 6px;
+    }
+    .steps-head { display: flex; flex-direction: column; padding: 10px 12px 6px; line-height: 1.25; }
+  }
+  @media (max-width: 599px) {
+    .cards { gap: 10px; }
+    .card { min-height: 0; padding: 14px 16px; }
+  }
+  /* A phone held sideways: slimmer bars and a video that fits above the pager with its controls in view. */
+  @media (orientation: landscape) and (max-height: 500px) {
+    :root { --header-h: 48px; --pager-h: 52px; }
+    .pager { padding-block: 4px calc(4px + env(safe-area-inset-bottom)); }
+    .pg-btn { min-height: 40px; }
+    .item { padding-block: 8px; gap: 8px; }
+    .item-head { align-items: center; }
+    .crumb { display: none; }
+    .item h1 { font-size: 1.05rem; }
+    .chip-btn { min-height: 36px; }
+    .stage-video video { max-height: calc(var(--app-h, 100vh) - var(--header-h) - var(--pager-h) - 72px); }
   }
   @media (min-width: 900px) {
     #menuBtn { display: none; }
@@ -450,6 +477,15 @@
     save();
     renderSidebar();
     updateDoneBtn();
+    // Tick the step under the content in place: re-rendering the view would restart a video.
+    var step = view.querySelector('.steps a[href="#/' + id + '"]');
+    if (step) {
+      step.classList.toggle('done', value);
+      var title = step.querySelector('.it-title');
+      var sr = title.querySelector('.sr-only');
+      if (value && !sr) title.insertAdjacentHTML('beforeend', '<span class="sr-only"> ' + esc(t('doneForScreenReaders')) + '</span>');
+      if (!value && sr) sr.remove();
+    }
   }
   function countDone(list) {
     return list.reduce(function (n, it) { return n + (done[it.id] ? 1 : 0); }, 0);
@@ -604,7 +640,24 @@
       '<h1 tabindex="-1">' + esc(item.title) + '</h1></div>' +
       '<div class="head-actions">' + actions +
       '<button class="chip-btn done-btn" id="doneBtn" type="button" aria-pressed="false"></button></div></div>' +
-      stage + extra + '</div>';
+      stage + extra + renderSteps(item) + '</div>';
+  }
+
+  // The steps of the current lesson, under the content. On phones and tablets the sidebar
+  // is behind the menu button, so this keeps the lesson in view; on computers it's hidden.
+  function renderSteps(item) {
+    var section = item.section;
+    var html = '<nav class="steps" aria-label="' + esc(section.title) + '"><div class="steps-head">' +
+      (section.kicker ? '<span class="g-kicker">' + esc(section.kicker) + '</span>' : '') +
+      '<span class="g-title">' + esc(section.title) + '</span></div><ol class="group-items">';
+    section.items.forEach(function (it) {
+      var cls = 'it' + (done[it.id] ? ' done' : '') + (it === item ? ' current' : '');
+      html += '<li><a class="' + cls + '" href="#/' + esc(it.id) + '"' + (it === item ? ' aria-current="step"' : '') + '>' +
+        '<span class="status">' + icon('check') + '</span>' +
+        '<span class="it-title">' + esc(it.title) + (done[it.id] ? '<span class="sr-only"> ' + esc(t('doneForScreenReaders')) + '</span>' : '') + '</span>' +
+        '<span class="it-kind" title="' + esc(kindText(it.kind)) + '">' + icon(it.kind) + '</span></a></li>';
+    });
+    return html + '</ol></nav>';
   }
 
   function renderView() {
