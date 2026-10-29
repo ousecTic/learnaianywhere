@@ -1,5 +1,24 @@
 {
-  "_note": "Course settings for the offline packages. NeuroPocket is pinned by hand: to use a newer release, change version and sha256 (the fingerprint of that release's file). The package build downloads https://github.com/ousecTic/neuropocket/releases/download/v<version>/<file> and stops if the fingerprint doesn't match.",
+  "_note": "Settings for the offline course packages. The package build makes one zip per entry in packages, named <slug>-<package id>-v<course version>.zip. Drive folders are found by the code at the start of their name (\"en — English\" is \"en\"), so the rest of a folder's name can change. Inside each package folder the lessons, Introduction and Resources are found as scripts/check_course.py finds them (numbered lesson folders; Resources is the folder holding the Google Docs and Slides masters); sharedResources means the Resources folder sits next to the package folder and is shared, as for the two Swahili versions. lang picks the app text in course/translations and the language NeuroPocket opens in. NeuroPocket is pinned by hand: to use a newer release, change version and sha256 (the fingerprint of that release's file). The build downloads https://github.com/ousecTic/neuropocket/releases/download/v<version>/<file> and stops if the fingerprint doesn't match.",
+  "course": {
+    "name": "AI Literacy for Everyone",
+    "slug": "ai-literacy-for-everyone",
+    "version": "1.0"
+  },
+  "drive": {
+    "root": "1icEyszg_HXjxPHUZmlp_1_Zb3icZpR1p"
+  },
+  "packages": [
+    { "id": "en", "name": "English", "lang": "en", "folder": ["en"] },
+    { "id": "fr", "name": "French", "lang": "fr", "folder": ["fr"] },
+    { "id": "es", "name": "Spanish", "lang": "es", "folder": ["es"] },
+    { "id": "pt", "name": "Portuguese", "lang": "pt", "folder": ["pt"] },
+    { "id": "ar", "name": "Arabic", "lang": "ar", "folder": ["ar"] },
+    { "id": "hi", "name": "Hindi", "lang": "hi", "folder": ["hi"] },
+    { "id": "ur", "name": "Urdu", "lang": "ur", "folder": ["ur"] },
+    { "id": "sw-KE", "name": "Swahili (Kenya)", "lang": "sw", "folder": ["sw", "sw-KE"], "sharedResources": true },
+    { "id": "sw-TZ", "name": "Swahili (Tanzania)", "lang": "sw", "folder": ["sw", "sw-TZ"], "sharedResources": true }
+  ],
   "neuropocket": {
     "version": "1.8.0",
     "file": "neuropocket-offline.html",
