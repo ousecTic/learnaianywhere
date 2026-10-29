@@ -1,106 +1,106 @@
 {
   "course": "AI Literacy for Everyone",
-  "version": "1.0",
-  "release": "course-v1.0",
+  "version": "1.1",
+  "release": "course-v1.1",
   "packages": [
     {
       "id": "en",
       "name": "English",
       "lang": "en",
-      "file": "ai-literacy-for-everyone-en-v1.0.zip",
+      "file": "ai-literacy-for-everyone-en-v1.1.zip",
       "folder": "AI Literacy for Everyone - English",
-      "bytes": 118839852,
-      "sha256": "3a0b3031a8e98e62bac7e472fe9c7ef245db65dcc56bf23463b89d7cc275c9df",
+      "bytes": 118841232,
+      "sha256": "8893769a40e042f97119a1aa860300c80060f2897311e08e5d80cc467ac145f1",
       "date": "2026-10-29",
-      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.0/ai-literacy-for-everyone-en-v1.0.zip"
+      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.1/ai-literacy-for-everyone-en-v1.1.zip"
     },
     {
       "id": "fr",
       "name": "French",
       "lang": "fr",
-      "file": "ai-literacy-for-everyone-fr-v1.0.zip",
+      "file": "ai-literacy-for-everyone-fr-v1.1.zip",
       "folder": "AI Literacy for Everyone - French",
-      "bytes": 182945068,
-      "sha256": "ff7843e7ef43170bfb7df78b281eaf7ac49fe69000360129368274363a7c5cee",
+      "bytes": 182946437,
+      "sha256": "24c5d833a7452f31217788c4f012bb5bf4bcefe486e9cbd236b2588a066e4af7",
       "date": "2026-10-29",
-      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.0/ai-literacy-for-everyone-fr-v1.0.zip"
+      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.1/ai-literacy-for-everyone-fr-v1.1.zip"
     },
     {
       "id": "es",
       "name": "Spanish",
       "lang": "es",
-      "file": "ai-literacy-for-everyone-es-v1.0.zip",
+      "file": "ai-literacy-for-everyone-es-v1.1.zip",
       "folder": "AI Literacy for Everyone - Spanish",
-      "bytes": 182642208,
-      "sha256": "69e16c85c5c28b9244646fe798fa5b6c15b58a9c906f2c6309a395088fe64843",
+      "bytes": 182643576,
+      "sha256": "fed861f90b74b17126ea0cf3e29d9225ee9c31f2aee6ec2791dd467b51af5284",
       "date": "2026-10-29",
-      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.0/ai-literacy-for-everyone-es-v1.0.zip"
+      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.1/ai-literacy-for-everyone-es-v1.1.zip"
     },
     {
       "id": "pt",
       "name": "Portuguese",
       "lang": "pt",
-      "file": "ai-literacy-for-everyone-pt-v1.0.zip",
+      "file": "ai-literacy-for-everyone-pt-v1.1.zip",
       "folder": "AI Literacy for Everyone - Portuguese",
-      "bytes": 182074024,
-      "sha256": "897b73792a2b128aa126281352b28a5325cd954bd9b4c4271e39a5060fbf8e79",
+      "bytes": 182075406,
+      "sha256": "b83bfafa759d58a3c37cbf3b985725a06de8595c640c80f873c9462d2de968fb",
       "date": "2026-10-29",
-      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.0/ai-literacy-for-everyone-pt-v1.0.zip"
+      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.1/ai-literacy-for-everyone-pt-v1.1.zip"
     },
     {
       "id": "ar",
       "name": "Arabic",
       "lang": "ar",
-      "file": "ai-literacy-for-everyone-ar-v1.0.zip",
+      "file": "ai-literacy-for-everyone-ar-v1.1.zip",
       "folder": "AI Literacy for Everyone - Arabic",
-      "bytes": 183676815,
-      "sha256": "71439c56eeccdee0443011538852452194c2ef74ce1b4ccfa3486cc325b2aa3a",
+      "bytes": 183678217,
+      "sha256": "252c5cbb8e55f020610acc610a65945981680fed8c869120e95da9652ca554e5",
       "date": "2026-10-29",
-      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.0/ai-literacy-for-everyone-ar-v1.0.zip"
+      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.1/ai-literacy-for-everyone-ar-v1.1.zip"
     },
     {
       "id": "hi",
       "name": "Hindi",
       "lang": "hi",
-      "file": "ai-literacy-for-everyone-hi-v1.0.zip",
+      "file": "ai-literacy-for-everyone-hi-v1.1.zip",
       "folder": "AI Literacy for Everyone - Hindi",
-      "bytes": 182576935,
-      "sha256": "6fe4e7f6646f4b0e9e05625b4483f2c21c8abbd1dd462dfd2ab0024066ad350f",
+      "bytes": 182578374,
+      "sha256": "38c1f9eef2199fc0f06769e98b6fb8acbb3f0c493bda443d64a180c9f527c991",
       "date": "2026-10-29",
-      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.0/ai-literacy-for-everyone-hi-v1.0.zip"
+      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.1/ai-literacy-for-everyone-hi-v1.1.zip"
     },
     {
       "id": "ur",
       "name": "Urdu",
       "lang": "ur",
-      "file": "ai-literacy-for-everyone-ur-v1.0.zip",
+      "file": "ai-literacy-for-everyone-ur-v1.1.zip",
       "folder": "AI Literacy for Everyone - Urdu",
-      "bytes": 201085563,
-      "sha256": "ad3ebc17c4b052c63e872d289177e448ce53e61570b2ab6d1a0eede0429ca182",
+      "bytes": 201086962,
+      "sha256": "db43996764238e36fb45b56f25e1865d22f6615a4cb7a89d633a6a6e9f49af5e",
       "date": "2026-10-29",
-      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.0/ai-literacy-for-everyone-ur-v1.0.zip"
+      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.1/ai-literacy-for-everyone-ur-v1.1.zip"
     },
     {
       "id": "sw-KE",
       "name": "Swahili (Kenya)",
       "lang": "sw",
-      "file": "ai-literacy-for-everyone-sw-KE-v1.0.zip",
+      "file": "ai-literacy-for-everyone-sw-KE-v1.1.zip",
       "folder": "AI Literacy for Everyone - Swahili (Kenya)",
-      "bytes": 184257483,
-      "sha256": "ff4cda39932e86681f95d733c22e5644935b9ac78d16f8b06aad1e40ebd487f8",
+      "bytes": 184258843,
+      "sha256": "551b85de9923a5651cbc5ce8528a2149eabae052932ad3e0a623ded33c1c9a18",
       "date": "2026-10-29",
-      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.0/ai-literacy-for-everyone-sw-KE-v1.0.zip"
+      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.1/ai-literacy-for-everyone-sw-KE-v1.1.zip"
     },
     {
       "id": "sw-TZ",
       "name": "Swahili (Tanzania)",
       "lang": "sw",
-      "file": "ai-literacy-for-everyone-sw-TZ-v1.0.zip",
+      "file": "ai-literacy-for-everyone-sw-TZ-v1.1.zip",
       "folder": "AI Literacy for Everyone - Swahili (Tanzania)",
-      "bytes": 181353236,
-      "sha256": "5496de758ebb236f7073657179b5591452cd0fa4aaa1ea7b5068df71827ff5d4",
+      "bytes": 181354612,
+      "sha256": "3395d6da0f2c9c3164eb714f1fee7482edda4f85794b08ddc5ae9ab56806c25e",
       "date": "2026-10-29",
-      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.0/ai-literacy-for-everyone-sw-TZ-v1.0.zip"
+      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.1/ai-literacy-for-everyone-sw-TZ-v1.1.zip"
     }
   ]
 }
