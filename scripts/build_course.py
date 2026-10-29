@@ -8,6 +8,8 @@ stage is its own command, so they can be run and checked one at a time:
     python -I scripts/build_course.py compress [--package ID ...] [--out build/course]
     python -I scripts/build_course.py download [--package ID ...] [--out build/course]
     python -I scripts/build_course.py assemble [--package ID ...] [--out build/course]
+    python -I scripts/build_course.py zip [--package ID ...] [--out build/course]
+    python -I scripts/build_course.py release [--publish] [--out build/course]
 
 export   Exports the 4 Google masters of each package's Resources folder:
          PDF for the offline package; DOCX/PPTX and PDF for the website.
@@ -37,6 +39,15 @@ assemble Puts each package together in build/course/packages/<package id>/<folde
          matching app, recognised by the English activity in the same place, and
          the NeuroPocket step moves after the how-to video. Needs export, compress
          and download first (download for en too, as the reference).
+zip      Zips each assembled package as build/course/zips/<slug>-<id>-v<version>.zip
+         (one top-level folder; videos, PDFs and pictures stored as they are,
+         everything else compressed), checks every zip opens and matches the
+         folder, and writes build/course/zips/downloads.json: file, size, sha256
+         and date for each package, for the release and the website.
+release  Uploads the zips to the GitHub release named in settings (release.repo,
+         tag course-v<version>) with the gh CLI, as a draft unless --publish, and
+         writes course/downloads.json (the zips' download links, sizes, dates and
+         sha256) for the website. The repo must be public for people to download.
 
 Drive is read without credentials, through the link-shared course folder, with
 the helpers in check_course.py. Downloaded files are only checked in memory
@@ -619,9 +630,116 @@ def cmd_assemble(settings, packages, out):
     return 0
 
 
+STORED = (".mp4", ".pdf", ".png", ".jpg", ".jpeg", ".woff2")  # already compressed
+
+
+def zip_name(settings, package):
+    c = settings["course"]
+    return f"{c['slug']}-{package['id']}-v{c['version']}.zip"
+
+
+def cmd_zip(settings, packages, out):
+    import datetime
+    import hashlib
+    import zipfile
+
+    zip_dir = os.path.join(out, "zips")
+    os.makedirs(zip_dir, exist_ok=True)
+    index_path = os.path.join(zip_dir, "downloads.json")
+    index = {"course": settings["course"]["name"], "version": settings["course"]["version"], "packages": []}
+    if os.path.isfile(index_path):
+        index["packages"] = read_json(index_path).get("packages", [])
+    for p in packages:
+        pkg_root = os.path.join(out, "packages", p["id"])
+        folders = os.listdir(pkg_root) if os.path.isdir(pkg_root) else []
+        if len(folders) != 1:
+            raise BuildError(f"{pkg_root}: no assembled package; run the assemble command first")
+        top = folders[0]
+        files = sorted(os.path.relpath(os.path.join(r, f), pkg_root).replace(os.sep, "/")
+                       for r, _d, fs in os.walk(os.path.join(pkg_root, top)) for f in fs)
+        name = zip_name(settings, p)
+        path = os.path.join(zip_dir, name)
+        with zipfile.ZipFile(path + ".part", "w") as z:
+            for rel in files:
+                method = zipfile.ZIP_STORED if rel.lower().endswith(STORED) else zipfile.ZIP_DEFLATED
+                z.write(os.path.join(pkg_root, rel), rel, compress_type=method, compresslevel=9 if method else None)
+        os.replace(path + ".part", path)
+
+        # The zip must open and hold exactly the package's files, intact.
+        with zipfile.ZipFile(path) as z:
+            bad = z.testzip()
+            names = sorted(i.filename for i in z.infolist())
+        if bad or names != files:
+            raise BuildError(f"{name}: zip check failed ({bad or 'file list differs'})")
+        h = hashlib.sha256()
+        with open(path, "rb") as f:
+            for chunk in iter(lambda: f.read(1 << 20), b""):
+                h.update(chunk)
+        record = {"id": p["id"], "name": p["name"], "lang": p["lang"], "file": name, "folder": top,
+                  "bytes": os.path.getsize(path), "sha256": h.hexdigest(),
+                  "date": datetime.date.today().isoformat()}
+        index["packages"] = [r for r in index["packages"] if r["id"] != p["id"]] + [record]
+        print(f"{p['id']:6} {name}  {record['bytes'] / 1e6:.0f} MB, {len(files)} files")
+    order = [p["id"] for p in settings["packages"]]
+    index["packages"].sort(key=lambda r: order.index(r["id"]) if r["id"] in order else len(order))
+    with open(index_path, "w", encoding="utf-8", newline="\n") as f:
+        json.dump(index, f, ensure_ascii=False, indent=2)
+        f.write("\n")
+    return 0
+
+
+RELEASE_URL = "https://github.com/{repo}/releases/download/{tag}/{file}"
+
+
+def cmd_release(settings, publish, out):
+    import subprocess
+    import tempfile
+
+    rel = settings["release"]
+    version = settings["course"]["version"]
+    tag = rel["tag"].format(version=version)
+    index = read_json(out, "zips", "downloads.json")
+    if index["version"] != version:
+        raise BuildError(f"the zips are for version {index['version']}, settings say {version}; run zip again")
+    missing = [p["id"] for p in settings["packages"] if p["id"] not in {r["id"] for r in index["packages"]}]
+    if missing:
+        raise BuildError("no zip yet for: " + ", ".join(missing))
+    files = [os.path.join(out, "zips", r["file"]) for r in index["packages"]]
+
+    def gh(*args, check=True):
+        return subprocess.run(["gh", *args, "--repo", rel["repo"]], check=check, capture_output=True, text=True)
+
+    if gh("release", "view", tag, check=False).returncode != 0:
+        lines = [f"{settings['course']['name']}, version {version}: the offline course packages.", "",
+                 "Unzip a package and open START HERE.html. Everything works without the internet.", ""]
+        lines += [f"- {r['name']}: `{r['file']}` ({r['bytes'] / 1e6:.0f} MB)" for r in index["packages"]]
+        with tempfile.NamedTemporaryFile("w", suffix=".md", delete=False, encoding="utf-8") as f:
+            f.write("\n".join(lines) + "\n")
+        try:
+            gh("release", "create", tag, "--draft", "--target", "master",
+               "--title", f"{settings['course']['name']} {version}", "--notes-file", f.name)
+        finally:
+            os.remove(f.name)
+    for path in files:
+        gh("release", "upload", tag, path, "--clobber")
+        print("uploaded", os.path.basename(path))
+    if publish:
+        gh("release", "edit", tag, "--draft=false")
+
+    downloads = {"course": index["course"], "version": version, "release": tag, "packages": [
+        {**r, "url": RELEASE_URL.format(repo=rel["repo"], tag=tag, file=r["file"])} for r in index["packages"]]}
+    with open(os.path.join(REPO, "course", "downloads.json"), "w", encoding="utf-8", newline="\n") as f:
+        json.dump(downloads, f, ensure_ascii=False, indent=2)
+        f.write("\n")
+    state = "published" if publish else "saved as a draft (publish with --publish)"
+    print(f"release {tag} on {rel['repo']} {state}; wrote course/downloads.json")
+    return 0
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
-    ap.add_argument("command", choices=["export", "compress", "download", "assemble"])
+    ap.add_argument("command", choices=["export", "compress", "download", "assemble", "zip", "release"])
+    ap.add_argument("--publish", action="store_true", help="release: publish instead of leaving a draft")
     ap.add_argument("--package", action="append", help="only this package id (repeatable)")
     ap.add_argument("--out", default=os.path.join(REPO, "build", "course"), help="output folder")
     args = ap.parse_args()
@@ -644,6 +762,10 @@ def main():
             return cmd_download(settings, packages, args.out)
         if args.command == "assemble":
             return cmd_assemble(settings, packages, args.out)
+        if args.command == "zip":
+            return cmd_zip(settings, packages, args.out)
+        if args.command == "release":
+            return cmd_release(settings, args.publish, args.out)
         return cmd_export(settings, packages, args.out)
     except BuildError as e:
         print("ERROR", e)

@@ -8,6 +8,10 @@
   "drive": {
     "root": "1icEyszg_HXjxPHUZmlp_1_Zb3icZpR1p"
   },
+  "release": {
+    "repo": "ousecTic/learnaianywhere",
+    "tag": "course-v{version}"
+  },
   "packages": [
     { "id": "en", "name": "English", "lang": "en", "folder": ["en"] },
     { "id": "fr", "name": "French", "lang": "fr", "folder": ["fr"] },
