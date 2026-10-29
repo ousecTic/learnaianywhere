@@ -399,6 +399,16 @@
         font-size: 1.5rem;
       }
     }
+
+    /* Right-to-left (Arabic, Urdu): mirror the parts placed with "left" above. */
+    html[dir="rtl"] .answer-option {
+      text-align: right;
+    }
+
+    html[dir="rtl"] .correct-answer {
+      border-left: 0;
+      border-right: 3px solid #258EC2;
+    }
   </style>
 </head>
 <body>
@@ -541,6 +551,7 @@
       document.querySelector('#introScreen h1').textContent = t('ui.introTitle');
       document.querySelector('#introScreen .subtitle').textContent = t('ui.introSubtitle');
       document.getElementById('startBtn').textContent = t('ui.startBtn');
+      document.getElementById('nextBtn').textContent = t('ui.nextBtn');
       var introFooterPs = document.querySelectorAll('#introScreen .footer p');
       introFooterPs[0].textContent = t('ui.footerBrand');
       introFooterPs[1].textContent = t('ui.footerTagline');

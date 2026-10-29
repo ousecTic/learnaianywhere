@@ -312,6 +312,14 @@
         margin-top: 1.5rem;
       }
     }
+
+    /* Right-to-left (Arabic, Urdu): mirror the parts placed with "left" above.
+       Arabic and Urdu scripts have no italic, and slanting them makes them hard to read. */
+    html[dir="rtl"] .example {
+      border-left: 0;
+      border-right: 3px solid #258EC2;
+      font-style: normal;
+    }
   </style>
 </head>
 <body>

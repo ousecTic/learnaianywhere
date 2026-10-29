@@ -366,6 +366,25 @@
         font-size: 1.5rem;
       }
     }
+
+    /* Right-to-left (Arabic, Urdu): mirror the parts placed with "left" above. */
+    html[dir="rtl"] .quiz-container .intro-list,
+    html[dir="rtl"] .quiz-container .explanation {
+      border-left: 0;
+      border-right: 3px solid #258EC2;
+    }
+
+    html[dir="rtl"] .quiz-container .intro-list ol {
+      margin-left: 0;
+      margin-right: 1.25rem;
+    }
+
+    html[dir="rtl"] .quiz-container .explanation-item {
+      padding-left: 0;
+      padding-right: 1rem;
+      border-left: 0;
+      border-right: 2px solid #E5E7EB;
+    }
   </style>
 </head>
 <body>
