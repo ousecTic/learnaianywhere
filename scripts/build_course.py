@@ -7,6 +7,7 @@ stage is its own command, so they can be run and checked one at a time:
     python -I scripts/build_course.py export [--package ID ...] [--out build/course]
     python -I scripts/build_course.py compress [--package ID ...] [--out build/course]
     python -I scripts/build_course.py download [--package ID ...] [--out build/course]
+    python -I scripts/build_course.py assemble [--package ID ...] [--out build/course]
 
 export   Exports the 4 Google masters of each package's Resources folder:
          PDF for the offline package; DOCX/PPTX and PDF for the website.
@@ -27,6 +28,15 @@ download Downloads each package's videos and their captions into
          only if it is new or its size in Drive changed. It stops if the folders
          don't have the expected layout, a video has no caption, or a download
          isn't a real MP4/WebVTT file (for example a Google limit page).
+assemble Puts each package together in build/course/packages/<package id>/<folder>/:
+         START HERE.html (course/player with the course data, the captions and the
+         language's text from course/translations/<lang>/player.json built in),
+         neuropocket.html (the pinned release, checked against its fingerprint),
+         content/ with the videos, the shared apps (scripts/build-apps.mjs) and the
+         shrunk PDFs. Lessons keep Drive's numbered order; each activity becomes the
+         matching app, recognised by the English activity in the same place, and
+         the NeuroPocket step moves after the how-to video. Needs export, compress
+         and download first (download for en too, as the reference).
 
 Drive is read without credentials, through the link-shared course folder, with
 the helpers in check_course.py. Downloaded files are only checked in memory
@@ -290,16 +300,22 @@ DOWNLOAD_URL = "https://drive.usercontent.google.com/download?id={id}&export=dow
 
 
 def media_items(settings, package):
-    """[(section, number, video entry, caption entry)] for a package, read from Drive
-    with check_course's lesson scan; raises BuildError on any layout problem."""
+    """(sections, items, activities) for a package, read from Drive with check_course's
+    lesson scan: sections is {section: Drive folder name}, items [(section, number,
+    video entry, caption entry)], activities [(section, number, Drive file name)] for
+    the numbered non-video files (quizzes, worksheets, install steps), whose places
+    in the lesson order the START HERE page keeps. Raises BuildError on any layout problem."""
     _parent, folder = package_folder(settings, package)
     rep = drive.Report()
     lessons, _res = drive.classify_version_folder(
         package["id"], drive.list_folder(folder.id, folder.path), rep, folder.path,
         not package.get("sharedResources"))
-    items = []
+    sections = {section: lesson.name for section, lesson in sorted(lessons.items())}
+    items, activities = [], []
     for section, lesson in sorted(lessons.items()):
         scan = drive.scan_lesson(package["id"], lesson, rep)
+        for num, acts in sorted(scan["acts"].items()):
+            activities.append((section, num, acts[0].name))
         for num, videos in sorted(scan["videos"].items()):
             caps = scan["caps"].get(num)
             if len(videos) > 1:
@@ -311,7 +327,7 @@ def media_items(settings, package):
     errors = [f"{path}: {msg}" for _v, level, path, msg in rep.items if level == "ERROR"]
     if errors:
         raise BuildError("; ".join(errors))
-    return items
+    return sections, items, activities
 
 
 def download_file(entry, dst, signature_ok):
@@ -359,9 +375,14 @@ def cmd_download(settings, packages, out):
             with open(manifest_path, encoding="utf-8") as f:
                 old = {r["id"]: r for item in json.load(f)["items"] for r in (item["video"], item["caption"])}
 
-        items = media_items(settings, p)
+        sections, items, activities = media_items(settings, p)
         jobs = []  # (record, entry, path, check)
-        manifest = {"package": p["id"], "items": []}
+        manifest = {
+            "package": p["id"],
+            "sections": [{"section": s, "name": name} for s, name in sorted(sections.items())],
+            "activities": [{"section": s, "number": n, "name": name} for s, n, name in activities],
+            "items": [],
+        }
         for section, num, video, caption in items:
             item = {"section": section, "number": num, "title": video.name[:-4].strip()}
             for kind, entry, check in (("video", video, is_mp4), ("caption", caption, is_vtt)):
@@ -405,9 +426,202 @@ def cmd_download(settings, packages, out):
     return 0
 
 
+PLAYER = os.path.join(REPO, "course", "player")
+TRANSLATIONS = os.path.join(REPO, "course", "translations")
+NEUROPOCKET_URL = "https://github.com/ousecTic/neuropocket/releases/download/v{version}/{file}"
+PDF_NAMES = {1: "1-teacher-guide.pdf", 2: "2-worksheet.pdf", 3: "3-worksheet-example.pdf", 4: "4-slides.pdf"}
+NUMBER_PREFIX = re.compile(r"^\s*\d+\s*-\s*")
+TRAILING_NOTE = re.compile(r"\s*\([^()]*\)\s*$")
+
+
+def classify_activity(english_name):
+    """What an activity in the English course is, from its Drive name: (kind, app, query)."""
+    if re.search(r"AI or Not", english_name, re.I):
+        return "Quiz", "ai-or-not", {}
+    if re.search(r"Recap Quiz", english_name, re.I):
+        return "Quiz", "recap-quiz", {"quiz": None}
+    if re.search(r"Worksheet", english_name, re.I):
+        return "Worksheet", "worksheet", {"lesson": None}
+    if re.search(r"Install NeuroPocket", english_name, re.I):
+        return "App", "neuropocket", {}
+    raise BuildError(f"don't know which app to use for the English activity {english_name!r}")
+
+
+def neuropocket_file(settings, out):
+    """The pinned NeuroPocket release file, downloaded once and checked against its fingerprint."""
+    import hashlib
+
+    np = settings["neuropocket"]
+    path = os.path.join(out, "neuropocket", np["version"], np["file"])
+    if not os.path.isfile(path):
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        data = drive.fetch(NEUROPOCKET_URL.format(**np))
+        with open(path + ".part", "wb") as f:
+            f.write(data)
+        os.replace(path + ".part", path)
+    with open(path, "rb") as f:
+        digest = hashlib.sha256(f.read()).hexdigest()
+    if digest != np["sha256"]:
+        os.remove(path)
+        raise BuildError(f"NeuroPocket {np['version']} doesn't match the fingerprint in course/settings.json")
+    return path
+
+
+def data_url(path, mime):
+    import base64
+
+    with open(path, "rb") as f:
+        return f"data:{mime};base64," + base64.b64encode(f.read()).decode("ascii")
+
+
+def script_json(value):
+    """JSON safe to put inside a <script> element."""
+    return (json.dumps(value, ensure_ascii=False)
+            .replace("<", "\\u003c").replace("\u2028", "\\u2028").replace("\u2029", "\\u2029"))
+
+
+def read_json(*parts):
+    with open(os.path.join(*parts), encoding="utf-8") as f:
+        return json.load(f)
+
+
+def cmd_assemble(settings, packages, out):
+    import shutil
+    import subprocess
+
+    languages = {l["code"]: l for l in read_json(TRANSLATIONS, "languages.json")}
+    english = read_json(out, "media", "en", "manifest.json")
+    english_acts = {(a["section"], a["number"]): a["name"] for a in english["activities"]}
+    english_videos = {(i["section"], i["number"]): i["title"] for i in english["items"]}
+
+    subprocess.run(["node", os.path.join(REPO, "scripts", "build-apps.mjs"), "--out", out],
+                   check=True, stdout=subprocess.DEVNULL)
+    np_path = neuropocket_file(settings, out)
+    template = open(os.path.join(PLAYER, "index.html"), encoding="utf-8").read()
+    assets = {
+        "__LAIA_LOGO__": data_url(os.path.join(PLAYER, "assets", "learn-ai-anywhere-logo.png"), "image/png"),
+        "__NP_ICON__": data_url(os.path.join(PLAYER, "assets", "neuropocket-icon.png"), "image/png"),
+        "__INTER_FONT__": data_url(os.path.join(PLAYER, "assets", "inter-latin.woff2"), "font/woff2"),
+    }
+    course = settings["course"]
+
+    for p in packages:
+        lang = p["lang"]
+        media_dir = os.path.join(out, "media", p["id"])
+        media = read_json(media_dir, "manifest.json")
+        ui = read_json(TRANSLATIONS, lang, "player.json")["ui"]
+        key = resources_key(p)
+        exports = read_json(out, "exports", key, "manifest.json")
+        folder_name = f"{course['name']} - {p['name']}"
+        pkg_root = os.path.join(out, "packages", p["id"])
+        dest = os.path.join(pkg_root, folder_name)
+        if os.path.isdir(pkg_root):
+            shutil.rmtree(pkg_root)
+        content = os.path.join(dest, "content")
+        os.makedirs(content)
+
+        shutil.copytree(os.path.join(out, "apps"), os.path.join(content, "apps"))
+        shutil.copyfile(np_path, os.path.join(dest, "neuropocket.html"))
+
+        # Lessons: videos and activities in Drive's numbered order.
+        entries = {}
+        for it in media["items"]:
+            entries[(it["section"], it["number"])] = ("video", it)
+        for a in media["activities"]:
+            entries[(a["section"], a["number"])] = ("activity", a)
+        if set(k for k, (kind, _x) in entries.items() if kind == "activity") != set(english_acts):
+            raise BuildError(f"{p['id']}: its activities aren't in the same places as the English course's")
+
+        sections = []
+        for s in media["sections"]:
+            n = s["section"]
+            sid = "intro" if n == 0 else f"lesson-{n}"
+            if n == 0:
+                kicker, title = ui["introKicker"], s["name"]
+            else:
+                head, _sep, rest = s["name"].partition(" - ")
+                kicker, title = head.strip(), rest.strip() or s["name"]
+            sec = {"id": sid, "kicker": kicker, "title": title, "items": []}
+            for (sec_n, num), (kind, x) in sorted(entries.items()):
+                if sec_n != n:
+                    continue
+                item_id = f"{sid}/{num:02d}"
+                if kind == "video":
+                    rel = f"content/{sid}/{num:02d}.mp4"
+                    os.makedirs(os.path.join(content, sid), exist_ok=True)
+                    shutil.copyfile(os.path.join(media_dir, x["video"]["file"]), os.path.join(dest, rel))
+                    with open(os.path.join(media_dir, x["caption"]["file"]), encoding="utf-8-sig") as f:
+                        vtt = f.read()
+                    item = {"id": item_id, "title": NUMBER_PREFIX.sub("", x["title"]), "type": "video",
+                            "kind": "Video", "src": rel, "vtt": vtt}
+                    if re.search(r"Bearly a Dog", english_videos.get((n, num), ""), re.I):
+                        item["action"] = "challenge"
+                else:
+                    akind, app, query = classify_activity(english_acts[(n, num)])
+                    if app == "neuropocket":
+                        item = {"id": item_id, "title": ui["openNeuroPocket"], "type": "app", "kind": "App"}
+                    else:
+                        params = {k: (v if v is not None else n) for k, v in query.items()}
+                        params["lang"] = lang
+                        qs = "&".join(f"{k}={v}" for k, v in params.items())
+                        name = TRAILING_NOTE.sub("", NUMBER_PREFIX.sub("", x["name"].rsplit(".", 1)[0]))
+                        item = {"id": item_id, "title": name.strip(), "type": "html", "kind": akind,
+                                "src": f"content/apps/{app}/index.html?{qs}"}
+                if kind == "video":
+                    item["howTo"] = bool(re.search(r"How to Use NeuroPocket", english_videos.get((n, num), ""), re.I))
+                sec["items"].append(item)
+            # The NeuroPocket step takes the place of "Install NeuroPocket", which comes
+            # before the how-to video; students watch that first, then open the app.
+            apps = [i for i, it in enumerate(sec["items"]) if it["type"] == "app"]
+            how_to = [i for i, it in enumerate(sec["items"]) if it.pop("howTo", False)]
+            if apps and how_to and apps[0] < how_to[0]:
+                sec["items"].insert(how_to[0], sec["items"].pop(apps[0]))
+            sections.append(sec)
+
+        # Resources: the shrunk PDFs.
+        res_dir = os.path.join(content, "resources")
+        os.makedirs(res_dir)
+        res = {"id": "resources", "kicker": ui["resourcesKicker"],
+               "title": exports["folder"].rstrip("/").rsplit("/", 1)[-1], "items": []}
+        for m in exports["masters"]:
+            src = os.path.join(out, "pdfs", key, m["files"]["pdf"]["file"])
+            rel = f"content/resources/{PDF_NAMES[m['number']]}"
+            shutil.copyfile(src, os.path.join(dest, rel))
+            res["items"].append({"id": f"resources/{m['number']}", "title": NUMBER_PREFIX.sub("", m["title"]),
+                                 "type": "pdf", "kind": "PDF", "src": rel, "size": os.path.getsize(src)})
+        sections.append(res)
+
+        data = {
+            "package": p["id"], "lang": lang, "dir": languages[lang]["dir"], "version": course["version"],
+            "courseName": course["name"], "neuropocket": f"neuropocket.html?lang={lang}",
+            "captionLabel": languages[lang]["label"], "ui": ui, "sections": sections,
+        }
+        page = template
+        if "/*COURSE_DATA*/null" not in page:
+            raise BuildError("course/player/index.html has no /*COURSE_DATA*/null marker")
+        page = page.replace("/*COURSE_DATA*/null", script_json(data), 1)
+        for k, v in assets.items():
+            page = page.replace(k, v)
+        leftover = re.search(r"__[A-Z_]+__", page)
+        if leftover:
+            raise BuildError(f"START HERE.html still has {leftover.group(0)}")
+        with open(os.path.join(dest, "START HERE.html"), "w", encoding="utf-8", newline="\n") as f:
+            f.write(page)
+
+        # Every file the page points at must be in the package.
+        for sec in sections:
+            for it in sec["items"]:
+                if "src" in it and not os.path.isfile(os.path.join(dest, it["src"].split("?")[0])):
+                    raise BuildError(f"{p['id']}: {it['src']} is missing")
+        count = sum(len(s["items"]) for s in sections)
+        size = sum(os.path.getsize(os.path.join(r, f)) for r, _d, fs in os.walk(dest) for f in fs)
+        print(f"{p['id']:6} {count} items in {len(sections)} sections, {size / 1e6:.0f} MB -> {dest}")
+    return 0
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
-    ap.add_argument("command", choices=["export", "compress", "download"])
+    ap.add_argument("command", choices=["export", "compress", "download", "assemble"])
     ap.add_argument("--package", action="append", help="only this package id (repeatable)")
     ap.add_argument("--out", default=os.path.join(REPO, "build", "course"), help="output folder")
     args = ap.parse_args()
@@ -428,6 +642,8 @@ def main():
             return cmd_compress(packages, args.out)
         if args.command == "download":
             return cmd_download(settings, packages, args.out)
+        if args.command == "assemble":
+            return cmd_assemble(settings, packages, args.out)
         return cmd_export(settings, packages, args.out)
     except BuildError as e:
         print("ERROR", e)

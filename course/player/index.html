@@ -1,0 +1,805 @@
+<!doctype html>
+<!--
+  AI Literacy for Everyone: the START HERE page of an offline course package.
+  scripts/build_course.py (assemble) fills in the course data, the text for the
+  package's language (course/translations/<lang>/player.json) and the pictures in
+  assets/, and writes it as "START HERE.html" next to neuropocket.html and content/.
+  Students double-click it: everything is relative, offline and dependency-free.
+  Based on the player of the first offline course (learn-ai-anywhere-offline).
+-->
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AI Literacy for Everyone</title>
+<link rel="icon" href="__LAIA_LOGO__">
+<style>
+  /* Inter, embedded so the course matches learnaianywhere.org without the internet.
+     It covers Latin script; Arabic, Urdu and Hindi use the device's own fonts. */
+  @font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400 700;
+    font-display: swap;
+    src: url(__INTER_FONT__) format("woff2");
+  }
+  /* Brand tokens from learnaianywhere.org. Light only, like the site. */
+  :root {
+    --bg: #f9fafb;
+    --surface: #ffffff;
+    --surface-2: #f3f4f6;
+    --text: #000000;
+    --muted: #71717a;
+    --line: #e5e7eb;
+    --brand: #258ec2;
+    --brand-dark: #1c6e99;
+    --brand-ink: #ffffff;
+    --brand-soft: #eff6ff;
+    --done: #10b981;
+    --done-ink: #047857;
+    --done-soft: #ecfdf5;
+    --radius: 6px;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .04), 0 4px 14px rgba(0, 0, 0, .05);
+    --header-h: 60px;
+    --pager-h: 64px;
+    --side-w: 304px;
+    color-scheme: light;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.5 Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Tahoma, "Noto Sans", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+    overflow: hidden;
+  }
+  button { font: inherit; color: inherit; }
+  a { color: inherit; }
+  svg.i { width: 20px; height: 20px; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  :focus-visible { outline: 3px solid var(--brand); outline-offset: 2px; }
+  /* Arrows point the way the page reads. */
+  [dir="rtl"] .flip { transform: scaleX(-1); }
+
+  /* ---------- App shell ---------- */
+  .app { display: flex; flex-direction: column; height: 100vh; height: var(--app-h, 100vh); }
+  .topbar {
+    flex: none; height: var(--header-h); display: flex; align-items: center; gap: 8px;
+    padding-block: 0; padding-inline: max(12px, env(safe-area-inset-left)) max(12px, env(safe-area-inset-right));
+    background: var(--surface); border-bottom: 1px solid var(--line); position: relative; z-index: 30;
+  }
+  .brand { display: flex; align-items: center; text-decoration: none; min-width: 0; height: 100%; }
+  .brand-logo { display: block; height: 30px; width: auto; max-width: 100%; }
+  .spacer { flex: 1; }
+  .icon-btn {
+    width: 44px; height: 44px; border: 0; border-radius: 10px; background: transparent; display: grid; place-items: center; cursor: pointer; flex: none;
+  }
+  .icon-btn:hover { background: var(--surface-2); }
+  .np-btn {
+    display: inline-flex; align-items: center; gap: 8px; height: 40px; padding-block: 0; padding-inline: 8px 14px; border-radius: var(--radius);
+    border: 1px solid var(--line); background: var(--surface); cursor: pointer; font-weight: 500; font-size: 15px; flex: none;
+  }
+  .np-btn:hover { border-color: var(--brand); color: var(--brand); }
+  .np-icon { display: inline-block; flex: none; width: 26px; height: 26px; background: url(__NP_ICON__) center / contain no-repeat; }
+
+  .body { flex: 1; min-height: 0; display: flex; position: relative; }
+  .main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+  .view { flex: 1; min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+
+  /* ---------- Sidebar ---------- */
+  .sidebar {
+    width: var(--side-w); flex: none; overflow-y: auto; background: var(--surface); border-inline-end: 1px solid var(--line);
+    padding: 12px 10px 24px;
+  }
+  .side-head { display: none; }
+  .side-link {
+    display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 10px; text-decoration: none; font-weight: 600; min-height: 44px;
+  }
+  .side-link:hover { background: var(--surface-2); }
+  .side-link.current { background: var(--brand-soft); color: var(--brand); }
+  .side-progress { padding: 8px 12px 14px; font-size: 14px; color: var(--muted); }
+  .side-version { padding: 14px 12px 0; font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); }
+  .bar { display: block; height: 8px; border-radius: 99px; background: var(--surface-2); overflow: hidden; margin-top: 6px; }
+  .bar > span { display: block; height: 100%; border-radius: inherit; background: var(--done); transition: width .3s ease; }
+  .group { border-top: 1px solid var(--line); padding: 6px 0; }
+  .group-head {
+    width: 100%; display: flex; align-items: center; gap: 8px; padding: 8px 12px; min-height: 52px; border: 0; background: transparent;
+    border-radius: 10px; text-align: start; cursor: pointer;
+  }
+  .group-head:hover { background: var(--surface-2); }
+  .group-titles { flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.25; }
+  .g-kicker { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+  .g-title { font-weight: 650; }
+  .g-count { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .g-count.all { color: var(--done-ink); font-weight: 700; }
+  .chev { transition: transform .2s ease; color: var(--muted); }
+  .group-head[aria-expanded="true"] .chev { transform: rotate(90deg); }
+  .group-items { list-style: none; margin: 2px 0 4px; padding: 0; }
+  .group-head[aria-expanded="false"] + .group-items { display: none; }
+  .it {
+    display: flex; align-items: center; gap: 10px; padding-block: 8px; padding-inline: 14px 12px; min-height: 44px; border-radius: 10px;
+    text-decoration: none; font-size: 15px; line-height: 1.3;
+  }
+  .it:hover { background: var(--surface-2); }
+  .it.current { background: var(--brand-soft); color: var(--brand); font-weight: 600; }
+  .status {
+    width: 22px; height: 22px; flex: none; border-radius: 50%; border: 2px solid var(--line); display: grid; place-items: center; color: transparent;
+  }
+  .status svg.i { width: 14px; height: 14px; stroke-width: 3; }
+  .it.current .status { border-color: var(--brand); }
+  .it.done .status { background: var(--done); border-color: var(--done); color: #fff; }
+  .it-title { flex: 1; min-width: 0; }
+  .it-kind { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 4px; flex: none; }
+  .it-kind svg.i { width: 16px; height: 16px; }
+  .it.current .it-kind { color: inherit; }
+
+  /* ---------- Pager ---------- */
+  .pager {
+    flex: none; min-height: var(--pager-h); display: flex; align-items: center; gap: 12px;
+    padding-block: 8px calc(8px + env(safe-area-inset-bottom));
+    padding-inline: max(12px, env(safe-area-inset-left)) max(12px, env(safe-area-inset-right));
+    background: var(--surface); border-top: 1px solid var(--line);
+  }
+  .pager[hidden] { display: none; }
+  .pg-btn {
+    display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 6px 16px; border-radius: var(--radius);
+    border: 1px solid var(--line); background: var(--surface); cursor: pointer; max-width: 42%; text-align: start;
+  }
+  .pg-btn:hover:not(:disabled) { border-color: var(--brand); }
+  .pg-btn:disabled { opacity: .4; cursor: default; }
+  .pg-btn.next { margin-inline-start: auto; background: var(--brand); color: var(--brand-ink); border-color: var(--brand); text-align: end; }
+  .pg-btn.next:hover:not(:disabled) { background: var(--brand-dark); border-color: var(--brand-dark); }
+  .pg-text { display: flex; flex-direction: column; min-width: 0; line-height: 1.2; }
+  .pg-label { font-weight: 600; }
+  .pg-sub { font-size: 13px; opacity: .8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .pg-pos { font-size: 14px; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+  /* ---------- Item view ---------- */
+  .item {
+    display: flex; flex-direction: column; gap: 14px; height: 100%; max-width: 1180px; margin: 0 auto;
+    padding-block: 18px; padding-inline: max(20px, env(safe-area-inset-left)) max(20px, env(safe-area-inset-right));
+  }
+  .item-head { display: flex; align-items: flex-start; gap: 12px; flex-wrap: wrap; flex: none; }
+  .item-titles { flex: 1; min-width: 200px; }
+  .crumb { font-size: 13px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; display: flex; align-items: center; gap: 6px; }
+  .crumb svg.i { width: 16px; height: 16px; }
+  .item h1 { font-size: 1.5rem; font-weight: 700; line-height: 1.25; margin: 2px 0 0; outline: none; }
+  .head-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  .chip-btn {
+    display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 14px; border-radius: var(--radius);
+    border: 1px solid var(--line); background: var(--surface); cursor: pointer; font-size: 14px; font-weight: 600; text-decoration: none; white-space: nowrap;
+  }
+  .chip-btn:hover { border-color: var(--brand); color: var(--brand); }
+  .chip-btn svg.i { width: 16px; height: 16px; }
+  .done-btn[aria-pressed="true"] { background: var(--done-soft); border-color: var(--done); color: var(--done-ink); }
+
+  .stage { flex: 1; min-height: 0; border-radius: 14px; overflow: hidden; position: relative; }
+  .stage-video { background: #000; display: flex; align-items: center; justify-content: center; }
+  .stage-video video { width: 100%; height: 100%; display: block; background: #000; }
+  .stage-frame { background: #fff; border: 1px solid var(--line); }
+  .stage-frame iframe { width: 100%; height: 100%; border: 0; display: block; }
+  .stage-app { background: var(--surface-2); border: 1px solid var(--line); display: grid; place-items: center; color: var(--muted); }
+  .stage-card { background: var(--surface); border: 1px solid var(--line); display: grid; place-items: center; padding: 24px; text-align: center; }
+  .stage-card .big-icon { width: 56px; height: 56px; color: var(--brand); margin: 0 auto 8px; }
+  .stage-card p { color: var(--muted); margin: 4px 0 18px; }
+
+  .callout {
+    flex: none; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; padding: 14px 16px; border-radius: 14px;
+    background: var(--brand-soft); border: 1px solid var(--line);
+  }
+  .callout p { margin: 0; flex: 1; min-width: 200px; font-weight: 600; }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 22px; border-radius: var(--radius);
+    border: 1px solid transparent; background: var(--brand); color: var(--brand-ink); font-weight: 500; cursor: pointer; text-decoration: none;
+  }
+  .btn:hover { background: var(--brand-dark); }
+  .btn.secondary { background: var(--surface); color: var(--text); border-color: var(--line); }
+  .btn.secondary:hover { border-color: var(--brand); color: var(--brand); background: var(--surface); }
+
+  /* ---------- Home ---------- */
+  .home { max-width: 1100px; margin: 0 auto; padding-block: 28px 40px; padding-inline: max(20px, env(safe-area-inset-left)) max(20px, env(safe-area-inset-right)); }
+  .hero {
+    background: linear-gradient(var(--brand-soft), var(--surface)); border: 1px solid var(--line); border-radius: 16px; padding: 32px; box-shadow: var(--shadow);
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .hero .kicker { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; color: var(--brand); }
+  .hero h1 { margin: 0; font-size: clamp(1.9rem, 5vw, 3rem); font-weight: 700; line-height: 1.15; letter-spacing: -.01em; outline: none; }
+  .hero p { margin: 0; color: var(--muted); font-size: 1.125rem; max-width: 60ch; }
+  .hero-progress { max-width: 420px; font-size: 14px; color: var(--muted); }
+  .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+  .hero-actions .btn { max-width: 100%; }
+  .hero-actions .btn span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .section-title { font-size: 1.5rem; font-weight: 600; margin: 32px 4px 14px; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 14px; }
+  .card {
+    display: flex; flex-direction: column; gap: 6px; text-align: start; padding: 18px; border-radius: 16px; border: 1px solid var(--line);
+    background: var(--surface); cursor: pointer; text-decoration: none; box-shadow: var(--shadow); min-height: 150px;
+  }
+  .card:hover { border-color: var(--brand); }
+  .card .g-title { font-size: 1.1rem; }
+  .card-meta { display: block; font-size: 14px; color: var(--muted); margin-top: auto; }
+  .tag { align-self: flex-start; font-size: 12px; font-weight: 700; padding: 2px 10px; border-radius: 99px; background: var(--surface-2); color: var(--muted); }
+  .tag.done { background: var(--done-soft); color: var(--done-ink); }
+  .tag.progress { background: var(--brand-soft); color: var(--brand); }
+  .home-version { margin: 28px 4px 0; font-size: 13px; color: var(--muted); }
+
+  /* Letter spacing and capitals are for Latin script; they break Arabic joining. */
+  :lang(ar) .g-kicker, :lang(ar) .crumb, :lang(ar) .hero .kicker,
+  :lang(ur) .g-kicker, :lang(ur) .crumb, :lang(ur) .hero .kicker,
+  :lang(hi) .g-kicker, :lang(hi) .crumb, :lang(hi) .hero .kicker { letter-spacing: 0; text-transform: none; }
+  :lang(ur) body { line-height: 1.8; }
+
+  /* ---------- NeuroPocket host ---------- */
+  .np { position: fixed; display: none; flex-direction: column; background: var(--surface); z-index: 20; }
+  .np.inline { display: flex; border-radius: 14px; overflow: hidden; }
+  .np.overlay { display: flex; inset: 0; top: 0; left: 0; width: 100% !important; height: 100% !important; z-index: 60; }
+  .np-bar {
+    display: none; flex: none; align-items: center; gap: 8px; height: var(--header-h);
+    padding-block: 0; padding-inline: max(8px, env(safe-area-inset-left)) max(8px, env(safe-area-inset-right));
+    border-bottom: 1px solid var(--line); background: var(--surface);
+  }
+  .np.overlay .np-bar { display: flex; }
+  .np-bar strong { font-weight: 600; flex: 1; display: flex; align-items: center; gap: 8px; justify-content: center; min-width: 0; }
+  .np-frame { flex: 1; min-height: 0; width: 100%; border: 0; display: block; background: #fff; }
+  .np:fullscreen .np-bar { display: none; }
+
+  .scrim { display: none; }
+
+  /* ---------- Mobile ---------- */
+  @media (max-width: 899px) {
+    .sidebar {
+      position: fixed; top: 0; bottom: 0; inset-inline-start: 0; width: min(86vw, 340px); z-index: 50; transform: translateX(-102%);
+      transition: transform .25s ease; box-shadow: var(--shadow); padding-top: 0; padding-inline-start: max(10px, env(safe-area-inset-left));
+    }
+    [dir="rtl"] .sidebar { transform: translateX(102%); }
+    .sidebar.open, [dir="rtl"] .sidebar.open { transform: none; }
+    .side-head {
+      display: flex; align-items: center; gap: 10px; height: var(--header-h); position: sticky; top: 0; background: var(--surface);
+      z-index: 1; margin: 0 -10px 4px; padding-block: 0; padding-inline: 14px 6px; border-bottom: 1px solid var(--line);
+    }
+    .side-head .brand-logo { height: 26px; }
+    .side-head .spacer { flex: 1; }
+    .scrim { position: fixed; inset: 0; background: rgba(0, 0, 0, .45); z-index: 45; }
+    .scrim.open { display: block; }
+    .item { padding-top: 14px; padding-bottom: 14px; gap: 12px; }
+    .item h1 { font-size: 1.25rem; }
+    .stage-video { flex: none; }
+    .stage-video video { height: auto; max-height: 70vh; }
+    .stage-frame, .stage-app, .stage-card { min-height: 60vh; }
+    .pg-sub, .pg-pos-wide { display: none; }
+    .pg-btn { max-width: none; }
+    .hero { padding: 22px; }
+  }
+  @media (min-width: 900px) {
+    #menuBtn { display: none; }
+  }
+  @media (max-width: 420px) {
+    .np-btn .np-label { display: none; }
+    .np-btn { padding: 0 7px; }
+    .topbar .brand-logo { height: 24px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <button class="icon-btn" id="menuBtn" aria-controls="sidebar" aria-expanded="false" data-label="openMenu">
+      <svg class="i" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <a class="brand" href="#/">
+      <img class="brand-logo" src="__LAIA_LOGO__" alt="Learn AI Anywhere">
+    </a>
+    <span class="spacer"></span>
+    <button class="np-btn" id="npBtn" type="button" data-title="neuroPocketButtonTitle">
+      <span class="np-icon" aria-hidden="true"></span><span class="np-label">NeuroPocket</span>
+    </button>
+  </header>
+
+  <div class="body">
+    <nav class="sidebar" id="sidebar" data-label="courseContents">
+      <div class="side-head">
+        <img class="brand-logo" src="__LAIA_LOGO__" alt="Learn AI Anywhere"><span class="spacer"></span>
+        <button class="icon-btn" id="closeMenu" data-label="closeMenu">
+          <svg class="i" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+      <div id="sideContent"></div>
+    </nav>
+    <div class="scrim" id="scrim"></div>
+
+    <main class="main">
+      <div class="view" id="view"></div>
+      <nav class="pager" id="pager">
+        <button class="pg-btn prev" id="prevBtn" type="button">
+          <svg class="i flip" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>
+          <span class="pg-text"><span class="pg-label" data-text="previous"></span><span class="pg-sub" id="prevSub"></span></span>
+        </button>
+        <span class="pg-pos" id="pgPos"></span>
+        <button class="pg-btn next" id="nextBtn" type="button">
+          <span class="pg-text"><span class="pg-label" id="nextLabel"></span><span class="pg-sub" id="nextSub"></span></span>
+          <svg class="i flip" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
+      </nav>
+    </main>
+  </div>
+</div>
+
+<div class="np" id="np" role="dialog" aria-label="NeuroPocket">
+  <div class="np-bar">
+    <button class="chip-btn" id="npClose" type="button">
+      <svg class="i flip" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg><span data-text="backToCourse"></span>
+    </button>
+    <strong><span class="np-icon" aria-hidden="true"></span>NeuroPocket</strong>
+    <button class="chip-btn" id="npFull" type="button">
+      <svg class="i" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><span data-text="fullScreen"></span>
+    </button>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  // Filled in by the build: { package, lang, dir, version, courseName, neuropocket,
+  // ui: {...player.json text...}, captionLabel, sections: [{ id, kicker, title, items }] }.
+  var COURSE = /*COURSE_DATA*/null;
+
+  var view = document.getElementById('view');
+  var sideContent = document.getElementById('sideContent');
+  var sidebar = document.getElementById('sidebar');
+  var scrim = document.getElementById('scrim');
+  var menuBtn = document.getElementById('menuBtn');
+  var pager = document.getElementById('pager');
+  var prevBtn = document.getElementById('prevBtn');
+  var nextBtn = document.getElementById('nextBtn');
+  var np = document.getElementById('np');
+
+  if (!COURSE) {
+    view.innerHTML = '<div class="home"><div class="hero"><h1>Course not built</h1>' +
+      '<p>Run <code>python -I scripts/build_course.py assemble</code> to create START HERE.html.</p></div></div>';
+    pager.hidden = true;
+    return;
+  }
+
+  // ---------- Text and direction ----------
+  var UI = COURSE.ui;
+  var RTL = COURSE.dir === 'rtl';
+  document.documentElement.lang = COURSE.lang;
+  document.documentElement.dir = COURSE.dir;
+
+  // t('position', { n: 2, total: 7 }) -> "2 of 7" in the package's language.
+  function t(key, vars) {
+    var s = UI[key] == null ? key : String(UI[key]);
+    if (vars) {
+      Object.keys(vars).forEach(function (k) { s = s.split('{' + k + '}').join(String(vars[k])); });
+    }
+    return s;
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('[data-text]'), function (el) { el.textContent = t(el.getAttribute('data-text')); });
+  Array.prototype.forEach.call(document.querySelectorAll('[data-label]'), function (el) { el.setAttribute('aria-label', t(el.getAttribute('data-label'))); });
+  Array.prototype.forEach.call(document.querySelectorAll('[data-title]'), function (el) { el.title = t(el.getAttribute('data-title')); });
+
+  // ---------- Data ----------
+  var SECTIONS = COURSE.sections;
+  var items = [];
+  var byId = {};
+  SECTIONS.forEach(function (section) {
+    section.items.forEach(function (item, i) {
+      item.section = section;
+      item.indexInSection = i;
+      item.index = items.length;
+      items.push(item);
+      byId[item.id] = item;
+    });
+  });
+  var KIND_TEXT = { Video: 'kindVideo', Quiz: 'kindQuiz', Worksheet: 'kindWorksheet', PDF: 'kindPdf', App: 'kindApp' };
+  function kindText(kind) { return t(KIND_TEXT[kind] || 'kindApp'); }
+
+  var ICONS = {
+    Video: '<circle cx="12" cy="12" r="9"/><path d="M10 8.5v7l6-3.5z" fill="currentColor" stroke="none"/>',
+    Quiz: '<circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.4 2.4c-.6.3-1 .8-1 1.5v.3"/><path d="M12 16.9v.1"/>',
+    Worksheet: '<path d="M4 20h4L19 9l-4-4L4 16v4z"/><path d="M13.5 6.5l4 4"/>',
+    Activity: '<path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.4 6.7 19.4l1.2-6L3.4 9.3l6-.7z"/>',
+    PDF: '<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/>',
+    App: '<rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9.5 2.5V6M14.5 2.5V6M9.5 18v3.5M14.5 18v3.5M2.5 9.5H6M2.5 14.5H6M18 9.5h3.5M18 14.5h3.5"/>',
+    check: '<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+    chev: '<path d="M9 6l6 6-6 6"/>',
+    home: '<path d="M4 11l8-7 8 7v9a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1z"/>',
+    external: '<path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/>',
+    full: '<path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/>',
+    play: '<path d="M8 5v14l11-7z" fill="currentColor" stroke="none"/>'
+  };
+  function icon(name, cls) {
+    return '<svg class="i' + (cls ? ' ' + cls : '') + '" viewBox="0 0 24 24" aria-hidden="true">' + (ICONS[name] || ICONS.Activity) + '</svg>';
+  }
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function fmtSize(bytes) {
+    if (!bytes) return '';
+    return bytes > 1e6 ? Math.round(bytes / 1e6) + ' MB' : Math.max(1, Math.round(bytes / 1e3)) + ' KB';
+  }
+
+  // ---------- Progress (saved on this device, per package) ----------
+  // Pages opened from disk can share storage, so the key includes the package id
+  // to keep two languages' progress apart.
+  var STORE_KEY = 'aile_course_' + COURSE.package;
+  var state = { completed: [], last: null };
+  try {
+    var saved = JSON.parse(localStorage.getItem(STORE_KEY) || 'null');
+    if (saved && Array.isArray(saved.completed)) state = { completed: saved.completed, last: saved.last || null };
+  } catch (e) { /* storage unavailable: progress lasts for this visit only */ }
+  var done = {};
+  state.completed.forEach(function (id) { if (byId[id]) done[id] = true; });
+
+  function save() {
+    state.completed = Object.keys(done);
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) { /* ignore */ }
+  }
+  function setDone(id, value) {
+    if (!!done[id] === value) return;
+    if (value) done[id] = true; else delete done[id];
+    save();
+    renderSidebar();
+    updateDoneBtn();
+  }
+  function countDone(list) {
+    return list.reduce(function (n, it) { return n + (done[it.id] ? 1 : 0); }, 0);
+  }
+
+  // ---------- Routing ----------
+  var current = null; // current item, or null on the home screen
+  var expanded = {};
+
+  function routeId() {
+    var h = location.hash || '';
+    if (h.charAt(0) === '#') h = h.slice(1);
+    if (h.charAt(0) === '/') h = h.slice(1);
+    return decodeURIComponent(h);
+  }
+  function go(item) {
+    location.hash = item ? '#/' + item.id : '#/';
+  }
+  function onRoute() {
+    var id = routeId();
+    current = byId[id] || null;
+    if (id && !current) { history.replaceState(null, '', '#/'); }
+    if (current) {
+      expanded[current.section.id] = true;
+      state.last = current.id;
+      save();
+    }
+    closeMenu();
+    renderView();
+    renderSidebar();
+    renderPager();
+    scrollCurrentIntoView();
+  }
+
+  // ---------- Sidebar ----------
+  function renderSidebar() {
+    var total = items.length, n = countDone(items);
+    var html = '';
+    html += '<a class="side-link' + (current ? '' : ' current') + '" href="#/">' + icon('home') + esc(t('courseHome')) + '</a>';
+    html += '<div class="side-progress">' + esc(t('yourProgress', { done: n, total: total })) +
+      '<div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="' + total + '" aria-valuenow="' + n + '"><span style="width:' + (100 * n / total) + '%"></span></div></div>';
+    SECTIONS.forEach(function (section) {
+      var sd = countDone(section.items), open = !!expanded[section.id];
+      html += '<div class="group">' +
+        '<button class="group-head" type="button" data-section="' + esc(section.id) + '" aria-expanded="' + open + '">' +
+        '<span class="group-titles"><span class="g-kicker">' + esc(section.kicker) + '</span><span class="g-title">' + esc(section.title) + '</span></span>' +
+        '<span class="g-count' + (sd === section.items.length ? ' all' : '') + '">' + sd + '/' + section.items.length + '</span>' +
+        '<span class="flip">' + icon('chev', 'chev') + '</span></button><ol class="group-items">';
+      section.items.forEach(function (item) {
+        var cls = 'it' + (done[item.id] ? ' done' : '') + (current === item ? ' current' : '');
+        html += '<li><a class="' + cls + '" href="#/' + esc(item.id) + '"' + (current === item ? ' aria-current="page"' : '') + '>' +
+          '<span class="status">' + icon('check') + '</span>' +
+          '<span class="it-title">' + esc(item.title) + (done[item.id] ? '<span class="sr-only"> ' + esc(t('doneForScreenReaders')) + '</span>' : '') + '</span>' +
+          '<span class="it-kind" title="' + esc(kindText(item.kind)) + '">' + icon(item.kind) + '</span></a></li>';
+      });
+      html += '</ol></div>';
+    });
+    html += '<div class="side-version">' + esc(COURSE.courseName) + ' · ' + esc(t('version', { version: COURSE.version })) + '</div>';
+    sideContent.innerHTML = html;
+  }
+  sideContent.addEventListener('click', function (e) {
+    var head = e.target.closest('.group-head');
+    if (!head) return;
+    var id = head.getAttribute('data-section');
+    expanded[id] = !expanded[id];
+    head.setAttribute('aria-expanded', String(expanded[id]));
+  });
+  function scrollCurrentIntoView() {
+    var el = sideContent.querySelector('.it.current');
+    if (el && el.scrollIntoView) el.scrollIntoView({ block: 'nearest' });
+  }
+
+  // ---------- Mobile drawer ----------
+  function openMenu() {
+    sidebar.classList.add('open'); scrim.classList.add('open'); menuBtn.setAttribute('aria-expanded', 'true');
+    scrollCurrentIntoView();
+  }
+  function closeMenu() {
+    sidebar.classList.remove('open'); scrim.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false');
+  }
+  menuBtn.addEventListener('click', openMenu);
+  document.getElementById('closeMenu').addEventListener('click', closeMenu);
+  scrim.addEventListener('click', closeMenu);
+
+  // ---------- Views ----------
+  function firstOpenItem(list) {
+    for (var i = 0; i < list.length; i++) if (!done[list[i].id]) return list[i];
+    return list[0];
+  }
+
+  function renderHome() {
+    var total = items.length, n = countDone(items);
+    var resume = byId[state.last] || null;
+    var primary = n === total ? null : (resume && !done[resume.id] ? resume : firstOpenItem(items));
+    var html = '<div class="home"><section class="hero">' +
+      '<span class="kicker">' + esc(t('brand')) + '</span>' +
+      '<h1 tabindex="-1">' + esc(COURSE.courseName) + '</h1>' +
+      '<p>' + esc(n === total ? t('heroFinished') : t('heroText')) + '</p>' +
+      '<div class="hero-progress">' + esc(t('activitiesDone', { done: n, total: total })) +
+      '<div class="bar"><span style="width:' + (100 * n / total) + '%"></span></div></div>' +
+      '<div class="hero-actions">' +
+      (primary
+        ? '<a class="btn" href="#/' + esc(primary.id) + '">' + icon('play') + '<span>' +
+          esc(n === 0 ? t('startCourse') : t('continue', { title: primary.title })) + '</span></a>'
+        : '') +
+      '<button class="btn secondary" type="button" data-open-np><span class="np-icon" aria-hidden="true"></span>' + esc(t('openNeuroPocket')) + '</button>' +
+      '</div></section>' +
+      '<h2 class="section-title">' + esc(t('lessons')) + '</h2><div class="cards">';
+    SECTIONS.forEach(function (section) {
+      var sd = countDone(section.items), len = section.items.length;
+      var tag = sd === len ? '<span class="tag done">' + esc(t('tagDone')) + '</span>'
+        : sd ? '<span class="tag progress">' + esc(t('tagInProgress')) + '</span>'
+        : '<span class="tag">' + esc(t('activities', { total: len })) + '</span>';
+      html += '<a class="card" href="#/' + esc(firstOpenItem(section.items).id) + '">' + tag +
+        '<span class="g-kicker">' + esc(section.kicker) + '</span><span class="g-title">' + esc(section.title) + '</span>' +
+        '<span class="card-meta">' + esc(t('sectionDone', { done: sd, total: len })) +
+        '<span class="bar"><span style="width:' + (100 * sd / len) + '%"></span></span></span></a>';
+    });
+    html += '</div><p class="home-version">' + esc(COURSE.courseName) + ' · ' + esc(t('version', { version: COURSE.version })) + '</p></div>';
+    return html;
+  }
+
+  var pdfInline = navigator.pdfViewerEnabled === true ||
+    (navigator.pdfViewerEnabled === undefined && !/Android|iPhone|iPad|Mobile/i.test(navigator.userAgent));
+
+  function renderItem(item) {
+    var section = item.section;
+    var actions = '';
+    var stage = '';
+    var extra = '';
+    if (item.type === 'video') {
+      stage = '<div class="stage stage-video"><video id="video" controls playsinline preload="metadata" src="' + esc(item.src) + '"></video></div>';
+    } else if (item.type === 'html') {
+      stage = '<div class="stage stage-frame"><iframe src="' + esc(item.src) + '" title="' + esc(item.title) + '"></iframe></div>';
+    } else if (item.type === 'pdf') {
+      actions += '<a class="chip-btn" href="' + esc(item.src) + '" target="_blank" rel="noopener">' + icon('external') + esc(t('openPdf')) + '</a>';
+      stage = pdfInline
+        ? '<div class="stage stage-frame"><iframe src="' + esc(item.src) + '" title="' + esc(item.title) + '"></iframe></div>'
+        : '<div class="stage stage-card"><div>' + icon('PDF', 'big-icon') + '<h2>' + esc(item.title) + '</h2>' +
+          '<p>' + esc(t('pdfDocument')) + ' · ' + fmtSize(item.size) + '</p>' +
+          '<a class="btn" href="' + esc(item.src) + '" target="_blank" rel="noopener">' + icon('external') + esc(t('openPdf')) + '</a></div></div>';
+    } else if (item.type === 'app') {
+      actions += '<button class="chip-btn" type="button" data-open-np>' + icon('full') + esc(t('fullScreen')) + '</button>';
+      stage = '<div class="stage stage-app" id="npSlot">' + esc(t('loadingNeuroPocket')) + '</div>';
+    }
+    if (item.action === 'challenge') {
+      extra = '<div class="callout"><p>' + esc(t('challengePrompt')) + '</p>' +
+        '<button class="btn" type="button" data-challenge>' + icon('play') + esc(t('tryChallenge')) + '</button></div>';
+    }
+    return '<div class="item"><div class="item-head"><div class="item-titles">' +
+      '<div class="crumb">' + icon(item.kind) + esc(section.kicker || section.title) + ' · ' + esc(kindText(item.kind)) + '</div>' +
+      '<h1 tabindex="-1">' + esc(item.title) + '</h1></div>' +
+      '<div class="head-actions">' + actions +
+      '<button class="chip-btn done-btn" id="doneBtn" type="button" aria-pressed="false"></button></div></div>' +
+      stage + extra + '</div>';
+  }
+
+  function renderView() {
+    view.innerHTML = current ? renderItem(current) : renderHome();
+    view.scrollTop = 0;
+    document.title = current ? current.title + ' · ' + COURSE.courseName : COURSE.courseName;
+    var h1 = view.querySelector('h1');
+    if (h1 && document.activeElement !== document.body) {
+      try { h1.focus({ preventScroll: true }); } catch (e) { h1.focus(); }
+    }
+    updateDoneBtn();
+    wireVideo();
+    syncNp();
+  }
+
+  function updateDoneBtn() {
+    var btn = document.getElementById('doneBtn');
+    if (!btn || !current) return;
+    var d = !!done[current.id];
+    btn.setAttribute('aria-pressed', String(d));
+    btn.innerHTML = icon('check') + esc(d ? t('done') : t('markDone'));
+  }
+
+  // Captions come inside the course data and are served from Blob URLs, since a page
+  // opened from disk can't load a separate .vtt file. They start on; turning them off
+  // in the player is remembered on this device.
+  var CAPTIONS_KEY = 'aile_captions_off';
+  var captionsOff = false;
+  try { captionsOff = localStorage.getItem(CAPTIONS_KEY) === '1'; } catch (e) { /* ignore */ }
+
+  function addCaptions(video, item) {
+    if (!item.vtt) return;
+    if (!item.vttUrl) item.vttUrl = URL.createObjectURL(new Blob([item.vtt], { type: 'text/vtt' }));
+    var track = document.createElement('track');
+    track.kind = 'subtitles';
+    track.srclang = COURSE.lang;
+    track.label = COURSE.captionLabel;
+    track.src = item.vttUrl;
+    if (!captionsOff) track.default = true;
+    video.appendChild(track);
+    video.textTracks.addEventListener('change', function () {
+      var on = Array.prototype.some.call(video.textTracks, function (tr) { return tr.mode === 'showing'; });
+      captionsOff = !on;
+      try { localStorage.setItem(CAPTIONS_KEY, on ? '0' : '1'); } catch (e) { /* ignore */ }
+    });
+  }
+
+  // A video counts as finished once it's (nearly) watched to the end.
+  function wireVideo() {
+    var video = document.getElementById('video');
+    if (!video) return;
+    var item = current;
+    addCaptions(video, item);
+    function check() {
+      if (video.duration && video.currentTime / video.duration >= 0.9) setDone(item.id, true);
+    }
+    video.addEventListener('timeupdate', check);
+    video.addEventListener('ended', function () { setDone(item.id, true); });
+  }
+
+  view.addEventListener('click', function (e) {
+    if (e.target.closest('#doneBtn') && current) setDone(current.id, !done[current.id]);
+    else if (e.target.closest('[data-open-np]')) openNp();
+    else if (e.target.closest('[data-challenge]')) openNp('#/challenge');
+  });
+
+  // ---------- Pager ----------
+  function renderPager() {
+    pager.hidden = !current;
+    if (!current) return;
+    var prev = items[current.index - 1], next = items[current.index + 1];
+    prevBtn.disabled = !prev;
+    document.getElementById('prevSub').textContent = prev ? prev.title : '';
+    document.getElementById('nextLabel').textContent = next ? t('next') : t('finish');
+    document.getElementById('nextSub').textContent = next ? next.title : t('backToHome');
+    document.getElementById('pgPos').innerHTML = '<span class="pg-pos-wide">' + esc(current.section.kicker || current.section.title) + ' · </span>' +
+      esc(t('position', { n: current.indexInSection + 1, total: current.section.items.length }));
+  }
+  function goPrev() {
+    if (current && items[current.index - 1]) go(items[current.index - 1]);
+  }
+  function goNext() {
+    if (!current) { go(firstOpenItem(items)); return; }
+    // Moving on counts as finishing anything that isn't a video.
+    if (current.type !== 'video') setDone(current.id, true);
+    go(items[current.index + 1] || null);
+  }
+  prevBtn.addEventListener('click', goPrev);
+  nextBtn.addEventListener('click', goNext);
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      if (np.classList.contains('overlay')) closeNp(); else closeMenu();
+      return;
+    }
+    if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
+    if (np.classList.contains('overlay')) return;
+    var target = e.target;
+    if (target && (/^(INPUT|TEXTAREA|SELECT|VIDEO|IFRAME)$/.test(target.tagName) || target.isContentEditable)) return;
+    // The arrow pointing the way the page reads goes forward.
+    var forward = RTL ? 'ArrowLeft' : 'ArrowRight';
+    var back = RTL ? 'ArrowRight' : 'ArrowLeft';
+    if (e.key === back) goPrev();
+    else if (e.key === forward && current) goNext();
+  });
+
+  // ---------- NeuroPocket ----------
+  // One iframe for the whole visit: it's created on first use and only ever shown or
+  // hidden (never moved in the DOM, which would reload it), so the app and its AI
+  // model load once and work in progress survives moving around the course.
+  var npFrame = null;
+  var npMode = 'hidden'; // 'hidden' | 'inline' | 'overlay'
+
+  function ensureNp(hash) {
+    var src = COURSE.neuropocket + (hash || '');
+    if (!npFrame) {
+      npFrame = document.createElement('iframe');
+      npFrame.className = 'np-frame';
+      npFrame.title = 'NeuroPocket';
+      npFrame.setAttribute('allow', 'camera *; fullscreen *');
+      npFrame.setAttribute('allowfullscreen', '');
+      npFrame.src = src;
+      np.appendChild(npFrame);
+    } else if (hash) {
+      npFrame.src = src;
+    }
+  }
+  function setNpMode(mode) {
+    npMode = mode;
+    np.classList.toggle('inline', mode === 'inline');
+    np.classList.toggle('overlay', mode === 'overlay');
+    document.getElementById('npBtn').setAttribute('aria-pressed', String(mode === 'overlay'));
+    if (mode !== 'inline') np.style.top = np.style.left = np.style.width = np.style.height = '';
+    placeNp();
+  }
+  function placeNp() {
+    if (npMode !== 'inline') return;
+    var slot = document.getElementById('npSlot');
+    if (!slot) return;
+    var r = slot.getBoundingClientRect();
+    np.style.top = r.top + 'px';
+    np.style.left = r.left + 'px';
+    np.style.width = r.width + 'px';
+    np.style.height = r.height + 'px';
+  }
+  // Inline when the current item is the app step, otherwise hidden (unless the overlay is open).
+  function syncNp() {
+    if (npMode === 'overlay') return;
+    if (current && current.type === 'app') {
+      ensureNp();
+      setNpMode('inline');
+      setTimeout(placeNp, 0);
+    } else {
+      setNpMode('hidden');
+    }
+  }
+  function openNp(hash) {
+    ensureNp(hash);
+    setNpMode('overlay');
+    closeMenu();
+    document.getElementById('npClose').focus();
+  }
+  function closeNp() {
+    if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen();
+    npMode = 'hidden';
+    syncNp();
+    document.getElementById('npBtn').focus();
+  }
+  document.getElementById('npBtn').addEventListener('click', function () {
+    if (npMode === 'overlay') closeNp(); else openNp();
+  });
+  document.getElementById('npClose').addEventListener('click', closeNp);
+  var npFull = document.getElementById('npFull');
+  var canFullscreen = !!(np.requestFullscreen || np.webkitRequestFullscreen) && document.fullscreenEnabled !== false;
+  if (!canFullscreen) npFull.hidden = true;
+  npFull.addEventListener('click', function () {
+    var req = np.requestFullscreen || np.webkitRequestFullscreen;
+    if (req) req.call(np);
+  });
+
+  // ---------- Layout ----------
+  function setAppHeight() {
+    document.documentElement.style.setProperty('--app-h', window.innerHeight + 'px');
+    placeNp();
+  }
+  window.addEventListener('resize', setAppHeight);
+  window.addEventListener('orientationchange', function () { setTimeout(setAppHeight, 200); });
+  view.addEventListener('scroll', placeNp, { passive: true });
+  if (window.ResizeObserver) new ResizeObserver(placeNp).observe(view);
+  setAppHeight();
+
+  // ---------- Start ----------
+  window.addEventListener('hashchange', onRoute);
+  onRoute();
+})();
+</script>
+</body>
+</html>

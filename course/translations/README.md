@@ -7,6 +7,7 @@ The words shown by the course mini-apps, one folder per language and one file pe
 | `ai-or-not.json` | AI or Not quiz (Lesson 1) |
 | `recap-quiz-1.json` … `recap-quiz-4.json` | Recap quiz for Lessons 1–4 |
 | `worksheet-1.json` … `worksheet-4.json` | Design Your Own AI Classifier worksheet, Lessons 1–4 |
+| `player.json` | The START HERE page of the offline packages (`course/player`); lesson, video and document titles come from the names in Google Drive |
 
 Languages: `en`, `fr`, `es`, `pt`, `ar`, `hi`, `sw` (used by both Kenya and Tanzania) and `ur`.
 English is the reference; the others are translations of it.
