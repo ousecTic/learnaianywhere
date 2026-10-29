@@ -10,7 +10,8 @@
   },
   "release": {
     "repo": "ousecTic/learnaianywhere",
-    "tag": "course-v{version}"
+    "tag": "course-v{version}",
+    "latestTag": "course-latest"
   },
   "packages": [
     { "id": "en", "name": "English", "lang": "en", "folder": ["en"] },

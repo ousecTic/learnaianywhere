@@ -14,6 +14,29 @@ its START HERE page. After that it works without internet.
 The course page itself (`../player`) notices when it runs inside the app: it adds an
 "App settings" link (to change language) and opens PDFs in the phone's PDF viewer.
 
+## Updates
+
+There's no app store, so the app updates itself. Each time it opens it checks, in the
+background, the two addresses in `capacitor.config.json`:
+
+- `course-latest/downloads.json`: written by `scripts/build_course.py release --publish`.
+  A newer course version than the installed one is offered on an Updates screen, and
+  downloaded like the first one; the installed version keeps working until it's ready.
+- `app-latest/app.json`: the newest APK (`versionCode`, `versionName`, `url`, `sha256`,
+  `bytes`). A higher `versionCode` than the installed app's is offered too; the app downloads
+  and checks the APK, then Android's installer takes over.
+
+The check waits at most 2.5 seconds before opening the course (offline it fails at once).
+"Not now" hides an update until a newer one appears; App settings has "Check for updates".
+
+## Icon
+
+The icon is made from `resources/` (the LAIA logo; the foreground fits inside a round mask).
+After changing those pictures, regenerate the Android icons with
+`npx capacitor-assets generate --android`.
+
+## Storage
+
 On the phone the course lives in the app's own storage, in `courses/<package>-v<version>/`,
 with an `index.html` copy of START HERE. Only one language is kept at a time; changing
 language downloads the new one first and keeps the old one until it's ready.

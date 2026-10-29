@@ -4,13 +4,16 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
 import android.net.Uri;
 import androidx.core.content.FileProvider;
+import androidx.core.content.pm.PackageInfoCompat;
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.CapacitorPlugin;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -24,6 +27,8 @@ import java.security.MessageDigest;
 import java.util.Enumeration;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -32,6 +37,11 @@ import java.util.zip.ZipFile;
  * checks its fingerprint, unzips it into the app's own storage and serves its START HERE
  * page as the app. The setup screens in www/ call it; the course page calls openShell and
  * openFile when it runs inside the app.
+ *
+ * When the app opens it also checks, in the background, for a newer course version
+ * (downloads.json on the course-latest release) and a newer APK (app.json on app-latest),
+ * at the addresses in capacitor.config.json; getLatest reports what it found, and
+ * installApp downloads a newer APK and hands it to Android's installer.
  *
  * Files: downloads/<package>-v<version>.zip(.part) while downloading, then
  * courses/<package>-v<version>/ with the package's files and an index.html copy of
@@ -46,10 +56,18 @@ public class CoursePackPlugin extends Plugin {
     private static final double SPACE_FACTOR = 2.2;
 
     private final ExecutorService worker = Executors.newSingleThreadExecutor();
+    private final ExecutorService checker = Executors.newSingleThreadExecutor();
     private volatile boolean cancelled = false;
     private volatile boolean busy = false;
     private String pendingScreen = null;
     private long lastEvent = 0;
+    // What the update check found: the newest course list and the newest APK's details.
+    private Future<JSObject> latest;
+
+    @Override
+    public void load() {
+        latest = checker.submit(this::checkLatest);
+    }
 
     private SharedPreferences prefs() {
         return getContext().getSharedPreferences(PREFS, Context.MODE_PRIVATE);
@@ -122,6 +140,77 @@ public class CoursePackPlugin extends Plugin {
         });
     }
 
+    /**
+     * The result of the update check started when the app opened: "course" is the newest
+     * downloads.json and "app" the newest APK's app.json, when they could be read, and
+     * "appVersionCode" this APK's version. Waits for the check up to "waitMs".
+     */
+    @PluginMethod
+    public void getLatest(PluginCall call) {
+        int waitMs = call.getInt("waitMs", 0);
+        new Thread(() -> {
+            JSObject ret = new JSObject();
+            try {
+                ret = latest.get(waitMs, TimeUnit.MILLISECONDS);
+            } catch (Exception e) {
+                // Offline, slow or not published yet: no news is fine.
+            }
+            ret.put("appVersionCode", appVersionCode());
+            call.resolve(ret);
+        }).start();
+    }
+
+    /** Downloads a newer APK, checks it and hands it to Android's installer. */
+    @PluginMethod(returnType = PluginMethod.RETURN_PROMISE)
+    public void installApp(PluginCall call) {
+        String url = call.getString("url");
+        String sha256 = call.getString("sha256");
+        Double bytesD = call.getDouble("bytes");
+        Integer versionCode = call.getInt("versionCode");
+        if (url == null || sha256 == null || bytesD == null || versionCode == null) {
+            call.reject("Missing url, sha256, bytes or versionCode", "badInput");
+            return;
+        }
+        if (busy) {
+            call.reject("A download is already running", "busy");
+            return;
+        }
+        busy = true;
+        cancelled = false;
+        worker.execute(() -> {
+            try {
+                File dir = new File(getContext().getCacheDir(), "apk");
+                dir.mkdirs();
+                File apk = new File(dir, "ai-literacy-" + versionCode + ".apk");
+                File part = new File(dir, apk.getName() + ".part");
+                deleteChildrenExcept(dir, apk.getName(), part.getName());
+                if (!apk.isFile()) {
+                    fetch(url, part, bytesD.longValue());
+                    if (!part.renameTo(apk)) throw new IOException("Could not save the download");
+                }
+                progress("verify", 0, 1);
+                if (!sha256Of(apk).equals(sha256.toLowerCase())) {
+                    apk.delete();
+                    throw new BadFileException("The download was damaged. Please try again.");
+                }
+                Uri uri = FileProvider.getUriForFile(getContext(), getContext().getPackageName() + ".fileprovider", apk);
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setDataAndType(uri, "application/vnd.android.package-archive");
+                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_ACTIVITY_NEW_TASK);
+                getContext().startActivity(intent);
+                call.resolve();
+            } catch (CancelledException e) {
+                call.reject("Cancelled", "cancelled");
+            } catch (BadFileException e) {
+                call.reject(e.getMessage(), "badFile");
+            } catch (Exception e) {
+                call.reject(String.valueOf(e.getMessage()), "network");
+            } finally {
+                busy = false;
+            }
+        });
+    }
+
     /** Stops a running download. The part already downloaded is kept, to continue later. */
     @PluginMethod
     public void cancel(PluginCall call) {
@@ -179,6 +268,48 @@ public class CoursePackPlugin extends Plugin {
     }
 
     // ---------- Work ----------
+
+    /** Reads the newest course list and APK details from the addresses in capacitor.config.json. */
+    private JSObject checkLatest() {
+        JSObject ret = new JSObject();
+        String courseUrl = getConfig().getString("courseLatestUrl", null);
+        String appUrl = getConfig().getString("appLatestUrl", null);
+        try {
+            if (courseUrl != null) ret.put("course", new JSObject(fetchText(courseUrl)));
+        } catch (Exception e) {
+            // Offline or not published: keep the list that came with the app.
+        }
+        try {
+            if (appUrl != null) ret.put("app", new JSObject(fetchText(appUrl)));
+        } catch (Exception e) {
+            // Offline or no app release yet.
+        }
+        return ret;
+    }
+
+    private long appVersionCode() {
+        try {
+            PackageInfo info = getContext().getPackageManager().getPackageInfo(getContext().getPackageName(), 0);
+            return PackageInfoCompat.getLongVersionCode(info);
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
+    private static String fetchText(String url) throws IOException {
+        HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
+        conn.setConnectTimeout(10000);
+        conn.setReadTimeout(10000);
+        try {
+            if (conn.getResponseCode() != 200) throw new IOException("Server answered " + conn.getResponseCode());
+            try (InputStream in = conn.getInputStream(); ByteArrayOutputStream out = new ByteArrayOutputStream()) {
+                pipe(in, out);
+                return out.toString("UTF-8");
+            }
+        } finally {
+            conn.disconnect();
+        }
+    }
 
     private File install(String url, String sha256, String id, String version, String lang, long bytes) throws Exception {
         File root = getContext().getFilesDir();

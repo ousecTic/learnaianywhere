@@ -4,5 +4,11 @@
   "webDir": "www",
   "android": {
     "backgroundColor": "#ffffff"
+  },
+  "plugins": {
+    "CoursePack": {
+      "courseLatestUrl": "https://github.com/ousecTic/learnaianywhere/releases/download/course-latest/downloads.json",
+      "appLatestUrl": "https://github.com/ousecTic/learnaianywhere/releases/download/app-latest/app.json"
+    }
   }
 }

@@ -137,8 +137,21 @@
     </div>
     <div class="bottom">
       <p class="tip" id="stTip"></p>
+      <button class="btn secondary" id="stCheck" type="button"></button>
       <button class="btn secondary" id="stChange" type="button"></button>
       <button class="btn" id="stBack" type="button"></button>
+    </div>
+  </div>
+</section>
+
+<section class="screen pad" id="sUpdate">
+  <div class="stack">
+    <h1 id="upTitle"></h1>
+    <div class="card" id="upApp"><p id="upAppText"></p><button class="btn" id="upGetApp" type="button" style="margin-top: 12px"></button></div>
+    <div class="card" id="upCourse"><p id="upCourseText"></p><button class="btn" id="upGetCourse" type="button" style="margin-top: 12px"></button></div>
+    <p class="tip" id="upNone"></p>
+    <div class="bottom">
+      <button class="btn secondary" id="upLater" type="button"></button>
     </div>
   </div>
 </section>
@@ -198,6 +211,43 @@
       settings: 'Mipangilio ya programu', language: 'Lugha ya kozi', version: 'Toleo {v}', back: 'Rudi kwenye kozi', change: 'Badilisha lugha',
       changeTip: 'Lugha mpya inapakuliwa kwanza. Lugha ya sasa inabaki hadi mpya iwe tayari.' }
   };
+  // The update screen and the app's own download.
+  var UPDATE_TEXT = {
+    en: { updateTitle: 'Updates', courseNew: 'A new version of the course is ready: version {v}.', appNew: 'A new version of the app is ready: version {v}.',
+      getCourse: 'Get the new course version', getApp: 'Get the new app', appDownloading: 'Downloading the new app',
+      installTip: 'Android will ask whether to install it. If it says this isn’t allowed, tap Settings, allow AI Literacy, then go back.',
+      upToDate: 'You have the newest version.', notNow: 'Not now', checkUpdates: 'Check for updates' },
+    fr: { updateTitle: 'Mises à jour', courseNew: 'Une nouvelle version du cours est prête : version {v}.', appNew: 'Une nouvelle version de l’application est prête : version {v}.',
+      getCourse: 'Obtenir la nouvelle version du cours', getApp: 'Obtenir la nouvelle application', appDownloading: 'Téléchargement de la nouvelle application',
+      installTip: 'Android vous demandera s’il faut l’installer. S’il indique que ce n’est pas autorisé, touchez Paramètres, autorisez AI Literacy, puis revenez.',
+      upToDate: 'Vous avez la version la plus récente.', notNow: 'Plus tard', checkUpdates: 'Rechercher des mises à jour' },
+    es: { updateTitle: 'Actualizaciones', courseNew: 'Hay una nueva versión del curso: versión {v}.', appNew: 'Hay una nueva versión de la aplicación: versión {v}.',
+      getCourse: 'Obtener la nueva versión del curso', getApp: 'Obtener la nueva aplicación', appDownloading: 'Descargando la nueva aplicación',
+      installTip: 'Android te preguntará si quieres instalarla. Si dice que no está permitido, toca Ajustes, permite AI Literacy y vuelve.',
+      upToDate: 'Tienes la versión más reciente.', notNow: 'Ahora no', checkUpdates: 'Buscar actualizaciones' },
+    pt: { updateTitle: 'Atualizações', courseNew: 'Uma nova versão do curso está pronta: versão {v}.', appNew: 'Uma nova versão do app está pronta: versão {v}.',
+      getCourse: 'Obter a nova versão do curso', getApp: 'Obter o novo app', appDownloading: 'Baixando o novo app',
+      installTip: 'O Android vai perguntar se você quer instalar. Se disser que não é permitido, toque em Configurações, permita o AI Literacy e volte.',
+      upToDate: 'Você tem a versão mais recente.', notNow: 'Agora não', checkUpdates: 'Procurar atualizações' },
+    ar: { updateTitle: 'التحديثات', courseNew: 'إصدار جديد من الدورة جاهز: الإصدار {v}.', appNew: 'إصدار جديد من التطبيق جاهز: الإصدار {v}.',
+      getCourse: 'احصل على الإصدار الجديد من الدورة', getApp: 'احصل على التطبيق الجديد', appDownloading: 'جارٍ تنزيل التطبيق الجديد',
+      installTip: 'سيسألك Android عما إذا كنت تريد تثبيته. إذا ظهر أن ذلك غير مسموح، فاضغط على الإعدادات واسمح لتطبيق AI Literacy، ثم ارجع.',
+      upToDate: 'لديك أحدث إصدار.', notNow: 'ليس الآن', checkUpdates: 'البحث عن تحديثات' },
+    hi: { updateTitle: 'अपडेट', courseNew: 'कोर्स का नया संस्करण तैयार है: संस्करण {v}।', appNew: 'ऐप का नया संस्करण तैयार है: संस्करण {v}।',
+      getCourse: 'कोर्स का नया संस्करण लें', getApp: 'नया ऐप लें', appDownloading: 'नया ऐप डाउनलोड हो रहा है',
+      installTip: 'Android पूछेगा कि इसे इंस्टॉल करना है या नहीं। अगर लिखा आए कि इसकी अनुमति नहीं है, तो सेटिंग्स पर टैप करें, AI Literacy को अनुमति दें, फिर वापस आएँ।',
+      upToDate: 'आपके पास सबसे नया संस्करण है।', notNow: 'अभी नहीं', checkUpdates: 'अपडेट देखें' },
+    ur: { updateTitle: 'اپ ڈیٹس', courseNew: 'کورس کا نیا ورژن تیار ہے: ورژن {v}۔', appNew: 'ایپ کا نیا ورژن تیار ہے: ورژن {v}۔',
+      getCourse: 'کورس کا نیا ورژن حاصل کریں', getApp: 'نئی ایپ حاصل کریں', appDownloading: 'نئی ایپ ڈاؤن لوڈ ہو رہی ہے',
+      installTip: 'Android پوچھے گا کہ اسے انسٹال کرنا ہے یا نہیں۔ اگر لکھا آئے کہ اس کی اجازت نہیں ہے تو Settings پر ٹیپ کریں، AI Literacy کو اجازت دیں، پھر واپس آئیں۔',
+      upToDate: 'آپ کے پاس سب سے نیا ورژن ہے۔', notNow: 'ابھی نہیں', checkUpdates: 'اپ ڈیٹس دیکھیں' },
+    sw: { updateTitle: 'Masasisho', courseNew: 'Toleo jipya la kozi liko tayari: toleo {v}.', appNew: 'Toleo jipya la programu liko tayari: toleo {v}.',
+      getCourse: 'Pata toleo jipya la kozi', getApp: 'Pata programu mpya', appDownloading: 'Inapakua programu mpya',
+      installTip: 'Android itauliza kama unataka kuisakinisha. Ikisema hairuhusiwi, gusa Mipangilio, ruhusu AI Literacy, kisha urudi.',
+      upToDate: 'Una toleo jipya zaidi.', notNow: 'Si sasa', checkUpdates: 'Angalia masasisho' }
+  };
+  Object.keys(UPDATE_TEXT).forEach(function (code) { Object.assign(TEXT[code], UPDATE_TEXT[code]); });
+
   // Each package's name in its own language; the English name is shown under it.
   var NATIVE = { en: 'English', fr: 'Français', es: 'Español', pt: 'Português', ar: 'العربية', hi: 'हिन्दी', ur: 'اردو',
     'sw-KE': 'Kiswahili (Kenya)', 'sw-TZ': 'Kiswahili (Tanzania)' };
@@ -213,17 +263,22 @@
     function call(method, options) { return cap.nativePromise('CoursePack', method, options || {}); }
     return {
       getState: function () { return call('getState'); },
+      getLatest: function (o) { return call('getLatest', o); },
       download: function (o) { return call('download', o); },
+      installApp: function (o) { return call('installApp', o); },
       cancel: function () { return call('cancel'); },
       openCourse: function () { return call('openCourse'); },
       addListener: function (name, fn) { return cap.addListener('CoursePack', name, fn); }
     };
   }
 
-  var release = null;  // downloads.json
+  var release = null;  // downloads.json: the copy in the app, or the newest one once known
   var installed = null;
-  var chosen = null;   // the package being downloaded
+  var latest = null;   // what the app's update check found (CoursePackPlugin.getLatest)
+  var chosen = null;   // the package (or new app) being downloaded
+  var dlKind = 'course';
   var lang = 'en';
+  var DISMISSED_KEY = 'aile_update_dismissed';
 
   function $(id) { return document.getElementById(id); }
   function t(key, vars) {
@@ -280,17 +335,20 @@
   }
   function dlState(state, detail) {
     var busy = state === 'busy', done = state === 'done', failed = state === 'failed';
-    $('dlTitle').textContent = done ? t('ready') : failed ? t('stopped') : t('getting');
+    var app = dlKind === 'app';
+    $('dlTitle').textContent = failed ? t('stopped') : app ? t('appDownloading') : done ? t('ready') : t('getting');
+    $('dlStart').textContent = app ? t('back') : t('start');
     $('dlStart').hidden = !done;
     $('dlRetry').hidden = !failed;
     $('dlCancel').hidden = done;
     $('dlBack').hidden = busy || done;
     var tip = $('dlTip');
     tip.classList.toggle('warn', failed);
-    tip.textContent = done ? t('readyTip') : failed ? detail : t('wifi');
+    tip.textContent = failed ? detail : done ? (app ? t('installTip') : t('readyTip')) : t('wifi');
   }
   function startDownload(p) {
     chosen = p;
+    dlKind = 'course';
     setLang(p.lang);
     $('dlLang').textContent = NATIVE[p.id] || p.name;
     $('dlStart').textContent = t('start');
@@ -325,8 +383,27 @@
       $('dlStep').textContent = t('unpacking');
     }
   });
+  // A new APK: downloaded and checked here, then Android's installer takes over.
+  function startAppUpdate(app) {
+    chosen = app;
+    dlKind = 'app';
+    $('dlLang').textContent = 'AI Literacy ' + app.versionName;
+    $('dlRetry').textContent = t('retry');
+    $('dlCancel').textContent = t('cancel');
+    $('dlStep').textContent = t('mb', { done: 0, total: mb(app.bytes) });
+    setBar(0);
+    dlState('busy');
+    show('sDownload');
+    CP.installApp({ url: app.url, sha256: app.sha256, bytes: app.bytes, versionCode: app.versionCode })
+      .then(function () { setBar(1); dlState('done'); })
+      .catch(function (e) {
+        var code = e && e.code;
+        if (code === 'cancelled') { showUpdate(); return; }
+        dlState('failed', code === 'badFile' ? t('damaged') : t('stoppedTip'));
+      });
+  }
   $('dlStart').addEventListener('click', function () { CP.openCourse(); });
-  $('dlRetry').addEventListener('click', function () { startDownload(chosen); });
+  $('dlRetry').addEventListener('click', function () { if (dlKind === 'app') startAppUpdate(chosen); else startDownload(chosen); });
   $('dlCancel').addEventListener('click', function () { CP.cancel(); });
   $('dlBack').addEventListener('click', function () { installed ? showSettings() : showLangs(); });
 
@@ -339,21 +416,96 @@
     $('stLang').textContent = NATIVE[installed.id] || (p && p.name) || installed.id;
     $('stVersion').textContent = t('version', { v: installed.version });
     $('stTip').textContent = t('changeTip');
+    $('stCheck').textContent = t('checkUpdates');
     $('stChange').textContent = t('change');
     $('stBack').textContent = t('back');
     show('sSettings');
   }
   $('stChange').addEventListener('click', showLangs);
   $('stBack').addEventListener('click', function () { CP.openCourse(); });
+  $('stCheck').addEventListener('click', function () {
+    show('sLoading');
+    checkLatest(15000).then(function () { showUpdate(); });
+  });
+
+  // ---------- Updates ----------
+  // True when version a (like "1.1") is newer than b.
+  function newer(a, b) {
+    var x = String(a).split('.'), y = String(b).split('.');
+    for (var i = 0; i < Math.max(x.length, y.length); i++) {
+      var d = (parseInt(x[i], 10) || 0) - (parseInt(y[i], 10) || 0);
+      if (d) return d > 0;
+    }
+    return false;
+  }
+  function checkLatest(waitMs) {
+    return CP.getLatest({ waitMs: waitMs }).then(function (l) {
+      latest = l || {};
+      // Downloads always come from the newest list the app has seen.
+      if (latest.course && latest.course.packages && newer(latest.course.version, release.version)) release = latest.course;
+    }, function () { latest = {}; });
+  }
+  function updates() {
+    var u = {};
+    if (installed && latest && latest.course && newer(latest.course.version, installed.version)) {
+      var p = (latest.course.packages || []).filter(function (x) { return x.id === installed.id; })[0];
+      if (p) u.course = { pkg: p, version: latest.course.version };
+    }
+    if (latest && latest.app && latest.app.versionCode > latest.appVersionCode) u.app = latest.app;
+    return u;
+  }
+  function updateKey(u) { return (u.course ? u.course.version : '') + '|' + (u.app ? u.app.versionCode : ''); }
+  function dismissed(u) {
+    try { return localStorage.getItem(DISMISSED_KEY) === updateKey(u); } catch (e) { return false; }
+  }
+  function showUpdate() {
+    var u = updates();
+    var any = !!(u.course || u.app);
+    setLang(installed.lang);
+    $('upTitle').textContent = t('updateTitle');
+    $('upApp').hidden = !u.app;
+    $('upCourse').hidden = !u.course;
+    $('upNone').hidden = any;
+    if (u.app) {
+      $('upAppText').textContent = t('appNew', { v: u.app.versionName });
+      $('upGetApp').textContent = t('getApp');
+      $('upGetApp').onclick = function () { startAppUpdate(u.app); };
+    }
+    if (u.course) {
+      $('upCourseText').textContent = t('courseNew', { v: u.course.version });
+      $('upGetCourse').textContent = t('getCourse');
+      $('upGetCourse').onclick = function () { startDownload(u.course.pkg); };
+    }
+    $('upNone').textContent = t('upToDate');
+    $('upLater').textContent = any ? t('notNow') : t('back');
+    $('upLater').onclick = function () {
+      if (any) { try { localStorage.setItem(DISMISSED_KEY, updateKey(u)); } catch (e) { /* ignore */ } }
+      CP.openCourse();
+    };
+    show('sUpdate');
+  }
 
   // ---------- Start ----------
   Promise.all([fetch('downloads.json').then(function (r) { return r.json(); }), CP.getState()])
     .then(function (res) {
       release = res[0];
       installed = res[1].installed || null;
-      if (installed && res[1].screen === 'settings') showSettings();
-      else if (installed) CP.openCourse();
-      else showLangs();
+      var screen = res[1].screen;
+      if (!installed) {
+        showLangs();
+        // A newer course version than the one this APK knows about: offer that instead.
+        checkLatest(15000).then(function () { if ($('sLangs').classList.contains('on')) showLangs(); });
+      } else if (screen === 'settings') {
+        showSettings();
+        checkLatest(15000);
+      } else {
+        // Opening the app: a short look for updates (offline it fails at once), then the course.
+        checkLatest(2500).then(function () {
+          var u = updates();
+          if ((u.course || u.app) && !dismissed(u)) showUpdate();
+          else CP.openCourse();
+        });
+      }
     });
 
   // A stand-in for the app's plugin when this page is opened in a browser: it pretends to
@@ -366,6 +518,26 @@
     function emit(e) { listeners.forEach(function (fn) { fn(e); }); }
     return {
       getState: function () { return Promise.resolve({ installed: state.installed, screen: screen }); },
+      // ?latest=1.1 pretends a newer course version exists, ?app=2 a newer APK.
+      getLatest: function () {
+        var q = new URLSearchParams(location.search), l = { appVersionCode: 1 };
+        return fetch('downloads.json').then(function (r) { return r.json(); }).then(function (d) {
+          if (q.get('latest')) { d.version = q.get('latest'); l.course = d; }
+          if (q.get('app')) l.app = { versionCode: +q.get('app'), versionName: '1.' + q.get('app'), url: '', sha256: '', bytes: 4e6 };
+          return l;
+        });
+      },
+      installApp: function (o) {
+        return new Promise(function (resolve, rej) {
+          var done = 0;
+          reject = rej;
+          timer = setInterval(function () {
+            done = Math.min(o.bytes, done + o.bytes / 20);
+            emit({ phase: 'download', done: done, total: o.bytes });
+            if (done >= o.bytes) { clearInterval(timer); resolve(); }
+          }, 100);
+        });
+      },
       addListener: function (name, fn) { listeners.push(fn); },
       download: function (o) {
         return new Promise(function (resolve, rej) {

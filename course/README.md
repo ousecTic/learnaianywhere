@@ -51,7 +51,9 @@ folder, and want people to get it.
    python -I scripts/build_course.py release --publish
    ```
 
-   Anyone can now download the zips. This also updates `downloads.json` with the new links.
+   Anyone can now download the zips. This also updates `downloads.json` with the new links,
+   and puts it on the `course-latest` release, where installed copies of the Android app
+   (`app/`) look for new course versions.
 
 6. **Commit** `settings.json` and `downloads.json`, so the website points at the new version.
 

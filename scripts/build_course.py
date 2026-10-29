@@ -735,12 +735,28 @@ def cmd_release(settings, publish, out):
 
     downloads = {"course": index["course"], "version": version, "release": tag, "packages": [
         {**r, "url": RELEASE_URL.format(repo=rel["repo"], tag=tag, file=r["file"])} for r in index["packages"]]}
-    with open(os.path.join(REPO, "course", "downloads.json"), "w", encoding="utf-8", newline="\n") as f:
+    downloads_path = os.path.join(REPO, "course", "downloads.json")
+    with open(downloads_path, "w", encoding="utf-8", newline="\n") as f:
         json.dump(downloads, f, ensure_ascii=False, indent=2)
         f.write("\n")
+    if publish:
+        publish_latest(gh, rel, settings, downloads_path)
     state = "published" if publish else "saved as a draft (publish with --publish)"
     print(f"release {tag} on {rel['repo']} {state}; wrote course/downloads.json")
     return 0
+
+
+def publish_latest(gh, rel, settings, downloads_path):
+    """Puts downloads.json on the release that never changes address (release.latestTag), so
+    installed copies of the app can find the newest course version."""
+    latest = rel["latestTag"]
+    if gh("release", "view", latest, check=False).returncode != 0:
+        notes = ("The list of the newest course packages, for the AI Literacy app. "
+                 "Every published course version replaces downloads.json here.")
+        gh("release", "create", latest, "--target", "master", "--latest=false",
+           "--title", f"{settings['course']['name']}: newest version", "--notes", notes)
+    gh("release", "upload", latest, downloads_path, "--clobber")
+    print(f"updated downloads.json on {latest}: " + RELEASE_URL.format(repo=rel["repo"], tag=latest, file="downloads.json"))
 
 
 def main():
