@@ -6,6 +6,7 @@ stage is its own command, so they can be run and checked one at a time:
 
     python -I scripts/build_course.py export [--package ID ...] [--out build/course]
     python -I scripts/build_course.py compress [--package ID ...] [--out build/course]
+    python -I scripts/build_course.py download [--package ID ...] [--out build/course]
 
 export   Exports the 4 Google masters of each package's Resources folder:
          PDF for the offline package; DOCX/PPTX and PDF for the website.
@@ -19,6 +20,13 @@ compress Shrinks the pictures in the exported PDFs for the package and writes
          rewrite_images breaks the pattern-filled pictures in Google's slide
          exports.) It stops if a page count changes, MuPDF reports a problem
          drawing the new file, or any page looks noticeably different.
+download Downloads each package's videos and their captions into
+         build/course/media/<package id>/<section>/ (section 0 is the
+         Introduction, 1-4 the lessons), keeping Drive's "N - Title" names, with a
+         manifest.json. Copies are kept between runs: a file is downloaded again
+         only if it is new or its size in Drive changed. It stops if the folders
+         don't have the expected layout, a video has no caption, or a download
+         isn't a real MP4/WebVTT file (for example a Google limit page).
 
 Drive is read without credentials, through the link-shared course folder, with
 the helpers in check_course.py. Downloaded files are only checked in memory
@@ -34,6 +42,8 @@ import math
 import os
 import re
 import sys
+import time
+import urllib.request
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import check_course as drive  # noqa: E402
@@ -91,12 +101,18 @@ def resources_key(package):
     return "/".join(package["folder"][:-1]) if package.get("sharedResources") else package["id"]
 
 
-def resources_folder(settings, package):
-    """(key, folder) of a package's Resources: the folder in it (or next to it, if
-    sharedResources) that holds the Google Docs and Slides masters."""
+def package_folder(settings, package):
+    """(parent, folder) of a package's Drive folder, found by the codes in its settings."""
     node = parent = drive.Entry(settings["drive"]["root"], "course folder", drive.FOLDER, "")
     for code in package["folder"]:
         parent, node = node, by_code(node, code)
+    return parent, node
+
+
+def resources_folder(settings, package):
+    """(key, folder) of a package's Resources: the folder in it (or next to it, if
+    sharedResources) that holds the Google Docs and Slides masters."""
+    parent, node = package_folder(settings, package)
     home = parent if package.get("sharedResources") else node
     candidates = [e for e in drive.list_folder(home.id, home.path) if e.is_folder and any(
         k.mime in (drive.DOC, drive.SLIDES) for k in drive.list_folder(e.id, e.path))]
@@ -270,9 +286,128 @@ def cmd_compress(packages, out):
     return 1 if problems else 0
 
 
+DOWNLOAD_URL = "https://drive.usercontent.google.com/download?id={id}&export=download&confirm=t"
+
+
+def media_items(settings, package):
+    """[(section, number, video entry, caption entry)] for a package, read from Drive
+    with check_course's lesson scan; raises BuildError on any layout problem."""
+    _parent, folder = package_folder(settings, package)
+    rep = drive.Report()
+    lessons, _res = drive.classify_version_folder(
+        package["id"], drive.list_folder(folder.id, folder.path), rep, folder.path,
+        not package.get("sharedResources"))
+    items = []
+    for section, lesson in sorted(lessons.items()):
+        scan = drive.scan_lesson(package["id"], lesson, rep)
+        for num, videos in sorted(scan["videos"].items()):
+            caps = scan["caps"].get(num)
+            if len(videos) > 1:
+                rep.error(package["id"], lesson.path, f"two videos numbered {num}")
+            if not caps:
+                rep.error(package["id"], lesson.path, f"no caption for {videos[0].name!r}")
+                continue
+            items.append((section, num, videos[0], caps[0]))
+    errors = [f"{path}: {msg}" for _v, level, path, msg in rep.items if level == "ERROR"]
+    if errors:
+        raise BuildError("; ".join(errors))
+    return items
+
+
+def download_file(entry, dst, signature_ok):
+    """Stream a Drive file to dst (through dst.part), checking its first bytes."""
+    tmp = dst + ".part"
+    for attempt in range(4):
+        try:
+            req = urllib.request.Request(DOWNLOAD_URL.format(id=entry.id), headers=drive.UA)
+            with urllib.request.urlopen(req, timeout=300) as r, open(tmp, "wb") as f:
+                head = r.read(64)
+                if not signature_ok(head):
+                    raise BuildError(f"{entry.path}: download is not the expected file (starts {head[:40]!r});"
+                                     " Google may be limiting anonymous downloads (see plan step 5.2)")
+                f.write(head)
+                while True:
+                    chunk = r.read(1 << 20)
+                    if not chunk:
+                        break
+                    f.write(chunk)
+            os.replace(tmp, dst)
+            return os.path.getsize(dst)
+        except BuildError:
+            raise
+        except Exception:  # noqa: BLE001 - network trouble: retry, then give up
+            if attempt == 3:
+                raise
+            time.sleep(5 * (attempt + 1))
+
+
+def is_mp4(head):
+    return head[4:8] == b"ftyp"
+
+
+def is_vtt(head):
+    return head.lstrip(b"\xef\xbb\xbf").startswith(b"WEBVTT")
+
+
+def cmd_download(settings, packages, out):
+    for p in packages:
+        pkg_dir = os.path.join(out, "media", p["id"])
+        os.makedirs(pkg_dir, exist_ok=True)
+        manifest_path = os.path.join(pkg_dir, "manifest.json")
+        old = {}
+        if os.path.isfile(manifest_path):
+            with open(manifest_path, encoding="utf-8") as f:
+                old = {r["id"]: r for item in json.load(f)["items"] for r in (item["video"], item["caption"])}
+
+        items = media_items(settings, p)
+        jobs = []  # (record, entry, path, check)
+        manifest = {"package": p["id"], "items": []}
+        for section, num, video, caption in items:
+            item = {"section": section, "number": num, "title": video.name[:-4].strip()}
+            for kind, entry, check in (("video", video, is_mp4), ("caption", caption, is_vtt)):
+                rel = f"{section}/{UNSAFE.sub('_', entry.name).strip()}"
+                item[kind] = {"id": entry.id, "file": rel}
+                jobs.append((item[kind], entry, os.path.join(pkg_dir, rel), check))
+            manifest["items"].append(item)
+
+        def run(job):
+            record, entry, path, check = job
+            os.makedirs(os.path.dirname(path), exist_ok=True)
+            _head, size = drive.probe_head(entry.id, 8)
+            prev = old.get(entry.id)
+            if prev and prev.get("bytes") == size and prev["file"] == record["file"] and os.path.isfile(path) \
+                    and os.path.getsize(path) == size:
+                record["bytes"] = size
+                return False
+            record["bytes"] = download_file(entry, path, check)
+            if size is not None and record["bytes"] != size:
+                raise BuildError(f"{entry.path}: got {record['bytes']} bytes, Drive says {size}")
+            return True
+
+        start = time.time()
+        with cf.ThreadPoolExecutor(3) as ex:
+            fetched = sum(ex.map(run, jobs))
+
+        # Drop files left from earlier runs that are no longer in Drive (renamed or removed).
+        keep = {os.path.normpath(os.path.join(pkg_dir, j[0]["file"])) for j in jobs} | {os.path.normpath(manifest_path)}
+        for root, _dirs, files in os.walk(pkg_dir):
+            for name in files:
+                path = os.path.normpath(os.path.join(root, name))
+                if path not in keep:
+                    os.remove(path)
+
+        with open(manifest_path, "w", encoding="utf-8", newline="\n") as f:
+            json.dump(manifest, f, ensure_ascii=False, indent=2)
+            f.write("\n")
+        total = sum(it[k]["bytes"] for it in manifest["items"] for k in ("video", "caption"))
+        print(f"{p['id']:6} {len(items)} videos + captions, {total / 1e6:.0f} MB; "
+              f"downloaded {fetched}, kept {len(jobs) - fetched} ({time.time() - start:.0f} s)")
+    return 0
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
-    ap.add_argument("command", choices=["export", "compress"])
+    ap.add_argument("command", choices=["export", "compress", "download"])
     ap.add_argument("--package", action="append", help="only this package id (repeatable)")
     ap.add_argument("--out", default=os.path.join(REPO, "build", "course"), help="output folder")
     args = ap.parse_args()
@@ -291,6 +426,8 @@ def main():
     try:
         if args.command == "compress":
             return cmd_compress(packages, args.out)
+        if args.command == "download":
+            return cmd_download(settings, packages, args.out)
         return cmd_export(settings, packages, args.out)
     except BuildError as e:
         print("ERROR", e)
