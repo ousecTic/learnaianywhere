@@ -210,3 +210,24 @@
   .alfe-lang select { flex: 1 1 auto; min-width: 0; }
   .alfe-btn-big, .alfe-start { align-self: stretch; }
 }
+
+/* Android install steps page */
+.alfe-install h1 { margin: 0 0 12px; font-size: 40px; font-weight: 800; line-height: 1.15; letter-spacing: -0.01em; }
+.alfe-back { margin: 0 0 20px; font-size: 15px; font-weight: 600; }
+.alfe-install .alfe-section-lead { margin: 0 0 24px; }
+.alfe-install-steps { list-style: none; margin: 8px 0 32px; padding: 0; display: flex; flex-direction: column; gap: 20px; }
+.alfe-install-steps li {
+  display: flex; gap: 28px; align-items: center; background: #ffffff;
+  border: 1px solid var(--alfe-grey-line); border-radius: 8px; padding: 20px;
+}
+.alfe-install-steps img {
+  flex: 0 0 auto; width: 200px; height: auto; border-radius: 8px; border: 1px solid var(--alfe-grey-line);
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.1);
+}
+.alfe-install-steps h2 { margin: 0 0 8px; font-size: 22px; display: flex; align-items: center; gap: 12px; }
+.alfe-install-steps p { margin: 0; font-size: 16px; color: var(--alfe-text); max-width: 520px; }
+@media (max-width: 640px) {
+  .alfe-install h1 { font-size: 30px; }
+  .alfe-install-steps li { flex-direction: column; align-items: flex-start; gap: 16px; padding: 16px; }
+  .alfe-install-steps img { width: 100%; max-width: 280px; align-self: center; }
+}

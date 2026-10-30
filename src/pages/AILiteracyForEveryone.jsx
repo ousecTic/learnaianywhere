@@ -18,10 +18,10 @@ import biasChallengeImg from '../assets/images/ai-literacy/lesson-4-bias-challen
 
 const APP_URL = 'https://github.com/ousecTic/learnaianywhere/releases/download/app-latest/ai-literacy.apk';
 const APP_MB = 3;
-// The online kit (plan step 7.6) and the Android install steps with pictures (7.5)
-// aren't built yet. Until they are, everything that points to them stays hidden.
+// The online kit (plan step 7.6) isn't built yet. Until it is, everything that
+// points to it stays hidden.
 const ONLINE_URL = null; // e.g. (lang) => `/courses/ai-literacy-for-everyone/online/${lang}/`
-const INSTALL_STEPS_URL = null;
+const INSTALL_STEPS_URL = '/courses/ai-literacy-for-everyone/install-android';
 const TRAILER_EMBED = 'https://drive.google.com/file/d/1vitkG1eQ_6ks_EDyIg_ko6OfzTPrfg2i/preview';
 const YOUTUBE_URL = 'https://www.youtube.com/watch?v=tchN4xa4pfg';
 const KOLIBRI_URL = 'https://docs.google.com/document/d/10xXu_L2pvKAAREcTpuIpC9y6eGcPKi1L_rVNcicWPOg/edit?usp=sharing';
@@ -277,7 +277,7 @@ const AILiteracyForEveryone = () => {
                 <h4>Then install it</h4>
                 <ol>
                   <li>Open the downloaded file. If the phone asks, allow installing apps from this source.</li>
-                  <li>Tap <strong>Install</strong>. If Play Protect warns you, tap <strong>Install anyway</strong>: the app is safe, it just isn’t from the Play Store.</li>
+                  <li>Tap <strong>Install</strong>. If Play Protect warns you, tap <strong>More details</strong>, then <strong>Install anyway</strong>: the app is safe, it just isn’t from the Play Store.</li>
                   <li>Open the app and choose <strong>{pkg.name}</strong>. It downloads the kit once, so do this while you still have internet. After that, it works without internet.</li>
                 </ol>
                 {INSTALL_STEPS_URL && <a href={INSTALL_STEPS_URL}>See the steps with pictures</a>}

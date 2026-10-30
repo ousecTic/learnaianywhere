@@ -7,6 +7,7 @@ import AnnouncementBanner from './components/AnnouncementBanner';
 import Home from './pages/Home';
 import IntroToGenerativeAI from './pages/IntroToGenerativeAI';
 import AILiteracyForEveryone from './pages/AILiteracyForEveryone';
+import AndroidInstallSteps from './pages/AndroidInstallSteps';
 import GetInvolved from './pages/GetInvolved';
 import AboutUs from './pages/AboutUs';
 import Contact from './pages/Contact';
@@ -29,6 +30,7 @@ function App() {
             <Route path="/curriculum/intro-to-ai" element={<Navigate to="/courses/ai-literacy-for-everyone" replace />} />
             <Route path="/curriculum/intro-to-generative-ai" element={<IntroToGenerativeAI />} />
             <Route path="/courses/ai-literacy-for-everyone" element={<AILiteracyForEveryone />} />
+            <Route path="/courses/ai-literacy-for-everyone/install-android" element={<AndroidInstallSteps />} />
             <Route path="/courses/ai-literacy-for-everyone/ai-or-not" element={<CourseApp app="ai-or-not" title="AI or Not quiz" />} />
             {[1, 2, 3, 4].map((n) => (
               <Route
