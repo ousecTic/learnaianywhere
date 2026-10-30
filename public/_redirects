@@ -1,17 +1,11 @@
 # Redirects for Learn AI Anywhere website
 # Netlify applies the first matching rule, so the SPA catch-all must stay last.
+# Netlify matches a path with or without its trailing slash, so a rule like
+# "/about/ /about" sends the page to itself in a loop: don't add those.
 
 # Introduction to AI became AI Literacy for Everyone
 /curriculum /courses/ai-literacy-for-everyone 301
 /curriculum/intro-to-ai /courses/ai-literacy-for-everyone 301
-/curriculum/intro-to-ai/ /courses/ai-literacy-for-everyone 301
-
-# Redirect trailing slashes
-/about/ /about 301
-/contact/ /contact 301
-/get-involved/ /get-involved 301
-/curriculum/intro-to-generative-ai/ /curriculum/intro-to-generative-ai 301
-/courses/ai-literacy-for-everyone/ /courses/ai-literacy-for-everyone 301
 
 # Handle SPA routing - serve index.html for all paths
 /* /index.html 200
