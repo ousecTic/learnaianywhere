@@ -11,6 +11,7 @@ and open with **START HERE.html**, with no internet needed.
 | The quizzes and the worksheet app | `apps/` |
 | The words on the page and in the apps, per language | `translations/` |
 | Links to the published zips and the single files in Drive, for the website | `downloads.json` (written by the release step) |
+| The online kit, the same START HERE page with its videos streamed | `online/` (written by the online step) |
 
 The build script is `scripts/build_course.py`. It writes into `build/course/`, which isn't saved in git.
 
@@ -55,7 +56,18 @@ folder, and want people to get it.
    and puts it on the `course-latest` release, where installed copies of the Android app
    (`app/`) look for new course versions.
 
-6. **Commit** `settings.json` and `downloads.json`, so the website points at the new version.
+6. **Update the online kit:**
+
+   ```
+   python -I scripts/build_course.py videos
+   python -I scripts/build_course.py online
+   ```
+
+   The first uploads each video on its own to the release in `settings.json` (`online.videoRelease`,
+   for example `course-videos-v1.1`), where the online kit streams them from; it skips any already
+   there. The second writes the online pages, `online/<language>/index.html`.
+
+7. **Commit** `settings.json`, `downloads.json` and `online/`, so the website points at the new version.
 
 ## Other changes
 

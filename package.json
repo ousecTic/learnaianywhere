@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "build:apps": "node scripts/build-apps.mjs --out public/course",
+    "build:apps": "node scripts/build-apps.mjs --out public/course && node scripts/build-online.mjs --out public/course",
     "predev": "npm run build:apps",
     "dev": "vite",
     "build": "npm run build:apps && vite build",

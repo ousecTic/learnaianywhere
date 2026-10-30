@@ -18,9 +18,9 @@ import biasChallengeImg from '../assets/images/ai-literacy/lesson-4-bias-challen
 
 const APP_URL = 'https://github.com/ousecTic/learnaianywhere/releases/download/app-latest/ai-literacy.apk';
 const APP_MB = 3;
-// The online kit (plan step 7.6) isn't built yet. Until it is, everything that
-// points to it stays hidden.
-const ONLINE_URL = null; // e.g. (lang) => `/courses/ai-literacy-for-everyone/online/${lang}/`
+// The online kit: course/online/<package>/index.html, put into the site by
+// scripts/build-online.mjs. Set this to null to hide everything that points to it.
+const ONLINE_URL = (packageId) => `/course/online/${packageId}/`;
 const INSTALL_STEPS_URL = '/courses/ai-literacy-for-everyone/install-android';
 const TRAILER_EMBED = 'https://drive.google.com/file/d/1vitkG1eQ_6ks_EDyIg_ko6OfzTPrfg2i/preview';
 const YOUTUBE_URL = 'https://www.youtube.com/watch?v=tchN4xa4pfg';

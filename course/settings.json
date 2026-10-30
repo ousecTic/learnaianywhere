@@ -13,6 +13,11 @@
     "tag": "course-v{version}",
     "latestTag": "course-latest"
   },
+  "online": {
+    "_note": "The online kit's videos (build_course.py online and videos). videoRelease is the GitHub release the videos command uploads them to; videoUrl is where the online pages load each one from ({version}, {file}). To host the videos somewhere else, upload them there with the same file names and change videoUrl.",
+    "videoRelease": "course-videos-v{version}",
+    "videoUrl": "https://github.com/ousecTic/learnaianywhere/releases/download/course-videos-v{version}/{file}"
+  },
   "packages": [
     { "id": "en", "name": "English", "lang": "en", "folder": ["en"] },
     { "id": "fr", "name": "French", "lang": "fr", "folder": ["fr"] },

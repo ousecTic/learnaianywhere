@@ -14,6 +14,8 @@ release stays a separate step). See course/README.md for releasing a version.
     python -I scripts/build_course.py zip [--package ID ...] [--out build/course]
     python -I scripts/build_course.py release [--publish] [--out build/course]
     python -I scripts/build_course.py links [--out build/course]
+    python -I scripts/build_course.py online [--package ID ...] [--out build/course]
+    python -I scripts/build_course.py videos [--package ID ...] [--out build/course]
 
 export   Exports the 4 Google masters of each package's Resources folder:
          PDF for the offline package; DOCX/PPTX and PDF for the website.
@@ -57,6 +59,15 @@ links    Adds each package's single files to course/downloads.json without a new
          Word) and slides (PDF, PowerPoint), with the sizes from the export
          manifest, and the package's Drive folder for the videos. release does
          this too. Needs export first.
+online   Writes the online kit, course/online/<package id>/index.html: the
+         package's START HERE page with its videos streamed from online.videoUrl
+         in the settings, its PDFs as Google previews of the masters, its apps from the
+         website's /course/apps/ and NeuroPocket from /course/online/ (put there
+         by scripts/build-online.mjs). Needs assemble and export first.
+videos   Uploads each package's videos as <package id>-<section>-<NN>.mp4 to the
+         release named by online.videoRelease in the settings (created the first
+         time, public, never marked Latest), for the online kit; ones already
+         there with the same size are skipped.
 
 Drive is read without credentials, through the link-shared course folder, with
 the helpers in check_course.py. Downloaded files are only checked in memory
@@ -735,6 +746,110 @@ def write_downloads(settings, downloads, out):
     return path
 
 
+ONLINE_DIR = os.path.join(REPO, "course", "online")
+PREVIEW_URL = {drive.DOC: "https://docs.google.com/document/d/{id}/preview",
+               drive.SLIDES: "https://docs.google.com/presentation/d/{id}/preview"}
+
+
+def video_asset(package, src):
+    """The release file name of one of a package's videos: "en-lesson-1-02.mp4" for
+    content/lesson-1/02.mp4. Every version's release holds all of them."""
+    return f"{package['id']}-" + src.removeprefix("content/").replace("/", "-")
+
+
+def read_course_data(page):
+    """The course data built into a START HERE page, and where it sits in the page."""
+    start = page.index("var COURSE = ") + len("var COURSE = ")
+    data, end = json.JSONDecoder().raw_decode(page, start)
+    return data, start, end
+
+
+def cmd_online(settings, packages, out):
+    """Writes the online kit: course/online/<id>/index.html, each package's START HERE
+    page with its files pointed elsewhere, since the website can't hold the videos.
+    Videos stream from online.videoUrl in the settings (see the videos command), PDFs are Google's
+    preview of the masters, the apps are the website's own copies (/course/apps/), and
+    NeuroPocket is one shared copy (scripts/build-online.mjs puts it at /course/online/)."""
+    version = settings["course"]["version"]
+    for p in packages:
+        pkg_root = os.path.join(out, "packages", p["id"])
+        folders = os.listdir(pkg_root) if os.path.isdir(pkg_root) else []
+        if len(folders) != 1:
+            raise BuildError(f"{pkg_root}: no assembled package; run the assemble command first")
+        with open(os.path.join(pkg_root, folders[0], "START HERE.html"), encoding="utf-8") as f:
+            page = f.read()
+        data, start, end = read_course_data(page)
+        masters = {m["number"]: m for m in read_json(out, "exports", resources_key(p), "manifest.json")["masters"]}
+        for sec in data["sections"]:
+            for it in sec["items"]:
+                src = it.get("src", "")
+                if it["type"] == "video":
+                    it["src"] = settings["online"]["videoUrl"].format(version=version, file=video_asset(p, src))
+                elif src.startswith("content/apps/"):
+                    it["src"] = "/course/apps/" + src.removeprefix("content/apps/")
+                elif it["type"] == "pdf":
+                    n = int(it["id"].split("/")[1])
+                    it["src"] = PREVIEW_URL[drive.RESOURCES[n][1]].format(id=masters[n]["id"])
+                elif src:
+                    raise BuildError(f"{p['id']}: don't know where {src} lives online")
+        data["neuropocket"] = "/course/online/" + data["neuropocket"]
+        # The intro's second sentence says everything works without the internet, which
+        # isn't true online; keep only the first (".", Hindi "।", Urdu "۔").
+        first = re.match(r"^(.*?[.।۔])\s", data["ui"]["heroText"])
+        if not first:
+            raise BuildError(f"{p['id']}: can't find the first sentence of the player's heroText")
+        data["ui"]["heroText"] = first.group(1)
+        dest = os.path.join(ONLINE_DIR, p["id"])
+        os.makedirs(dest, exist_ok=True)
+        with open(os.path.join(dest, "index.html"), "w", encoding="utf-8", newline="\n") as f:
+            f.write(page[:start] + script_json(data) + page[end:])
+        print(f"{p['id']:6} course/online/{p['id']}/index.html")
+    return 0
+
+
+def cmd_videos(settings, packages, out):
+    """Uploads each package's videos under their video_asset names to the release named
+    by online.videoRelease, for the online kit, creating it (public, never marked Latest)
+    the first time. Files already there with the same size are skipped."""
+    import shutil
+    import subprocess
+    import tempfile
+
+    rel = settings["release"]
+    version = settings["course"]["version"]
+    tag = settings["online"]["videoRelease"].format(version=version)
+
+    def gh(*args, check=True):
+        return subprocess.run(["gh", *args, "--repo", rel["repo"]], check=check, capture_output=True, text=True)
+
+    if gh("release", "view", tag, check=False).returncode != 0:
+        notes = (f"The videos of {settings['course']['name']} {version}, one file per video, for the online "
+                 f"kit on the website. To use the course offline, download a zip from {rel['tag'].format(version=version)}.")
+        gh("release", "create", tag, "--target", "master", "--latest=false",
+           "--title", f"{settings['course']['name']} {version}: videos for the online kit", "--notes", notes)
+    have = {a["name"]: a["size"] for a in json.loads(gh("release", "view", tag, "--json", "assets").stdout)["assets"]}
+    for p in packages:
+        pkg_root = os.path.join(out, "packages", p["id"])
+        top = os.path.join(pkg_root, os.listdir(pkg_root)[0])
+        with open(os.path.join(top, "START HERE.html"), encoding="utf-8") as f:
+            data = read_course_data(f.read())[0]
+        videos = [it["src"] for sec in data["sections"] for it in sec["items"] if it["type"] == "video"]
+        todo = [s for s in videos if have.get(video_asset(p, s)) != os.path.getsize(os.path.join(top, s))]
+        with tempfile.TemporaryDirectory() as tmp:
+            paths = []
+            for s in todo:
+                path = os.path.join(tmp, video_asset(p, s))
+                try:
+                    os.link(os.path.join(top, s), path)  # same disk: no copy needed
+                except OSError:
+                    shutil.copyfile(os.path.join(top, s), path)
+                paths.append(path)
+            for i in range(0, len(paths), 10):
+                gh("release", "upload", tag, *paths[i:i + 10], "--clobber")
+        print(f"{p['id']:6} {len(videos)} videos, {len(todo)} uploaded")
+    return 0
+
+
 def cmd_links(settings, out):
     """Adds the single-file links to the published course/downloads.json, without a release."""
     downloads = read_json(REPO, "course", "downloads.json")
@@ -808,7 +923,8 @@ def publish_latest(gh, rel, settings, downloads_path):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
-    ap.add_argument("command", choices=["all", "export", "compress", "download", "assemble", "zip", "release", "links"])
+    ap.add_argument("command", choices=["all", "export", "compress", "download", "assemble", "zip", "release", "links",
+                                        "online", "videos"])
     ap.add_argument("--publish", action="store_true", help="release: publish instead of leaving a draft")
     ap.add_argument("--package", action="append", help="only this package id (repeatable)")
     ap.add_argument("--out", default=os.path.join(REPO, "build", "course"), help="output folder")
@@ -856,6 +972,10 @@ def main():
             return cmd_release(settings, args.publish, args.out)
         if args.command == "links":
             return cmd_links(settings, args.out)
+        if args.command == "online":
+            return cmd_online(settings, packages, args.out)
+        if args.command == "videos":
+            return cmd_videos(settings, packages, args.out)
         return cmd_export(settings, packages, args.out)
     except BuildError as e:
         print("ERROR", e)
