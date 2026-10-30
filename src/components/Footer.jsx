@@ -25,7 +25,7 @@ const Footer = () => {
           <div className="footer-section">
             <h3>AI Lessons</h3>
             <ul>
-              <li><Link to="/curriculum/intro-to-ai">Introduction to AI</Link></li>
+              <li><Link to="/courses/ai-literacy-for-everyone">AI Literacy for Everyone</Link></li>
               <li><Link to="/curriculum/intro-to-generative-ai">Introduction to Generative AI</Link></li>
             </ul>
           </div>

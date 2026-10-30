@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './AnnouncementBanner.css';
+
+// A new key each time the announcement changes, so people who closed the last one see it.
+const DISMISSED_KEY = 'aiLiteracyKitAnnouncementDismissed';
 
 const AnnouncementBanner = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const navigate = useNavigate();
 
   useEffect(() => {
     // Check if banner was previously dismissed
-    const isDismissed = localStorage.getItem('videoCourseAnnouncementDismissed');
+    const isDismissed = localStorage.getItem(DISMISSED_KEY);
     if (!isDismissed) {
       setIsVisible(true);
     }
@@ -16,22 +18,18 @@ const AnnouncementBanner = () => {
 
   const handleDismiss = () => {
     setIsVisible(false);
-    localStorage.setItem('videoCourseAnnouncementDismissed', 'true');
-  };
-
-  const handleClick = () => {
-    navigate('/courses/ai-literacy-for-everyone');
+    localStorage.setItem(DISMISSED_KEY, 'true');
   };
 
   if (!isVisible) return null;
 
   return (
     <div className="announcement-banner">
-      <div className="announcement-content" onClick={handleClick}>
+      <Link to="/courses/ai-literacy-for-everyone#download" className="announcement-content">
         <span className="announcement-text">
-          AI Literacy for Everyone - Now available online, offline, and as a download
+          New: AI Literacy for Everyone, a free teaching kit in 8 languages. Download it once and teach without internet.
         </span>
-      </div>
+      </Link>
       <button 
         className="announcement-close" 
         onClick={handleDismiss}

@@ -25,6 +25,8 @@
   outline: 3px solid var(--alfe-blue);
   outline-offset: 2px;
 }
+/* Sections linked with # land below the site's sticky menu bar. */
+.alfe [id] { scroll-margin-top: 96px; }
 .alfe-wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 .alfe-narrow { max-width: 1000px; }
 .alfe-muted { color: var(--alfe-muted); }
