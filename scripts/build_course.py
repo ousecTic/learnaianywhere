@@ -13,6 +13,7 @@ release stays a separate step). See course/README.md for releasing a version.
     python -I scripts/build_course.py assemble [--package ID ...] [--out build/course]
     python -I scripts/build_course.py zip [--package ID ...] [--out build/course]
     python -I scripts/build_course.py release [--publish] [--out build/course]
+    python -I scripts/build_course.py links [--out build/course]
 
 export   Exports the 4 Google masters of each package's Resources folder:
          PDF for the offline package; DOCX/PPTX and PDF for the website.
@@ -51,6 +52,11 @@ release  Uploads the zips to the GitHub release named in settings (release.repo,
          tag course-v<version>) with the gh CLI, as a draft unless --publish, and
          writes course/downloads.json (the zips' download links, sizes, dates and
          sha256) for the website. The repo must be public for people to download.
+links    Adds each package's single files to course/downloads.json without a new
+         release: Google export links for the guide, worksheet and example (PDF,
+         Word) and slides (PDF, PowerPoint), with the sizes from the export
+         manifest, and the package's Drive folder for the videos. release does
+         this too. Needs export first.
 
 Drive is read without credentials, through the link-shared course folder, with
 the helpers in check_course.py. Downloaded files are only checked in memory
@@ -693,6 +699,50 @@ def cmd_zip(settings, packages, out):
 
 RELEASE_URL = "https://github.com/{repo}/releases/download/{tag}/{file}"
 
+# The website's single-file buttons: master number -> (key, export formats). The
+# links export straight from the link-shared Google masters, so they always give
+# the current version with no sign-in.
+LINKS = {1: ("guide", ("pdf", "docx")), 2: ("worksheet", ("pdf", "docx")),
+         3: ("example", ("pdf", "docx")), 4: ("slides", ("pdf", "pptx"))}
+DRIVE_FOLDER_URL = "https://drive.google.com/drive/folders/{id}"
+
+
+def resource_links(settings, package, out):
+    """A package's single files for the website: export links for the masters (from the
+    export manifest, with each file's size) and its Drive folder, which holds the videos."""
+    manifest = read_json(out, "exports", resources_key(package), "manifest.json")
+    links = {}
+    for m in manifest["masters"]:
+        key, formats = LINKS[m["number"]]
+        mime = drive.RESOURCES[m["number"]][1]
+        suffixes = {f: s for f, s, _sig in EXPORTS[mime]}
+        for fmt in formats:
+            links[key + fmt.capitalize()] = {"url": EXPORT_BASE[mime].format(id=m["id"]) + suffixes[fmt],
+                                             "bytes": m["files"][fmt]["bytes"]}
+    links["videosFolder"] = {"url": DRIVE_FOLDER_URL.format(id=package_folder(settings, package)[1].id)}
+    return links
+
+
+def write_downloads(settings, downloads, out):
+    """Writes course/downloads.json, with each package's single-file links added."""
+    by_id = {p["id"]: p for p in settings["packages"]}
+    for r in downloads["packages"]:
+        r["resources"] = resource_links(settings, by_id[r["id"]], out)
+    path = os.path.join(REPO, "course", "downloads.json")
+    with open(path, "w", encoding="utf-8", newline="\n") as f:
+        json.dump(downloads, f, ensure_ascii=False, indent=2)
+        f.write("\n")
+    return path
+
+
+def cmd_links(settings, out):
+    """Adds the single-file links to the published course/downloads.json, without a release."""
+    downloads = read_json(REPO, "course", "downloads.json")
+    write_downloads(settings, downloads, out)
+    for r in downloads["packages"]:
+        print(f"{r['id']:6} {len(r['resources'])} links")
+    return 0
+
 
 def cmd_release(settings, publish, out):
     import subprocess
@@ -735,10 +785,7 @@ def cmd_release(settings, publish, out):
 
     downloads = {"course": index["course"], "version": version, "release": tag, "packages": [
         {**r, "url": RELEASE_URL.format(repo=rel["repo"], tag=tag, file=r["file"])} for r in index["packages"]]}
-    downloads_path = os.path.join(REPO, "course", "downloads.json")
-    with open(downloads_path, "w", encoding="utf-8", newline="\n") as f:
-        json.dump(downloads, f, ensure_ascii=False, indent=2)
-        f.write("\n")
+    downloads_path = write_downloads(settings, downloads, out)
     if publish:
         publish_latest(gh, rel, settings, downloads_path)
     state = "published" if publish else "saved as a draft (publish with --publish)"
@@ -761,7 +808,7 @@ def publish_latest(gh, rel, settings, downloads_path):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
-    ap.add_argument("command", choices=["all", "export", "compress", "download", "assemble", "zip", "release"])
+    ap.add_argument("command", choices=["all", "export", "compress", "download", "assemble", "zip", "release", "links"])
     ap.add_argument("--publish", action="store_true", help="release: publish instead of leaving a draft")
     ap.add_argument("--package", action="append", help="only this package id (repeatable)")
     ap.add_argument("--out", default=os.path.join(REPO, "build", "course"), help="output folder")
@@ -807,6 +854,8 @@ def main():
             return cmd_zip(settings, packages, args.out)
         if args.command == "release":
             return cmd_release(settings, args.publish, args.out)
+        if args.command == "links":
+            return cmd_links(settings, args.out)
         return cmd_export(settings, packages, args.out)
     except BuildError as e:
         print("ERROR", e)

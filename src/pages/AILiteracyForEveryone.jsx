@@ -91,25 +91,31 @@ const megabytes = (bytes) => `${Math.round(bytes / 1e6)} MB`;
 
 const formatDate = (iso) => new Date(`${iso}T12:00:00`).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
-// The single files for one package, in the order of the kit. A button whose link
-// isn't known yet shows but can't be pressed.
+// A Google export link (a file download), labelled with its size when it's big
+// enough to matter on a slow connection. A link the build hasn't added yet gives
+// a button that shows but can't be pressed.
+const file = (label, link) => [link && link.bytes > 5e6 ? `${label} · ${megabytes(link.bytes)}` : label, link && link.url];
+
+// The single files for one package, in the order of the kit.
 const resourceRows = (pkg) => {
   const r = pkg.resources || {};
   const english = pkg.lang === 'en';
   return [
-    { name: 'Teacher guide', buttons: [['PDF', r.guidePdf], ['Word', r.guideDocx]] },
-    { name: 'Slides', what: 'Includes the recap quiz for each lesson.', buttons: [['PDF', r.slidesPdf], ['PowerPoint', r.slidesPptx]] },
-    { name: 'Worksheet', buttons: [['PDF', r.worksheetPdf], ['Word', r.worksheetDocx]] },
+    { name: 'Teacher guide', buttons: [file('PDF', r.guidePdf), file('Word', r.guideDocx)] },
+    { name: 'Slides', what: 'Includes the recap quiz for each lesson.', buttons: [file('PDF', r.slidesPdf), file('PowerPoint', r.slidesPptx)] },
+    { name: 'Worksheet', buttons: [file('PDF', r.worksheetPdf), file('Word', r.worksheetDocx)] },
+    { name: 'Worksheet example', what: 'Filled in, to show students what to aim for.', buttons: [file('PDF', r.examplePdf), file('Word', r.exampleDocx)] },
     {
       name: 'Lesson videos',
-      what: english ? 'All 26 videos, with captions' : 'All 26 videos, with captions. On YouTube they are in English only.',
-      buttons: [['Download (ZIP)', r.videos], [english ? 'Watch on YouTube' : 'Watch in English on YouTube', YOUTUBE_URL]],
+      what: `All 26 videos, with captions, in each lesson’s folder. They’re also all inside the full kit download.${english ? '' : ' On YouTube they are in English only.'}`,
+      buttons: [['Open in Google Drive', r.videosFolder && r.videosFolder.url], [english ? 'Watch on YouTube' : 'Watch in English on YouTube', YOUTUBE_URL]],
     },
     { name: 'NeuroPocket app', what: 'For Lessons 2 and 4', buttons: [['For Android phones', NEUROPOCKET.android], ['For Windows computers', NEUROPOCKET.windows], ['Use it in a browser', NEUROPOCKET.browser]] },
   ];
 };
 
-const external = (url) => /^https?:/.test(url) && !url.endsWith('.zip') && !url.endsWith('.apk') && !url.endsWith('.exe');
+// Pages open in a new tab; downloads (zips, apps, Google exports) don't need one.
+const external = (url) => /^https?:/.test(url) && !/\.(zip|apk|exe)$|\/export(\/|\?)/.test(url);
 
 const ResourceButton = ({ label, url }) => (url
   ? <a className="alfe-file-btn" href={url} {...(external(url) ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>{label}</a>

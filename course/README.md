@@ -10,7 +10,7 @@ and open with **START HERE.html**, with no internet needed.
 | The START HERE page | `player/` |
 | The quizzes and the worksheet app | `apps/` |
 | The words on the page and in the apps, per language | `translations/` |
-| Links to the published zips, for the website | `downloads.json` (written by the release step) |
+| Links to the published zips and the single files in Drive, for the website | `downloads.json` (written by the release step) |
 
 The build script is `scripts/build_course.py`. It writes into `build/course/`, which isn't saved in git.
 
@@ -65,6 +65,9 @@ folder, and want people to get it.
 - **A new language:** add its folder in Drive (named with its code first, like `"ur — Urdu (اردو)"`),
   its text files in `translations/<code>/`, its entry in `translations/languages.json` and a line
   under `"packages"` in `settings.json`.
+- **A document moved or was replaced in Drive:** the website's single-file buttons link straight
+  to the Google masters, so edits show up by themselves. If a master gets a new file (a new ID),
+  run `export` and then `python -I scripts/build_course.py links`, and commit `downloads.json`.
 - **Only some languages:** add `--package ur` (repeat for more) to `all`.
 - **Changed text in `translations/`:** run `python -I scripts/check_translations.py` first.
 
