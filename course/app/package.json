@@ -1,0 +1,19 @@
+{
+  "name": "ai-literacy-app",
+  "private": true,
+  "version": "0.1.0",
+  "description": "The AI Literacy for Everyone Android app: downloads one language's offline course package and opens its START HERE page.",
+  "scripts": {
+    "prepare-www": "node scripts/prepare-www.mjs",
+    "sync": "npm run prepare-www && cap sync android",
+    "open": "cap open android"
+  },
+  "dependencies": {
+    "@capacitor/android": "6.2.0",
+    "@capacitor/core": "6.2.0"
+  },
+  "devDependencies": {
+    "@capacitor/assets": "^3.0.5",
+    "@capacitor/cli": "6.2.0"
+  }
+}

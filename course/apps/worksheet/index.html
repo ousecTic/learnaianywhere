@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<!--
+  "Design Your Own AI Classifier" worksheet for Lessons 1-4 of AI Literacy for Everyone,
+  in every course language. Source page: scripts/build-apps.mjs replaces COURSE_TEXT below
+  with the text in course/translations/<lang>/worksheet-<n>.json and writes a single
+  self-contained file that works offline from a folder (file://).
+
+  Open with ?lesson=<1-4> to pick the lesson (default 1) and ?lang=<code> to pick the
+  language (default: the last language chosen in the menu, else English). Each lesson's
+  answer is saved on the device under its own key, as in the original per-lesson pages.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design Your Own AI Classifier</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+      line-height: 1.6;
+      color: #000000;
+      background: white;
+      overflow-x: hidden;
+      width: 100%;
+      min-height: 100vh;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      padding: 32px;
+      padding: 2rem;
+    }
+
+    .container {
+      max-width: 700px;
+      width: 100%;
+    }
+
+    .card {
+      background: #FFFFFF;
+      border: 1px solid #E5E7EB;
+      border-radius: 16px;
+      padding: 3rem 2rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+
+    .lang-selector {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: end;
+      -ms-flex-pack: end;
+      justify-content: flex-end;
+      margin-bottom: 0.75rem;
+    }
+
+    .lang-selector select {
+      font-size: 0.8rem;
+      border: 1px solid #E5E7EB;
+      border-radius: 6px;
+      padding: 0.25rem 0.5rem;
+      color: #71717A;
+      background: white;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .lang-selector select:hover {
+      border-color: #258EC2;
+      color: #258EC2;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    h1 {
+      color: #258EC2;
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .lesson-title {
+      color: #000000;
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .subtitle {
+      color: #71717A;
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .question-section {
+      margin-bottom: 2rem;
+    }
+
+    .question {
+      color: #000000;
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      line-height: 1.6;
+    }
+
+    .example {
+      color: #71717A;
+      font-size: 0.9rem;
+      font-style: italic;
+      margin-bottom: 1rem;
+      padding: 0.75rem;
+      background: #F9FAFB;
+      border-radius: 8px;
+      border-left: 3px solid #258EC2;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      color: #000000;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 150px;
+      padding: 1rem;
+      border: 2px solid #E5E7EB;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #000000;
+      background: #FFFFFF;
+      resize: vertical;
+      transition: border-color 0.3s ease;
+    }
+
+    textarea:focus {
+      outline: none;
+      border-color: #258EC2;
+    }
+
+    .controls {
+      margin-top: 1.5rem;
+    }
+
+    .auto-save-status {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      background: #F9FAFB;
+      color: #71717A;
+      min-height: 45px;
+    }
+
+    .auto-save-status.saving {
+      color: #258EC2;
+      background: #E0F2FE;
+    }
+
+    .auto-save-status.saved {
+      color: #065F46;
+      background: #D1FAE5;
+    }
+
+    .auto-save-status.error {
+      color: #991B1B;
+      background: #FEE2E2;
+    }
+
+    .status-icon {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+    }
+
+    .button-group {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+
+    .btn-clear {
+      padding: 0.75rem 2rem;
+      background: #F9FAFB;
+      color: #000000;
+      border: 2px solid #E5E7EB;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: inherit;
+    }
+
+    .btn-clear:hover {
+      background: #E5E7EB;
+    }
+
+    .status-message {
+      margin-top: 1rem;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      text-align: center;
+      display: none;
+    }
+
+    .status-message.success {
+      background: #D1FAE5;
+      color: #065F46;
+      border: 1px solid #6EE7B7;
+    }
+
+    .status-message.error {
+      background: #FEE2E2;
+      color: #991B1B;
+      border: 1px solid #FCA5A5;
+    }
+
+    .footer {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #E5E7EB;
+      text-align: center;
+      color: #71717A;
+      font-size: 0.875rem;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 0.75rem;
+      }
+
+      .card {
+        padding: 1.5rem 1rem;
+      }
+
+      h1 {
+        font-size: 1.35rem;
+      }
+
+      .lesson-title {
+        font-size: 1.15rem;
+      }
+
+      .question {
+        font-size: 1rem;
+      }
+
+      .example {
+        font-size: 0.85rem;
+        padding: 0.625rem;
+      }
+
+      textarea {
+        min-height: 200px;
+        font-size: 16px;
+        padding: 0.875rem;
+      }
+
+      .auto-save-status {
+        font-size: 0.85rem;
+        padding: 0.625rem;
+        min-height: 40px;
+      }
+
+      .btn-clear {
+        width: 100%;
+        padding: 1rem;
+        font-size: 1rem;
+      }
+
+      .footer {
+        font-size: 0.8rem;
+        margin-top: 1.5rem;
+      }
+    }
+
+    /* Right-to-left (Arabic, Urdu): mirror the parts placed with "left" above.
+       Arabic and Urdu scripts have no italic, and slanting them makes them hard to read. */
+    html[dir="rtl"] .example {
+      border-left: 0;
+      border-right: 3px solid #258EC2;
+      font-style: normal;
+    }
+
+    /* Shown inside another page (the website): size to the content, not the window. */
+    html.embedded body {
+      min-height: 0;
+    }
+  </style>
+  <script>
+    // Inside a frame (the website shows the apps this way), drop the full-window height.
+    try { if (window.self !== window.top) { document.documentElement.className += ' embedded'; } } catch (e) { document.documentElement.className += ' embedded'; }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="lang-selector">
+        <select id="langSelect" onchange="setLanguage(this.value)"></select>
+      </div>
+
+      <div class="header">
+        <h1>Design Your Own AI Classifier</h1>
+        <p class="lesson-title"></p>
+      </div>
+
+      <div class="question-section">
+        <p class="question"></p>
+        <div class="example"></div>
+      </div>
+
+      <div>
+        <div class="form-group">
+          <label for="response">Your Response:</label>
+          <textarea
+            id="response"
+            name="response"
+            placeholder="Type your answer here..."
+            aria-label="Your response to the lesson question"
+            autocomplete="off"
+            autocorrect="on"
+            spellcheck="true"
+          ></textarea>
+        </div>
+
+        <div class="controls">
+          <div id="autoSaveStatus" class="auto-save-status">
+            <span id="statusText">Start typing - your work will be saved automatically</span>
+          </div>
+
+          <div class="button-group">
+            <button type="button" class="btn-clear" id="clearBtn">Clear Response</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <p>Learn AI Anywhere</p>
+        <p>Your responses are saved locally on this device</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Filled in by scripts/build-apps.mjs:
+    // { languages: [{ code, label, dir }], lessons: { "1": { en: {...}, fr: {...}, ... }, ... } }
+    var COURSE_TEXT = /*COURSE_TEXT*/null;
+
+    function readParam(name) {
+      var m = new RegExp('[?&]' + name + '=([^&#]*)').exec(window.location.search);
+      return m ? decodeURIComponent(m[1]) : null;
+    }
+
+    // localStorage can be missing or blocked (private windows, some file:// setups).
+    function loadSavedLang() {
+      try { return window.localStorage.getItem('worksheet_lang'); } catch (e) { return null; }
+    }
+    function saveLang(lang) {
+      try { window.localStorage.setItem('worksheet_lang', lang); } catch (e) { /* not saved */ }
+    }
+
+    var LESSON = COURSE_TEXT.lessons[readParam('lesson')] ? readParam('lesson') : '1';
+    var TRANSLATIONS = COURSE_TEXT.lessons[LESSON];
+    var LANGUAGES = COURSE_TEXT.languages;
+
+    function isKnownLang(code) { return !!(code && TRANSLATIONS[code]); }
+    function isRtl(code) {
+      for (var i = 0; i < LANGUAGES.length; i++) {
+        if (LANGUAGES[i].code === code) { return LANGUAGES[i].dir === 'rtl'; }
+      }
+      return false;
+    }
+    function applyDirection(code) {
+      document.documentElement.lang = code;
+      document.documentElement.dir = isRtl(code) ? 'rtl' : 'ltr';
+    }
+
+    var currentLang = isKnownLang(readParam('lang')) ? readParam('lang')
+      : isKnownLang(loadSavedLang()) ? loadSavedLang() : 'en';
+    applyDirection(currentLang);
+
+    (function fillLanguageMenu() {
+      var select = document.getElementById('langSelect');
+      for (var i = 0; i < LANGUAGES.length; i++) {
+        if (!TRANSLATIONS[LANGUAGES[i].code]) { continue; }
+        var option = document.createElement('option');
+        option.value = LANGUAGES[i].code;
+        option.textContent = LANGUAGES[i].label;
+        select.appendChild(option);
+      }
+    })();
+
+    function t(key) {
+      var parts = key.split('.');
+      var lang = TRANSLATIONS[currentLang] || TRANSLATIONS.en;
+      var val = lang[parts[0]] && lang[parts[0]][parts[1]];
+      return val || (TRANSLATIONS.en[parts[0]] && TRANSLATIONS.en[parts[0]][parts[1]]) || key;
+    }
+
+    function tFmt(key, vars) {
+      var str = t(key);
+      var keys = Object.keys(vars);
+      for (var i = 0; i < keys.length; i++) {
+        str = str.split('{' + keys[i] + '}').join(String(vars[keys[i]]));
+      }
+      return str;
+    }
+
+    function applyTranslations() {
+      document.title = t('ui.pageTitle');
+      document.querySelector('h1').textContent = t('ui.mainHeading');
+      document.querySelector('.lesson-title').textContent = t('ui.lessonTitle');
+      document.querySelector('.question').textContent = t('ui.question');
+      document.querySelector('.example').textContent = t('ui.example');
+      document.querySelector('label[for="response"]').textContent = t('ui.responseLabel');
+      document.getElementById('response').placeholder = t('ui.placeholder');
+      document.getElementById('response').setAttribute('aria-label', t('ui.ariaLabel'));
+      document.getElementById('clearBtn').textContent = t('ui.clearBtn');
+      var footerPs = document.querySelectorAll('.footer p');
+      footerPs[0].textContent = t('ui.footerBrand');
+      footerPs[1].textContent = t('ui.footerSave');
+      document.getElementById('statusText').textContent = t('ui.statusInit');
+      document.getElementById('langSelect').value = currentLang;
+    }
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      saveLang(lang);
+      applyDirection(lang);
+      applyTranslations();
+    }
+
+    applyTranslations();
+  </script>
+
+  <script>
+    // ES5 compatible code for maximum browser support
+    (function() {
+      'use strict';
+
+      // Same keys as the original per-lesson pages, so saved answers carry over.
+      var STORAGE_KEY = 'ai_classifier_lesson_' + LESSON;
+      var responseField = document.getElementById('response');
+      var clearBtn = document.getElementById('clearBtn');
+      var autoSaveStatus = document.getElementById('autoSaveStatus');
+      var statusText = document.getElementById('statusText');
+      var saveTimeout = null;
+      var DEBOUNCE_DELAY = 1500; // 1.5 seconds after user stops typing
+
+      function isLocalStorageAvailable() {
+        try {
+          var test = '__localStorage_test__';
+          localStorage.setItem(test, test);
+          localStorage.removeItem(test);
+          return true;
+        } catch(e) {
+          return false;
+        }
+      }
+
+      function updateStatus(status, message) {
+        autoSaveStatus.className = 'auto-save-status ' + status;
+        statusText.textContent = message;
+      }
+
+      function formatTime(date) {
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var ampm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12;
+        hours = hours ? hours : 12;
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+        return hours + ':' + minutes + ' ' + ampm;
+      }
+
+      function loadResponse() {
+        if (!isLocalStorageAvailable()) {
+          updateStatus('error', t('ui.errorStorage'));
+          return;
+        }
+
+        try {
+          var savedData = localStorage.getItem(STORAGE_KEY);
+          if (savedData) {
+            var data = JSON.parse(savedData);
+            responseField.value = data.response || '';
+            if (data.timestamp) {
+              var savedDate = new Date(data.timestamp);
+              updateStatus('saved', tFmt('ui.statusLastSaved', {time: formatTime(savedDate)}));
+            }
+          }
+        } catch(e) {
+          console.error('Error loading saved response:', e);
+          updateStatus('error', t('ui.errorLoad'));
+        }
+      }
+
+      function saveResponse(responseText) {
+        if (!isLocalStorageAvailable()) {
+          updateStatus('error', t('ui.errorStorage'));
+          return false;
+        }
+
+        try {
+          var data = {
+            response: responseText,
+            timestamp: new Date().toISOString(),
+            lesson: Number(LESSON)
+          };
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+          var now = new Date();
+          updateStatus('saved', tFmt('ui.statusSaved', {time: formatTime(now)}));
+          return true;
+        } catch(e) {
+          console.error('Error saving response:', e);
+          updateStatus('error', t('ui.errorSave'));
+          return false;
+        }
+      }
+
+      function handleInput() {
+        if (saveTimeout) {
+          clearTimeout(saveTimeout);
+        }
+
+        var responseText = responseField.value.trim();
+
+        if (responseText === '') {
+          updateStatus('', t('ui.statusInit'));
+          if (isLocalStorageAvailable()) { localStorage.removeItem(STORAGE_KEY); }
+          return;
+        }
+
+        updateStatus('saving', t('ui.statusSaving'));
+
+        saveTimeout = setTimeout(function() {
+          saveResponse(responseText);
+        }, DEBOUNCE_DELAY);
+      }
+
+      function clearResponse() {
+        if (!isLocalStorageAvailable()) {
+          return;
+        }
+
+        if (responseField.value.trim() === '') {
+          updateStatus('error', t('ui.errorNothingToClear'));
+          setTimeout(function() {
+            updateStatus('', t('ui.statusInit'));
+          }, 2000);
+          return;
+        }
+
+        if (confirm(t('ui.confirmClear'))) {
+          try {
+            localStorage.removeItem(STORAGE_KEY);
+            responseField.value = '';
+            updateStatus('saved', t('ui.successCleared'));
+            setTimeout(function() {
+              updateStatus('', t('ui.statusInit'));
+            }, 2000);
+          } catch(e) {
+            console.error('Error clearing response:', e);
+            updateStatus('error', t('ui.errorClearing'));
+          }
+        }
+      }
+
+      if (responseField.addEventListener) {
+        responseField.addEventListener('input', handleInput);
+        clearBtn.addEventListener('click', clearResponse);
+      } else if (responseField.attachEvent) {
+        // IE8 fallback
+        responseField.attachEvent('oninput', handleInput);
+        responseField.attachEvent('onkeyup', handleInput);
+        clearBtn.attachEvent('onclick', clearResponse);
+      }
+
+      if (document.readyState === 'loading') {
+        if (document.addEventListener) {
+          document.addEventListener('DOMContentLoaded', loadResponse);
+        } else if (document.attachEvent) {
+          document.attachEvent('onreadystatechange', function() {
+            if (document.readyState === 'complete') {
+              loadResponse();
+            }
+          });
+        }
+      } else {
+        loadResponse();
+      }
+    })();
+  </script>
+</body>
+</html>

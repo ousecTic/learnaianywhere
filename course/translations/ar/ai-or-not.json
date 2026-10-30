@@ -1,0 +1,88 @@
+{
+  "_note": "Do not translate keys or the correctAnswer values ('ai' / 'not_ai'). Preserve {placeholder} tokens exactly as written.",
+  "ui": {
+    "pageTitle": "اختبار: ذكاء اصطناعي أم لا؟ - تعلّم الذكاء الاصطناعي في أي مكان",
+    "title": "!هيا نلعب: ذكاء اصطناعي أم لا؟",
+    "subtitle": "اختبر فهمك لمفاهيم الذكاء الاصطناعي",
+    "introStep1": "سأصف لك موقفاً",
+    "introStep2": "لاحظ ما إذا كان ينطوي على استقلالية وقدرة على التكيّف",
+    "introStep3": "قرّر: هل هو ذكاء اصطناعي أم لا؟",
+    "introStep4": "شارك تفكيرك",
+    "startBtn": "ابدأ اللعبة",
+    "questionHeading": "ذكاء اصطناعي أم لا؟",
+    "progress": "الجولة {n} من {total}",
+    "progressReview": "الجولة {n} من {total} (وضع المراجعة)",
+    "answerAi": "هذا ذكاء اصطناعي",
+    "answerNotAi": "هذا ليس ذكاءً اصطناعياً",
+    "imageAlt": "صورة توضيحية للسؤال {n}",
+    "feedbackCorrect": "✓ صحيح! {answer}.",
+    "feedbackIncorrect": "✗ خطأ. الإجابة الصحيحة هي: {answer}.",
+    "explanationHeading": "الشرح:",
+    "nextBtn": "السؤال التالي",
+    "gameComplete": "!انتهت اللعبة",
+    "hereIsHowYouDid": "هذه نتيجتك",
+    "scoreDisplay": "أجبت بشكل صحيح على {score} من {total}!",
+    "reviewRound": "الجولة {n}",
+    "reviewCorrect": "✓ صحيح",
+    "reviewIncorrect": "✗ خطأ",
+    "reviewYourAnswer": "إجابتك: {userAnswer} | الإجابة الصحيحة: {correctAnswer}",
+    "playAgainBtn": "العب مجدداً",
+    "backToReviewBtn": "العودة إلى المراجعة",
+    "footerBrand": "تعلّم الذكاء الاصطناعي في أي مكان",
+    "footerTagline": "5 أسئلة • لعبة تعليمية",
+    "footerKeepLearning": "!واصل تعلّم الذكاء الاصطناعي"
+  },
+  "explanationLabels": {
+    "autonomous_positive": "الاستقلالية: نعم، إنه مستقل",
+    "autonomous_negative": "الاستقلالية: لا، إنه ليس مستقلاً",
+    "adaptive_positive": "القدرة على التكيّف: نعم، إنه متكيّف",
+    "adaptive_negative": "القدرة على التكيّف: لا، إنه غير متكيّف"
+  },
+  "questions": [
+    {
+      "id": 1,
+      "question": "أثناء كتابة رسالة لصديقك، يقترح هاتفك الكلمة التالية التي قد ترغب في استخدامها. كما يصحّح إملاءك إذا أخطأت.",
+      "correctAnswer": "ai",
+      "explanation": {
+        "autonomous": { "positive": true,  "content": "يرصد أخطاءك ويقترح تصحيحاً تلقائياً قبل أن تلاحظ الخطأ حتى." },
+        "adaptive":   { "positive": true,  "content": "يتحسّن في اقتراح الكلمات بناءً على ما كتبته من قبل." }
+      }
+    },
+    {
+      "id": 2,
+      "question": "هاتف يتيح لك إجراء المكالمات فقط عندما تكتب الرقم أو تطلبه بنفسك",
+      "correctAnswer": "not_ai",
+      "explanation": {
+        "autonomous": { "positive": false, "content": "عليك أن تفعل كل شيء بنفسك في كل مرة." },
+        "adaptive":   { "positive": false, "content": "لا يحلّل بيانات جديدة لكي يتحسّن. يعمل دائماً بنفس الطريقة." }
+      }
+    },
+    {
+      "id": 3,
+      "question": "يمكنك إلغاء قفل هاتفك بإظهار وجهك. وكلما حلّل صوراً أكثر، أصبح أفضل في التعرف عليك.",
+      "correctAnswer": "ai",
+      "explanation": {
+        "autonomous": { "positive": true,  "content": "يساعدك بفتح قفل هاتفك تلقائياً. لا تحتاج حتى إلى الضغط على أي زر!" },
+        "adaptive":   { "positive": true,  "content": "يحلّل المزيد من صور وجهك لتحسين التعرف عليك، حتى لو تغيّر مظهرك." }
+      }
+    },
+    {
+      "id": 4,
+      "question": "مصباح بمستشعر حركة يضيء عند اكتشاف حركة ويطفئ عندما لا يوجد أحد. يتفاعل بنفس الطريقة في كل مرة.",
+      "correctAnswer": "not_ai",
+      "explanation": {
+        "autonomous": { "positive": true,  "content": "يضيء ويطفئ تلقائياً عند استشعار الحركة." },
+        "adaptive":   { "positive": false, "content": "يتفاعل دائماً بنفس الطريقة بغض النظر عمّا يتحرك." }
+      }
+    },
+    {
+      "id": 5,
+      "question": "تتحدث مع تطبيق يساعدك على التخطيط للمشاريع. تصف مشروعك، ويقترح خطوات لإتمامه. يتحسّن في اقتراح الخطوات كلما تحدثت معه أكثر.",
+      "correctAnswer": "ai",
+      "explanation": {
+        "autonomous": { "positive": true,  "content": "يساعدك بوضع خطة تلقائياً بناءً على وصفك." },
+        "adaptive":   { "positive": true,  "content": "يحسّن اقتراحاته مع تعلّمه المزيد عن مشروعك المحدد وطريقة عملك." }
+      }
+    }
+  ]
+}

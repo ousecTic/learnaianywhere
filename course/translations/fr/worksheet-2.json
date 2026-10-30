@@ -1,0 +1,27 @@
+{
+  "_note": "Do not translate keys. Preserve {placeholder} tokens exactly as written.",
+  "ui": {
+    "pageTitle": "Leçon 2 : Collecte de Données - Concevez votre Propre Classificateur d'IA",
+    "mainHeading": "Concevez votre Propre Classificateur d'IA",
+    "lessonTitle": "Leçon 2 : Collecte de Données",
+    "question": "Quels éléments allez-vous classer, et comment allez-vous recueillir vos données ?",
+    "example": "Exemple : si vous classez des types de fournitures scolaires, vous pourriez photographier des crayons, des cahiers et des bureaux dans votre salle de classe",
+    "responseLabel": "Votre Réponse :",
+    "placeholder": "Tapez votre réponse ici...",
+    "ariaLabel": "Votre réponse à la question de la leçon",
+    "clearBtn": "Effacer la Réponse",
+    "footerBrand": "Apprendre l'IA Partout",
+    "footerSave": "Vos réponses sont enregistrées localement sur cet appareil",
+    "statusInit": "Commencez à taper : votre travail sera enregistré automatiquement",
+    "statusSaving": "Enregistrement...",
+    "statusSaved": "Enregistré à {time}",
+    "statusLastSaved": "Dernier enregistrement à {time}",
+    "errorStorage": "Le stockage local n'est pas disponible dans votre navigateur",
+    "errorSave": "Erreur lors de l'enregistrement : veuillez réessayer",
+    "errorLoad": "Erreur lors du chargement de la réponse enregistrée",
+    "confirmClear": "Êtes-vous sûr de vouloir effacer votre réponse ? Cette action est irréversible.",
+    "errorNothingToClear": "Rien à effacer",
+    "successCleared": "Réponse effacée avec succès",
+    "errorClearing": "Erreur lors de l'effacement de la réponse"
+  }
+}

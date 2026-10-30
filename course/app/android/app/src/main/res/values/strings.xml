@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">AI Literacy</string>
+    <string name="title_activity_main">AI Literacy</string>
+    <string name="package_name">org.learnaianywhere.ailiteracy</string>
+    <string name="custom_url_scheme">org.learnaianywhere.ailiteracy</string>
+</resources>

@@ -1,0 +1,72 @@
+{
+  "_note": "Do not translate keys. Preserve {placeholder} tokens exactly as written.",
+  "ui": {
+    "pageTitle": "Lesson 1 Recap Quiz - Learn AI Anywhere",
+    "introTitle": "Lesson 1 Recap Quiz",
+    "introSubtitle": "Test your knowledge of AI fundamentals",
+    "startBtn": "Start Quiz",
+    "footerTagline": "4 questions • Multiple choice & True/False",
+    "questionHeading": "Recap Quiz",
+    "correctAnswerLabel": "Correct Answer:",
+    "nextBtn": "Next Question",
+    "reviewTitle": "Quiz Complete!",
+    "reviewSubtitle": "Here's how you did",
+    "retakeBtn": "Retake Quiz",
+    "footerComplete": "Great job completing the quiz!",
+    "footerBrand": "Learn AI Anywhere",
+    "progress": "Question {n} of {total}",
+    "progressReview": "Question {n} of {total} (Review Mode)",
+    "feedbackCorrect": "✓ Correct!",
+    "feedbackIncorrect": "✗ Incorrect",
+    "scoreDisplay": "You got {score} out of {total} correct! ({percent}%)",
+    "reviewQuestion": "Question {n}",
+    "reviewCorrect": "✓ Correct",
+    "reviewIncorrect": "✗ Incorrect",
+    "reviewDetails": "Your answer: {userAnswer} | Correct answer: {correctAnswer}",
+    "backToReview": "Back to Review"
+  },
+  "questions": [
+    {
+      "id": 1,
+      "question": "What is Artificial Intelligence (AI)?",
+      "options": [
+        "A) Teaching humans to act like robots",
+        "B) Making machines do math faster",
+        "C) Making technology simulate intelligence",
+        "D) Giving machines emotions"
+      ],
+      "correctAnswer": "C) Making technology simulate intelligence"
+    },
+    {
+      "id": 2,
+      "question": "What two qualities describe a technology's AI capability?",
+      "options": [
+        "A) Autonomy and adaptability",
+        "B) Speed and size",
+        "C) Memory and internet connection",
+        "D) Battery life and storage"
+      ],
+      "correctAnswer": "A) Autonomy and adaptability"
+    },
+    {
+      "id": 3,
+      "question": "Which of these is an example of AI?",
+      "options": [
+        "A) A calculator that solves math when you press buttons",
+        "B) A motion sensor light that turns on when you walk in",
+        "C) A phone that lets you call someone by typing their number",
+        "D) None of the above"
+      ],
+      "correctAnswer": "D) None of the above"
+    },
+    {
+      "id": 4,
+      "question": "True or False : AI tools are always correct in their predictions.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": "False"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "_note": "Settings for the offline course packages. The package build makes one zip per entry in packages, named <slug>-<package id>-v<course version>.zip. Drive folders are found by the code at the start of their name (\"en — English\" is \"en\"), so the rest of a folder's name can change. Inside each package folder the lessons, Introduction and Resources are found as scripts/check_course.py finds them (numbered lesson folders; Resources is the folder holding the Google Docs and Slides masters); sharedResources means the Resources folder sits next to the package folder and is shared, as for the two Swahili versions. lang picks the app text in course/translations and the language NeuroPocket opens in. NeuroPocket is pinned by hand: to use a newer release, change version and sha256 (the fingerprint of that release's file). The build downloads https://github.com/ousecTic/neuropocket/releases/download/v<version>/<file> and stops if the fingerprint doesn't match.",
+  "course": {
+    "name": "AI Literacy for Everyone",
+    "slug": "ai-literacy-for-everyone",
+    "version": "1.1"
+  },
+  "drive": {
+    "root": "1icEyszg_HXjxPHUZmlp_1_Zb3icZpR1p"
+  },
+  "release": {
+    "repo": "ousecTic/learnaianywhere",
+    "tag": "course-v{version}",
+    "latestTag": "course-latest"
+  },
+  "online": {
+    "_note": "The online kit's videos (build_course.py online and videos). videoRelease is the GitHub release the videos command uploads them to; videoUrl is where the online pages load each one from ({version}, {file}). To host the videos somewhere else, upload them there with the same file names and change videoUrl.",
+    "videoRelease": "course-videos-v{version}",
+    "videoUrl": "https://github.com/ousecTic/learnaianywhere/releases/download/course-videos-v{version}/{file}"
+  },
+  "packages": [
+    { "id": "en", "name": "English", "lang": "en", "folder": ["en"] },
+    { "id": "fr", "name": "French", "lang": "fr", "folder": ["fr"] },
+    { "id": "es", "name": "Spanish", "lang": "es", "folder": ["es"] },
+    { "id": "pt", "name": "Portuguese", "lang": "pt", "folder": ["pt"] },
+    { "id": "ar", "name": "Arabic", "lang": "ar", "folder": ["ar"] },
+    { "id": "hi", "name": "Hindi", "lang": "hi", "folder": ["hi"] },
+    { "id": "ur", "name": "Urdu", "lang": "ur", "folder": ["ur"] },
+    { "id": "sw-KE", "name": "Swahili (Kenya)", "lang": "sw", "folder": ["sw", "sw-KE"], "sharedResources": true },
+    { "id": "sw-TZ", "name": "Swahili (Tanzania)", "lang": "sw", "folder": ["sw", "sw-TZ"], "sharedResources": true }
+  ],
+  "neuropocket": {
+    "version": "1.8.0",
+    "file": "neuropocket-offline.html",
+    "sha256": "68d3fc8e15ea73718ed699a94833f977536cf51d687048f3f862f65dcde56f20"
+  }
+}

@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Built course apps and packages
+dist-course
+public/course
+
+# Course package build output (scripts/build_course.py)
+build

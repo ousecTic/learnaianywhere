@@ -1,0 +1,74 @@
+{
+  "_note": "Do not translate keys. Preserve {placeholder} tokens exactly as written.",
+  "ui": {
+    "pageTitle": "Quiz Récapitulatif Leçon 4 - Apprendre l'IA Partout",
+    "introTitle": "Quiz Récapitulatif Leçon 4",
+    "introSubtitle": "Testez vos connaissances sur l'éthique et la responsabilité de l'IA",
+    "startBtn": "Commencer le Quiz",
+    "footerTagline": "4 questions • Choix multiple",
+    "questionHeading": "Quiz Récapitulatif",
+    "correctAnswerLabel": "Bonne Réponse :",
+    "nextBtn": "Question Suivante",
+    "reviewTitle": "Quiz Terminé !",
+    "reviewSubtitle": "Voici votre résultat",
+    "retakeBtn": "Refaire le Quiz",
+    "footerComplete": "Bravo d'avoir terminé le quiz !",
+    "footerBrand": "Apprendre l'IA Partout",
+    "progress": "Question {n} sur {total}",
+    "progressReview": "Question {n} sur {total} (Mode Révision)",
+    "feedbackCorrect": "✓ Correct !",
+    "feedbackIncorrect": "✗ Incorrect",
+    "scoreDisplay": "Vous avez obtenu {score} sur {total} bonnes réponses ! ({percent}%)",
+    "reviewQuestion": "Question {n}",
+    "reviewCorrect": "✓ Correct",
+    "reviewIncorrect": "✗ Incorrect",
+    "reviewDetails": "Votre réponse : {userAnswer} | Bonne réponse : {correctAnswer}",
+    "backToReview": "Retour à la Révision"
+  },
+  "questions": [
+    {
+      "id": 1,
+      "question": "Pourquoi un biais dans les données peut-il conduire à de mauvaises prédictions ?",
+      "options": [
+        "La machine refuse de traiter de nouvelles données",
+        "Le modèle se concentre sur les sentiments au lieu des nombres",
+        "La machine fonde sa prédiction sur une perspective limitée",
+        "La machine oublie son entraînement avec le temps"
+      ],
+      "correctAnswer": "La machine fonde sa prédiction sur une perspective limitée"
+    },
+    {
+      "id": 2,
+      "question": "Qui est responsable lorsqu'un outil d'IA commet une erreur nuisible ?",
+      "options": [
+        "L'outil d'IA",
+        "Les humains qui l'ont créé ou utilisé",
+        "Les données seules",
+        "Personne n'est responsable"
+      ],
+      "correctAnswer": "Les humains qui l'ont créé ou utilisé"
+    },
+    {
+      "id": 3,
+      "question": "Quels sont les moyens par lesquels les humains peuvent réduire les dommages des prédictions de l'IA ?",
+      "options": [
+        "Laisser l'IA corriger ses propres erreurs",
+        "Vérifier deux fois les prédictions de l'IA",
+        "Ignorer les erreurs et espérer qu'elles s'améliorent",
+        "Utiliser davantage de modèles d'IA sans rien changer"
+      ],
+      "correctAnswer": "Vérifier deux fois les prédictions de l'IA"
+    },
+    {
+      "id": 4,
+      "question": "Lequel des éléments suivants respecte la confidentialité des données des personnes ?",
+      "options": [
+        "Collecter des données sans en informer les personnes",
+        "Partager des données personnelles avec quiconque le demande",
+        "Obtenir la permission et utiliser les données pour la raison pour laquelle elles ont été collectées",
+        "Utiliser des données même sensibles, tant qu'elles aident l'IA"
+      ],
+      "correctAnswer": "Obtenir la permission et utiliser les données pour la raison pour laquelle elles ont été collectées"
+    }
+  ]
+}

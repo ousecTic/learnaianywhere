@@ -1,0 +1,74 @@
+{
+  "_note": "Do not translate keys. Preserve {placeholder} tokens exactly as written.",
+  "ui": {
+    "pageTitle": "Lesson 2 Recap Quiz - Learn AI Anywhere",
+    "introTitle": "Lesson 2 Recap Quiz",
+    "introSubtitle": "Test your knowledge of Machine Learning fundamentals",
+    "startBtn": "Start Quiz",
+    "footerTagline": "4 questions • Multiple choice",
+    "questionHeading": "Recap Quiz",
+    "correctAnswerLabel": "Correct Answer:",
+    "nextBtn": "Next Question",
+    "reviewTitle": "Quiz Complete!",
+    "reviewSubtitle": "Here's how you did",
+    "retakeBtn": "Retake Quiz",
+    "footerComplete": "Great job completing the quiz!",
+    "footerBrand": "Learn AI Anywhere",
+    "progress": "Question {n} of {total}",
+    "progressReview": "Question {n} of {total} (Review Mode)",
+    "feedbackCorrect": "✓ Correct!",
+    "feedbackIncorrect": "✗ Incorrect",
+    "scoreDisplay": "You got {score} out of {total} correct! ({percent}%)",
+    "reviewQuestion": "Question {n}",
+    "reviewCorrect": "✓ Correct",
+    "reviewIncorrect": "✗ Incorrect",
+    "reviewDetails": "Your answer: {userAnswer} | Correct answer: {correctAnswer}",
+    "backToReview": "Back to Review"
+  },
+  "questions": [
+    {
+      "id": 1,
+      "question": "What are the four key parts of Machine Learning?",
+      "options": [
+        "Model, Data, Training, and Trained Model",
+        "Model, Data, Coding, and Hardware",
+        "Training, Data, Internet, and Model",
+        "Model, Coding, Training, and Hardware"
+      ],
+      "correctAnswer": "Model, Data, Training, and Trained Model"
+    },
+    {
+      "id": 2,
+      "question": "What is the purpose of \"training\" in machine learning?",
+      "options": [
+        "Storing data for later use",
+        "Sending commands to the machine",
+        "Finding patterns in the data",
+        "Designing how the user will interact"
+      ],
+      "correctAnswer": "Finding patterns in the data"
+    },
+    {
+      "id": 3,
+      "question": "What is a \"trained model\" in machine learning?",
+      "options": [
+        "A diagram of how the machine was built",
+        "The process where the machine is trained on data",
+        "A visual representation of the training steps",
+        "The final part that makes predictions"
+      ],
+      "correctAnswer": "The final part that makes predictions"
+    },
+    {
+      "id": 4,
+      "question": "Why might an AI classifier give the wrong prediction?",
+      "options": [
+        "It analyzed a limited amount of data",
+        "It didn't understand the question",
+        "It wasn't connected to the internet",
+        "It processed the input too quickly"
+      ],
+      "correctAnswer": "It analyzed a limited amount of data"
+    }
+  ]
+}

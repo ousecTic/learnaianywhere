@@ -3,8 +3,9 @@
 # Netlify matches a path with or without its trailing slash, so a rule like
 # "/about/ /about" sends the page to itself in a loop: don't add those.
 
-# Handle old curriculum path to ensure it redirects properly
-/curriculum /curriculum/intro-to-ai 301
+# Introduction to AI became AI Literacy for Everyone
+/curriculum /courses/ai-literacy-for-everyone 301
+/curriculum/intro-to-ai /courses/ai-literacy-for-everyone 301
 
 # Handle SPA routing - serve index.html for all paths
 /* /index.html 200

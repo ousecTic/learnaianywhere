@@ -1,0 +1,88 @@
+{
+  "_note": "Do not translate keys or the correctAnswer values ('ai' / 'not_ai'). Preserve {placeholder} tokens exactly as written.",
+  "ui": {
+    "pageTitle": "क्विज़: AI है या नहीं? - AI कहीं भी सीखें",
+    "title": "चलो खेलते हैं: AI है या नहीं?!",
+    "subtitle": "AI की अवधारणाओं की अपनी समझ परखें",
+    "introStep1": "मैं एक स्थिति का वर्णन करूँगा",
+    "introStep2": "देखें कि क्या इसमें स्वायत्तता और अनुकूलनशीलता है",
+    "introStep3": "तय करें कि यह AI है या नहीं",
+    "introStep4": "अपना तर्क साझा करें",
+    "startBtn": "खेल शुरू करें",
+    "questionHeading": "AI है या नहीं?",
+    "progress": "राउंड {n} में से {total}",
+    "progressReview": "राउंड {n} में से {total} (समीक्षा मोड)",
+    "answerAi": "यह AI है",
+    "answerNotAi": "यह AI नहीं है",
+    "imageAlt": "प्रश्न {n} का चित्र",
+    "feedbackCorrect": "✓ सही! {answer}.",
+    "feedbackIncorrect": "✗ गलत। सही उत्तर है: {answer}.",
+    "explanationHeading": "स्पष्टीकरण:",
+    "nextBtn": "अगला प्रश्न",
+    "gameComplete": "खेल पूरा हुआ!",
+    "hereIsHowYouDid": "आपका परिणाम",
+    "scoreDisplay": "आपने {total} में से {score} सही उत्तर दिए!",
+    "reviewRound": "राउंड {n}",
+    "reviewCorrect": "✓ सही",
+    "reviewIncorrect": "✗ गलत",
+    "reviewYourAnswer": "आपका उत्तर: {userAnswer} | सही उत्तर: {correctAnswer}",
+    "playAgainBtn": "फिर से खेलें",
+    "backToReviewBtn": "समीक्षा पर वापस जाएं",
+    "footerBrand": "AI कहीं भी सीखें",
+    "footerTagline": "5 प्रश्न • शैक्षिक खेल",
+    "footerKeepLearning": "AI के बारे में सीखते रहें!"
+  },
+  "explanationLabels": {
+    "autonomous_positive": "स्वायत्तता: हाँ, यह स्वायत्त है",
+    "autonomous_negative": "स्वायत्तता: नहीं, यह स्वायत्त नहीं है",
+    "adaptive_positive": "अनुकूलनशीलता: हाँ, यह अनुकूलनशील है",
+    "adaptive_negative": "अनुकूलनशीलता: नहीं, यह अनुकूलनशील नहीं है"
+  },
+  "questions": [
+    {
+      "id": 1,
+      "question": "जैसे ही आप किसी मित्र को संदेश टाइप करते हैं, आपका फ़ोन वह अगला शब्द सुझाता है जो आप उपयोग करना चाह सकते हैं। यह गलती होने पर आपकी वर्तनी भी सुधारता है।",
+      "correctAnswer": "ai",
+      "explanation": {
+        "autonomous": { "positive": true,  "content": "यह आपकी गलतियाँ पकड़ता है और टाइपो नोटिस करने से पहले ही खुद सुधार सुझाता है।" },
+        "adaptive":   { "positive": true,  "content": "यह पहले टाइप किए गए शब्दों के आधार पर शब्द सुझाने में बेहतर होता जाता है।" }
+      }
+    },
+    {
+      "id": 2,
+      "question": "एक फ़ोन जो आपको केवल तभी कॉल करने देता है जब आप खुद नंबर टाइप या डायल करते हैं",
+      "correctAnswer": "not_ai",
+      "explanation": {
+        "autonomous": { "positive": false, "content": "हर बार आपको सब कुछ खुद करना पड़ता है।" },
+        "adaptive":   { "positive": false, "content": "यह बेहतर होने के लिए नए डेटा का विश्लेषण नहीं करता। यह हमेशा एक ही तरह काम करता है।" }
+      }
+    },
+    {
+      "id": 3,
+      "question": "आप अपना फ़ोन अपना चेहरा दिखाकर अनलॉक कर सकते हैं। यह जितनी अधिक तस्वीरें विश्लेषण करता है, उतना ही बेहतर आपको पहचानता है।",
+      "correctAnswer": "ai",
+      "explanation": {
+        "autonomous": { "positive": true,  "content": "यह खुद ही आपका फ़ोन अनलॉक करके आपकी मदद करता है। आपको बटन भी दबाने की ज़रूरत नहीं!" },
+        "adaptive":   { "positive": true,  "content": "यह पहचान बेहतर करने के लिए आपके चेहरे की अधिक तस्वीरों का विश्लेषण करता है, भले ही आपका रूप बदल जाए।" }
+      }
+    },
+    {
+      "id": 4,
+      "question": "एक मोशन सेंसर लाइट जब गति महसूस करती है तो जलती है और जब कोई नहीं होता तो बुझ जाती है। यह हर बार एक ही तरह से प्रतिक्रिया करती है।",
+      "correctAnswer": "not_ai",
+      "explanation": {
+        "autonomous": { "positive": true,  "content": "यह गति महसूस होने पर खुद जलती और बुझती है।" },
+        "adaptive":   { "positive": false, "content": "यह हमेशा एक ही तरह से प्रतिक्रिया करती है, चाहे कुछ भी हिले।" }
+      }
+    },
+    {
+      "id": 5,
+      "question": "आप एक ऐप से बात करते हैं जो प्रोजेक्ट योजना बनाने में मदद करता है। आप अपना प्रोजेक्ट बताते हैं और यह उसे पूरा करने के चरण सुझाता है। जितना अधिक आप इससे बात करते हैं, यह उतना बेहतर सुझाव देता है।",
+      "correctAnswer": "ai",
+      "explanation": {
+        "autonomous": { "positive": true,  "content": "यह आपके विवरण के आधार पर खुद ही एक योजना बनाकर आपकी मदद करता है।" },
+        "adaptive":   { "positive": true,  "content": "यह आपके विशिष्ट प्रोजेक्ट और काम करने के तरीके के बारे में जितना अधिक सीखता है, उतना बेहतर सुझाव देता है।" }
+      }
+    }
+  ]
+}
