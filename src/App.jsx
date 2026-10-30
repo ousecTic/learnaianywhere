@@ -5,7 +5,6 @@ import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 import AnnouncementBanner from './components/AnnouncementBanner';
 import Home from './pages/Home';
-import IntroToAI from './pages/IntroToAI';
 import IntroToGenerativeAI from './pages/IntroToGenerativeAI';
 import AILiteracyForEveryone from './pages/AILiteracyForEveryone';
 import GetInvolved from './pages/GetInvolved';
@@ -25,8 +24,9 @@ function App() {
         <main>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/curriculum" element={<Navigate to="/curriculum/intro-to-ai" replace />} />
-            <Route path="/curriculum/intro-to-ai" element={<IntroToAI />} />
+            {/* Introduction to AI became AI Literacy for Everyone */}
+            <Route path="/curriculum" element={<Navigate to="/courses/ai-literacy-for-everyone" replace />} />
+            <Route path="/curriculum/intro-to-ai" element={<Navigate to="/courses/ai-literacy-for-everyone" replace />} />
             <Route path="/curriculum/intro-to-generative-ai" element={<IntroToGenerativeAI />} />
             <Route path="/courses/ai-literacy-for-everyone" element={<AILiteracyForEveryone />} />
             <Route path="/courses/ai-literacy-for-everyone/ai-or-not" element={<CourseApp app="ai-or-not" title="AI or Not quiz" />} />
