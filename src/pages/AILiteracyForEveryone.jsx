@@ -157,7 +157,7 @@ const materialRows = (pkg) => {
 
 // The plan for one set of answers: a few numbered steps, each with its own
 // buttons, and a closing note that points at the other way of using the course.
-const makePlan = ({ mode, device, pkg, onlineUrl }) => {
+const makePlan = ({ mode, device, pkg, onlineUrl, openFiles }) => {
   const r = pkg.resources || {};
   const lang = pkg.name;
   const guide = { h: 'Read the teacher guide', p: 'How the course is set up, how each lesson splits into lesson time and project time, and what learners should be able to do by the end.', buttons: [file('PDF', r.guidePdf), file('Word', r.guideDocx)] };
@@ -170,7 +170,7 @@ const makePlan = ({ mode, device, pkg, onlineUrl }) => {
       title: `Teach it yourself, in ${lang}`,
       steps: [guide, slides, worksheet, neuropocket, { h: 'Start teaching the first lesson', p: 'Each lesson has a lesson part, taught from the slides, then project time, when learners work on the worksheet and their own AI.' }],
       pic: { img: slidesImg, alt: 'A slide from the course', what: 'You teach from these slides: one deck for all 4 lessons, each with its recap quiz and project time.' },
-      note: <>Want to see how we teach it? About an hour of lesson videos covers the same ideas. Watch them to prepare, or play them to the group. {onlineUrl && <><a href={onlineUrl}>Watch the videos online</a> or </>}<a href="#materials">download them</a>.</>,
+      note: <>Want to see how we teach it? About an hour of lesson videos covers the same ideas. Watch them to prepare, or play them to the group. {onlineUrl && <><a href={onlineUrl}>Watch the videos online</a> or </>}<a href="#materials" onClick={openFiles}>download them</a>.</>,
     };
   }
 
@@ -197,7 +197,7 @@ const makePlan = ({ mode, device, pkg, onlineUrl }) => {
     title: `Learners go through it on their own, in ${lang}`,
     steps: [get, open, { h: 'Optional: print the worksheet', p: 'It is already inside the course, filled in on screen. Print it if you would rather have paper.', buttons: [file('Worksheet (PDF)', r.worksheetPdf)] }],
     pic: { img: startHereImg, alt: 'The START HERE page: the lessons listed on the left, a Start the course button on the right', what },
-    note: <>Want to teach some of it yourself? The teacher guide and slides are in the <a href="#materials">list at the bottom of this page</a>.</>,
+    note: <>Want to teach some of it yourself? The teacher guide and slides are in the <a href="#materials" onClick={openFiles}>list at the bottom of this page</a>.</>,
   };
 };
 
@@ -209,10 +209,12 @@ const AILiteracyForEveryone = () => {
   const [device, setDevice] = useState('computer');
   const [trailer, setTrailer] = useState('off'); // 'off' | 'video' | 'embed'
   const [openLesson, setOpenLesson] = useState(null);
+  const [filesOpen, setFilesOpen] = useState(false);
+  const openFiles = () => setFilesOpen(true);
   const pkg = packages.find((p) => p.id === langId) || packages[0];
   const onlineUrl = ONLINE_URL ? ONLINE_URL(pkg.id) : null;
   const devices = DEVICES.filter((d) => !d.online || onlineUrl);
-  const plan = makePlan({ mode, device, pkg, onlineUrl });
+  const plan = makePlan({ mode, device, pkg, onlineUrl, openFiles });
   const askDevice = mode === 'self';
 
   const pickLang = (e) => {
@@ -399,6 +401,10 @@ const AILiteracyForEveryone = () => {
         <div className="alfe-wrap alfe-narrow alfe-files">
           <h2 id="mat-h">All the files, in {pkg.name}</h2>
           <p className="alfe-section-lead">Every file in the course, one by one, if you’d rather not answer the questions above.</p>
+          <button type="button" className="alfe-btn alfe-btn-outline alfe-start" aria-expanded={filesOpen} aria-controls="alfe-files-all" onClick={() => setFilesOpen((o) => !o)}>
+            <span className={filesOpen ? 'alfe-toggle is-open' : 'alfe-toggle'}><Icon name="chevron" size={18} /></span>{filesOpen ? 'Hide the files' : 'Show all the files'}
+          </button>
+          {filesOpen && <div id="alfe-files-all" className="alfe-files-all">
 
           <h3>To teach with</h3>
           <p className="alfe-muted">PDF to print, Word and PowerPoint to edit. These are also inside the course download, under Resources.</p>
@@ -438,6 +444,7 @@ const AILiteracyForEveryone = () => {
               <div className="alfe-file-btns"><FileButton label="On a computer" url={KOLIBRI.computer} /><FileButton label="On Android" url={KOLIBRI.android} /></div>
             </div>
           </div>
+          </div>}
         </div>
       </section>
 
