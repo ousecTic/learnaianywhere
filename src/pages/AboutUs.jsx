@@ -2,6 +2,8 @@ import React from 'react';
 import Button from '../components/shared/Button';
 import ugandaClassroom from '../assets/images/about/uganda-classroom.jpg';
 import studentTestimony from '../assets/images/about/student-testimony.jpg';
+import worldMap from '../assets/images/about/world-map.svg';
+import countries from '../data/learner-countries.json';
 import ImageModal from '../components/ImageModal';
 
 // Import partnership logos
@@ -131,22 +133,30 @@ const AboutUs = () => {
       <div className="container">
         <section className="about-section">
           <h1>About Learn AI Anywhere</h1>
-          <p>We saw a gap in existing AI literacy resources. Most AI literacy lessons assume you have constant access to computers, internet, and electricity, but that is not the reality for many communities in the world.</p>
+          <p>We saw a gap in existing AI literacy resources. Most AI literacy courses assume you have constant access to computers, internet, and electricity, but that is not the reality for many communities in the world.</p>
           
           <img 
             src={ugandaClassroom} 
             alt="Classroom in Uganda with limited technology resources" 
             className="about-photo"
           />
-          <p className="image-caption">This picture was taken in Uganda where a single student is using a teacher's phone to play with ChatGPT. This photo is what inspired us to start developing an offline-first AI literacy curriculum.</p>
+          <p className="image-caption">This picture was taken in Uganda where a single student is using a teacher's phone to play with ChatGPT. This photo is what inspired us to start developing an offline-first AI literacy course.</p>
 
           <p>We wanted to remove these barriers so anyone can develop AI literacy skills no matter what environment they are in. Even if you only have a smartphone and limited internet you can still learn AI anywhere.</p>
 
-          <p>This message from one of our first students in Uganda captures exactly what we hope every learner experiences. Today, we have learners in over 60 countries across the world:</p>
+          <p>Today we have learners in {countries.length} countries across the world:</p>
 
-          <img 
-            src={studentTestimony} 
-            alt="Handwritten student feedback about understanding AI" 
+          <img
+            src={worldMap}
+            alt={`World map with the ${countries.length} countries where we have learners highlighted`}
+            className="about-photo"
+          />
+
+          <p>This message from one of our first learners in Uganda captures exactly what we hope every learner experiences:</p>
+
+          <img
+            src={studentTestimony}
+            alt="Handwritten student feedback about understanding AI"
             className="about-photo"
           />
         </section>
