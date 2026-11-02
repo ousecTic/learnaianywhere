@@ -165,6 +165,7 @@ const makePlan = ({ mode, device, pkg, onlineUrl }) => {
     return {
       title: `Teach it yourself, in ${lang}`,
       steps: [guide, slides, worksheet, neuropocket, { h: 'Start teaching the first lesson', p: 'Each lesson has a lesson part, taught from the slides, then project time, when students work on the worksheet and their own AI.' }],
+      pic: { img: slidesImg, alt: 'A slide from the course', what: 'You teach from these slides: one deck for all 4 lessons, with the recap quiz at the end of each lesson.' },
       note: <>Want to see how we teach it? About an hour of lesson videos covers the same ideas. Watch them to prepare, or play them in class. {onlineUrl && <><a href={onlineUrl}>Watch the videos online</a> or </>}<a href="#materials">download them</a>.</>,
     };
   }
@@ -191,7 +192,7 @@ const makePlan = ({ mode, device, pkg, onlineUrl }) => {
   return {
     title: `Students learn on their own, in ${lang}`,
     steps: [get, open, { h: 'Optional: print the worksheet', p: 'It is already inside the course, filled in on screen. Print it if you would rather have paper.', buttons: [file('Worksheet (PDF)', r.worksheetPdf)] }],
-    what,
+    pic: { img: startHereImg, alt: 'The START HERE page: the lessons listed on the left, a Start the course button on the right', what },
     note: <>Want to teach some of it yourself? The teacher guide and slides are in the <a href="#materials">list at the bottom of this page</a>.</>,
   };
 };
@@ -374,12 +375,10 @@ const AILiteracyForEveryone = () => {
               </ol>
               <p className="alfe-plan-note">{plan.note}</p>
             </div>
-            {askDevice && (
-              <figure className="alfe-plan-pic">
-                <div className="alfe-plan-shot"><img src={startHereImg} alt="The START HERE page: the lessons listed on the left, a Start the course button on the right" loading="lazy" /></div>
-                <figcaption>{plan.what}</figcaption>
-              </figure>
-            )}
+            <figure className="alfe-plan-pic">
+              <div className="alfe-plan-shot"><img src={plan.pic.img} alt={plan.pic.alt} loading="lazy" /></div>
+              <figcaption>{plan.pic.what}</figcaption>
+            </figure>
           </div>
         </div>
       </section>
