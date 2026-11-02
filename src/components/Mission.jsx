@@ -26,9 +26,9 @@ const Mission = () => {
             </p>
           </div>
           <div className="stat-card">
-            <div className="stat-number">1 in 2</div>
+            <div className="stat-number">50%</div>
             <p className="stat-description">
-              learners worldwide have no computer at home, and 43% have no internet at home (
+              of secondary teachers in sub-Saharan Africa have received minimum training, and it often doesn’t include ICT skills (
               <a href="https://www.unesco.org/en/articles/startling-digital-divides-distance-learning-emerge" target="_blank" rel="noopener noreferrer">UNESCO, 2020</a>
               )
             </p>
