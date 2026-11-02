@@ -158,7 +158,7 @@ This is the page to spend the most time on.
 ### 3.7 Get the course: the two questions
 - [ ] Question 1 "How do you want to use it?" has two choices: **I'll teach it** (selected by default) and **Learners go through it on their own**.
 - [ ] With "I'll teach it" selected there is **no** question 2.
-- [ ] Choosing "Learners go through it on their own" makes question 2 "Where will learners use it?" appear with four choices: On a computer (selected by default), Android phone or tablet, Online, Moodle or another platform.
+- [ ] Choosing "Learners go through it on their own" makes question 2 "Where will learners use it?" appear with four choices: On a computer (selected by default), Android phone or tablet, Learning platform, Online.
 - [ ] Switching back to "I'll teach it" hides question 2 again and the plan changes back.
 - [ ] The selected choice is clearly highlighted. The choices work with Tab and Enter and announce pressed state (aria-pressed).
 - [ ] On a phone the choices stack or shrink without text being cut.
@@ -197,7 +197,7 @@ Do this once in English, then once in a non-Latin language (Arabic or Urdu) and 
 - [ ] The text says nothing to install, needs internet the whole time.
 - [ ] Steps 2 and 3 as above.
 
-### 3.12 Plan: Moodle or another platform
+### 3.12 Plan: Learning platform
 - [ ] Step 1 "Upload the course to your platform" with the big ZIP button and text explaining it is added as an HTML package.
 - [ ] Two Kolibri links, "on a computer" and "on Android", each opening the right Google Doc in a new tab. Check both docs are shared so anyone with the link can view (open them in a private window).
 - [ ] Steps 2 and 3 as above.

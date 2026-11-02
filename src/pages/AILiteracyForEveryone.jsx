@@ -97,8 +97,8 @@ const MODES = [
 const DEVICES = [
   { id: 'computer', title: 'On a computer', sub: 'Windows, Mac or Linux', icon: 'computer' },
   { id: 'android', title: 'Android phone or tablet', sub: 'As an app', icon: 'phone' },
+  { id: 'platform', title: 'Learning platform', sub: 'Moodle, Kolibri, Google Classroom…', icon: 'school' },
   { id: 'online', title: 'Online', sub: 'Any device, needs internet', icon: 'globe', online: true },
-  { id: 'platform', title: 'Moodle or another platform', sub: 'Kolibri, Google Classroom…', icon: 'school' },
 ];
 
 const ICONS = {
