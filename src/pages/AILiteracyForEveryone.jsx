@@ -232,14 +232,11 @@ const AILiteracyForEveryone = () => {
               <span className="alfe-fact"><Icon name="offline" size={15} />Works offline</span>
               <span className="alfe-fact"><Icon name="teacher" size={15} />Teach it, or let learners go through it on their own</span>
             </div>
-            <div className="alfe-lang alfe-hero-lang">
-              <label htmlFor="alfe-lang-hero">Language</label>
-              <select id="alfe-lang-hero" value={langId} onChange={pickLang}>{langOptions}</select>
-            </div>
             <div className="alfe-hero-actions">
-              {onlineUrl && <a href={onlineUrl} className="alfe-btn alfe-btn-primary"><Icon name="globe" size={18} />Try it online now, in {pkg.name}</a>}
+              {onlineUrl && <a href={onlineUrl} className="alfe-btn alfe-btn-primary"><Icon name="globe" size={18} />Try it online now</a>}
               <a href="#get" className={onlineUrl ? 'alfe-btn alfe-btn-outline' : 'alfe-btn alfe-btn-primary'}><Icon name="download" size={18} />Get the course</a>
             </div>
+            <p className="alfe-hero-note">The trailer is in English. The online preview opens in {pkg.name}; for another language, choose it under <a href="#get">Get the course</a>.</p>
           </div>
           <div className="alfe-hero-photo">
             {trailer === 'video' && (
@@ -451,7 +448,11 @@ const AILiteracyForEveryone = () => {
             </div>
             <div className="alfe-faq-item">
               <h3>Does every learner need a device?</h3>
-              <p>No. The activities are made to be done in groups, so one device per group is enough, and the whole group can watch the slides or videos on one screen. The worksheet can be done on paper.</p>
+              <p>No. The activities are made to be done in groups, so one device per group is enough, and everyone can watch the slides or videos on one screen. The worksheet can be done on paper.</p>
+            </div>
+            <div className="alfe-faq-item">
+              <h3>Can one person take it alone?</h3>
+              <p>Yes. The whole course works for one person with one device: the videos, games, quizzes and NeuroPocket, and the worksheet on screen or on paper. Nobody needs to teach it.</p>
             </div>
             <div className="alfe-faq-item">
               <h3>Can I share or change it?</h3>

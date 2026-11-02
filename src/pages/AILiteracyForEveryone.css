@@ -60,8 +60,7 @@
 }
 .alfe-fact svg { color: var(--alfe-link); }
 .alfe-hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
-.alfe-hero-lang { padding-top: 6px; }
-.alfe-hero-lang select { min-height: 44px; font-size: 16px; padding: 6px 10px; }
+.alfe-hero-note { margin: -4px 0 0; font-size: 14px; color: var(--alfe-muted); }
 .alfe-hero-photo {
   flex: 1 1 420px; min-width: 0; max-width: 560px; position: relative; aspect-ratio: 4 / 3;
   border-radius: 8px; overflow: hidden; background: #0f172a; box-shadow: 0 14px 36px rgba(15, 23, 42, 0.18);
