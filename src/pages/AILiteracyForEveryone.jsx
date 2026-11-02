@@ -163,67 +163,43 @@ const StepHead = ({ n, children }) => (
   </div>
 );
 
-// The teacher's materials for one package, as rows of download buttons.
-const materialRows = (pkg) => {
-  const r = pkg.resources || {};
-  const english = pkg.lang === 'en';
-  return [
-    { name: 'Teacher guide', what: 'How the course is set up and how each lesson runs. Read this first.', buttons: [file('PDF', r.guidePdf), file('Word', r.guideDocx)] },
-    { name: 'Slides', what: 'For all 4 lessons, each with a recap quiz and then project time.', buttons: [file('PDF', r.slidesPdf), file('PowerPoint', r.slidesPptx)] },
-    { name: 'Worksheet', what: 'A 1-page project that builds across the 4 lessons.', buttons: [file('PDF', r.worksheetPdf), file('Word', r.worksheetDocx)] },
-    { name: 'Worksheet example', what: 'Filled in, to show learners what to aim for.', buttons: [file('PDF', r.examplePdf), file('Word', r.exampleDocx)] },
-    {
-      name: 'Lesson videos',
-      what: `All 25 videos, with captions, in each lesson’s folder. They’re also inside the course download.${english ? '' : ' On YouTube they are in English only.'}`,
-      buttons: [['Open in Google Drive', r.videosFolder && r.videosFolder.url], [english ? 'Watch on YouTube' : 'Watch in English on YouTube', YOUTUBE_URL]],
-    },
-    { name: 'NeuroPocket app', what: 'Learners train their own AI with pictures that come with the app, or their own.', buttons: [['Android app', NEUROPOCKET.android], ['Windows app', NEUROPOCKET.windows], ['Online at neuropocket.com', NEUROPOCKET.online]] },
-  ];
-};
-
-// The plan for one set of answers: a few numbered steps, each with its own
-// buttons, and a closing note that points at the other way of using the course.
-const makePlan = ({ mode, device, pkg, onlineUrl, openFiles }) => {
+// The plan for one set of answers: a few steps, each a heading, one short line
+// and its buttons, beside a picture of what learners will see. Kept short on
+// purpose: the language and the answers are already chosen just above it.
+const makePlan = ({ mode, device, pkg, onlineUrl }) => {
   const r = pkg.resources || {};
   const lang = pkg.name;
-  const guide = { h: 'Read the teacher guide', p: 'How the course is set up, how each lesson splits into lesson time and project time, and what learners should be able to do by the end.', buttons: [file('PDF', r.guidePdf), file('Word', r.guideDocx)] };
-  const slides = { h: 'Get the slides', p: 'One deck for all 4 lessons. Each lesson teaches the ideas, then has a recap quiz, then project time. Show them on a screen or print them.', buttons: [file('PDF', r.slidesPdf), file('PowerPoint', r.slidesPptx)] };
-  const worksheet = { h: 'Print the worksheet', p: 'A 1-page project learners build up over the 4 lessons. Plain paper works too. There is a filled-in example to check against.', buttons: [file('Worksheet (PDF)', r.worksheetPdf), file('Worksheet (Word)', r.worksheetDocx), file('Filled-in example (PDF)', r.examplePdf)] };
-  const neuropocket = { h: 'Put NeuroPocket on one device per group', p: 'Learners train their own AI with pictures that come with the app, or their own if the device has a camera. The apps work offline once installed.', buttons: [['Android app', NEUROPOCKET.android], ['Windows app', NEUROPOCKET.windows], ['Online at neuropocket.com', NEUROPOCKET.online]] };
+  const guide = { h: 'Read the teacher guide', p: 'How the course works and what each lesson covers.', buttons: [file('PDF', r.guidePdf), file('Word', r.guideDocx)] };
+  const slides = { h: 'Get the slides', p: 'One deck for all 4 lessons. Show it or print it.', buttons: [file('PDF', r.slidesPdf), file('PowerPoint', r.slidesPptx)] };
+  const worksheet = { h: 'Print the worksheet', p: 'A 1-page project for the 4 lessons, with a filled-in example.', buttons: [file('Worksheet (PDF)', r.worksheetPdf), file('Worksheet (Word)', r.worksheetDocx), file('Filled-in example (PDF)', r.examplePdf)] };
+  const neuropocket = { h: 'Put NeuroPocket on one device per group', p: 'Learners train their own AI. Works offline once installed.', buttons: [['Android app', NEUROPOCKET.android], ['Windows app', NEUROPOCKET.windows], ['Online at neuropocket.com', NEUROPOCKET.online]] };
+
+  const videos = { h: 'Watch the lesson videos', p: '25 short videos with captions. Watch them to prepare, or play them to the group.', buttons: [
+    ['Open in Google Drive', r.videosFolder && r.videosFolder.url],
+    ['Watch online', onlineUrl],
+    ['Watch on YouTube', pkg.lang === 'en' && YOUTUBE_URL], // English only there
+  ].filter(([, url]) => url) };
 
   if (mode === 'teach') {
     return {
-      title: `Teach it yourself, in ${lang}`,
-      steps: [guide, slides, worksheet, neuropocket, { h: 'Start teaching the first lesson', p: 'Each lesson has a lesson part, taught from the slides, then project time, when learners work on the worksheet and their own AI.' }],
-      pic: { img: slidesImg, alt: 'A slide from the course', what: 'You teach from these slides: one deck for all 4 lessons, each with its recap quiz and project time.' },
-      note: <>Want to see how we teach it? About an hour of lesson videos covers the same ideas. Watch them to prepare, or play them to the group. {onlineUrl && <><a href={onlineUrl}>Watch the videos online</a> or </>}<a href="#materials" onClick={openFiles}>download them</a>.</>,
+      steps: [guide, slides, worksheet, neuropocket, videos],
     };
   }
 
-  const zip = ['Download the course', `${lang} · ${megabytes(pkg.bytes)}`, pkg.url];
-  let get; let open; let what;
+  const zip = ['Download the course', megabytes(pkg.bytes), pkg.url];
+  let get;
   if (device === 'android') {
-    get = { h: 'Install the app on the learners’ phones or tablets', p: <>Open the file, tap <strong>Install</strong>, then choose <strong>{lang}</strong>. The app downloads the course once, while you still have internet. iPhone or iPad? Use it online instead.</>, big: ['Download the app', `${APP_MB} MB`, APP_URL], more: INSTALL_STEPS_URL && <a href={INSTALL_STEPS_URL}>See the install steps with pictures</a> };
-    open = { h: 'Learners open the app and tap Lesson 1', p: 'The videos, games and quizzes come in order. The app remembers where they got to.' };
-    what = 'This is what the app shows: the 4 lessons, with progress saved. The teacher materials are under Resources.';
+    get = { h: 'Install the app on the learners’ phones or tablets', p: <>Install it and choose <strong>{lang}</strong>. On iPhone or iPad? Use it online.</>, big: ['Download the app', `${APP_MB} MB`, APP_URL], more: INSTALL_STEPS_URL && <a href={INSTALL_STEPS_URL}>See the install steps with pictures</a> };
   } else if (device === 'online') {
-    get = { h: 'Share the link with learners', p: 'Nothing to install. Needs internet the whole time.', big: ['Open the course', lang, onlineUrl] };
-    open = { h: 'Learners open the link and start Lesson 1', p: 'The videos, games and quizzes come in order. The browser remembers where they got to.' };
-    what = 'This is what the link opens: the 4 lessons, with progress saved. The teacher materials are under Resources.';
+    get = { h: 'Share the link with learners', p: 'Nothing to install. Needs internet.', big: ['Open the course', null, onlineUrl] };
   } else if (device === 'platform') {
-    get = { h: 'Upload the course to your platform', p: <>Download the ZIP and add it to your course as an HTML package, the way you would add any web activity. Already on Kolibri? The course is in the Kolibri library: see how to add it <a href={KOLIBRI.computer} target="_blank" rel="noopener noreferrer">on a computer</a> or <a href={KOLIBRI.android} target="_blank" rel="noopener noreferrer">on Android</a>.</>, big: zip };
-    open = { h: 'Learners open it from your course page and start Lesson 1', p: 'The videos, games and quizzes come in order, inside your platform.' };
-    what = 'This is what learners see inside your platform: the 4 lessons, with progress saved. The teacher materials are under Resources.';
+    get = { h: 'Upload the course to your platform', p: <>Add the ZIP as an HTML package. On Kolibri? See how: <a href={KOLIBRI.computer} target="_blank" rel="noopener noreferrer">computer</a> · <a href={KOLIBRI.android} target="_blank" rel="noopener noreferrer">Android</a>.</>, big: zip };
   } else {
-    get = { h: 'Download the course to a computer', p: <>Unzip it and open <strong>START HERE</strong>. Copy the folder to other computers with a USB stick.</>, big: zip };
-    open = { h: 'Learners open START HERE and start Lesson 1', p: 'The videos, games and quizzes come in order. It remembers where they got to.' };
-    what = 'This is START HERE, what opens on the computer: the 4 lessons, with progress saved. The teacher materials are under Resources.';
+    get = { h: 'Download the course to a computer', p: <>Unzip it and open <strong>START HERE</strong>.</>, big: zip };
   }
   return {
-    title: `Learners go through it on their own, in ${lang}`,
-    steps: [get, open],
-    pic: { img: startHereImg, alt: 'The START HERE page: the lessons listed on the left, a Start the course button on the right', what },
-    note: <>Want to teach some of it yourself? The teacher guide and slides are in the <a href="#materials" onClick={openFiles}>list at the bottom of this page</a>.</>,
+    steps: [get],
+    pic: { img: startHereImg, alt: 'The START HERE page: the lessons listed on the left, a Start the course button on the right' },
   };
 };
 
@@ -235,12 +211,10 @@ const AILiteracyForEveryone = () => {
   const [device, setDevice] = useState('computer');
   const [trailer, setTrailer] = useState('off'); // 'off' | 'video' | 'embed'
   const [openLesson, setOpenLesson] = useState(null);
-  const [filesOpen, setFilesOpen] = useState(false);
-  const openFiles = () => setFilesOpen(true);
   const pkg = packages.find((p) => p.id === langId) || packages[0];
   const onlineUrl = ONLINE_URL ? ONLINE_URL(pkg.id) : null;
   const devices = DEVICES.filter((d) => !d.online || onlineUrl);
-  const plan = makePlan({ mode, device, pkg, onlineUrl, openFiles });
+  const plan = makePlan({ mode, device, pkg, onlineUrl });
   const askDevice = mode === 'self';
 
   // One language for the whole page: the hero's menu and the one under Get the
@@ -405,16 +379,15 @@ const AILiteracyForEveryone = () => {
           <div className="alfe-card alfe-plan">
             <div className="alfe-plan-text">
               <p className="alfe-eyebrow">Your plan</p>
-              <h3 className="alfe-plan-title">{plan.title}</h3>
               <ol className="alfe-steps">
                 {plan.steps.map((s, i) => (
                   <li key={s.h}>
-                    <span className="alfe-step-small" aria-hidden="true">{i + 1}</span>
+                    {plan.steps.length > 1 && <span className="alfe-step-small" aria-hidden="true">{i + 1}</span>}
                     <div className="alfe-step-body">
                       <h4>{s.h}</h4>
                       <p>{s.p}</p>
                       {s.big && (
-                        <a href={s.big[2]} className="alfe-btn alfe-btn-primary alfe-start" {...linkProps(s.big[2])}><Icon name={device === 'online' ? 'arrow' : 'download'} size={18} />{s.big[0]} <span className="alfe-btn-meta">· {s.big[1]}</span></a>
+                        <a href={s.big[2]} className="alfe-btn alfe-btn-primary alfe-start" {...linkProps(s.big[2])}><Icon name={device === 'online' ? 'arrow' : 'download'} size={18} />{s.big[0]}{s.big[1] && <span className="alfe-btn-meta"> · {s.big[1]}</span>}</a>
                       )}
                       {s.more}
                       {s.buttons && (
@@ -426,65 +399,13 @@ const AILiteracyForEveryone = () => {
                   </li>
                 ))}
               </ol>
-              <p className="alfe-plan-note">{plan.note}</p>
             </div>
-            <figure className="alfe-plan-pic">
-              <div className="alfe-plan-shot"><img src={plan.pic.img} alt={plan.pic.alt} loading="lazy" /></div>
-              <figcaption>{plan.pic.what}</figcaption>
-            </figure>
-          </div>
-        </div>
-      </section>
-
-      {/* All the files, one by one */}
-      <section id="materials" className="alfe-section" aria-labelledby="mat-h">
-        <div className="alfe-wrap alfe-narrow alfe-files">
-          <h2 id="mat-h">All the files, in {pkg.name}</h2>
-          <p className="alfe-section-lead">Every file in the course, one by one, if you’d rather not answer the questions above.</p>
-          <button type="button" className="alfe-btn alfe-btn-outline alfe-start" aria-expanded={filesOpen} aria-controls="alfe-files-all" onClick={() => setFilesOpen((o) => !o)}>
-            <span className={filesOpen ? 'alfe-toggle is-open' : 'alfe-toggle'}><Icon name="chevron" size={18} /></span>{filesOpen ? 'Hide the files' : 'Show all the files'}
-          </button>
-          {filesOpen && <div id="alfe-files-all" className="alfe-files-all">
-
-          <h3>To teach with</h3>
-          <p className="alfe-muted">PDF to print, Word and PowerPoint to edit. These are also inside the course download, under Resources.</p>
-          <div className="alfe-files-list">
-            {materialRows(pkg).map((row) => (
-              <div className="alfe-file-row" key={row.name}>
-                <div className="alfe-file-name">
-                  <strong>{row.name}</strong>
-                  {row.what && <span>{row.what}</span>}
-                </div>
-                <div className="alfe-file-btns">
-                  {row.buttons.map(([label, url]) => <FileButton key={label} label={label} url={url} />)}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <h3>The course to learn with</h3>
-          <p className="alfe-muted">The videos, games, quizzes and NeuroPocket together. Pick the one that fits the device.</p>
-          <div className="alfe-files-list">
-            <div className="alfe-file-row">
-              <div className="alfe-file-name"><strong>For a computer</strong><span>A ZIP with everything. Unzip it and open START HERE. Windows, Mac or Linux.</span></div>
-              <div className="alfe-file-btns"><FileButton label={`Download · ${megabytes(pkg.bytes)}`} url={pkg.url} /></div>
-            </div>
-            <div className="alfe-file-row">
-              <div className="alfe-file-name"><strong>For Android phones and tablets</strong><span>A small app that downloads the course in your language once, then works offline.</span></div>
-              <div className="alfe-file-btns"><FileButton label={`Download the app · ${APP_MB} MB`} url={APP_URL} />{INSTALL_STEPS_URL && <FileButton label="Install steps" url={INSTALL_STEPS_URL} />}</div>
-            </div>
-            {onlineUrl && (
-              <div className="alfe-file-row">
-                <div className="alfe-file-name"><strong>Online</strong><span>The same course in a browser. Nothing to install, needs internet.</span></div>
-                <div className="alfe-file-btns"><FileButton label={`Open the course in ${pkg.name}`} url={onlineUrl} /></div>
-              </div>
+            {plan.pic && (
+              <figure className="alfe-plan-pic">
+                <div className="alfe-plan-shot"><img src={plan.pic.img} alt={plan.pic.alt} loading="lazy" /></div>
+              </figure>
             )}
-            <div className="alfe-file-row">
-              <div className="alfe-file-name"><strong>On Kolibri</strong><span>The course is in the Kolibri library, for anyone who already uses it. How to add it:</span></div>
-              <div className="alfe-file-btns"><FileButton label="On a computer" url={KOLIBRI.computer} /><FileButton label="On Android" url={KOLIBRI.android} /></div>
-            </div>
           </div>
-          </div>}
         </div>
       </section>
 

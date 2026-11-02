@@ -173,8 +173,7 @@
 /* The plan */
 .alfe-plan { border: 2px solid var(--alfe-blue); flex-direction: row; flex-wrap: wrap; gap: 28px 36px; }
 .alfe-plan-text { flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 20px; }
-.alfe-plan-title { margin: 0; font-size: 22px; font-weight: 800; line-height: 1.25; }
-.alfe-plan-text .alfe-eyebrow { margin: 0 0 -16px; font-size: 13px; font-weight: 700; }
+.alfe-plan-text .alfe-eyebrow { margin: 0 0 -6px; font-size: 13px; font-weight: 700; }
 .alfe-steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 18px; }
 .alfe-steps li { display: flex; gap: 14px; align-items: flex-start; }
 .alfe-step-small {
@@ -185,27 +184,11 @@
 .alfe-step-body h4 { margin: 0; font-size: 17px; font-weight: 700; }
 .alfe-step-body > a:not(.alfe-btn) { font-size: 15px; font-weight: 600; }
 .alfe-btn-meta { font-weight: 500; opacity: 0.9; }
-.alfe-plan-note { background: #F7FBFD; border-radius: 8px; padding: 14px 18px; font-size: 15px; color: #1f2937; }
-.alfe-plan-note a { font-weight: 700; }
 .alfe-plan-pic { flex: 1 1 300px; max-width: 400px; min-width: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
 .alfe-plan-shot { border-radius: 8px; overflow: hidden; border: 1px solid var(--alfe-line); background: #F3F4F6; box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12); }
 .alfe-plan-shot img { display: block; width: 100%; height: auto; }
-.alfe-plan-pic figcaption { font-size: 14px; color: var(--alfe-muted); }
 
-/* All the files */
-.alfe-files { display: flex; flex-direction: column; gap: 4px; }
-.alfe-files > .alfe-btn { margin-top: 4px; gap: 8px; }
-.alfe-files .alfe-toggle.is-open { transform: rotate(180deg); }
-.alfe-files-all { display: flex; flex-direction: column; gap: 4px; margin-top: 8px; }
-.alfe-files h2 { margin-bottom: 20px; }
-.alfe-files h3 { margin: 16px 0 0; font-size: 18px; font-weight: 800; }
-.alfe-files > p { margin: 4px 0 0; font-size: 15px; }
-.alfe-files-list { background: #ffffff; border: 1px solid var(--alfe-grey-line); border-radius: 8px; padding: 4px 24px; margin-top: 12px; }
-.alfe-file-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 20px; padding: 16px 0; }
-.alfe-file-row + .alfe-file-row { border-top: 1px solid var(--alfe-grey-line); }
-.alfe-file-name { flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; }
-.alfe-file-name strong { font-size: 16px; }
-.alfe-file-name span { font-size: 14px; color: var(--alfe-muted); }
+/* File buttons in the plan */
 .alfe-file-btns { display: flex; flex-wrap: wrap; gap: 8px; }
 .alfe-file-btn {
   border: 1.5px solid var(--alfe-blue); border-radius: 6px; padding: 9px 14px; min-height: 44px; color: var(--alfe-link);
@@ -234,7 +217,6 @@
   .alfe-lesson-img { flex-basis: 100%; }
   .alfe-card { padding: 20px; }
   .alfe-plan-pic { max-width: none; }
-  .alfe-files-list { padding: 4px 16px; }
   .alfe-lang { width: 100%; }
   .alfe-lang select { flex: 1 1 auto; min-width: 0; }
   .alfe-start { align-self: stretch; }

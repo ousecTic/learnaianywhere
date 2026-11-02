@@ -55,7 +55,7 @@ These are things the code already tells us. Check them first so you don't redisc
 
 ### 1.4 Navigation behaviour
 - [ ] Opening a new page starts at the top, not where you left the previous page.
-- [ ] Links with a `#` (for example the banner's `#download`, the course page's `#get` and `#materials`) scroll to that section.
+- [ ] Links with a `#` (for example the banner's `#download`, the course page's `#get`) scroll to that section.
 - [ ] Browser back and forward buttons work and restore the right page.
 - [ ] Reloading any page (for example `/about`, `/courses/ai-literacy-for-everyone`) loads that page, not a Netlify 404. This checks the `_redirects` catch-all.
 - [ ] Old addresses still work: `/curriculum` and `/curriculum/intro-to-ai` both redirect to the course page. `/curriculum/intro-to-generative-ai` still shows the Gen AI course. These are the links other sites and Kolibri may have.
@@ -140,7 +140,7 @@ This is the page to spend the most time on.
 - [ ] Clicking a row opens it; clicking it again closes it; opening another closes the first (only one open at a time).
 - [ ] The chevron turns when open.
 - [ ] Inside each: a picture of the activity, "Learners will:" with the objectives, and the small tags (Slides, N short videos, activity name, Recap quiz, Worksheet part N).
-- [ ] Video counts: 4, 5, 7, 7 (with the 2 introduction videos that is 25, matching the card above and the files section). Confirm against the Drive folders.
+- [ ] Video counts: 4, 5, 7, 7 (with the 2 introduction videos that is 25, matching the card above). Confirm against the Drive folders.
 - [ ] Objectives match the teacher guide word for word or close to it.
 - [ ] Activity names match the slides: AI or Not game, Train a model in NeuroPocket, Describer Drawer game, Bias challenge in NeuroPocket.
 - [ ] **Keyboard:** Tab to a lesson row, press Enter or Space, it opens. Screen reader users get the open/closed state (the row is a real button with aria-expanded).
@@ -165,70 +165,58 @@ This is the page to spend the most time on.
 
 ### 3.8 The plan card: "I'll teach it"
 Do this once in English, then once in a non-Latin language (Arabic or Urdu) and once in Swahili (Kenya).
-- [ ] Title "Teach it yourself, in English" (changes with the language).
-- [ ] Five steps: 1 Read the teacher guide, 2 Get the slides, 3 Print the worksheet, 4 Put NeuroPocket on one device per group, 5 Start teaching the first lesson.
+- [ ] The card starts with the small "YOUR PLAN" label and no big title. Each step is a heading, one short line and its buttons.
+- [ ] Five steps: 1 Read the teacher guide, 2 Get the slides, 3 Print the worksheet, 4 Put NeuroPocket on one device per group, 5 Watch the lesson videos.
 - [ ] Step 1 buttons PDF and Word download the guide **in the chosen language**. Open each file and check it is the right language and the right document.
 - [ ] Step 2 buttons: "PDF · 15 MB" and "PowerPoint · 95 MB" (sizes shown because they are big). Both download, both are the slides in the chosen language.
 - [ ] Step 3 buttons: Worksheet (PDF), Worksheet (Word), Filled-in example (PDF). All three download in the chosen language.
-- [ ] Step 4 buttons: Android app (APK from the NeuroPocket 1.8.0 release), Windows app (EXE), Online at neuropocket.com (opens in a new tab). Step 4 text says a camera is optional.
-- [ ] Step 5 has no buttons, just text.
-- [ ] The picture on the right is a slide with the caption about teaching from one deck. On a phone it moves under the steps.
-- [ ] The closing note: "Want to see how we teach it? ... Watch the videos online or download them." "Watch the videos online" opens `/course/online/<language>/`. "download them" opens the All the files section further down (it should expand it **and** scroll to it).
+- [ ] Step 4 buttons: Android app (APK from the NeuroPocket 1.8.0 release), Windows app (EXE), Online at neuropocket.com (opens in a new tab). Step 4 text does not mention a camera.
+- [ ] Step 5 text "25 short videos with captions. Watch them to prepare, or play them to the group." Buttons: Open in Google Drive (that language's video folder), Watch online (`/course/online/<language>/`), and Watch on YouTube **only in English**. No other language shows a YouTube button.
+- [ ] There is no picture: the steps use the full width of the card.
+- [ ] There is no closing note under the steps.
 - [ ] No step says how many minutes anything takes (timings are only on the lesson cards).
 - [ ] No step says "students" or "class".
 
 ### 3.9 The plan card: "Learners go through it on their own" → On a computer
-- [ ] Title "Learners go through it on their own, in English".
-- [ ] Step 1 "Download the course to a computer" with the big button "Download the course · English · 119 MB". The size changes per language (French 185 MB, Urdu 202 MB, and so on). The button downloads the ZIP straight away (no new tab).
-- [ ] Step 2 "Learners open START HERE and start Lesson 1".
-- [ ] No third step: the plan ends at step 2 (no "print the worksheet").
-- [ ] The picture is the START HERE screenshot with the caption about the 4 lessons and Resources.
-- [ ] Closing note links to the All the files section and opens it.
+- [ ] No big title, only the "YOUR PLAN" label.
+- [ ] Step 1 "Download the course to a computer", text "Unzip it and open START HERE.", with the big button "Download the course · 116 MB" (no language in the button). The size changes per language (French 185 MB, Urdu 202 MB, and so on). The button downloads the ZIP straight away (no new tab).
+- [ ] The plan is a single step with no step number in front of it (no "Learners open START HERE" step, no "print the worksheet").
+- [ ] The picture is the v1.5 START HERE screenshot (sidebar says Version 1.5, 39 activities), with no caption.
+- [ ] No closing note.
 
 ### 3.10 Plan: Android phone or tablet
 - [ ] Step 1 "Install the app on the learners' phones or tablets" with the big button "Download the app · 3 MB". Downloads the APK from the `app-latest` release.
 - [ ] Under it, "See the install steps with pictures" goes to `/courses/ai-literacy-for-everyone/install-android`.
-- [ ] The text mentions choosing the language inside the app and that iPhone/iPad users should use it online.
-- [ ] Step 2 "Learners open the app and tap Lesson 1".
+- [ ] The text reads "Install it and choose English. On iPhone or iPad? Use it online." (the language name changes).
 
 ### 3.11 Plan: Online
-- [ ] Step 1 "Share the link with learners" with the big button "Open the course · English" (arrow icon, not a download icon). It opens `/course/online/en/`; after switching language it opens that language's folder (for example `/course/online/sw-TZ/`).
-- [ ] The text says nothing to install, needs internet the whole time.
-- [ ] Step 2 as above, and no step 3.
+- [ ] Step 1 "Share the link with learners" with the big button "Open the course" (no language or size, arrow icon, not a download icon). It opens `/course/online/en/`; after switching language it opens that language's folder (for example `/course/online/sw-TZ/`).
+- [ ] The text reads "Nothing to install. Needs internet."
 
 ### 3.12 Plan: Learning platform
-- [ ] Step 1 "Upload the course to your platform" with the big ZIP button and text explaining it is added as an HTML package.
-- [ ] Two Kolibri links, "on a computer" and "on Android", each opening the right Google Doc in a new tab. Check both docs are shared so anyone with the link can view (open them in a private window).
-- [ ] Step 2 as above, and no step 3.
+- [ ] Step 1 "Upload the course to your platform" with the big button "Download the course · 116 MB" and the text "Add the ZIP as an HTML package. On Kolibri? See how: computer · Android."
+- [ ] Two Kolibri links, "computer" and "Android", each opening the right Google Doc in a new tab. Check both docs are shared so anyone with the link can view (open them in a private window).
 
 ### 3.13 Every button, every language (the tedious but important one)
-Switch through all 9 languages and, in the All the files section (3.14), click every button. For each language check:
+Switch through all 9 languages and, in the "I'll teach it" plan, click every button. For each language check:
 - [ ] Teacher guide PDF and Word open and are in that language.
 - [ ] Slides PDF and PowerPoint open and are in that language.
-- [ ] Worksheet PDF and Word, Worksheet example PDF and Word.
+- [ ] Worksheet PDF and Word, Filled-in example PDF.
 - [ ] Each worksheet is 1 page in every language. The guide is 4 pages (5 in Hindi and Urdu) with no heading stranded at the bottom of a page.
-- [ ] The ZIP downloads and its size matches the label.
+- [ ] In each "on their own" plan, the ZIP downloads and its size matches the label.
 - [ ] "Open in Google Drive" opens that language's video folder and the folder is viewable without signing in.
-- [ ] YouTube button: English says "Watch on YouTube"; other languages say "Watch in English on YouTube" and the Lesson videos text adds "On YouTube they are in English only."
 - [ ] Both Swahili versions point at the same guide, slides and worksheet but different video folders. Confirm that is intended.
 - [ ] No button shows as greyed out "Coming soon". If one does, that resource is missing from `course/downloads.json`.
 - [ ] Downloads (ZIP, APK, EXE, Google exports) do **not** open a new tab. Pages (Drive folder, YouTube, Kolibri docs, neuropocket.com) **do** open in a new tab.
+- [ ] There is no "All the files" section any more: after the plan card the page goes straight to Common questions.
 
-### 3.14 All the files section
-- [ ] Heading "All the files, in English" (changes with the language).
-- [ ] Starts collapsed with a "Show all the files" button. Clicking shows everything and the button becomes "Hide the files".
-- [ ] Links from the plan notes ("download them", "list at the bottom of this page") open it and land on it.
-- [ ] "To teach with" rows: Teacher guide, Slides, Worksheet, Worksheet example, Lesson videos, NeuroPocket app.
-- [ ] "The course to learn with" rows: For a computer (ZIP with size), For Android (app · 3 MB + Install steps), Online (Open the course in English), On Kolibri (On a computer, On Android).
-- [ ] On a phone the buttons wrap under the description instead of overflowing sideways.
-
-### 3.15 Common questions
+### 3.14 Common questions
 - [ ] Five questions: Do I need internet to teach it? / Do I need to know about AI already? / Does every learner need a device? / Can one person take it alone? / Can I share or change it?
 - [ ] The device answer says one device per group is enough and the worksheet can be on paper (it must **not** say "no devices at all").
 - [ ] The "alone" answer says one person with one device can do the whole course.
 - [ ] The licence answer links to CC BY-NC-SA in a new tab.
 
-### 3.16 Content accuracy on this page
+### 3.15 Content accuracy on this page
 - [ ] Every number on the page matches reality: 4 lessons, 25 videos, 1-page worksheet, 8 languages, version 1.3 and its date, 3 MB app, ZIP sizes, NeuroPocket 1.8.0.
 - [ ] "About an hour of lesson videos" is right (you measured 51.5 minutes).
 - [ ] Nothing says "kit", "students", "class" or "classroom" where you wanted "course", "learners", "group".
