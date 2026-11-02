@@ -103,6 +103,7 @@ const ICONS = {
   clock: <><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></>,
   offline: <><path d="M4 9a12 12 0 0 1 16 0" /><path d="M7.5 12.5a7 7 0 0 1 9 0" /><circle cx="12" cy="16.5" r="1.2" fill="currentColor" /><path d="M3 3l18 18" /></>,
   check: <path d="M5 12l5 5 9-10" />,
+  chevron: <path d="M6 9l6 6 6-6" />,
 };
 
 const Icon = ({ name, size = 20 }) => (
@@ -207,6 +208,7 @@ const AILiteracyForEveryone = () => {
   const [mode, setMode] = useState('teach');
   const [device, setDevice] = useState('computer');
   const [trailer, setTrailer] = useState('off'); // 'off' | 'video' | 'embed'
+  const [openLesson, setOpenLesson] = useState(null);
   const pkg = packages.find((p) => p.id === langId) || packages[0];
   const onlineUrl = ONLINE_URL ? ONLINE_URL(pkg.id) : null;
   const devices = DEVICES.filter((d) => !d.online || onlineUrl);
@@ -227,16 +229,12 @@ const AILiteracyForEveryone = () => {
           <div className="alfe-hero-text">
             <p className="alfe-eyebrow">Free course · Ages 11 and up · 8 languages</p>
             <h1>AI Literacy for Everyone</h1>
-            <p className="alfe-lead">A 4-lesson course on how AI works. Learners train their own AI and learn to use it responsibly.</p>
-            <div className="alfe-facts">
-              <span className="alfe-fact"><Icon name="offline" size={15} />Works offline</span>
-              <span className="alfe-fact"><Icon name="teacher" size={15} />Teach it, or let learners go through it on their own</span>
-            </div>
+            <p className="alfe-lead">A 4-lesson course on how AI works. Learners train their own AI and learn to use it responsibly, with or without internet.</p>
             <div className="alfe-hero-actions">
               {onlineUrl && <a href={onlineUrl} className="alfe-btn alfe-btn-primary"><Icon name="globe" size={18} />Try it online now</a>}
               <a href="#get" className={onlineUrl ? 'alfe-btn alfe-btn-outline' : 'alfe-btn alfe-btn-primary'}><Icon name="download" size={18} />Get the course</a>
             </div>
-            <p className="alfe-hero-note">The trailer is in English. The online preview opens in {pkg.name}; for another language, choose it under <a href="#get">Get the course</a>.</p>
+            <p className="alfe-hero-note">In English here. Other languages are under <a href="#get">Get the course</a>.</p>
           </div>
           <div className="alfe-hero-photo">
             {trailer === 'video' && (
@@ -286,24 +284,34 @@ const AILiteracyForEveryone = () => {
           <h2 id="lessons-h">The 4 lessons</h2>
           <p className="alfe-section-lead">The course is flexible: teach all 4 lessons in a day, or one a day and finish in a week.</p>
           <div className="alfe-lessons">
-            {LESSONS.map((l) => (
-              <article className="alfe-lesson" key={l.n}>
-                <div className="alfe-lesson-img"><img src={l.img} alt={`Lesson ${l.n}: ${l.activity}`} loading="lazy" /></div>
-                <div className="alfe-lesson-text">
-                  <div className="alfe-lesson-head">
-                    <h3><span className="alfe-lesson-n">Lesson {l.n}.</span> {l.title}</h3>
-                    <span className="alfe-lesson-time"><Icon name="clock" size={15} />{l.time}</span>
-                  </div>
-                  <p className="alfe-lesson-will">Learners will:</p>
-                  <ul>
-                    {l.objectives.map((o) => <li key={o}>{o}</li>)}
-                  </ul>
-                  <div className="alfe-tags">
-                    {['Slides', `${l.videos} short videos`, l.activity, 'Recap quiz', `Worksheet part ${l.n}`].map((t) => <span key={t}>{t}</span>)}
-                  </div>
-                </div>
-              </article>
-            ))}
+            {LESSONS.map((l) => {
+              const open = openLesson === l.n;
+              return (
+                <article className={open ? 'alfe-lesson is-open' : 'alfe-lesson'} key={l.n}>
+                  <h3 className="alfe-lesson-title">
+                    <button type="button" aria-expanded={open} aria-controls={`alfe-lesson-${l.n}`} onClick={() => setOpenLesson(open ? null : l.n)}>
+                      <span className="alfe-lesson-name"><span className="alfe-lesson-n">Lesson {l.n}.</span> {l.title}</span>
+                      <span className="alfe-lesson-time"><Icon name="clock" size={15} />{l.time}</span>
+                      <span className="alfe-toggle" aria-hidden="true"><Icon name="chevron" size={20} /></span>
+                    </button>
+                  </h3>
+                  {open && (
+                    <div className="alfe-lesson-body" id={`alfe-lesson-${l.n}`}>
+                      <div className="alfe-lesson-img"><img src={l.img} alt={`Lesson ${l.n}: ${l.activity}`} loading="lazy" /></div>
+                      <div className="alfe-lesson-text">
+                        <p className="alfe-lesson-will">Learners will:</p>
+                        <ul>
+                          {l.objectives.map((o) => <li key={o}>{o}</li>)}
+                        </ul>
+                        <div className="alfe-tags">
+                          {['Slides', `${l.videos} short videos`, l.activity, 'Recap quiz', `Worksheet part ${l.n}`].map((t) => <span key={t}>{t}</span>)}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>

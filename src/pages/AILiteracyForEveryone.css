@@ -53,12 +53,6 @@
 .alfe-eyebrow { margin: 0; font-size: 14px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--alfe-link); }
 .alfe-hero h1 { margin: 0; font-size: 52px; line-height: 1.08; font-weight: 800; letter-spacing: -0.02em; }
 .alfe-lead { margin: 0; font-size: 20px; color: var(--alfe-text); max-width: 560px; }
-.alfe-facts { display: flex; flex-wrap: wrap; gap: 8px 10px; }
-.alfe-fact {
-  display: inline-flex; align-items: center; gap: 7px; font-size: 14px; font-weight: 600; color: #1f2937;
-  background: #ffffff; border: 1px solid var(--alfe-line); border-radius: 999px; padding: 7px 13px;
-}
-.alfe-fact svg { color: var(--alfe-link); }
 .alfe-hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
 .alfe-hero-note { margin: -4px 0 0; font-size: 14px; color: var(--alfe-muted); }
 .alfe-hero-photo {
@@ -97,19 +91,24 @@
 .alfe-kit-text h3 { margin: 0 0 6px; font-size: 18px; }
 .alfe-kit-text p { margin: 0; font-size: 15px; color: var(--alfe-muted); }
 
-/* Lessons */
+/* Lessons: one open at a time */
 .alfe-lessons { display: flex; flex-direction: column; gap: 12px; }
-.alfe-lesson {
-  border: 1px solid var(--alfe-grey-line); border-radius: 8px; background: #ffffff; padding: 20px 24px;
-  display: flex; flex-wrap: wrap; gap: 18px 24px; align-items: flex-start;
+.alfe-lesson { border: 1px solid var(--alfe-grey-line); border-radius: 8px; background: #ffffff; overflow: hidden; }
+.alfe-lesson-title { margin: 0; }
+.alfe-lesson-title button {
+  width: 100%; display: flex; align-items: center; gap: 14px; padding: 16px 20px; min-height: 64px;
+  background: #ffffff; border: none; border-radius: 0; cursor: pointer; text-align: left; font: inherit; color: var(--alfe-ink);
 }
-.alfe-lesson-img { flex: 0 0 180px; aspect-ratio: 16 / 10; border-radius: 8px; overflow: hidden; border: 1px solid var(--alfe-grey-line); background: #F3F4F6; }
-.alfe-lesson-img img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
-.alfe-lesson-text { flex: 1 1 400px; min-width: 0; display: flex; flex-direction: column; gap: 12px; }
-.alfe-lesson-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 20px; }
-.alfe-lesson-head h3 { margin: 0; font-size: 20px; font-weight: 800; line-height: 1.25; }
+.alfe-lesson-title button:hover, .alfe-lesson.is-open .alfe-lesson-title button { background: var(--light-bg, #F9FAFB); }
+.alfe-lesson-name { flex: 1 1 auto; min-width: 0; font-size: 19px; font-weight: 800; line-height: 1.25; }
 .alfe-lesson-n { color: var(--alfe-link); }
 .alfe-lesson-time { flex: 0 0 auto; display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; color: var(--alfe-muted); }
+.alfe-toggle { flex: 0 0 auto; color: var(--alfe-link); display: flex; transition: transform 0.15s; }
+.alfe-lesson.is-open .alfe-toggle { transform: rotate(180deg); }
+.alfe-lesson-body { display: flex; flex-wrap: wrap; gap: 18px 24px; align-items: flex-start; padding: 20px 24px 24px; border-top: 1px solid var(--alfe-grey-line); }
+.alfe-lesson-img { flex: 0 0 220px; aspect-ratio: 16 / 10; border-radius: 8px; overflow: hidden; border: 1px solid var(--alfe-grey-line); background: #F3F4F6; }
+.alfe-lesson-img img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.alfe-lesson-text { flex: 1 1 360px; min-width: 0; display: flex; flex-direction: column; gap: 12px; }
 .alfe-lesson-will { margin: 0 0 -8px; font-size: 15px; font-weight: 600; color: #1f2937; }
 .alfe-lesson ul { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 3px; font-size: 15px; color: var(--alfe-text); }
 .alfe-tags { display: flex; flex-wrap: wrap; gap: 8px; border-top: 1px solid var(--alfe-grey-line); padding-top: 12px; }
@@ -214,7 +213,9 @@
   .alfe-section { padding: 48px 0; }
   .alfe-section h2 { font-size: 28px; }
   .alfe-kit { grid-template-columns: 1fr; }
-  .alfe-lesson { padding: 16px; }
+  .alfe-lesson-title button { padding: 14px 16px; flex-wrap: wrap; }
+  .alfe-lesson-name { font-size: 17px; flex-basis: calc(100% - 40px); }
+  .alfe-lesson-body { padding: 16px; }
   .alfe-lesson-img { flex-basis: 100%; }
   .alfe-card { padding: 20px; }
   .alfe-plan-pic { max-width: none; }
