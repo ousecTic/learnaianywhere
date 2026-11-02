@@ -162,7 +162,7 @@ const AboutUs = () => {
             className="about-photo"
           />
 
-          <p>Teachers tell us the same. A school principal, after one of our workshops:</p>
+          <p>Teachers tell us the same. A school principal, after going through our course:</p>
 
           <video
             className="about-video"
@@ -174,7 +174,6 @@ const AboutUs = () => {
           >
             <track kind="captions" label="English" srcLang="en" src="/media/teacher-testimony.vtt" default />
           </video>
-          <p className="image-caption">“I personally learned that a school can actually begin its own AI. It is not only good for me as an administrator, but equally good for the teachers.”</p>
         </section>
 
         <section className="gallery-section">
