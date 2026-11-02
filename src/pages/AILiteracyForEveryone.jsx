@@ -33,6 +33,10 @@ const INSTALL_STEPS_URL = '/courses/ai-literacy-for-everyone/install-android';
 // browser that plays the sound but can't decode the picture (no error is raised then),
 // which is why the file must be H.264: Edge and Firefox can't show HEVC.
 const TRAILER_MP4 = 'https://github.com/ousecTic/learnaianywhere/releases/download/site-media/course-trailer.mp4';
+// The trailer in each language that has its own, by package id or language code.
+// The others show the English one, labelled as English.
+const TRAILERS = { en: TRAILER_MP4 };
+const trailerFor = (pkg) => TRAILERS[pkg.id] || TRAILERS[pkg.lang] || null;
 const TRAILER_EMBED = 'https://drive.google.com/file/d/1vitkG1eQ_6ks_EDyIg_ko6OfzTPrfg2i/preview';
 const YOUTUBE_URL = 'https://www.youtube.com/watch?v=tchN4xa4pfg';
 // How to add the course in Kolibri, on a computer and on Android.
@@ -113,6 +117,21 @@ const Icon = ({ name, size = 20 }) => (
     {ICONS[name]}
   </svg>
 );
+
+// The package in the visitor's browser language, if the course comes in one of
+// their preferred languages, else the first package (English). Swahili opens the
+// Tanzania version only for sw-TZ, and the Kenya version otherwise.
+const browserPackage = (packages) => {
+  const prefs = typeof navigator === 'undefined' ? [] : (navigator.languages || [navigator.language]);
+  for (const tag of prefs) {
+    if (!tag) continue;
+    const exact = packages.find((p) => p.id.toLowerCase() === tag.toLowerCase());
+    if (exact) return exact.id;
+    const byLang = packages.find((p) => p.lang === tag.split('-')[0].toLowerCase());
+    if (byLang) return byLang.id;
+  }
+  return packages[0].id;
+};
 
 const megabytes = (bytes) => `${Math.round(bytes / 1e6)} MB`;
 
@@ -205,7 +224,7 @@ const makePlan = ({ mode, device, pkg, onlineUrl, openFiles }) => {
 
 const AILiteracyForEveryone = () => {
   const packages = downloads.packages;
-  const [langId, setLangId] = useState(packages[0].id);
+  const [langId, setLangId] = useState(() => browserPackage(packages));
   const [langChanged, setLangChanged] = useState(false);
   const [mode, setMode] = useState('teach');
   const [device, setDevice] = useState('computer');
@@ -219,10 +238,16 @@ const AILiteracyForEveryone = () => {
   const plan = makePlan({ mode, device, pkg, onlineUrl, openFiles });
   const askDevice = mode === 'self';
 
-  const pickLang = (e) => {
-    setLangId(e.target.value);
+  // One language for the whole page: the hero's menu and the one under Get the
+  // course both set it, and the online course, the trailer and every file follow it.
+  const chooseLang = (id) => {
+    const next = packages.find((p) => p.id === id) || packages[0];
+    if (trailerFor(next) !== trailerFor(pkg)) setTrailer('off');
+    setLangId(id);
     setLangChanged(true);
   };
+  const pickLang = (e) => chooseLang(e.target.value);
+  const ownTrailer = trailerFor(pkg);
   const langOptions = packages.map((p) => <option key={p.id} value={p.id}>{LANG_LABELS[p.id] || p.name}</option>);
 
   return (
@@ -235,14 +260,22 @@ const AILiteracyForEveryone = () => {
             <h1>AI Literacy for Everyone</h1>
             <p className="alfe-lead">A 4-lesson course on how AI works. Learners train their own AI and learn to use it responsibly, with or without internet.</p>
             <div className="alfe-hero-actions">
-              {onlineUrl && <a href={onlineUrl} className="alfe-btn alfe-btn-primary"><Icon name="globe" size={18} />Try it online now</a>}
+              {onlineUrl && (
+                <div className="alfe-split">
+                  <a href={onlineUrl} className="alfe-btn alfe-btn-primary alfe-split-main"><Icon name="globe" size={18} />Try it online in {pkg.name}</a>
+                  <label className="alfe-btn alfe-btn-primary alfe-split-lang" title="Choose a language">
+                    <span className="alfe-visually-hidden">Language of the course</span>
+                    <Icon name="chevron" size={18} />
+                    <select value={langId} onChange={pickLang}>{langOptions}</select>
+                  </label>
+                </div>
+              )}
               <a href="#get" className={onlineUrl ? 'alfe-btn alfe-btn-outline' : 'alfe-btn alfe-btn-primary'}><Icon name="download" size={18} />Get the course</a>
             </div>
-            <p className="alfe-hero-note">In English here. Other languages are under <a href="#get">Get the course</a>.</p>
           </div>
           <div className="alfe-hero-photo">
             {trailer === 'video' && (
-              <video src={TRAILER_MP4} poster={trailerCover} autoPlay controls playsInline onError={() => setTrailer('embed')} onLoadedMetadata={(e) => { if (!e.currentTarget.videoWidth) setTrailer('embed'); }} />
+              <video src={ownTrailer || TRAILER_MP4} poster={trailerCover} autoPlay controls playsInline onError={() => setTrailer('embed')} onLoadedMetadata={(e) => { if (!e.currentTarget.videoWidth) setTrailer('embed'); }} />
             )}
             {trailer === 'embed' && (
               <iframe src={TRAILER_EMBED} title="AI Literacy for Everyone trailer" allow="autoplay; fullscreen" allowFullScreen />
@@ -252,7 +285,7 @@ const AILiteracyForEveryone = () => {
                 <img src={trailerCover} alt="" />
                 <span className="alfe-play">
                   <span className="alfe-play-icon"><Icon name="play" size={14} /></span>
-                  {pkg.lang === 'en' ? 'Watch the trailer' : 'Watch the trailer (English)'}
+                  {ownTrailer ? 'Watch the trailer' : 'Watch the trailer (English)'}
                 </span>
               </button>
             )}
