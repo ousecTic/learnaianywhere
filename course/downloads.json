@@ -1,18 +1,18 @@
 {
   "course": "AI Literacy for Everyone",
-  "version": "1.2",
-  "release": "course-v1.2",
+  "version": "1.3",
+  "release": "course-v1.3",
   "packages": [
     {
       "id": "en",
       "name": "English",
       "lang": "en",
-      "file": "ai-literacy-for-everyone-en-v1.2.zip",
+      "file": "ai-literacy-for-everyone-en-v1.3.zip",
       "folder": "AI Literacy for Everyone - English",
-      "bytes": 118841238,
-      "sha256": "8d042d315260bf919c9fb9ca890476b82f828b58363c37906fd19a6d8302972d",
-      "date": "2026-11-01",
-      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.2/ai-literacy-for-everyone-en-v1.2.zip",
+      "bytes": 115703708,
+      "sha256": "60d5b9e1964e17b784eded7c21376a77a9c222963a66ff8c58681ae7d250548e",
+      "date": "2026-11-02",
+      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.3/ai-literacy-for-everyone-en-v1.3.zip",
       "resources": {
         "guidePdf": {
           "url": "https://docs.google.com/document/d/1HR-jHOO6u2KP2W7AmyYazaIJ5ZlI_Xb1PhFD84oGFXY/export?format=pdf",
@@ -40,11 +40,11 @@
         },
         "slidesPdf": {
           "url": "https://docs.google.com/presentation/d/1doNrQbeZj2uF44VZ14HBnOxUnAmetZrx9vbTNycjFBQ/export/pdf",
-          "bytes": 15414376
+          "bytes": 15414337
         },
         "slidesPptx": {
           "url": "https://docs.google.com/presentation/d/1doNrQbeZj2uF44VZ14HBnOxUnAmetZrx9vbTNycjFBQ/export/pptx",
-          "bytes": 95119352
+          "bytes": 95119334
         },
         "videosFolder": {
           "url": "https://drive.google.com/drive/folders/18Lg1huoFHzZTZKKpwCthQ-crESn75Rha"
@@ -55,12 +55,12 @@
       "id": "fr",
       "name": "French",
       "lang": "fr",
-      "file": "ai-literacy-for-everyone-fr-v1.2.zip",
+      "file": "ai-literacy-for-everyone-fr-v1.3.zip",
       "folder": "AI Literacy for Everyone - French",
-      "bytes": 184769552,
-      "sha256": "41c7526b2fdddc08ad7b28c32b04d696de02555f27264136c5a1449059684f15",
-      "date": "2026-11-01",
-      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.2/ai-literacy-for-everyone-fr-v1.2.zip",
+      "bytes": 179774406,
+      "sha256": "992d928297a63730381ffe624b7e851b60cd0ce969df74421aeb59e007a55ee8",
+      "date": "2026-11-02",
+      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.3/ai-literacy-for-everyone-fr-v1.3.zip",
       "resources": {
         "guidePdf": {
           "url": "https://docs.google.com/document/d/1_eTguFa0iCkNI3a26-YtXRVri-M_XhQFabdP7SHbh2w/export?format=pdf",
@@ -76,7 +76,7 @@
         },
         "worksheetDocx": {
           "url": "https://docs.google.com/document/d/1AEjy0zJc6IoMgxt0J-e5DwtpNca_aOk84QCkV5RPamY/export?format=docx",
-          "bytes": 8388
+          "bytes": 8413
         },
         "examplePdf": {
           "url": "https://docs.google.com/document/d/1eSxxVNeQvx5MGoxoW5Jy6T7AjodvuR63z5xcidNMLZA/export?format=pdf",
@@ -88,11 +88,11 @@
         },
         "slidesPdf": {
           "url": "https://docs.google.com/presentation/d/1-3IQhn18VmVBQ02pR8IHplJtp87qUU4vNs0SHOuohME/export/pdf",
-          "bytes": 15421906
+          "bytes": 15421870
         },
         "slidesPptx": {
           "url": "https://docs.google.com/presentation/d/1-3IQhn18VmVBQ02pR8IHplJtp87qUU4vNs0SHOuohME/export/pptx",
-          "bytes": 95124463
+          "bytes": 95124417
         },
         "videosFolder": {
           "url": "https://drive.google.com/drive/folders/1xkbhDEt4AtkmnOUpoO84yxTF0ikzd1Mi"
@@ -103,12 +103,12 @@
       "id": "es",
       "name": "Spanish",
       "lang": "es",
-      "file": "ai-literacy-for-everyone-es-v1.2.zip",
+      "file": "ai-literacy-for-everyone-es-v1.3.zip",
       "folder": "AI Literacy for Everyone - Spanish",
-      "bytes": 182643572,
-      "sha256": "90fc5a029f5f34b88d3720692bbc53e04dca7138db28c1d4b685a9d62b8cab1d",
-      "date": "2026-11-01",
-      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.2/ai-literacy-for-everyone-es-v1.2.zip",
+      "bytes": 177652841,
+      "sha256": "b6f6088e0114eab63972f9ef945e9cdb38be1b49c9ce0d1018f4645ed738bc53",
+      "date": "2026-11-02",
+      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.3/ai-literacy-for-everyone-es-v1.3.zip",
       "resources": {
         "guidePdf": {
           "url": "https://docs.google.com/document/d/1QFGuJNEmzzcTu1SHwm1SOVTwwVHW25xTrZ9hAJdsFSs/export?format=pdf",
@@ -136,11 +136,11 @@
         },
         "slidesPdf": {
           "url": "https://docs.google.com/presentation/d/1Yyo5v3w6LcALin1hytiQtYKP4bp-EL5SmSydrLel9EE/export/pdf",
-          "bytes": 15418450
+          "bytes": 15418415
         },
         "slidesPptx": {
           "url": "https://docs.google.com/presentation/d/1Yyo5v3w6LcALin1hytiQtYKP4bp-EL5SmSydrLel9EE/export/pptx",
-          "bytes": 95122653
+          "bytes": 95122623
         },
         "videosFolder": {
           "url": "https://drive.google.com/drive/folders/1Sjfe7aJE2CkMlSAh7D4wAJOH3mRppPII"
@@ -151,12 +151,12 @@
       "id": "pt",
       "name": "Portuguese",
       "lang": "pt",
-      "file": "ai-literacy-for-everyone-pt-v1.2.zip",
+      "file": "ai-literacy-for-everyone-pt-v1.3.zip",
       "folder": "AI Literacy for Everyone - Portuguese",
-      "bytes": 183777884,
-      "sha256": "f9996d4260ea339bb7c3b3b81aa98908190388ee1f6694ba4c339c6fe85e986c",
-      "date": "2026-11-01",
-      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.2/ai-literacy-for-everyone-pt-v1.2.zip",
+      "bytes": 178863060,
+      "sha256": "4952fc654a1c56cfb89ed0b9f2274295516eef77b786fc1dd7462c031ff37b54",
+      "date": "2026-11-02",
+      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.3/ai-literacy-for-everyone-pt-v1.3.zip",
       "resources": {
         "guidePdf": {
           "url": "https://docs.google.com/document/d/1Ea4pHA4cwpM46DpvQlxlKvj_HvxeqS6cwIpXkbtmJCM/export?format=pdf",
@@ -180,15 +180,15 @@
         },
         "exampleDocx": {
           "url": "https://docs.google.com/document/d/1oripTTYlKZyEhrVfSdBrF4Yy56edCVgx63D7498uvS0/export?format=docx",
-          "bytes": 8723
+          "bytes": 8748
         },
         "slidesPdf": {
           "url": "https://docs.google.com/presentation/d/19L5HqgOfa29Ve1sVxrcMSiEiqfttE7ZSPnQFeRU9K3w/export/pdf",
-          "bytes": 15419024
+          "bytes": 15418990
         },
         "slidesPptx": {
           "url": "https://docs.google.com/presentation/d/19L5HqgOfa29Ve1sVxrcMSiEiqfttE7ZSPnQFeRU9K3w/export/pptx",
-          "bytes": 95122644
+          "bytes": 95122605
         },
         "videosFolder": {
           "url": "https://drive.google.com/drive/folders/19xaZwmfNEz2eZDnMuOT8ChHjLItfKwxj"
@@ -199,12 +199,12 @@
       "id": "ar",
       "name": "Arabic",
       "lang": "ar",
-      "file": "ai-literacy-for-everyone-ar-v1.2.zip",
+      "file": "ai-literacy-for-everyone-ar-v1.3.zip",
       "folder": "AI Literacy for Everyone - Arabic",
-      "bytes": 183678173,
-      "sha256": "9ab530a4d4e70287235a3d29d3e16559ce992ced26273fd8dd218dfa89d7b120",
-      "date": "2026-11-01",
-      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.2/ai-literacy-for-everyone-ar-v1.2.zip",
+      "bytes": 178771506,
+      "sha256": "cae24a5ec1960a2691739822fe5124e20f0d091502ca25ceab8ec8ba784c5f65",
+      "date": "2026-11-02",
+      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.3/ai-literacy-for-everyone-ar-v1.3.zip",
       "resources": {
         "guidePdf": {
           "url": "https://docs.google.com/document/d/12vtTdKIZIwIVWC5fgAXWFkMh-D8Wt7wN5qbe3IMBbZc/export?format=pdf",
@@ -212,7 +212,7 @@
         },
         "guideDocx": {
           "url": "https://docs.google.com/document/d/12vtTdKIZIwIVWC5fgAXWFkMh-D8Wt7wN5qbe3IMBbZc/export?format=docx",
-          "bytes": 17130
+          "bytes": 17154
         },
         "worksheetPdf": {
           "url": "https://docs.google.com/document/d/1zgFoVGiWz3ugNqrDtvvaXBwUE99_KBsx4MlPmW71zm0/export?format=pdf",
@@ -228,15 +228,15 @@
         },
         "exampleDocx": {
           "url": "https://docs.google.com/document/d/1fkom5Qal7814d1GxvGVKlU_xo67Epb2vP9OYsNwstuc/export?format=docx",
-          "bytes": 10168
+          "bytes": 10193
         },
         "slidesPdf": {
           "url": "https://docs.google.com/presentation/d/125FPIW2C_OIgcY54QEOsm0oGu5J5S9HqltQ3NR_l_vI/export/pdf",
-          "bytes": 15492045
+          "bytes": 15491912
         },
         "slidesPptx": {
           "url": "https://docs.google.com/presentation/d/125FPIW2C_OIgcY54QEOsm0oGu5J5S9HqltQ3NR_l_vI/export/pptx",
-          "bytes": 95136816
+          "bytes": 95136764
         },
         "videosFolder": {
           "url": "https://drive.google.com/drive/folders/1Es5Np1Iwl3VnHL91qiQxqSimVXF-Z0mR"
@@ -247,12 +247,12 @@
       "id": "hi",
       "name": "Hindi",
       "lang": "hi",
-      "file": "ai-literacy-for-everyone-hi-v1.2.zip",
+      "file": "ai-literacy-for-everyone-hi-v1.3.zip",
       "folder": "AI Literacy for Everyone - Hindi",
-      "bytes": 186910098,
-      "sha256": "f7bd5d5169bbe3c5b551e26b2ad4d00b0529b302b6b5790a5bce51a47f814a81",
-      "date": "2026-11-01",
-      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.2/ai-literacy-for-everyone-hi-v1.2.zip",
+      "bytes": 181988811,
+      "sha256": "22e982bff1822f4fe5403126c500ae24011a34366c5dd1ab22d8be8cf409ea22",
+      "date": "2026-11-02",
+      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.3/ai-literacy-for-everyone-hi-v1.3.zip",
       "resources": {
         "guidePdf": {
           "url": "https://docs.google.com/document/d/1qkSTZovHUN-MzG445qzpi3OZpBZQfwUECmTWqXRkMOY/export?format=pdf",
@@ -260,7 +260,7 @@
         },
         "guideDocx": {
           "url": "https://docs.google.com/document/d/1qkSTZovHUN-MzG445qzpi3OZpBZQfwUECmTWqXRkMOY/export?format=docx",
-          "bytes": 424314
+          "bytes": 424339
         },
         "worksheetPdf": {
           "url": "https://docs.google.com/document/d/11gpyDNlKemB7qVkz5zn2UMH2TBAktnfn1P4aEBY7mgc/export?format=pdf",
@@ -276,15 +276,15 @@
         },
         "exampleDocx": {
           "url": "https://docs.google.com/document/d/1Dz8rtDZRmz7BE69TLsdpRjvMPo1kk66jUh4Xjh7HpKk/export?format=docx",
-          "bytes": 421273
+          "bytes": 421298
         },
         "slidesPdf": {
           "url": "https://docs.google.com/presentation/d/1iRpJSJJguUIXWsifKSOldg2F7pyYIZGvgpA0DOrxBpo/export/pdf",
-          "bytes": 15530793
+          "bytes": 15530623
         },
         "slidesPptx": {
           "url": "https://docs.google.com/presentation/d/1iRpJSJJguUIXWsifKSOldg2F7pyYIZGvgpA0DOrxBpo/export/pptx",
-          "bytes": 95142897
+          "bytes": 95142858
         },
         "videosFolder": {
           "url": "https://drive.google.com/drive/folders/1RrWoPqu_ir04N5k3wvTZXM-cbRXbAh1Q"
@@ -295,12 +295,12 @@
       "id": "ur",
       "name": "Urdu",
       "lang": "ur",
-      "file": "ai-literacy-for-everyone-ur-v1.2.zip",
+      "file": "ai-literacy-for-everyone-ur-v1.3.zip",
       "folder": "AI Literacy for Everyone - Urdu",
-      "bytes": 202286016,
-      "sha256": "24eb323e166a7dc6a6335041d2f2b0c5d56bd50f969587051668b6652e944301",
-      "date": "2026-11-01",
-      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.2/ai-literacy-for-everyone-ur-v1.2.zip",
+      "bytes": 196679018,
+      "sha256": "138b6859660211d0a27abcce9f7bec29ff7b87dae760fa5dca4d2ba84c47d261",
+      "date": "2026-11-02",
+      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.3/ai-literacy-for-everyone-ur-v1.3.zip",
       "resources": {
         "guidePdf": {
           "url": "https://docs.google.com/document/d/1Tja-c5fOWdJHeqZjejaXre23MyECkk3EqY80X_VTOBE/export?format=pdf",
@@ -328,11 +328,11 @@
         },
         "slidesPdf": {
           "url": "https://docs.google.com/presentation/d/1G7p4cbrwCQAQXq-UOZj4EB3FnKcxZFwR3Ek89gWNMJg/export/pdf",
-          "bytes": 15522982
+          "bytes": 15522773
         },
         "slidesPptx": {
           "url": "https://docs.google.com/presentation/d/1G7p4cbrwCQAQXq-UOZj4EB3FnKcxZFwR3Ek89gWNMJg/export/pptx",
-          "bytes": 95139973
+          "bytes": 95139948
         },
         "videosFolder": {
           "url": "https://drive.google.com/drive/folders/1WxfIzu6Xx6LTmibL9RzmM5ESElBl28pb"
@@ -343,12 +343,12 @@
       "id": "sw-KE",
       "name": "Swahili (Kenya)",
       "lang": "sw",
-      "file": "ai-literacy-for-everyone-sw-KE-v1.2.zip",
+      "file": "ai-literacy-for-everyone-sw-KE-v1.3.zip",
       "folder": "AI Literacy for Everyone - Swahili (Kenya)",
-      "bytes": 185376191,
-      "sha256": "06d7d47a319612b06b00d695c45d394e1cb86a87627339d8579e4331b8a0e9a0",
-      "date": "2026-11-01",
-      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.2/ai-literacy-for-everyone-sw-KE-v1.2.zip",
+      "bytes": 180223577,
+      "sha256": "500bab831757717e59b06cce87964bb4aaa9d6ec7aac0addd3bf60d25de8d3c9",
+      "date": "2026-11-02",
+      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.3/ai-literacy-for-everyone-sw-KE-v1.3.zip",
       "resources": {
         "guidePdf": {
           "url": "https://docs.google.com/document/d/1OYVEWdK0yx6qKDPqnhWfBNE2K_vvOf_h7QNV-_NeDLQ/export?format=pdf",
@@ -372,15 +372,15 @@
         },
         "exampleDocx": {
           "url": "https://docs.google.com/document/d/1pYrwidAVmyf41gMm9vwslK57wATqaYdPnZO493Uf1WA/export?format=docx",
-          "bytes": 8528
+          "bytes": 8553
         },
         "slidesPdf": {
           "url": "https://docs.google.com/presentation/d/14PybhAz564OIopPkKB1VEBgMDbz90l8q4L2LnMdUylk/export/pdf",
-          "bytes": 15411127
+          "bytes": 15411104
         },
         "slidesPptx": {
           "url": "https://docs.google.com/presentation/d/14PybhAz564OIopPkKB1VEBgMDbz90l8q4L2LnMdUylk/export/pptx",
-          "bytes": 95120280
+          "bytes": 95120256
         },
         "videosFolder": {
           "url": "https://drive.google.com/drive/folders/1j3SzbKVf8qf4Zx4ZEJ7Xg3Qwmc1l3U5m"
@@ -391,12 +391,12 @@
       "id": "sw-TZ",
       "name": "Swahili (Tanzania)",
       "lang": "sw",
-      "file": "ai-literacy-for-everyone-sw-TZ-v1.2.zip",
+      "file": "ai-literacy-for-everyone-sw-TZ-v1.3.zip",
       "folder": "AI Literacy for Everyone - Swahili (Tanzania)",
-      "bytes": 187832861,
-      "sha256": "3c4d34ec7a97f08e1ea085ec4d14809e49d3b458e441187cb20b9660e2c19947",
-      "date": "2026-11-01",
-      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.2/ai-literacy-for-everyone-sw-TZ-v1.2.zip",
+      "bytes": 182818226,
+      "sha256": "be7952f57f56fd0b4264c784f19c82d46ec5b3110f0d50148231d54a1eb245a8",
+      "date": "2026-11-02",
+      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.3/ai-literacy-for-everyone-sw-TZ-v1.3.zip",
       "resources": {
         "guidePdf": {
           "url": "https://docs.google.com/document/d/1OYVEWdK0yx6qKDPqnhWfBNE2K_vvOf_h7QNV-_NeDLQ/export?format=pdf",
@@ -420,15 +420,15 @@
         },
         "exampleDocx": {
           "url": "https://docs.google.com/document/d/1pYrwidAVmyf41gMm9vwslK57wATqaYdPnZO493Uf1WA/export?format=docx",
-          "bytes": 8528
+          "bytes": 8553
         },
         "slidesPdf": {
           "url": "https://docs.google.com/presentation/d/14PybhAz564OIopPkKB1VEBgMDbz90l8q4L2LnMdUylk/export/pdf",
-          "bytes": 15411127
+          "bytes": 15411104
         },
         "slidesPptx": {
           "url": "https://docs.google.com/presentation/d/14PybhAz564OIopPkKB1VEBgMDbz90l8q4L2LnMdUylk/export/pptx",
-          "bytes": 95120280
+          "bytes": 95120256
         },
         "videosFolder": {
           "url": "https://drive.google.com/drive/folders/1drV-nHw5ZFO2JnaeCxLe5-mD6aKKreNq"

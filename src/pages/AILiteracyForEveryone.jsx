@@ -62,7 +62,7 @@ const INSIDE = [
   { img: teacherGuideImg, alt: 'The first page of the teacher guide', who: 'To teach with', title: 'Teacher guide', text: 'How the course is set up, how each lesson runs, and what learners should be able to do by the end.', page: true },
   { img: slidesImg, alt: 'A slide from the course', who: 'To teach with', title: 'Slides', text: 'For all 4 lessons, each with a recap quiz and then project time. Show them or print them.' },
   { img: worksheetImg, alt: 'The Design Your Own AI Classifier worksheet', who: 'To learn with', title: 'Worksheet', text: 'A 1-page project that builds across the 4 lessons, with a filled-in example.', page: true },
-  { img: lessonVideoImg, alt: 'A lesson video', who: 'To learn with', title: '26 short videos', text: 'Every idea in the course, explained in a few minutes each, with captions. Show them to the group or let learners watch on their own.' },
+  { img: lessonVideoImg, alt: 'A lesson video', who: 'To learn with', title: '25 short videos', text: 'Every idea in the course, explained in a few minutes each, with captions. Show them to the group or let learners watch on their own.' },
   { img: worksheetAppImg, alt: 'The worksheet app, Lesson 1', who: 'To learn with', title: 'Games and quizzes', text: 'The AI or Not game, a recap quiz after each lesson, and the worksheet to fill in on screen.' },
   { img: neuropocketImg, alt: 'The NeuroPocket app', who: 'To learn with', title: 'NeuroPocket app', text: 'Learners train their own AI, with pictures that come with the app or their own. One device per group is enough.' },
 ];
@@ -148,7 +148,7 @@ const materialRows = (pkg) => {
     { name: 'Worksheet example', what: 'Filled in, to show learners what to aim for.', buttons: [file('PDF', r.examplePdf), file('Word', r.exampleDocx)] },
     {
       name: 'Lesson videos',
-      what: `All 26 videos, with captions, in each lesson’s folder. They’re also inside the course download.${english ? '' : ' On YouTube they are in English only.'}`,
+      what: `All 25 videos, with captions, in each lesson’s folder. They’re also inside the course download.${english ? '' : ' On YouTube they are in English only.'}`,
       buttons: [['Open in Google Drive', r.videosFolder && r.videosFolder.url], [english ? 'Watch on YouTube' : 'Watch in English on YouTube', YOUTUBE_URL]],
     },
     { name: 'NeuroPocket app', what: 'Learners train their own AI with pictures that come with the app, or their own.', buttons: [['Android app', NEUROPOCKET.android], ['Windows app', NEUROPOCKET.windows], ['Online at neuropocket.com', NEUROPOCKET.online]] },

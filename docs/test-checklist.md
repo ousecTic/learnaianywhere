@@ -126,7 +126,7 @@ This is the page to spend the most time on.
 
 ### 3.4 What's in the course
 - [ ] Heading and the line "Use all of it, or only the parts you need."
-- [ ] Six cards in this order: Teacher guide, Slides, Worksheet, 26 short videos, Games and quizzes, NeuroPocket app.
+- [ ] Six cards in this order: Teacher guide, Slides, Worksheet, 25 short videos, Games and quizzes, NeuroPocket app.
 - [ ] Each has a small label, either "To teach with" or "To learn with". No "For students" or "For you" wording left.
 - [ ] Each picture loads and matches its card (the guide card shows the guide's first page, the worksheet card shows the worksheet, and so on). The two "page" cards (guide, worksheet) are drawn as portrait pages.
 - [ ] The Slides text says "each with a recap quiz and then project time" (not "quiz on the last slides").
@@ -140,14 +140,14 @@ This is the page to spend the most time on.
 - [ ] Clicking a row opens it; clicking it again closes it; opening another closes the first (only one open at a time).
 - [ ] The chevron turns when open.
 - [ ] Inside each: a picture of the activity, "Learners will:" with the objectives, and the small tags (Slides, N short videos, activity name, Recap quiz, Worksheet part N).
-- [ ] Video counts: 4, 5, 7, 7 (adds up to 26, matching the card above and the files section). Confirm against the Drive folders.
+- [ ] Video counts: 4, 5, 7, 7 (with the 2 introduction videos that is 25, matching the card above and the files section). Confirm against the Drive folders.
 - [ ] Objectives match the teacher guide word for word or close to it.
 - [ ] Activity names match the slides: AI or Not game, Train a model in NeuroPocket, Describer Drawer game, Bias challenge in NeuroPocket.
 - [ ] **Keyboard:** Tab to a lesson row, press Enter or Space, it opens. Screen reader users get the open/closed state (the row is a real button with aria-expanded).
 - [ ] On a phone the time and chevron do not wrap onto their own line awkwardly.
 
 ### 3.6 Get the course: language
-- [ ] Heading "Get the course in English" and under it "Version 1.2 · November 1, 2026 · Free".
+- [ ] Heading "Get the course in English" and under it "Version 1.3" and the release date.
 - [ ] The language menu has 9 entries in this order: English, Français (French), Español (Spanish), Português (Portuguese), العربية (Arabic), हिन्दी (Hindi), اردو (Urdu), Kiswahili – Kenya (Swahili), Kiswahili – Tanzania (Swahili).
 - [ ] Choosing a language changes the heading ("Get the course in French") and a green note appears: "Switched to French. Everything below, and all the files, are now in French."
 - [ ] The green note stays visible when you switch again (it should not disappear and reappear oddly).
@@ -230,7 +230,7 @@ Switch through all 9 languages and, in the All the files section (3.14), click e
 - [ ] The licence answer links to CC BY-NC-SA in a new tab.
 
 ### 3.16 Content accuracy on this page
-- [ ] Every number on the page matches reality: 4 lessons, 26 videos, 1-page worksheet, 8 languages, version 1.2, 1 November 2026, 3 MB app, ZIP sizes, NeuroPocket 1.8.0.
+- [ ] Every number on the page matches reality: 4 lessons, 25 videos, 1-page worksheet, 8 languages, version 1.3 and its date, 3 MB app, ZIP sizes, NeuroPocket 1.8.0.
 - [ ] "About an hour of lesson videos" is right (you measured 51.5 minutes).
 - [ ] Nothing says "kit", "students", "class" or "classroom" where you wanted "course", "learners", "group".
 - [ ] Nothing refers to things that no longer exist on the page (for example "3 pages", "the language picker above", "Both").
@@ -260,7 +260,7 @@ Switch through all 9 languages and, in the All the files section (3.14), click e
 
 ### 4.3 Online kit `/course/online/<language>/`
 - [ ] All 9 addresses load: `/course/online/en/`, `fr`, `es`, `pt`, `ar`, `hi`, `ur`, `sw-KE`, `sw-TZ`. (A missing trailing slash should also work; try `/course/online/en`.)
-- [ ] Videos stream. (Already checked: the `course-videos-v1.2` release exists and holds 234 files, which is 26 videos × 9 languages.)
+- [ ] Videos stream. (They come from the `course-videos-v1.3` release; it should hold 225 files, 25 videos × 9 languages.)
 - [ ] Captions show.
 - [ ] Quizzes, AI or Not, worksheet app and NeuroPocket all work inside it.
 - [ ] Progress is remembered on reload.
