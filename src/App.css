@@ -1533,6 +1533,17 @@ a:visited {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
+.about-video {
+  display: block;
+  width: 100%;
+  max-width: 360px;
+  aspect-ratio: 9 / 16;
+  margin: 1.5rem auto 0.75rem;
+  border-radius: 8px;
+  background: #0f172a;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
 .about-section .image-caption {
   color: #9CA3AF;
   font-size: 0.875rem;
