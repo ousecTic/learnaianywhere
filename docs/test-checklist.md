@@ -114,7 +114,7 @@ This is the page to spend the most time on.
 ### 3.2 Trailer, fallback (only if the GitHub file ever stops working)
 - [ ] The cover picture shows with a "Watch the trailer" pill.
 - [ ] Clicking it: the browser tries the GitHub MP4, fails, and shows the Drive player instead. One more click on Drive's play button starts the video. (This is the known two-click behaviour.)
-- [ ] After choosing a non-English language lower on the page, the pill says "Watch the trailer (English)".
+- [ ] Choosing a language from the arrow next to "Try it online" (or lower on the page) plays that language's trailer, which is its dubbed "Welcome to the Course" video. Check at least Urdu, Arabic and one Swahili, with sound.
 
 ### 3.3 Trailer
 - [ ] One click on the cover starts the video with sound, with the browser's own controls.

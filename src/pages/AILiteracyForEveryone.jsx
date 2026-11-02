@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import downloads from '../../course/downloads.json';
+import settings from '../../course/settings.json';
 import './AILiteracyForEveryone.css';
 import trailerCover from '../assets/images/ai-literacy/trailer-cover.jpg';
 import startHereImg from '../assets/images/ai-literacy/start-here.jpg';
@@ -33,10 +34,14 @@ const INSTALL_STEPS_URL = '/courses/ai-literacy-for-everyone/install-android';
 // browser that plays the sound but can't decode the picture (no error is raised then),
 // which is why the file must be H.264: Edge and Firefox can't show HEVC.
 const TRAILER_MP4 = 'https://github.com/ousecTic/learnaianywhere/releases/download/site-media/course-trailer.mp4';
-// The trailer in each language that has its own, by package id or language code.
-// The others show the English one, labelled as English.
-const TRAILERS = { en: TRAILER_MP4 };
-const trailerFor = (pkg) => TRAILERS[pkg.id] || TRAILERS[pkg.lang] || null;
+// The trailer in each language is that package's "1 - Welcome to the Course" video
+// (the English one is the same film as TRAILER_MP4), which the online kit already
+// streams from the course-videos release as <package id>-intro-01.mp4. If Drive's
+// introduction is ever renumbered, change "intro-01" here. Returning null for a
+// package shows it the English trailer, labelled as English.
+const trailerFor = (pkg) => settings.online.videoUrl
+  .replace('{version}', downloads.version)
+  .replace('{file}', `${pkg.id}-intro-01.mp4`);
 const TRAILER_EMBED = 'https://drive.google.com/file/d/1vitkG1eQ_6ks_EDyIg_ko6OfzTPrfg2i/preview';
 const YOUTUBE_URL = 'https://www.youtube.com/watch?v=tchN4xa4pfg';
 // How to add the course in Kolibri, on a computer and on Android.
