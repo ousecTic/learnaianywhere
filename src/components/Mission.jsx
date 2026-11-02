@@ -20,7 +20,7 @@ const Mission = () => {
           <div className="stat-card">
             <div className="stat-number">2/3</div>
             <p className="stat-description">
-              of educators surveyed across 59 countries said their school lacked sufficient computers for students; many in rural areas also lacked electricity or internet (
+              of educators surveyed across 59 countries lacked sufficient computers for their students (
               <a href="https://iite.unesco.org/wp-content/uploads/2023/07/Analytical-report-fnl5.pdf" target="_blank" rel="noopener noreferrer">UNESCO IITE, 2022</a>
               )
             </p>
@@ -28,7 +28,7 @@ const Mission = () => {
           <div className="stat-card">
             <div className="stat-number">50%</div>
             <p className="stat-description">
-              of secondary teachers in sub-Saharan Africa have received even minimum training, and it often leaves out ICT. Teachers need training to teach with technology, and that support is scarcest in low-income countries (
+              of secondary teachers in sub-Saharan Africa have had even minimum training, and it rarely covers technology (
               <a href="https://www.unesco.org/en/articles/startling-digital-divides-distance-learning-emerge" target="_blank" rel="noopener noreferrer">UNESCO, 2020</a>
               )
             </p>
