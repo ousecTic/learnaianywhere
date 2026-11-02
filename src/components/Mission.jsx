@@ -21,7 +21,7 @@ const Mission = () => {
             <div className="stat-number">2/3</div>
             <p className="stat-description">
               of educators surveyed across 59 countries lacked sufficient computers at their institution (
-              <a href="https://iite.unesco.org/wp-content/uploads/2025/12/Guidelines-Gender-ICT-Global-South-Edu-fnl.pdf" target="_blank" rel="noopener noreferrer">UNESCO IITE, 2022</a>
+              <a href="https://iite.unesco.org/wp-content/uploads/2023/07/Analytical-report-fnl5.pdf" target="_blank" rel="noopener noreferrer">UNESCO IITE, 2022</a>
               )
             </p>
           </div>
