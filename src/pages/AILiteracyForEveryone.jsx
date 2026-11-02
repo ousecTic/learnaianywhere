@@ -221,7 +221,7 @@ const makePlan = ({ mode, device, pkg, onlineUrl, openFiles }) => {
   }
   return {
     title: `Learners go through it on their own, in ${lang}`,
-    steps: [get, open, { h: 'Optional: print the worksheet', p: 'It is already inside the course, filled in on screen. Print it if you would rather have paper.', buttons: [file('Worksheet (PDF)', r.worksheetPdf)] }],
+    steps: [get, open],
     pic: { img: startHereImg, alt: 'The START HERE page: the lessons listed on the left, a Start the course button on the right', what },
     note: <>Want to teach some of it yourself? The teacher guide and slides are in the <a href="#materials" onClick={openFiles}>list at the bottom of this page</a>.</>,
   };

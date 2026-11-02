@@ -181,7 +181,7 @@ Do this once in English, then once in a non-Latin language (Arabic or Urdu) and 
 - [ ] Title "Learners go through it on their own, in English".
 - [ ] Step 1 "Download the course to a computer" with the big button "Download the course · English · 119 MB". The size changes per language (French 185 MB, Urdu 202 MB, and so on). The button downloads the ZIP straight away (no new tab).
 - [ ] Step 2 "Learners open START HERE and start Lesson 1".
-- [ ] Step 3 "Optional: print the worksheet" with one button, Worksheet (PDF).
+- [ ] No third step: the plan ends at step 2 (no "print the worksheet").
 - [ ] The picture is the START HERE screenshot with the caption about the 4 lessons and Resources.
 - [ ] Closing note links to the All the files section and opens it.
 
@@ -190,24 +190,23 @@ Do this once in English, then once in a non-Latin language (Arabic or Urdu) and 
 - [ ] Under it, "See the install steps with pictures" goes to `/courses/ai-literacy-for-everyone/install-android`.
 - [ ] The text mentions choosing the language inside the app and that iPhone/iPad users should use it online.
 - [ ] Step 2 "Learners open the app and tap Lesson 1".
-- [ ] Step 3 optional worksheet.
 
 ### 3.11 Plan: Online
 - [ ] Step 1 "Share the link with learners" with the big button "Open the course · English" (arrow icon, not a download icon). It opens `/course/online/en/`; after switching language it opens that language's folder (for example `/course/online/sw-TZ/`).
 - [ ] The text says nothing to install, needs internet the whole time.
-- [ ] Steps 2 and 3 as above.
+- [ ] Step 2 as above, and no step 3.
 
 ### 3.12 Plan: Learning platform
 - [ ] Step 1 "Upload the course to your platform" with the big ZIP button and text explaining it is added as an HTML package.
 - [ ] Two Kolibri links, "on a computer" and "on Android", each opening the right Google Doc in a new tab. Check both docs are shared so anyone with the link can view (open them in a private window).
-- [ ] Steps 2 and 3 as above.
+- [ ] Step 2 as above, and no step 3.
 
 ### 3.13 Every button, every language (the tedious but important one)
 Switch through all 9 languages and, in the All the files section (3.14), click every button. For each language check:
 - [ ] Teacher guide PDF and Word open and are in that language.
 - [ ] Slides PDF and PowerPoint open and are in that language.
 - [ ] Worksheet PDF and Word, Worksheet example PDF and Word.
-- [ ] The guide is 3 pages and each worksheet is 1 page in every language (your rule from earlier; check the page count after any doc edit).
+- [ ] Each worksheet is 1 page in every language. The guide is 4 pages (5 in Hindi and Urdu) with no heading stranded at the bottom of a page.
 - [ ] The ZIP downloads and its size matches the label.
 - [ ] "Open in Google Drive" opens that language's video folder and the folder is viewable without signing in.
 - [ ] YouTube button: English says "Watch on YouTube"; other languages say "Watch in English on YouTube" and the Lesson videos text adds "On YouTube they are in English only."
