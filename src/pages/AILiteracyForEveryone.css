@@ -182,7 +182,7 @@
 
 /* All the files */
 .alfe-files { display: flex; flex-direction: column; gap: 4px; }
-.alfe-files > .alfe-btn { margin-top: -8px; gap: 8px; }
+.alfe-files > .alfe-btn { margin-top: 4px; gap: 8px; }
 .alfe-files .alfe-toggle.is-open { transform: rotate(180deg); }
 .alfe-files-all { display: flex; flex-direction: column; gap: 4px; margin-top: 8px; }
 .alfe-files h2 { margin-bottom: 20px; }
