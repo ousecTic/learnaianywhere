@@ -134,15 +134,15 @@ const AboutUs = () => {
       <div className="container">
         <section className="about-section">
           <h1>About Learn AI Anywhere</h1>
-          <p>We saw a gap in existing AI literacy resources. Most AI literacy courses assume three things: reliable internet, enough devices for everyone, and teachers who have been trained to use them. For much of the world none of those hold. <a href="https://www.itu.int/en/ITU-D/Statistics/Pages/facts/default.aspx" target="_blank" rel="noopener noreferrer">2.2 billion people are still offline</a>, <a href="https://iite.unesco.org/wp-content/uploads/2023/07/Analytical-report-fnl5.pdf" target="_blank" rel="noopener noreferrer">two-thirds of educators surveyed across 59 countries</a> lack sufficient computers at their institution, and <a href="https://www.unesco.org/en/articles/startling-digital-divides-distance-learning-emerge" target="_blank" rel="noopener noreferrer">only half of secondary teachers in sub-Saharan Africa</a> have received even minimum training, which often leaves out ICT skills. Teachers need support to teach with technology, and it is scarcest where it is needed most.</p>
-          <p>So we built for all three gaps at once: a course that works without internet, runs on whatever devices a group already has, and gives the person teaching it everything they need, with no prior AI knowledge.</p>
-          
-          <img 
-            src={ugandaClassroom} 
-            alt="Classroom in Uganda with limited technology resources" 
+          <p>We saw a gap in existing AI literacy resources. Most of them assume you have reliable internet, enough computers to go around, and teachers with the ICT skills to use them. But the reality is that <a href="https://www.itu.int/en/ITU-D/Statistics/Pages/facts/default.aspx" target="_blank" rel="noopener noreferrer">2.2 billion people are still offline</a>, <a href="https://iite.unesco.org/wp-content/uploads/2023/07/Analytical-report-fnl5.pdf" target="_blank" rel="noopener noreferrer">two-thirds of educators surveyed across 59 countries</a> lack sufficient computers at their institution, and many places don’t have teachers with the technical training to run them. In sub-Saharan Africa, for example, <a href="https://www.unesco.org/en/articles/startling-digital-divides-distance-learning-emerge" target="_blank" rel="noopener noreferrer">only half of secondary teachers</a> have received even minimum training, and it often leaves out ICT skills. Teachers need support to teach with technology, and it is scarcest where it is needed most.</p>
+          <p>So we started Learn AI Anywhere and built a course to address all three: it works without internet, it runs on whatever devices a group or a person has, and it gives whoever runs or teaches it everything they need, with no prior AI knowledge.</p>
+
+          <img
+            src={ugandaClassroom}
+            alt="Classroom in Uganda with limited technology resources"
             className="about-photo"
           />
-          <p className="image-caption">This picture was taken in Uganda where a single student is using a teacher's phone to play with ChatGPT. This photo is what inspired us to start developing an offline-first AI literacy course.</p>
+          <p className="image-caption">This picture was taken in Uganda by Michael from Future Upgrade. A single student is using Michael’s phone and data to play with ChatGPT. This photo is what inspired us to develop an offline-first AI literacy course.</p>
 
           <p>We wanted to remove these barriers so anyone can develop AI literacy skills no matter what environment they are in. Even if you only have a smartphone and limited internet, you can still learn AI anywhere.</p>
 
@@ -164,16 +164,18 @@ const AboutUs = () => {
 
           <p>Teachers tell us the same. A school principal, after going through our course:</p>
 
-          <video
-            className="about-video"
-            src="/media/teacher-testimony.mp4"
-            poster={testimonyPoster}
-            controls
-            playsInline
-            preload="none"
-          >
-            <track kind="captions" label="English" srcLang="en" src="/media/teacher-testimony.vtt" default />
-          </video>
+          <div className="about-video-frame">
+            <video
+              className="about-video"
+              src="/media/teacher-testimony.mp4"
+              poster={testimonyPoster}
+              controls
+              playsInline
+              preload="none"
+            >
+              <track kind="captions" label="English" srcLang="en" src="/media/teacher-testimony.vtt" default />
+            </video>
+          </div>
         </section>
 
         <section className="gallery-section">
