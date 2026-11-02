@@ -26,10 +26,10 @@ const Mission = () => {
             </p>
           </div>
           <div className="stat-card">
-            <div className="stat-number">41%</div>
+            <div className="stat-number">1 in 2</div>
             <p className="stat-description">
-              of teachers in low-income countries receive practical ICT guidance (
-              <a href="https://teachertaskforce.org/blog/improve-state-education-around-world-we-need-support-teachers-how" target="_blank" rel="noopener noreferrer">UNESCO Teacher Task Force</a>
+              learners worldwide have no computer at home, and 43% have no internet at home (
+              <a href="https://www.unesco.org/en/articles/startling-digital-divides-distance-learning-emerge" target="_blank" rel="noopener noreferrer">UNESCO, 2020</a>
               )
             </p>
           </div>
