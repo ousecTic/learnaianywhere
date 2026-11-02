@@ -161,7 +161,8 @@ This is the page to spend the most time on.
 - [ ] Choosing "Learners go through it on their own" makes question 2 "Where will learners use it?" appear with four choices: On a computer (selected by default), Android phone or tablet, Learning platform, Online.
 - [ ] Switching back to "I'll teach it" hides question 2 again and the plan changes back.
 - [ ] The selected choice is clearly highlighted. The choices work with Tab and Enter and announce pressed state (aria-pressed).
-- [ ] On a phone the choices stack or shrink without text being cut.
+- [ ] Both questions show 2 choices per row (question 2 is a 2×2 grid) on desktop and tablet, with each title on one line. On a phone (narrower than about 520px) they stack one per row. No card sits alone in a row.
+- [ ] On a phone the big plan button wraps as text ("Download the / course · 116 MB"), and the size never splits across lines.
 
 ### 3.8 The plan card: "I'll teach it"
 Do this once in English, then once in a non-Latin language (Arabic or Urdu) and once in Swahili (Kenya).

@@ -154,8 +154,10 @@
   flex: 0 0 auto; width: 40px; height: 40px; border-radius: 50%; background: var(--alfe-blue); color: #ffffff;
   display: flex; align-items: center; justify-content: center; font-weight: 800;
 }
-.alfe-devices { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
-.alfe-modes { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+/* Two choices per row (2x2 for the four places), one per row on a phone, so
+   titles never squeeze onto two lines and no card is left alone in a row. */
+.alfe-devices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 520px) { .alfe-devices { grid-template-columns: 1fr; } }
 .alfe-device {
   width: 100%; font: inherit; cursor: pointer; text-align: left; border-radius: 8px; padding: 14px 16px; min-height: 76px;
   display: flex; align-items: center; gap: 14px; background: #ffffff; border: 1.5px solid #C9DCE8; color: var(--alfe-ink);
@@ -183,7 +185,7 @@
 .alfe-step-body { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
 .alfe-step-body h4 { margin: 0; font-size: 17px; font-weight: 700; }
 .alfe-step-body > a:not(.alfe-btn) { font-size: 15px; font-weight: 600; }
-.alfe-btn-meta { font-weight: 500; opacity: 0.9; }
+.alfe-btn-meta { font-weight: 500; opacity: 0.9; white-space: nowrap; }
 .alfe-plan-pic { flex: 1 1 300px; max-width: 400px; min-width: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
 .alfe-plan-shot { border-radius: 8px; overflow: hidden; border: 1px solid var(--alfe-line); background: #F3F4F6; box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12); }
 .alfe-plan-shot img { display: block; width: 100%; height: auto; }

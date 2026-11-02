@@ -387,7 +387,7 @@ const AILiteracyForEveryone = () => {
                       <h4>{s.h}</h4>
                       <p>{s.p}</p>
                       {s.big && (
-                        <a href={s.big[2]} className="alfe-btn alfe-btn-primary alfe-start" {...linkProps(s.big[2])}><Icon name={device === 'online' ? 'arrow' : 'download'} size={18} />{s.big[0]}{s.big[1] && <span className="alfe-btn-meta"> · {s.big[1]}</span>}</a>
+                        <a href={s.big[2]} className="alfe-btn alfe-btn-primary alfe-start" {...linkProps(s.big[2])}><Icon name={device === 'online' ? 'arrow' : 'download'} size={18} /><span>{s.big[0]}{s.big[1] && <span className="alfe-btn-meta"> · {s.big[1]}</span>}</span></a>
                       )}
                       {s.more}
                       {s.buttons && (
