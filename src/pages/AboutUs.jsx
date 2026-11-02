@@ -176,6 +176,7 @@ const AboutUs = () => {
               <track kind="captions" label="English" srcLang="en" src="/media/teacher-testimony.vtt" default />
             </video>
           </div>
+          <p className="image-caption">Video edited by Leah Sugg and Gabrielle Augier.</p>
         </section>
 
         <section className="gallery-section">
