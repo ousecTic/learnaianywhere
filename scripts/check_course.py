@@ -44,7 +44,7 @@ DOC = "application/vnd.google-apps.document"
 SLIDES = "application/vnd.google-apps.presentation"
 # Resource slot -> (role, expected mime, expected PDF pages or None)
 RESOURCES = {
-    1: ("Teacher Guide", DOC, 3),
+    1: ("Teacher Guide", DOC, None),  # no fixed length since v1.4 (4-5 pages)
     2: ("Worksheet", DOC, 1),
     3: ("Worksheet example", DOC, 1),
     4: ("Slides", SLIDES, None),
