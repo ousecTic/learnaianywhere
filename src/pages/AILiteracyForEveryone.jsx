@@ -29,7 +29,9 @@ const ONLINE_URL = (packageId) => `/course/online/${packageId}/`;
 const INSTALL_STEPS_URL = '/courses/ai-literacy-for-everyone/install-android';
 // The trailer, as a plain MP4 on the "site-media" GitHub release so it plays on
 // the first click (a Drive embed needs a second click on its own play button).
-// If the file can't be played, the Drive player is shown instead.
+// If the file can't be played, the Drive player is shown instead. That includes a
+// browser that plays the sound but can't decode the picture (no error is raised then),
+// which is why the file must be H.264: Edge and Firefox can't show HEVC.
 const TRAILER_MP4 = 'https://github.com/ousecTic/learnaianywhere/releases/download/site-media/course-trailer.mp4';
 const TRAILER_EMBED = 'https://drive.google.com/file/d/1vitkG1eQ_6ks_EDyIg_ko6OfzTPrfg2i/preview';
 const YOUTUBE_URL = 'https://www.youtube.com/watch?v=tchN4xa4pfg';
@@ -240,7 +242,7 @@ const AILiteracyForEveryone = () => {
           </div>
           <div className="alfe-hero-photo">
             {trailer === 'video' && (
-              <video src={TRAILER_MP4} poster={trailerCover} autoPlay controls playsInline onError={() => setTrailer('embed')} />
+              <video src={TRAILER_MP4} poster={trailerCover} autoPlay controls playsInline onError={() => setTrailer('embed')} onLoadedMetadata={(e) => { if (!e.currentTarget.videoWidth) setTrailer('embed'); }} />
             )}
             {trailer === 'embed' && (
               <iframe src={TRAILER_EMBED} title="AI Literacy for Everyone trailer" allow="autoplay; fullscreen" allowFullScreen />
