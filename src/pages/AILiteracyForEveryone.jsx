@@ -17,7 +17,7 @@ import biasChallengeImg from '../assets/images/ai-literacy/lesson-4-bias-challen
 // scripts/build_course.py writes on each release; a package's single files come
 // from its "resources" (Google Drive links), once the build adds them.
 //
-// The page asks two questions (how will you use it, where will students use
+// The page asks two questions (how will you use it, where will learners use
 // it) and turns the answers into a short numbered plan, so a teacher is told
 // what to download and what to do first instead of being shown every option.
 
@@ -27,14 +27,17 @@ const APP_MB = 3;
 // scripts/build-online.mjs. Set this to null to hide everything that points to it.
 const ONLINE_URL = (packageId) => `/course/online/${packageId}/`;
 const INSTALL_STEPS_URL = '/courses/ai-literacy-for-everyone/install-android';
-// The trailer, as a plain MP4 so it plays on the first click (a Drive embed
-// needs a second click on its own play button). If the browser can't play the
-// file, the Drive player is shown instead.
-const TRAILER_ID = '1vitkG1eQ_6ks_EDyIg_ko6OfzTPrfg2i';
-const TRAILER_MP4 = `https://drive.usercontent.google.com/download?id=${TRAILER_ID}&export=download&confirm=t`;
-const TRAILER_EMBED = `https://drive.google.com/file/d/${TRAILER_ID}/preview`;
+// The trailer, as a plain MP4 on the "site-media" GitHub release so it plays on
+// the first click (a Drive embed needs a second click on its own play button).
+// If the file can't be played, the Drive player is shown instead.
+const TRAILER_MP4 = 'https://github.com/ousecTic/learnaianywhere/releases/download/site-media/course-trailer.mp4';
+const TRAILER_EMBED = 'https://drive.google.com/file/d/1vitkG1eQ_6ks_EDyIg_ko6OfzTPrfg2i/preview';
 const YOUTUBE_URL = 'https://www.youtube.com/watch?v=tchN4xa4pfg';
-const KOLIBRI_URL = 'https://docs.google.com/document/d/10xXu_L2pvKAAREcTpuIpC9y6eGcPKi1L_rVNcicWPOg/edit?usp=sharing';
+// How to add the course in Kolibri, on a computer and on Android.
+const KOLIBRI = {
+  computer: 'https://docs.google.com/document/d/10xXu_L2pvKAAREcTpuIpC9y6eGcPKi1L_rVNcicWPOg/edit?usp=sharing',
+  android: 'https://docs.google.com/document/d/1y9YVa08yoA3LaydCHUS5YfOz9vvb5bnPkW4U_111QBk/edit?usp=sharing',
+};
 const NEUROPOCKET = {
   android: 'https://github.com/ousecTic/neuropocket/releases/download/v1.8.0/neuropocket-android.apk',
   windows: 'https://github.com/ousecTic/neuropocket/releases/download/v1.8.0/neuropocket-windows.exe',
@@ -56,12 +59,12 @@ const LANG_LABELS = {
 };
 
 const INSIDE = [
-  { img: teacherGuideImg, alt: 'The first page of the teacher guide', who: 'For you', title: 'Teacher guide', text: 'How the course is set up, how each lesson runs, and what students should be able to do by the end.', page: true },
-  { img: slidesImg, alt: 'A slide from the course', who: 'For you', title: 'Slides', text: 'For all 4 lessons, with the recap quiz at the end of each. Show them or print them.' },
-  { img: worksheetImg, alt: 'The Design Your Own AI Classifier worksheet', who: 'For students', title: 'Worksheet', text: 'A 1-page project that builds across the 4 lessons, with a filled-in example.', page: true },
-  { img: lessonVideoImg, alt: 'A lesson video', who: 'For students', title: '26 short videos', text: 'Every idea in the course, explained in a few minutes each, with captions. Show them in class or let students watch on their own.' },
-  { img: worksheetAppImg, alt: 'The worksheet app, Lesson 1', who: 'For students', title: 'Games and quizzes', text: 'The AI or Not game, a recap quiz after each lesson, and the worksheet to fill in on screen.' },
-  { img: neuropocketImg, alt: 'The NeuroPocket app', who: 'For students', title: 'NeuroPocket app', text: 'Students train their own AI, with pictures that come with the app or their own. One device per group is enough.' },
+  { img: teacherGuideImg, alt: 'The first page of the teacher guide', who: 'To teach with', title: 'Teacher guide', text: 'How the course is set up, how each lesson runs, and what learners should be able to do by the end.', page: true },
+  { img: slidesImg, alt: 'A slide from the course', who: 'To teach with', title: 'Slides', text: 'For all 4 lessons, with the recap quiz at the end of each. Show them or print them.' },
+  { img: worksheetImg, alt: 'The Design Your Own AI Classifier worksheet', who: 'For learners', title: 'Worksheet', text: 'A 1-page project that builds across the 4 lessons, with a filled-in example.', page: true },
+  { img: lessonVideoImg, alt: 'A lesson video', who: 'For learners', title: '26 short videos', text: 'Every idea in the course, explained in a few minutes each, with captions. Show them to the group or let learners watch on their own.' },
+  { img: worksheetAppImg, alt: 'The worksheet app, Lesson 1', who: 'For learners', title: 'Games and quizzes', text: 'The AI or Not game, a recap quiz after each lesson, and the worksheet to fill in on screen.' },
+  { img: neuropocketImg, alt: 'The NeuroPocket app', who: 'For learners', title: 'NeuroPocket app', text: 'Learners train their own AI, with pictures that come with the app or their own. One device per group is enough.' },
 ];
 
 const LESSONS = [
@@ -76,8 +79,8 @@ const LESSONS = [
 ];
 
 const MODES = [
-  { id: 'teach', title: 'I’ll teach it', sub: 'You run the lessons from the slides. One screen for the class and a device per group is enough.', icon: 'teacher' },
-  { id: 'self', title: 'Students learn on their own', sub: 'Videos, games and quizzes, at their own pace, on any device.', icon: 'students' },
+  { id: 'teach', title: 'I’ll teach it', sub: 'You run the lessons from the slides. One screen for the group and a device per small group is enough.', icon: 'teacher' },
+  { id: 'self', title: 'Learners go through it on their own', sub: 'Videos, games and quizzes, at their own pace, on any device.', icon: 'learners' },
 ];
 
 const DEVICES = [
@@ -94,7 +97,7 @@ const ICONS = {
   globe: <><circle cx="12" cy="12" r="9" /><path d="M3 12h18" /><path d="M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z" /></>,
   school: <><path d="M3 21h18" /><path d="M5 21V8l7-4 7 4v13" /><path d="M9 21v-6h6v6" /></>,
   teacher: <><circle cx="12" cy="7" r="3.5" /><path d="M5 21v-2a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v2" /></>,
-  students: <><circle cx="8" cy="8" r="3" /><circle cx="16" cy="8" r="3" /><path d="M2 20v-1a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v1" /><path d="M14 15h2a4 4 0 0 1 4 4v1" /></>,
+  learners: <><circle cx="8" cy="8" r="3" /><circle cx="16" cy="8" r="3" /><path d="M2 20v-1a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v1" /><path d="M14 15h2a4 4 0 0 1 4 4v1" /></>,
   arrow: <><path d="M5 12h14" /><path d="M13 6l6 6-6 6" /></>,
   play: <path d="M8 5v14l11-7z" fill="currentColor" />,
   clock: <><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></>,
@@ -141,13 +144,13 @@ const materialRows = (pkg) => {
     { name: 'Teacher guide', what: 'How the course is set up and how each lesson runs. Read this first.', buttons: [file('PDF', r.guidePdf), file('Word', r.guideDocx)] },
     { name: 'Slides', what: 'For all 4 lessons. The recap quiz is on the last slides of each.', buttons: [file('PDF', r.slidesPdf), file('PowerPoint', r.slidesPptx)] },
     { name: 'Worksheet', what: 'A 1-page project that builds across the 4 lessons.', buttons: [file('PDF', r.worksheetPdf), file('Word', r.worksheetDocx)] },
-    { name: 'Worksheet example', what: 'Filled in, to show students what to aim for.', buttons: [file('PDF', r.examplePdf), file('Word', r.exampleDocx)] },
+    { name: 'Worksheet example', what: 'Filled in, to show learners what to aim for.', buttons: [file('PDF', r.examplePdf), file('Word', r.exampleDocx)] },
     {
       name: 'Lesson videos',
       what: `All 26 videos, with captions, in each lesson’s folder. They’re also inside the course download.${english ? '' : ' On YouTube they are in English only.'}`,
       buttons: [['Open in Google Drive', r.videosFolder && r.videosFolder.url], [english ? 'Watch on YouTube' : 'Watch in English on YouTube', YOUTUBE_URL]],
     },
-    { name: 'NeuroPocket app', what: 'Students train their own AI with pictures that come with the app, or their own.', buttons: [['Android app', NEUROPOCKET.android], ['Windows app', NEUROPOCKET.windows], ['Online at neuropocket.com', NEUROPOCKET.online]] },
+    { name: 'NeuroPocket app', what: 'Learners train their own AI with pictures that come with the app, or their own.', buttons: [['Android app', NEUROPOCKET.android], ['Windows app', NEUROPOCKET.windows], ['Online at neuropocket.com', NEUROPOCKET.online]] },
   ];
 };
 
@@ -156,41 +159,41 @@ const materialRows = (pkg) => {
 const makePlan = ({ mode, device, pkg, onlineUrl }) => {
   const r = pkg.resources || {};
   const lang = pkg.name;
-  const guide = { h: 'Read the teacher guide', p: 'How the course is set up, how each lesson splits into lesson time and project time, and what students should be able to do by the end.', buttons: [file('PDF', r.guidePdf), file('Word', r.guideDocx)] };
+  const guide = { h: 'Read the teacher guide', p: 'How the course is set up, how each lesson splits into lesson time and project time, and what learners should be able to do by the end.', buttons: [file('PDF', r.guidePdf), file('Word', r.guideDocx)] };
   const slides = { h: 'Get the slides', p: 'One deck for all 4 lessons. The recap quiz is on the last slides of each lesson. Show them on a screen or print them.', buttons: [file('PDF', r.slidesPdf), file('PowerPoint', r.slidesPptx)] };
-  const worksheet = { h: 'Print the worksheet', p: 'A 1-page project students build up over the 4 lessons. Plain paper works too. There is a filled-in example to check against.', buttons: [file('Worksheet (PDF)', r.worksheetPdf), file('Worksheet (Word)', r.worksheetDocx), file('Filled-in example (PDF)', r.examplePdf)] };
-  const neuropocket = { h: 'Put NeuroPocket on one device per group', p: 'Students train their own AI with pictures that come with the app, or their own if the device has a camera. The apps work offline once installed.', buttons: [['Android app', NEUROPOCKET.android], ['Windows app', NEUROPOCKET.windows], ['Online at neuropocket.com', NEUROPOCKET.online]] };
+  const worksheet = { h: 'Print the worksheet', p: 'A 1-page project learners build up over the 4 lessons. Plain paper works too. There is a filled-in example to check against.', buttons: [file('Worksheet (PDF)', r.worksheetPdf), file('Worksheet (Word)', r.worksheetDocx), file('Filled-in example (PDF)', r.examplePdf)] };
+  const neuropocket = { h: 'Put NeuroPocket on one device per group', p: 'Learners train their own AI with pictures that come with the app, or their own if the device has a camera. The apps work offline once installed.', buttons: [['Android app', NEUROPOCKET.android], ['Windows app', NEUROPOCKET.windows], ['Online at neuropocket.com', NEUROPOCKET.online]] };
 
   if (mode === 'teach') {
     return {
       title: `Teach it yourself, in ${lang}`,
-      steps: [guide, slides, worksheet, neuropocket, { h: 'Start teaching the first lesson', p: 'Each lesson has a lesson part, taught from the slides, then project time, when students work on the worksheet and their own AI.' }],
+      steps: [guide, slides, worksheet, neuropocket, { h: 'Start teaching the first lesson', p: 'Each lesson has a lesson part, taught from the slides, then project time, when learners work on the worksheet and their own AI.' }],
       pic: { img: slidesImg, alt: 'A slide from the course', what: 'You teach from these slides: one deck for all 4 lessons, with the recap quiz at the end of each lesson.' },
-      note: <>Want to see how we teach it? About an hour of lesson videos covers the same ideas. Watch them to prepare, or play them in class. {onlineUrl && <><a href={onlineUrl}>Watch the videos online</a> or </>}<a href="#materials">download them</a>.</>,
+      note: <>Want to see how we teach it? About an hour of lesson videos covers the same ideas. Watch them to prepare, or play them to the group. {onlineUrl && <><a href={onlineUrl}>Watch the videos online</a> or </>}<a href="#materials">download them</a>.</>,
     };
   }
 
   const zip = ['Download the course', `${lang} · ${megabytes(pkg.bytes)}`, pkg.url];
   let get; let open; let what;
   if (device === 'android') {
-    get = { h: 'Install the app on the students’ phones or tablets', p: <>Open the file, tap <strong>Install</strong>, then choose <strong>{lang}</strong>. The app downloads the course once, while you still have internet. iPhone or iPad? Use it online instead.</>, big: ['Download the app', `${APP_MB} MB`, APP_URL], more: INSTALL_STEPS_URL && <a href={INSTALL_STEPS_URL}>See the install steps with pictures</a> };
-    open = { h: 'Students open the app and tap Lesson 1', p: 'The videos, games and quizzes come in order. The app remembers where they got to.' };
+    get = { h: 'Install the app on the learners’ phones or tablets', p: <>Open the file, tap <strong>Install</strong>, then choose <strong>{lang}</strong>. The app downloads the course once, while you still have internet. iPhone or iPad? Use it online instead.</>, big: ['Download the app', `${APP_MB} MB`, APP_URL], more: INSTALL_STEPS_URL && <a href={INSTALL_STEPS_URL}>See the install steps with pictures</a> };
+    open = { h: 'Learners open the app and tap Lesson 1', p: 'The videos, games and quizzes come in order. The app remembers where they got to.' };
     what = 'This is what the app shows: the 4 lessons, with progress saved. The teacher materials are under Resources.';
   } else if (device === 'online') {
-    get = { h: 'Share the link with students', p: 'Nothing to install. Needs internet the whole time.', big: ['Open the course', lang, onlineUrl] };
-    open = { h: 'Students open the link and start Lesson 1', p: 'The videos, games and quizzes come in order. The browser remembers where they got to.' };
+    get = { h: 'Share the link with learners', p: 'Nothing to install. Needs internet the whole time.', big: ['Open the course', lang, onlineUrl] };
+    open = { h: 'Learners open the link and start Lesson 1', p: 'The videos, games and quizzes come in order. The browser remembers where they got to.' };
     what = 'This is what the link opens: the 4 lessons, with progress saved. The teacher materials are under Resources.';
   } else if (device === 'platform') {
-    get = { h: 'Upload the course to your platform', p: <>Download the ZIP and add it to your course as an HTML package, the way you would add any web activity. Already on Kolibri? The course is in the <a href={KOLIBRI_URL} target="_blank" rel="noopener noreferrer">Kolibri library</a>.</>, big: zip };
-    open = { h: 'Students open it from your course page and start Lesson 1', p: 'The videos, games and quizzes come in order, inside your platform.' };
-    what = 'This is what students see inside your platform: the 4 lessons, with progress saved. The teacher materials are under Resources.';
+    get = { h: 'Upload the course to your platform', p: <>Download the ZIP and add it to your course as an HTML package, the way you would add any web activity. Already on Kolibri? The course is in the Kolibri library: see how to add it <a href={KOLIBRI.computer} target="_blank" rel="noopener noreferrer">on a computer</a> or <a href={KOLIBRI.android} target="_blank" rel="noopener noreferrer">on Android</a>.</>, big: zip };
+    open = { h: 'Learners open it from your course page and start Lesson 1', p: 'The videos, games and quizzes come in order, inside your platform.' };
+    what = 'This is what learners see inside your platform: the 4 lessons, with progress saved. The teacher materials are under Resources.';
   } else {
     get = { h: 'Download the course to a computer', p: <>Unzip it and open <strong>START HERE</strong>. Copy the folder to other computers with a USB stick.</>, big: zip };
-    open = { h: 'Students open START HERE and start Lesson 1', p: 'The videos, games and quizzes come in order. It remembers where they got to.' };
+    open = { h: 'Learners open START HERE and start Lesson 1', p: 'The videos, games and quizzes come in order. It remembers where they got to.' };
     what = 'This is START HERE, what opens on the computer: the 4 lessons, with progress saved. The teacher materials are under Resources.';
   }
   return {
-    title: `Students learn on their own, in ${lang}`,
+    title: `Learners go through it on their own, in ${lang}`,
     steps: [get, open, { h: 'Optional: print the worksheet', p: 'It is already inside the course, filled in on screen. Print it if you would rather have paper.', buttons: [file('Worksheet (PDF)', r.worksheetPdf)] }],
     pic: { img: startHereImg, alt: 'The START HERE page: the lessons listed on the left, a Start the course button on the right', what },
     note: <>Want to teach some of it yourself? The teacher guide and slides are in the <a href="#materials">list at the bottom of this page</a>.</>,
@@ -214,6 +217,7 @@ const AILiteracyForEveryone = () => {
     setLangId(e.target.value);
     setLangChanged(true);
   };
+  const langOptions = packages.map((p) => <option key={p.id} value={p.id}>{LANG_LABELS[p.id] || p.name}</option>);
 
   return (
     <div className="alfe">
@@ -223,13 +227,17 @@ const AILiteracyForEveryone = () => {
           <div className="alfe-hero-text">
             <p className="alfe-eyebrow">Free course · Ages 11 and up · 8 languages</p>
             <h1>AI Literacy for Everyone</h1>
-            <p className="alfe-lead">A 4-lesson course where students learn how AI works, train their own AI, and learn to use it responsibly.</p>
+            <p className="alfe-lead">A 4-lesson course on how AI works. Learners train their own AI and learn to use it responsibly.</p>
             <div className="alfe-facts">
               <span className="alfe-fact"><Icon name="offline" size={15} />Works offline</span>
-              <span className="alfe-fact"><Icon name="teacher" size={15} />Teach it, or let students learn on their own</span>
+              <span className="alfe-fact"><Icon name="teacher" size={15} />Teach it, or let learners go through it on their own</span>
+            </div>
+            <div className="alfe-lang alfe-hero-lang">
+              <label htmlFor="alfe-lang-hero">Language</label>
+              <select id="alfe-lang-hero" value={langId} onChange={pickLang}>{langOptions}</select>
             </div>
             <div className="alfe-hero-actions">
-              {onlineUrl && <a href={onlineUrl} className="alfe-btn alfe-btn-primary"><Icon name="globe" size={18} />Try it online now</a>}
+              {onlineUrl && <a href={onlineUrl} className="alfe-btn alfe-btn-primary"><Icon name="globe" size={18} />Try it online now, in {pkg.name}</a>}
               <a href="#get" className={onlineUrl ? 'alfe-btn alfe-btn-outline' : 'alfe-btn alfe-btn-primary'}><Icon name="download" size={18} />Get the course</a>
             </div>
           </div>
@@ -289,7 +297,7 @@ const AILiteracyForEveryone = () => {
                     <h3><span className="alfe-lesson-n">Lesson {l.n}.</span> {l.title}</h3>
                     <span className="alfe-lesson-time"><Icon name="clock" size={15} />{l.time}</span>
                   </div>
-                  <p className="alfe-lesson-will">Students will:</p>
+                  <p className="alfe-lesson-will">Learners will:</p>
                   <ul>
                     {l.objectives.map((o) => <li key={o}>{o}</li>)}
                   </ul>
@@ -313,9 +321,7 @@ const AILiteracyForEveryone = () => {
             </div>
             <div className="alfe-lang">
               <label htmlFor="alfe-lang">Language</label>
-              <select id="alfe-lang" value={langId} onChange={pickLang}>
-                {packages.map((p) => <option key={p.id} value={p.id}>{LANG_LABELS[p.id] || p.name}</option>)}
-              </select>
+              <select id="alfe-lang" value={langId} onChange={pickLang}>{langOptions}</select>
             </div>
           </div>
           <p className="alfe-dl-lead">Answer two questions and we’ll show you exactly what to download and what to do first.</p>
@@ -337,7 +343,7 @@ const AILiteracyForEveryone = () => {
 
           {askDevice && (
             <div className="alfe-card">
-              <StepHead n={2}>Where will students use it?</StepHead>
+              <StepHead n={2}>Where will learners use it?</StepHead>
               <div className="alfe-devices">
                 {devices.map((d) => (
                   <button type="button" key={d.id} className={device === d.id ? 'alfe-device is-on' : 'alfe-device'} aria-pressed={device === d.id} onClick={() => setDevice(d.id)}>
@@ -389,7 +395,7 @@ const AILiteracyForEveryone = () => {
           <h2 id="mat-h">All the files, in {pkg.name}</h2>
           <p className="alfe-section-lead">Every file in the course, one by one, if you’d rather not answer the questions above.</p>
 
-          <h3>Teacher materials</h3>
+          <h3>To teach with</h3>
           <p className="alfe-muted">PDF to print, Word and PowerPoint to edit. These are also inside the course download, under Resources.</p>
           <div className="alfe-files-list">
             {materialRows(pkg).map((row) => (
@@ -405,7 +411,7 @@ const AILiteracyForEveryone = () => {
             ))}
           </div>
 
-          <h3>The course for students</h3>
+          <h3>The course to learn with</h3>
           <p className="alfe-muted">The videos, games, quizzes and NeuroPocket together. Pick the one that fits the device.</p>
           <div className="alfe-files-list">
             <div className="alfe-file-row">
@@ -423,8 +429,8 @@ const AILiteracyForEveryone = () => {
               </div>
             )}
             <div className="alfe-file-row">
-              <div className="alfe-file-name"><strong>On Kolibri</strong><span>The course is in the Kolibri library, for schools that already use it.</span></div>
-              <div className="alfe-file-btns"><FileButton label="How to add it in Kolibri" url={KOLIBRI_URL} /></div>
+              <div className="alfe-file-name"><strong>On Kolibri</strong><span>The course is in the Kolibri library, for anyone who already uses it. How to add it:</span></div>
+              <div className="alfe-file-btns"><FileButton label="On a computer" url={KOLIBRI.computer} /><FileButton label="On Android" url={KOLIBRI.android} /></div>
             </div>
           </div>
         </div>
@@ -437,19 +443,19 @@ const AILiteracyForEveryone = () => {
           <div className="alfe-faq">
             <div className="alfe-faq-item">
               <h3>Do I need internet to teach it?</h3>
-              <p>Only once. On a computer, to download the course. On a phone, the first time you open the app. After that, everything works offline. You can copy the folder to other computers with a USB stick, so one download can serve a whole school.</p>
+              <p>Only once. On a computer, to download the course. On a phone, the first time you open the app. After that, everything works offline. You can copy the folder to other computers with a USB stick, so one download can serve a whole school or centre.</p>
             </div>
             <div className="alfe-faq-item">
               <h3>Do I need to know about AI already?</h3>
               <p>No. The teacher guide walks you through each lesson, and the videos explain every idea in plain words. Many teachers watch the videos first to prepare.</p>
             </div>
             <div className="alfe-faq-item">
-              <h3>Does every student need a device?</h3>
-              <p>No. The activities are made to be done in groups, so one device per group is enough, and the whole class can watch the slides or videos on one screen. The worksheet can be done on paper.</p>
+              <h3>Does every learner need a device?</h3>
+              <p>No. The activities are made to be done in groups, so one device per group is enough, and the whole group can watch the slides or videos on one screen. The worksheet can be done on paper.</p>
             </div>
             <div className="alfe-faq-item">
               <h3>Can I share or change it?</h3>
-              <p>Yes. The course is under a <a href={LICENSE_URL} target="_blank" rel="noopener noreferrer">CC BY-NC-SA</a> licence: share it and adapt it for your class, credit Learn AI Anywhere, don’t sell it, and share your changes the same way.</p>
+              <p>Yes. The course is under a <a href={LICENSE_URL} target="_blank" rel="noopener noreferrer">CC BY-NC-SA</a> licence: share it and adapt it for your group, credit Learn AI Anywhere, don’t sell it, and share your changes the same way.</p>
             </div>
           </div>
         </div>

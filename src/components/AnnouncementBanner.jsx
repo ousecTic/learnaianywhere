@@ -27,7 +27,7 @@ const AnnouncementBanner = () => {
     <div className="announcement-banner">
       <Link to="/courses/ai-literacy-for-everyone#download" className="announcement-content">
         <span className="announcement-text">
-          New: AI Literacy for Everyone, a free AI course in 8 languages. Teach it yourself or let students learn on their own, with or without internet.
+          New: AI Literacy for Everyone, a free AI course in 8 languages. Teach it yourself or let learners go through it on their own, with or without internet.
         </span>
       </Link>
       <button 
