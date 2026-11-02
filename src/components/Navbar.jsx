@@ -60,7 +60,7 @@ const Navbar = () => {
         <div className={`nav-links ${isMenuOpen ? 'open' : ''}`}>
           <div className={`nav-item-dropdown ${isDropdownOpen ? 'open' : ''}`}>
             <span className="nav-item" onClick={toggleDropdown}>
-              AI Lessons
+              AI Courses
               <svg 
                 xmlns="http://www.w3.org/2000/svg" 
                 width="16" 

@@ -107,7 +107,7 @@ const AboutUs = () => {
     {
       src: gallery9,
       alt: 'Interactive lesson',
-      caption: 'Bernadete leading a train-the-trainer workshop on how to effectively deliver and implement our AI literacy lessons'
+      caption: 'Bernadete leading a train-the-trainer workshop on how to effectively deliver and implement our AI literacy courses'
     },
     {
       src: gallery10,

@@ -23,7 +23,7 @@ const Footer = () => {
           </div>
 
           <div className="footer-section">
-            <h3>AI Lessons</h3>
+            <h3>AI Courses</h3>
             <ul>
               <li><Link to="/courses/ai-literacy-for-everyone">AI Literacy for Everyone</Link></li>
               <li><Link to="/curriculum/intro-to-generative-ai">Introduction to Generative AI</Link></li>
@@ -48,7 +48,7 @@ const Footer = () => {
         </div>
         
         <div className="footer-bottom">
-          <p>&copy; {new Date().getFullYear()} Learn AI Anywhere, an IRS 501(c)3 Public Charity (81-1631000). All rights reserved. Unless stated otherwise, the Learn AI Anywhere AI lessons are licensed under a <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a> (the "Learn AI Anywhere Creative Commons license").</p>
+          <p>&copy; {new Date().getFullYear()} Learn AI Anywhere, an IRS 501(c)3 Public Charity (81-1631000). All rights reserved. Unless stated otherwise, the Learn AI Anywhere AI courses are licensed under a <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a> (the "Learn AI Anywhere Creative Commons license").</p>
           <p style={{ fontSize: '0.85em', color: '#888', marginTop: '4px' }}>
             Design by <a href="http://ktang.netlify.app/" target="_blank" rel="noopener noreferrer" style={{ color: '#888', textDecoration: 'underline dotted' }}>Karen Tang</a>
           </p>

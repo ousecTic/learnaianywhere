@@ -82,7 +82,7 @@ const IntroToGenerativeAI = () => {
             additionalResource: {
               description: "Download this GGUF file to import into the app:",
               name: "SmolLM2 1.7B Instruct Model",
-              url: "https://huggingface.co/HuggingFaceTB/SmolLM2-1.7B-Instruct-GGUF/blob/main/smollm2-1.7b-instruct-q4_k_m.gguf"
+              url: "https://huggingface.co/HuggingFaceTB/SmolLM2-1.7B-Instruct-GGUF/resolve/main/smollm2-1.7b-instruct-q4_k_m.gguf?download=true"
             }
           },
           {
@@ -99,12 +99,8 @@ const IntroToGenerativeAI = () => {
         windowsApps: [
           {
             name: "Llamafile",
-            url: "https://huggingface.co/Mozilla/gemma-3-1b-it-llamafile/resolve/main/google_gemma-3-1b-it-Q6_K.llamafile?download=true",
-            additionalResource: {
-              description: "Download this GGUF file to use with the app:",
-              name: "GGUF Model File", 
-              url: "https://drive.google.com/file/d/1FkuZBzsRuh4mhrW5mIoUPTrTlL9bC4ol/view?usp=sharing"
-            }
+            description: "For interacting with small language models. One file that includes the model: nothing else to download.",
+            url: "https://huggingface.co/Mozilla/gemma-3-1b-it-llamafile/resolve/main/google_gemma-3-1b-it-Q6_K.llamafile?download=true"
           },
           {
             name: "Kiwix",
@@ -118,7 +114,7 @@ const IntroToGenerativeAI = () => {
         ]
       },
       internetNote: "If internet is limited, you can download these apps and model files once to a USB drive and install them on each device. Currently, we focus on Android and Windows devices as they're most accessible in diverse learning environments.",
-      teacherPrep: "We've designed these AI lessons without separate teacher or student guides. The presentations are self-contained and don't require prior AI knowledge—you can learn alongside your students. However, we strongly recommend reviewing the lesson and worksheet before class to understand the learning journey.",
+      teacherPrep: "We've designed this course without separate teacher or student guides. The presentations are self-contained and don't require prior AI knowledge—you can learn alongside your students. However, we strongly recommend reviewing the lesson and worksheet before class to understand the learning journey.",
       contactNote: "If you encounter any difficulties with the setup process or have questions about implementing this course, please don't hesitate to contact us. We're here to help make your AI teaching experience successful."
     },
     lessonPlan: {
@@ -302,7 +298,7 @@ const IntroToGenerativeAI = () => {
         <div className="container">
           <span className="banner-icon">🚧</span>
           <span className="banner-text">
-            <strong>This course is currently under development.</strong> Content and resources may be updated. We appreciate your patience!
+            <strong>This course is currently being renovated.</strong> Content and resources may be updated. If you’d like to sign up as an early tester for our latest changes, contact us at <a href="mailto:contact@learnaianywhere.org?subject=Early%20tester">contact@learnaianywhere.org</a>.
           </span>
         </div>
       </div>
@@ -374,6 +370,7 @@ const IntroToGenerativeAI = () => {
                     {content.setup.requiredApps.windowsApps.map((app, index) => (
                       <li key={index} className="app-item">
                         <Button href={app.url} variant="text" target="_blank" rel="noopener noreferrer">{app.name}</Button>
+                        {app.description && <span className="app-description"> - {app.description}</span>}
                         {app.additionalResource && (
                           <div className="additional-resource">
                             <p className="resource-description">{app.additionalResource.description}</p>
