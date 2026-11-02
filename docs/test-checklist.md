@@ -116,174 +116,174 @@ All on the deploy preview, at desktop (1280), tablet (768) and phone (375) width
 ## C2. Site-wide (every page)
 
 **Announcement banner**
-- [ ] Shows on first visit with the text: "New: AI Literacy for Everyone, a free AI course in 8 languages. Teach it yourself or let learners go through it on their own, with or without internet."
+- [x] Shows on first visit with the text: "New: AI Literacy for Everyone, a free AI course in 8 languages. Teach it yourself or let learners go through it on their own, with or without internet."
 - [ ] Clicking the text goes to the course page and lands on the Get the course section (address ends in `#download`; it scrolls there, not to the top).
-- [ ] The × hides it, and it stays hidden after a reload and on other pages. A different browser or private window shows it again.
+- [x] The × hides it, and it stays hidden after a reload and on other pages. A different browser or private window shows it again.
 
 **Navbar**
-- [ ] Logo goes home. AI Courses opens a dropdown with AI Literacy for Everyone and Introduction to Generative AI; both go to the right page. The arrow flips when open. Clicking outside closes it.
-- [ ] Get Involved, About Us, Donate and the Contact button go to the right pages. Every page is reachable from every other page.
-- [ ] Nothing in the navbar says "Lessons" or "Kit".
-- [ ] At phone width the hamburger opens the menu, the AI Courses item expands inside it, a link closes it, scrolling closes it, clicking outside closes it.
+- [x] Logo goes home. AI Courses opens a dropdown with AI Literacy for Everyone and Introduction to Generative AI; both go to the right page. The arrow flips when open. Clicking outside closes it.
+- [x] Get Involved, About Us, Donate and the Contact button go to the right pages. Every page is reachable from every other page.
+- [x] Nothing in the navbar says "Lessons" or "Kit".
+- [x] At phone width the hamburger opens the menu, the AI Courses item expands inside it, a link closes it, scrolling closes it, clicking outside closes it.
 
 **Footer**
-- [ ] Logo goes home. Quick Links: Get Involved, About Us. AI Courses: both courses. Connect: Volunteer and Partner with Us (both to Get Involved), Contact Us.
-- [ ] LinkedIn icon opens https://www.linkedin.com/company/learn-ai-anywhere/ in a new tab. The Creative Commons link opens in a new tab. "Design by Karen Tang" works.
-- [ ] Copyright year 2026. Wording says "AI courses", not "AI lessons" or "curriculum".
+- [x] Logo goes home. Quick Links: Get Involved, About Us. AI Courses: both courses. Connect: Volunteer and Partner with Us (both to Get Involved), Contact Us.
+- [x] LinkedIn icon opens https://www.linkedin.com/company/learn-ai-anywhere/ in a new tab. The Creative Commons link opens in a new tab. "Design by Karen Tang" works.
+- [x] Copyright year 2026. Wording says "AI courses", not "AI lessons" or "curriculum".
 
 **Navigation**
 - [ ] Opening a new page starts at the top. Links with a `#` (the banner's `#download`, the course page's `#get`) scroll to that section.
-- [ ] Back and forward restore the right page.
-- [ ] Reloading `/about` and `/courses/ai-literacy-for-everyone` loads the page, not a Netlify 404 (the `_redirects` catch-all).
-- [ ] `/curriculum` and `/curriculum/intro-to-ai` redirect to the course page. `/curriculum/intro-to-generative-ai` still shows the Gen AI course.
-- [ ] Tab title "Learn AI Anywhere", tab icon is the logo.
+- [x] Back and forward restore the right page.
+- [x] Reloading `/about` and `/courses/ai-literacy-for-everyone` loads the page, not a Netlify 404 (the `_redirects` catch-all).
+- [x] `/curriculum` and `/curriculum/intro-to-ai` redirect to the course page. `/curriculum/intro-to-generative-ai` still shows the Gen AI course.
+- [x] Tab title "Learn AI Anywhere", tab icon is the logo.
 - [ ] No red errors in the console on any page. Google Analytics requests go out (gtag / collect).
 
 ## C3. Home page `/`
 
-- [ ] Hero: heading "AI Education That Works Anywhere" and the one-line description. See the courses → course page. About Us → About. The GIF plays, is not stretched, and sits under the text at phone width.
-- [ ] Statistics: intro sentence ends in a full stop. Three cards: 2.2B (ITU, 2025), 2/3 (UNESCO IITE, 2022), 50% (UNESCO, 2020). No 41% card. Cards are the same height on a laptop.
-- [ ] Each source link opens in a new tab and lands on the right page: ITU facts page, the UNESCO IITE PDF, the UNESCO 2020 article.
-- [ ] Closing sentence "That's why we created Learn AI Anywhere..." is there.
-- [ ] How it works: three cards (Offline-First, Mobile-Friendly, Video Guidance); every button goes to the course page; wording says "courses".
-- [ ] Global reach: "We have learners in 80 countries". Every country on the list is shaded in the SVG, including the dot countries (Singapore, Hong Kong, Bahrain, Mauritius, Barbados, Saint Lucia) and the easy-to-get-wrong ones (Czechia, both Congos, Kenya, Tanzania, Uganda, Pakistan, Colombia). The map fits the screen at phone width.
-- [ ] Call to action: "Ready to Make a Difference?" with Contact Us → `/contact`.
+- [x] Hero: heading "AI Education That Works Anywhere" and the one-line description. See the courses → course page. About Us → About. The GIF plays, is not stretched, and sits under the text at phone width.
+- [x] Statistics: intro sentence ends in a full stop. Three cards: 2.2B (ITU, 2025), 2/3 (UNESCO IITE, 2022), 50% (UNESCO, 2020). No 41% card. Cards are the same height on a laptop.
+- [x] Each source link opens in a new tab and lands on the right page: ITU facts page, the UNESCO IITE PDF, the UNESCO 2020 article.
+- [x] Closing sentence "That's why we created Learn AI Anywhere..." is there.
+- [x] How it works: three cards (Offline-First, Mobile-Friendly, Video Guidance); every button goes to the course page; wording says "courses".
+- [x] Global reach: "We have learners in 80 countries". Every country on the list is shaded in the SVG, including the dot countries (Singapore, Hong Kong, Bahrain, Mauritius, Barbados, Saint Lucia) and the easy-to-get-wrong ones (Czechia, both Congos, Kenya, Tanzania, Uganda, Pakistan, Colombia). The map fits the screen at phone width.
+- [x] Call to action: "Ready to Make a Difference?" with Contact Us → `/contact`.
 
 ## C4. Course page: hero and trailer
 
-- [ ] Eyebrow "Free course · Ages 11 and up · 8 languages". "Ages 11 and up" matches the teacher guide.
-- [ ] Heading and lead: "A 4-lesson course on how AI works. Learners train their own AI and learn to use it responsibly, with or without internet."
-- [ ] **Try it online in English** opens `/course/online/en/`. The arrow next to it opens the "Language of the course" menu; picking a language changes the button text, the trailer, and the Get the course section below.
-- [ ] **Get the course** scrolls to the section.
+- [x] Eyebrow "Free course · Ages 11 and up · 8 languages". "Ages 11 and up" matches the teacher guide.
+- [x] Heading and lead: "A 4-lesson course on how AI works. Learners train their own AI and learn to use it responsibly, with or without internet."
+- [x] **Try it online in English** opens `/course/online/en/`. The arrow next to it opens the "Language of the course" menu; picking a language changes the button text, the trailer, and the Get the course section below.
+- [x] **Get the course** scrolls to the section.
 - [ ] Trailer: the cover picture shows as the poster, one click starts the MP4 from the `site-media` release with the browser's own controls. If the MP4 fails, the Drive player shows instead.
-- [ ] The trailer video is not downloaded until play is clicked (Network tab).
-- [ ] Nothing in the hero is crowded at laptop or phone width; at phone width the trailer sits under the text.
+- [x] The trailer video is not downloaded until play is clicked (Network tab).
+- [x] Nothing in the hero is crowded at laptop or phone width; at phone width the trailer sits under the text.
 
 ## C5. Course page: What's in the course and The 4 lessons
 
-- [ ] "Use all of it, or only the parts you need." Six cards in order: Teacher guide, Slides, Worksheet, 25 short videos, Games and quizzes, NeuroPocket app. Labels are "To teach with" or "To learn with"; no "For students" or "For you".
-- [ ] Each picture loads and matches its card; the guide and worksheet cards are drawn as portrait pages.
-- [ ] Slides text says "each with a recap quiz and then project time". NeuroPocket text does not say a camera is required.
-- [ ] 3 columns on a laptop, 2 on a tablet, 1 on a phone; no card text cut off.
-- [ ] Lessons: heading and the line about teaching all 4 in a day or one a day. Four rows with the right titles and times (25–30, 25–30, 30–40, 30–40 min); these match the teacher guide.
-- [ ] All start closed; clicking opens, clicking again closes, opening another closes the first; the chevron turns.
-- [ ] Inside each: activity picture, "Learners will:" objectives, tags (Slides, N short videos, activity name, Recap quiz, Worksheet part N).
-- [ ] Video counts 4, 5, 7, 7, plus 2 introduction videos = 25, matching the card and the Drive folders.
-- [ ] Objectives match the teacher guide. Activity names match the slides: AI or Not game, Train a model in NeuroPocket, Describer Drawer game, Bias challenge in NeuroPocket.
-- [ ] Keyboard: Tab to a row, Enter or Space opens it; the row is a real button with aria-expanded.
-- [ ] At phone width the time and chevron do not wrap awkwardly.
+- [x] "Use all of it, or only the parts you need." Six cards in order: Teacher guide, Slides, Worksheet, 25 short videos, Games and quizzes, NeuroPocket app. Labels are "To teach with" or "To learn with"; no "For students" or "For you".
+- [x] Each picture loads and matches its card; the guide and worksheet cards are drawn as portrait pages.
+- [x] Slides text says "each with a recap quiz and then project time". NeuroPocket text does not say a camera is required.
+- [x] 3 columns on a laptop, 2 on a tablet, 1 on a phone; no card text cut off.
+- [x] Lessons: heading and the line about teaching all 4 in a day or one a day. Four rows with the right titles and times (25–30, 25–30, 30–40, 30–40 min); these match the teacher guide.
+- [x] All start closed; clicking opens, clicking again closes, opening another closes the first; the chevron turns.
+- [x] Inside each: activity picture, "Learners will:" objectives, tags (Slides, N short videos, activity name, Recap quiz, Worksheet part N).
+- [x] Video counts 4, 5, 7, 7, plus 2 introduction videos = 25, matching the card and the Drive folders.
+- [x] Objectives match the teacher guide. Activity names match the slides: AI or Not game, Train a model in NeuroPocket, Describer Drawer game, Bias challenge in NeuroPocket.
+- [x] Keyboard: Tab to a row, Enter or Space opens it; the row is a real button with aria-expanded.
+- [x] At phone width the time and chevron do not wrap awkwardly.
 
 ## C6. Course page: Get the course
 
-- [ ] Heading "Get the course in English", under it "Version 1.5" and the release date.
-- [ ] Language menu: 9 entries in this order: English, Français (French), Español (Spanish), Português (Portuguese), العربية (Arabic), हिन्दी (Hindi), اردو (Urdu), Kiswahili – Kenya (Swahili), Kiswahili – Tanzania (Swahili). Arrow keys change it.
-- [ ] Choosing a language changes the heading and shows the green note "Switched to French. Everything below, and all the files, are now in French." The note stays visible when switching again.
-- [ ] Question 1 "How do you want to use it?": I'll teach it (default) and Learners go through it on their own. With "I'll teach it" there is no question 2.
-- [ ] Choosing "on their own" shows question 2 "Where will learners use it?" with On a computer (default), Android phone or tablet, Learning platform, Online. Switching back hides it and the plan changes back.
-- [ ] The selected choice is highlighted; choices work with Tab and Enter and announce aria-pressed.
+- [x] Heading "Get the course in English", under it "Version 1.5" and the release date.
+- [x] Language menu: 9 entries in this order: English, Français (French), Español (Spanish), Português (Portuguese), العربية (Arabic), हिन्दी (Hindi), اردو (Urdu), Kiswahili – Kenya (Swahili), Kiswahili – Tanzania (Swahili). Arrow keys change it.
+- [x] Choosing a language changes the heading and shows the green note "Switched to French. Everything below, and all the files, are now in French." The note stays visible when switching again.
+- [x] Question 1 "How do you want to use it?": I'll teach it (default) and Learners go through it on their own. With "I'll teach it" there is no question 2.
+- [x] Choosing "on their own" shows question 2 "Where will learners use it?" with On a computer (default), Android phone or tablet, Learning platform, Online. Switching back hides it and the plan changes back.
+- [x] The selected choice is highlighted; choices work with Tab and Enter and announce aria-pressed.
 - [ ] Both questions show 2 choices per row (question 2 is 2×2) at desktop and tablet; one per row below about 520px; no card alone in a row; every title on one line.
-- [ ] At phone width the big plan button wraps as text and the size never splits across lines.
+- [x] At phone width the big plan button wraps as text and the size never splits across lines.
 
 ## C7. Course page: the plan cards and every button in every language
 
 **"I'll teach it"**
-- [ ] Starts with the small "YOUR PLAN" label, no big title, no picture, no closing note. Each step is a heading, one short line and its buttons.
-- [ ] Five steps: 1 Read the teacher guide (PDF, Word), 2 Get the slides (PDF · 15 MB, PowerPoint · 95 MB), 3 Print the worksheet (Worksheet PDF, Worksheet Word, Filled-in example PDF), 4 Put NeuroPocket on one device per group (Android app, Windows app, Online at neuropocket.com), 5 Watch the lesson videos (Open in Google Drive, Watch online, and Watch on YouTube in English only).
-- [ ] Step 4 text does not mention a camera. No step gives minutes. No step says "students" or "class".
-- [ ] No language other than English shows a YouTube button.
+- [x] Starts with the small "YOUR PLAN" label, no big title, no picture, no closing note. Each step is a heading, one short line and its buttons.
+- [x] Five steps: 1 Read the teacher guide (PDF, Word), 2 Get the slides (PDF · 15 MB, PowerPoint · 95 MB), 3 Print the worksheet (Worksheet PDF, Worksheet Word, Filled-in example PDF), 4 Put NeuroPocket on one device per group (Android app, Windows app, Online at neuropocket.com), 5 Watch the lesson videos (Open in Google Drive, Watch online, and Watch on YouTube in English only).
+- [x] Step 4 text does not mention a camera. No step gives minutes. No step says "students" or "class".
+- [x] No language other than English shows a YouTube button.
 
 **"Learners go through it on their own"** (all four plans)
-- [ ] One step, no step number, no title, no closing note, the v1.5 START HERE screenshot (sidebar says Version 1.5, 39 activities) with no caption.
-- [ ] Computer: "Download the course to a computer", "Unzip it and open START HERE.", button "Download the course · 116 MB" (no language in the button; size changes per language). Downloads straight away, no new tab.
-- [ ] Android: "Install the app on the learners' phones or tablets", "Install it and choose English. On iPhone or iPad? Use it online.", button "Download the app · 3 MB" from the `app-latest` release, link "See the install steps with pictures" → `/courses/ai-literacy-for-everyone/install-android`.
-- [ ] Learning platform: "Upload the course to your platform", "Add the ZIP as an HTML package. On Kolibri? See how: computer · Android.", the ZIP button, and the two Kolibri links open the right Google Docs in a new tab. Both docs are viewable without signing in.
-- [ ] Online: "Share the link with learners", "Nothing to install. Needs internet.", button "Open the course" (arrow icon) → `/course/online/<language>/`.
-- [ ] After the plan card the page goes straight to Common questions; there is no "All the files" section.
+- [x] One step, no step number, no title, no closing note, the v1.5 START HERE screenshot (sidebar says Version 1.5, 39 activities) with no caption.
+- [x] Computer: "Download the course to a computer", "Unzip it and open START HERE.", button "Download the course · 116 MB" (no language in the button; size changes per language). Downloads straight away, no new tab.
+- [x] Android: "Install the app on the learners' phones or tablets", "Install it and choose English. On iPhone or iPad? Use it online.", button "Download the app · 3 MB" from the `app-latest` release, link "See the install steps with pictures" → `/courses/ai-literacy-for-everyone/install-android`.
+- [x] Learning platform: "Upload the course to your platform", "Add the ZIP as an HTML package. On Kolibri? See how: computer · Android.", the ZIP button, and the two Kolibri links open the right Google Docs in a new tab. Both docs are viewable without signing in.
+- [x] Online: "Share the link with learners", "Nothing to install. Needs internet.", button "Open the course" (arrow icon) → `/course/online/<language>/`.
+- [x] After the plan card the page goes straight to Common questions; there is no "All the files" section.
 
 **Every button, every language** (switch through all 9)
-- [ ] Teacher guide PDF and Word are the guide, in that language, 4 pages (5 in Hindi and Urdu), no heading stranded at the bottom of a page, no version number inside.
-- [ ] Slides PDF and PowerPoint are the slides in that language.
-- [ ] Worksheet PDF and Word, and the filled-in example PDF, are the right documents in that language; each worksheet is 1 page.
-- [ ] The ZIP's size matches the label and its SHA-256 matches `course/downloads.json`.
-- [ ] "Open in Google Drive" opens that language's video folder, viewable without signing in, with 25 videos.
-- [ ] No button is greyed out "Coming soon".
-- [ ] Downloads (ZIP, APK, EXE, Google exports) do not open a new tab; pages (Drive, YouTube, Kolibri docs, neuropocket.com) do.
-- [ ] NeuroPocket buttons point at the 1.8.0 release and the APK/EXE exist.
+- [x] Teacher guide PDF and Word are the guide, in that language, 4 pages (5 in Hindi and Urdu), no heading stranded at the bottom of a page, no version number inside.
+- [x] Slides PDF and PowerPoint are the slides in that language.
+- [x] Worksheet PDF and Word, and the filled-in example PDF, are the right documents in that language; each worksheet is 1 page.
+- [x] The ZIP's size matches the label and its SHA-256 matches `course/downloads.json`.
+- [x] "Open in Google Drive" opens that language's video folder, viewable without signing in, with 25 videos.
+- [x] No button is greyed out "Coming soon".
+- [x] Downloads (ZIP, APK, EXE, Google exports) do not open a new tab; pages (Drive, YouTube, Kolibri docs, neuropocket.com) do.
+- [x] NeuroPocket buttons point at the 1.8.0 release and the APK/EXE exist.
 
 ## C8. The course itself
 
 **Computer ZIP** (English fully; spot-check Arabic or Urdu and one Swahili)
 - [ ] Unzipped and served from a local server, START HERE.html opens in Chrome, Edge and Firefox and makes no request to any outside host (every request is to the local folder).
-- [ ] The lessons are listed on the left, "Start the course" on the right, matching the website screenshot.
-- [ ] Lesson 1 plays its videos in order with captions; AI or Not works; the recap quiz gives a score. Lessons 2 to 4 the same.
+- [x] The lessons are listed on the left, "Start the course" on the right, matching the website screenshot.
+- [x] Lesson 1 plays its videos in order with captions; AI or Not works; the recap quiz gives a score. Lessons 2 to 4 the same.
 - [ ] NeuroPocket opens from the course and trains with the built-in pictures.
-- [ ] The worksheet app keeps what was typed after closing and reopening. Progress is remembered.
-- [ ] Resources contains the guide, slides, worksheet and example in that language.
-- [ ] Arabic and Urdu are right-to-left, including inside the quizzes and the worksheet app.
+- [x] The worksheet app keeps what was typed after closing and reopening. Progress is remembered.
+- [x] Resources contains the guide, slides, worksheet and example in that language.
+- [x] Arabic and Urdu are right-to-left, including inside the quizzes and the worksheet app.
 - [ ] The ZIP is a plain HTML package with START HERE.html at the top level, the shape a learning platform expects.
 
 **Android app**
-- [ ] The APK downloads from `app-latest`. The `course-latest` pointer the app reads points at v1.5 with the right sizes and hashes.
+- [x] The APK downloads from `app-latest`. The `course-latest` pointer the app reads points at v1.5 with the right sizes and hashes.
 
 **Online kit** `/course/online/<language>/`
-- [ ] All 9 addresses load, with and without the trailing slash.
-- [ ] All 225 videos in the `course-videos-v1.5` release are reachable; captions show.
-- [ ] Quizzes, AI or Not, worksheet app and NeuroPocket work inside it. Progress is remembered on reload.
-- [ ] Arabic and Urdu are right-to-left.
-- [ ] At phone width the sidebar opens and closes and videos fit the width.
-- [ ] No link inside the online kit points at a local file that only exists in the ZIP.
+- [x] All 9 addresses load, with and without the trailing slash.
+- [x] All 225 videos in the `course-videos-v1.5` release are reachable; captions show.
+- [x] Quizzes, AI or Not, worksheet app and NeuroPocket work inside it. Progress is remembered on reload.
+- [x] Arabic and Urdu are right-to-left.
+- [x] At phone width the sidebar opens and closes and videos fit the width.
+- [x] No link inside the online kit points at a local file that only exists in the ZIP.
 
 **Mini-app pages**
-- [ ] `/courses/ai-literacy-for-everyone/ai-or-not` shows the game inside the site layout; the frame grows with the content (no inner scrollbar, no cut-off bottom).
-- [ ] `recap-quiz-1` to `recap-quiz-4` show the right lesson's quiz. Finishing a quiz, the frame resizes to show the result.
-- [ ] `?lang=fr` (and ar, ur, sw, hi, pt, es) switches the language; `?lang=ar` is right-to-left.
+- [x] `/courses/ai-literacy-for-everyone/ai-or-not` shows the game inside the site layout; the frame grows with the content (no inner scrollbar, no cut-off bottom).
+- [x] `recap-quiz-1` to `recap-quiz-4` show the right lesson's quiz. Finishing a quiz, the frame resizes to show the result.
+- [x] `?lang=fr` (and ar, ur, sw, hi, pt, es) switches the language; `?lang=ar` is right-to-left.
 
 **Install steps page** `/courses/ai-literacy-for-everyone/install-android`
 - [ ] "← AI Literacy for Everyone" goes back to the course page's Get the course section.
-- [ ] Eight steps, each with a tall phone screenshot and short text; pictures load (first two straight away, the rest on scroll).
+- [x] Eight steps, each with a tall phone screenshot and short text; pictures load (first two straight away, the rest on scroll).
 - [ ] Step 1's "Download the app" downloads the APK. The sizes quoted ("120 to 200 MB") match the real package sizes. The last line says Android only.
-- [ ] At phone width the picture is above the text and the page is not wider than the screen.
+- [x] At phone width the picture is above the text and the page is not wider than the screen.
 
 ## C9. Introduction to Generative AI `/curriculum/intro-to-generative-ai`
 
-- [ ] The yellow banner reads exactly: "This course is currently being renovated. Content and resources may be updated. If you'd like to sign up as an early tester for our latest changes, contact us at contact@learnaianywhere.org." The email is a mailto link with the subject "Early tester".
-- [ ] Overview is open by default; the other sections open and close and the + / − flips.
-- [ ] The Google Slides embed loads and can be clicked through.
-- [ ] Lesson plan PowerPoint and PDF, worksheet PDF and Word, example PDF and Word all open the right document.
-- [ ] Setup → Android: Pocketpal (Play Store), SmolLM2 GGUF on Hugging Face (the link resolves; not downloaded), Kiwix (Play Store), Offline Encyclopedia (Drive file, shared with anyone).
-- [ ] Setup → Windows: Llamafile on Hugging Face (one file, no second download under it), Kiwix (Microsoft Store), Offline Encyclopedia.
-- [ ] Wording says "this course", not "this curriculum". Both Contact buttons → `/contact`.
-- [ ] At phone width the slides embed fits and the section headers are tappable.
+- [x] The yellow banner reads exactly: "This course is currently being renovated. Content and resources may be updated. If you'd like to sign up as an early tester for our latest changes, contact us at contact@learnaianywhere.org." The email is a mailto link with the subject "Early tester".
+- [x] Overview is open by default; the other sections open and close and the + / − flips.
+- [x] The Google Slides embed loads and can be clicked through.
+- [x] Lesson plan PowerPoint and PDF, worksheet PDF and Word, example PDF and Word all open the right document.
+- [x] Setup → Android: Pocketpal (Play Store), SmolLM2 GGUF on Hugging Face (the link resolves; not downloaded), Kiwix (Play Store), Offline Encyclopedia (Drive file, shared with anyone).
+- [x] Setup → Windows: Llamafile on Hugging Face (one file, no second download under it), Kiwix (Microsoft Store), Offline Encyclopedia.
+- [x] Wording says "this course", not "this curriculum". Both Contact buttons → `/contact`.
+- [x] At phone width the slides embed fits and the section headers are tappable.
 
 ## C10. About Us `/about`
 
-- [ ] Opening paragraph about the three gaps, with the ITU, UNESCO IITE PDF and UNESCO 2020 links in new tabs. Second paragraph "So we started Learn AI Anywhere and built a course to address all three...".
-- [ ] Uganda photo loads with its caption (Michael from Future Upgrade, ChatGPT on his phone, what inspired the offline-first course).
-- [ ] "Today we have learners in 80 countries across the world:" with the same map as the home page.
-- [ ] The handwritten learner note shows with its intro line.
-- [ ] "Teachers tell us the same. A school principal, after going through our course:" then the video in a framed box with the poster showing; the video is not downloaded before play (preload none).
-- [ ] The captions file is anonymised: the name is replaced by "[He gives his name.]" and the school by "I'm the principal of a school." Nothing on the page names the principal or the school.
-- [ ] "Video edited by Leah Sugg and Gabrielle Augier." under the video.
+- [x] Opening paragraph about the three gaps, with the ITU, UNESCO IITE PDF and UNESCO 2020 links in new tabs. Second paragraph "So we started Learn AI Anywhere and built a course to address all three...".
+- [x] Uganda photo loads with its caption (Michael from Future Upgrade, ChatGPT on his phone, what inspired the offline-first course).
+- [x] "Today we have learners in 80 countries across the world:" with the same map as the home page.
+- [x] The handwritten learner note shows with its intro line.
+- [x] "Teachers tell us the same. A school principal, after going through our course:" then the video in a framed box with the poster showing; the video is not downloaded before play (preload none).
+- [x] The captions file is anonymised: the name is replaced by "[He gives his name.]" and the school by "I'm the principal of a school." Nothing on the page names the principal or the school.
+- [x] "Video edited by Leah Sugg and Gabrielle Augier." under the video.
 - [ ] Gallery: 12 pictures; clicking opens a large view with the caption; × closes, clicking outside closes, Esc closes.
-- [ ] Partner logos: Kiwix, Future Upgrade, Learning Equality, Learning Passport, AI Literacy Day, OLI. Each opens its site in a new tab; no logo is stretched.
-- [ ] Contact Us button at the bottom.
+- [x] Partner logos: Kiwix, Future Upgrade, Learning Equality, Learning Passport, AI Literacy Day, OLI. Each opens its site in a new tab; no logo is stretched.
+- [x] Contact Us button at the bottom.
 
 ## C11. Get Involved, Contact, Donate
 
-- [ ] Get Involved: Volunteers tab open by default, Partnerships switches content, the active tab is highlighted. Teachers, Translators, Ambassadors cards; Teachers has four bullets. Contact Us button.
-- [ ] Contact: email contact@learnaianywhere.org shown; Copy Email copies it and the toast shows and disappears on its own (desktop). The "What to Include" list shows.
-- [ ] Donate: the DonorBox form loads inside the page, tall enough with no inner scrollbar, with amount buttons and the card form visible. Leaving and coming back still loads the form. The classroom photo and caption show.
+- [x] Get Involved: Volunteers tab open by default, Partnerships switches content, the active tab is highlighted. Teachers, Translators, Ambassadors cards; Teachers has four bullets. Contact Us button.
+- [x] Contact: email contact@learnaianywhere.org shown; Copy Email copies it and the toast shows and disappears on its own (desktop). The "What to Include" list shows.
+- [x] Donate: the DonorBox form loads inside the page, tall enough with no inner scrollbar, with amount buttons and the card form visible. Leaving and coming back still loads the form. The classroom photo and caption show.
 
 ## C12. Accessibility, layout and speed
 
 - [ ] Every page at phone width (375) and tablet width (768): no sideways scrolling, nothing cut off, body text at least 16px.
-- [ ] Browser zoom at 200% on a laptop: the layout still works.
+- [x] Browser zoom at 200% on a laptop: the layout still works.
 - [ ] Keyboard only: Tab reaches every link and button in a sensible order, a visible focus ring shows, Enter activates, Esc closes the gallery modal.
-- [ ] Every image has sensible alt text (the trailer cover is deliberately empty alt because the button has its own label).
-- [ ] Colour contrast: the green note, the grey "To teach with" labels and the muted step text pass.
-- [ ] Dark mode: nothing becomes unreadable (the site is designed light).
-- [ ] Pictures lower on the course page load only when scrolled to.
-- [ ] Content accuracy: every number on the course page matches reality (4 lessons, 25 videos, 1-page worksheet, 8 languages, version 1.5 and its date, 3 MB app, ZIP sizes, NeuroPocket 1.8.0). Nothing says "kit", "students", "class" or "classroom" where you wanted "course", "learners", "group". Nothing refers to things no longer on the page.
+- [x] Every image has sensible alt text (the trailer cover is deliberately empty alt because the button has its own label).
+- [x] Colour contrast: the green note, the grey "To teach with" labels and the muted step text pass.
+- [x] Dark mode: nothing becomes unreadable (the site is designed light).
+- [x] Pictures lower on the course page load only when scrolled to.
+- [x] Content accuracy: every number on the course page matches reality (4 lessons, 25 videos, 1-page worksheet, 8 languages, version 1.5 and its date, 3 MB app, ZIP sizes, NeuroPocket 1.8.0). Nothing says "kit", "students", "class" or "classroom" where you wanted "course", "learners", "group". Nothing refers to things no longer on the page.
 
 ## C13. After the merge
 
