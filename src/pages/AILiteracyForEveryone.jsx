@@ -60,11 +60,11 @@ const LANG_LABELS = {
 
 const INSIDE = [
   { img: teacherGuideImg, alt: 'The first page of the teacher guide', who: 'To teach with', title: 'Teacher guide', text: 'How the course is set up, how each lesson runs, and what learners should be able to do by the end.', page: true },
-  { img: slidesImg, alt: 'A slide from the course', who: 'To teach with', title: 'Slides', text: 'For all 4 lessons, with the recap quiz at the end of each. Show them or print them.' },
-  { img: worksheetImg, alt: 'The Design Your Own AI Classifier worksheet', who: 'For learners', title: 'Worksheet', text: 'A 1-page project that builds across the 4 lessons, with a filled-in example.', page: true },
-  { img: lessonVideoImg, alt: 'A lesson video', who: 'For learners', title: '26 short videos', text: 'Every idea in the course, explained in a few minutes each, with captions. Show them to the group or let learners watch on their own.' },
-  { img: worksheetAppImg, alt: 'The worksheet app, Lesson 1', who: 'For learners', title: 'Games and quizzes', text: 'The AI or Not game, a recap quiz after each lesson, and the worksheet to fill in on screen.' },
-  { img: neuropocketImg, alt: 'The NeuroPocket app', who: 'For learners', title: 'NeuroPocket app', text: 'Learners train their own AI, with pictures that come with the app or their own. One device per group is enough.' },
+  { img: slidesImg, alt: 'A slide from the course', who: 'To teach with', title: 'Slides', text: 'For all 4 lessons, each with a recap quiz and then project time. Show them or print them.' },
+  { img: worksheetImg, alt: 'The Design Your Own AI Classifier worksheet', who: 'To learn with', title: 'Worksheet', text: 'A 1-page project that builds across the 4 lessons, with a filled-in example.', page: true },
+  { img: lessonVideoImg, alt: 'A lesson video', who: 'To learn with', title: '26 short videos', text: 'Every idea in the course, explained in a few minutes each, with captions. Show them to the group or let learners watch on their own.' },
+  { img: worksheetAppImg, alt: 'The worksheet app, Lesson 1', who: 'To learn with', title: 'Games and quizzes', text: 'The AI or Not game, a recap quiz after each lesson, and the worksheet to fill in on screen.' },
+  { img: neuropocketImg, alt: 'The NeuroPocket app', who: 'To learn with', title: 'NeuroPocket app', text: 'Learners train their own AI, with pictures that come with the app or their own. One device per group is enough.' },
 ];
 
 const LESSONS = [
@@ -142,7 +142,7 @@ const materialRows = (pkg) => {
   const english = pkg.lang === 'en';
   return [
     { name: 'Teacher guide', what: 'How the course is set up and how each lesson runs. Read this first.', buttons: [file('PDF', r.guidePdf), file('Word', r.guideDocx)] },
-    { name: 'Slides', what: 'For all 4 lessons. The recap quiz is on the last slides of each.', buttons: [file('PDF', r.slidesPdf), file('PowerPoint', r.slidesPptx)] },
+    { name: 'Slides', what: 'For all 4 lessons, each with a recap quiz and then project time.', buttons: [file('PDF', r.slidesPdf), file('PowerPoint', r.slidesPptx)] },
     { name: 'Worksheet', what: 'A 1-page project that builds across the 4 lessons.', buttons: [file('PDF', r.worksheetPdf), file('Word', r.worksheetDocx)] },
     { name: 'Worksheet example', what: 'Filled in, to show learners what to aim for.', buttons: [file('PDF', r.examplePdf), file('Word', r.exampleDocx)] },
     {
@@ -160,7 +160,7 @@ const makePlan = ({ mode, device, pkg, onlineUrl }) => {
   const r = pkg.resources || {};
   const lang = pkg.name;
   const guide = { h: 'Read the teacher guide', p: 'How the course is set up, how each lesson splits into lesson time and project time, and what learners should be able to do by the end.', buttons: [file('PDF', r.guidePdf), file('Word', r.guideDocx)] };
-  const slides = { h: 'Get the slides', p: 'One deck for all 4 lessons. The recap quiz is on the last slides of each lesson. Show them on a screen or print them.', buttons: [file('PDF', r.slidesPdf), file('PowerPoint', r.slidesPptx)] };
+  const slides = { h: 'Get the slides', p: 'One deck for all 4 lessons. Each lesson teaches the ideas, then has a recap quiz, then project time. Show them on a screen or print them.', buttons: [file('PDF', r.slidesPdf), file('PowerPoint', r.slidesPptx)] };
   const worksheet = { h: 'Print the worksheet', p: 'A 1-page project learners build up over the 4 lessons. Plain paper works too. There is a filled-in example to check against.', buttons: [file('Worksheet (PDF)', r.worksheetPdf), file('Worksheet (Word)', r.worksheetDocx), file('Filled-in example (PDF)', r.examplePdf)] };
   const neuropocket = { h: 'Put NeuroPocket on one device per group', p: 'Learners train their own AI with pictures that come with the app, or their own if the device has a camera. The apps work offline once installed.', buttons: [['Android app', NEUROPOCKET.android], ['Windows app', NEUROPOCKET.windows], ['Online at neuropocket.com', NEUROPOCKET.online]] };
 
@@ -168,7 +168,7 @@ const makePlan = ({ mode, device, pkg, onlineUrl }) => {
     return {
       title: `Teach it yourself, in ${lang}`,
       steps: [guide, slides, worksheet, neuropocket, { h: 'Start teaching the first lesson', p: 'Each lesson has a lesson part, taught from the slides, then project time, when learners work on the worksheet and their own AI.' }],
-      pic: { img: slidesImg, alt: 'A slide from the course', what: 'You teach from these slides: one deck for all 4 lessons, with the recap quiz at the end of each lesson.' },
+      pic: { img: slidesImg, alt: 'A slide from the course', what: 'You teach from these slides: one deck for all 4 lessons, each with its recap quiz and project time.' },
       note: <>Want to see how we teach it? About an hour of lesson videos covers the same ideas. Watch them to prepare, or play them to the group. {onlineUrl && <><a href={onlineUrl}>Watch the videos online</a> or </>}<a href="#materials">download them</a>.</>,
     };
   }
