@@ -24,7 +24,7 @@ const Features = () => {
             <div className="feature-icon">🎥</div>
             <h3>Video Guidance</h3>
             <p>Videos to guide educators on delivering our AI lessons offline and online.</p>
-            <Button to="/courses/ai-literacy-for-everyone" variant="text">See the Kit →</Button>
+            <Button to="/courses/ai-literacy-for-everyone" variant="text">See the course →</Button>
           </div>
         </div>
       </div>

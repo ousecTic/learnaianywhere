@@ -30,9 +30,9 @@ const STEPS = [
   { img: step6, alt: 'App installed, with Done and Open buttons',
     title: 'Open the app', text: <>When it says <strong>App installed</strong>, tap <strong>Open</strong>. The app is also on your home screen as <strong>AI Literacy</strong>.</> },
   { img: step7, alt: 'The app’s first screen: choose your language, with the size of each',
-    title: 'Choose your language', text: <>Do this while you still have internet, ideally on Wi-Fi: the app now downloads the kit in that language, 120 to 200 MB.</> },
+    title: 'Choose your language', text: <>Do this while you still have internet, ideally on Wi-Fi: the app now downloads the course in that language, 120 to 200 MB.</> },
   { img: step8, alt: 'Getting your course ready: a progress bar',
-    title: 'Wait for the download', text: <>If the connection drops, it carries on where it stopped. When it’s done, the kit opens, and from then on it works without internet.</> },
+    title: 'Wait for the download', text: <>If the connection drops, it carries on where it stopped. When it’s done, the course opens, and from then on it works without internet.</> },
 ];
 
 const AndroidInstallSteps = () => (
