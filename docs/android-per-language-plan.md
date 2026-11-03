@@ -447,7 +447,8 @@ course 1.5 ZIPs still hold 1.8.0 and can't change, so the apps should ship it as
 1.6**: the apps are built from the course ZIPs. The test apps on Henry's phone
 (`build/test-apk/ai-literacy-<id>-1.6.0-np190-debug.apk`, en, ar, fr) were built from copies
 of the 1.5 ZIPs with only `neuropocket.html` swapped for 1.9.0. That is what course 1.6
-will contain if nothing else changes.
+will contain if nothing else changes. They installed over 1.5.x on the phone as
+updates (progress kept), and NeuroPocket 1.9.0 opens in the app.
 
 The website now says NeuroPocket needs a device with at least 1 GB of memory (RAM), on the
 course page and on the install page. The teacher guide masters on Drive still say "at least
