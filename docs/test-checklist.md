@@ -189,9 +189,9 @@ All on the deploy preview, at desktop (1280), tablet (768) and phone (375) width
 
 **"I'll teach it"**
 - [x] Starts with the small "YOUR PLAN" label, no big title, no picture, no closing note. Each step is a heading, one short line and its buttons.
-- [x] Five steps: 1 Read the teacher guide (PDF, Word), 2 Get the slides (PDF · 15 MB, PowerPoint · 95 MB), 3 Print the worksheet (Worksheet PDF, Worksheet Word, Filled-in example PDF), 4 Put NeuroPocket on one device per group (Android app, Windows app, Online at neuropocket.com), 5 Watch the lesson videos (Open in Google Drive, Watch online, and Watch on YouTube in English only).
+- [x] Five steps: 1 Read the teacher guide (PDF, Word), 2 Get the slides (PDF · 15 MB, PowerPoint · 95 MB), 3 Print the worksheet (Worksheet PDF, Worksheet Word, Filled-in example PDF), 4 Put NeuroPocket on one device per group (Android app, Windows app, Online at neuropocket.com), 5 Watch the lesson videos (Watch in the online course, Download from Google Drive), the same two buttons in every language.
 - [x] Step 4 text does not mention a camera. No step gives minutes. No step says "students" or "class".
-- [x] No language other than English shows a YouTube button.
+- [x] The hero has a small link under its two buttons, "Also on freeCodeCamp’s YouTube channel", which opens the freeCodeCamp video in a new tab, in every language. (Changed 3 November 2026: it used to be a YouTube button in step 5, English only.)
 
 **"Learners go through it on their own"** (all four plans)
 - [x] One step, no step number, no title, no closing note, the v1.5 START HERE screenshot (sidebar says Version 1.5, 39 activities) with no caption.

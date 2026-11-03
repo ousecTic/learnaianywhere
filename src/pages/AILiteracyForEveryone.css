@@ -54,6 +54,8 @@
 .alfe-hero h1 { margin: 0; font-size: 52px; line-height: 1.08; font-weight: 800; letter-spacing: -0.02em; }
 .alfe-lead { margin: 0; font-size: 20px; color: var(--alfe-text); max-width: 560px; }
 .alfe-hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.alfe-hero-proof { align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; margin-top: -4px; font-size: 15px; font-weight: 600; color: var(--alfe-link); text-decoration: none; }
+.alfe-hero-proof:hover { text-decoration: underline; }
 /* "Try it online" and its language menu: one blue button in two parts. The menu is
    a real select laid invisibly over the arrow, so phones show their own picker. */
 .alfe-split { display: inline-flex; max-width: 100%; }

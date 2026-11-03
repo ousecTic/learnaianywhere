@@ -169,9 +169,8 @@ const makePlan = ({ mode, device, pkg, onlineUrl }) => {
   const neuropocket = { h: 'Put NeuroPocket on one device per group', p: 'Learners train their own AI. Works offline once installed. Needs a device with at least 1 GB of memory (RAM).', buttons: [['Android app', NEUROPOCKET.android], ['Windows app', NEUROPOCKET.windows], ['Online at neuropocket.com', NEUROPOCKET.online]] };
 
   const videos = { h: 'Watch the lesson videos', p: '25 short videos with captions. Watch them to prepare, or play them to the group.', buttons: [
-    ['Open in Google Drive', r.videosFolder && r.videosFolder.url],
-    ['Watch online', onlineUrl],
-    ['Watch on YouTube', pkg.lang === 'en' && YOUTUBE_URL], // English only there
+    ['Watch in the online course', onlineUrl],
+    ['Download from Google Drive', r.videosFolder && r.videosFolder.url],
   ].filter(([, url]) => url) };
 
   if (mode === 'teach') {
@@ -249,6 +248,8 @@ const AILiteracyForEveryone = () => {
               )}
               <a href="#get" className={onlineUrl ? 'alfe-btn alfe-btn-outline' : 'alfe-btn alfe-btn-primary'}><Icon name="download" size={18} />Get the course</a>
             </div>
+            {/* Credibility, not an action: a quiet link under the two buttons. */}
+            <a href={YOUTUBE_URL} className="alfe-hero-proof" target="_blank" rel="noopener noreferrer"><Icon name="play" size={14} />Also on freeCodeCamp’s YouTube channel</a>
           </div>
           <div className="alfe-hero-photo">
             {trailer === 'video' && (
