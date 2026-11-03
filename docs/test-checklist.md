@@ -1,6 +1,6 @@
 # Test checklist for the redesigned learnaianywhere.org
 
-Written 2 November 2026 against the `redesign` branch. Reorganised the same day into two parts: **Part 1 is Henry's**, **Part 2 is Claude's**. Every item is in exactly one part. Tick each box as you go. Anything that fails: note the item number, what you did, what you saw, and the browser and device.
+Written 2 November 2026 against the `redesign` branch. Last updated the same evening (commit `0de7fdc`): all H1 decisions made, Moodle confirmed, and every Part 2 fix re-checked on the deploy preview. Reorganised the same day into two parts: **Part 1 is Henry's**, **Part 2 is Claude's**. Every item is in exactly one part. Tick each box as you go. Anything that fails: note the item number, what you did, what you saw, and the browser and device.
 
 **Where to test.** The Netlify deploy preview, built the same way as the live site:
 https://deploy-preview-1--silver-ganache-efcc26.netlify.app
@@ -16,10 +16,10 @@ Start with H2 (platforms) and H3 (Android app). They take the longest and need n
 
 ## H1. Decisions
 
-Claude will confirm each of these is still true (C1). You decide what to do.
+All decided on 2 November 2026.
 
 - [x] ~~Slide 2 of the course deck says a camera is required.~~ No longer true: checked 2 November 2026, the word "camera" is in none of the 9 v1.5 decks (228 pages each). Nothing to decide.
-- [x] **"8 languages" vs 9 packages.** Decided 2 November 2026: keep "8 languages" and both Swahili entries for now; revisit with feedback. The hero and the announcement banner say 8 languages. The language menu has 9 entries because Swahili comes in a Kenya and a Tanzania version. Keep "8"?
+- [x] ~~"8 languages" vs 9 menu entries~~ (Swahili comes in a Kenya and a Tanzania version). Decided 2 November 2026: keep "8 languages" and both Swahili entries for now; revisit with feedback.
 - [x] ~~Unknown web addresses show an empty page.~~ Decided: add a simple page. Done 2 November 2026: `/this-does-not-exist` now shows "Page not found" with buttons to the course and the home page.
 - [x] ~~Switching back to English keeps the green note~~ ("Switched to English"). Decided 2 November 2026: fine as is.
 - [x] ~~Both Swahili versions share the same guide, slides and worksheet~~ but have different video folders. Decided 2 November 2026: keep as is and revisit once Swahili-speaking teachers give feedback.
@@ -29,14 +29,14 @@ Claude will confirm each of these is still true (C1). You decide what to do.
 
 ## H2. Learning platforms
 
-The "Learning platform" plan tells people to add the ZIP as an HTML package. Nobody has done that with the v1.5 ZIP yet.
+The "Learning platform" plan now covers Moodle only. Kolibri and Google Classroom are left for later.
 
 - [x] **Moodle.** Works on Henry's own Moodle (2 November 2026): add a File resource, upload the ZIP, unzip it, set START HERE.html as the main file. The plan now says exactly that. Moodle's public sandbox can't take it: its server rejects uploads this big with 413.
 - [ ] ~~Kolibri on a computer.~~ Left for later (2 November 2026): the plan no longer mentions Kolibri. Kolibri needs a ZIP with `index.html` at the top; a test copy is in `build/platform-test/`.
 - [ ] ~~Kolibri on Android.~~ Left for later, as above.
 - [ ] ~~Google Classroom.~~ Left for later (2 November 2026): the plan no longer mentions it.
-- [ ] One non-English language (French or Swahili) on whichever platform was easiest.
-- [ ] Tell Claude what you learned, so the "Learning platform" plan text and the FAQ match reality.
+- [ ] **Moodle in another language.** The same Moodle steps with one more language's ZIP, ideally Arabic or Urdu (right to left) or else French. This checks that the text, captions and quizzes in that language still show correctly inside Moodle, not just in English.
+- [x] ~~Tell Claude what you learned.~~ Done: the plan now gives your Moodle steps.
 
 ## H3. Android app on a real phone
 
@@ -69,8 +69,8 @@ Do each of these on both phones. Many of your teachers are on cheap Android phon
 
 Claude runs the same course from a local server (C8); you check the parts that need a real machine.
 
-- [ ] Download the English ZIP, unzip it, **turn Wi-Fi off**, open START HERE.html. Go through Lesson 1: videos with captions, AI or Not, recap quiz with a score.
-- [ ] NeuroPocket opens from the course and lets you train with the built-in pictures, still with Wi-Fi off.
+- [ ] Download the English ZIP, unzip it, **turn Wi-Fi off**, open START HERE.html in **Edge or Firefox** (Claude could only test Chromium). Go through Lesson 1: videos with captions, AI or Not, recap quiz with a score.
+- [ ] NeuroPocket opens from the course and **finishes** training with the built-in pictures, still with Wi-Fi off. (Claude saw training start but not finish, probably because its browser was in the background.)
 - [ ] Copy the unzipped folder to a USB stick and open it from another computer. Still works.
 - [ ] If you have access to a cheap or old laptop, the same there.
 
@@ -111,13 +111,13 @@ All on the deploy preview, at desktop (1280), tablet (768) and phone (375) width
 
 ## C1. Known issues
 
-- [ ] Each item in H1 is still true, so Henry decides on facts, not memories.
+- [x] Each item in H1 was confirmed before Henry decided (one, the slides' camera line, was no longer true).
 
 ## C2. Site-wide (every page)
 
 **Announcement banner**
 - [x] Shows on first visit with the text: "New: AI Literacy for Everyone, a free AI course in 8 languages. Teach it yourself or let learners go through it on their own, with or without internet."
-- [ ] Clicking the text goes to the course page and lands on the Get the course section (address ends in `#download`; it scrolls there, not to the top).
+- [x] Clicking the text goes to the course page and lands on the Get the course section (address ends in `#get`; it scrolls there, not to the top). Fixed and re-checked 2 November 2026.
 - [x] The × hides it, and it stays hidden after a reload and on other pages. A different browser or private window shows it again.
 
 **Navbar**
@@ -132,12 +132,12 @@ All on the deploy preview, at desktop (1280), tablet (768) and phone (375) width
 - [x] Copyright year 2026. Wording says "AI courses", not "AI lessons" or "curriculum".
 
 **Navigation**
-- [ ] Opening a new page starts at the top. Links with a `#` (the banner's `#download`, the course page's `#get`) scroll to that section.
+- [x] Opening a new page starts at the top. Links with a `#` (the banner's and the install page's `#get`) scroll to that section. Re-checked 2 November 2026.
 - [x] Back and forward restore the right page.
 - [x] Reloading `/about` and `/courses/ai-literacy-for-everyone` loads the page, not a Netlify 404 (the `_redirects` catch-all).
 - [x] `/curriculum` and `/curriculum/intro-to-ai` redirect to the course page. `/curriculum/intro-to-generative-ai` still shows the Gen AI course.
 - [x] Tab title "Learn AI Anywhere", tab icon is the logo.
-- [ ] No red errors in the console on any page. Google Analytics requests go out (gtag / collect).
+- [x] No red errors in the console on any page, including after leaving Donate and coming back. Google Analytics requests go out (gtag / collect). Re-checked 2 November 2026.
 
 ## C3. Home page `/`
 
@@ -155,7 +155,7 @@ All on the deploy preview, at desktop (1280), tablet (768) and phone (375) width
 - [x] Heading and lead: "A 4-lesson course on how AI works. Learners train their own AI and learn to use it responsibly, with or without internet."
 - [x] **Try it online in English** opens `/course/online/en/`. The arrow next to it opens the "Language of the course" menu; picking a language changes the button text, the trailer, and the Get the course section below.
 - [x] **Get the course** scrolls to the section.
-- [ ] Trailer: the cover picture shows as the poster, one click starts the MP4 from the `site-media` release with the browser's own controls. If the MP4 fails, the Drive player shows instead.
+- [x] Trailer: the cover picture shows as the poster, and one click plays that language's "Welcome to the Course" video (`course-videos-v1.5/<language>-intro-01.mp4`) with the browser's own controls. The `site-media` file is only a fallback for a language without its own video, and every language has one. Not tested: the Drive player that appears if the MP4 fails.
 - [x] The trailer video is not downloaded until play is clicked (Network tab).
 - [x] Nothing in the hero is crowded at laptop or phone width; at phone width the trailer sits under the text.
 
@@ -181,7 +181,7 @@ All on the deploy preview, at desktop (1280), tablet (768) and phone (375) width
 - [x] Question 1 "How do you want to use it?": I'll teach it (default) and Learners go through it on their own. With "I'll teach it" there is no question 2.
 - [x] Choosing "on their own" shows question 2 "Where will learners use it?" with On a computer (default), Android phone or tablet, Learning platform, Online. Switching back hides it and the plan changes back.
 - [x] The selected choice is highlighted; choices work with Tab and Enter and announce aria-pressed.
-- [ ] Question 2 shows 2 choices per row (2×2) down to 640px wide and one per row below; question 1 shows its 2 choices side by side above 900px and stacked below (its long title needs the width); no card alone in a row; every title on one line except on a phone.
+- [x] Question 2 shows 2 choices per row (2×2) down to 640px wide and one per row below; question 1 shows its 2 choices side by side above 900px and stacked below (its long title needs the width); no card alone in a row; every title on one line except on a phone. Re-checked at 1280, 768 and 375 on 2 November 2026.
 - [x] At phone width the big plan button wraps as text and the size never splits across lines.
 
 ## C7. Course page: the plan cards and every button in every language
@@ -196,7 +196,7 @@ All on the deploy preview, at desktop (1280), tablet (768) and phone (375) width
 - [x] One step, no step number, no title, no closing note, the v1.5 START HERE screenshot (sidebar says Version 1.5, 39 activities) with no caption.
 - [x] Computer: "Download the course to a computer", "Unzip it and open START HERE.", button "Download the course · 116 MB" (no language in the button; size changes per language). Downloads straight away, no new tab.
 - [x] Android: "Install the app on the learners' phones or tablets", "Install it and choose English. On iPhone or iPad? Use it online.", button "Download the app · 3 MB" from the `app-latest` release, link "See the install steps with pictures" → `/courses/ai-literacy-for-everyone/install-android`.
-- [ ] Learning platform (changed 2 November 2026, re-check): the card says "Learning platform / Such as Moodle". The plan says "Add the course to your learning platform", "In Moodle, add a File, upload the ZIP, unzip it and set START HERE.html as the main file.", with the ZIP button. No Kolibri or Google Classroom links.
+- [x] Learning platform (re-checked on the deploy preview 2 November 2026): the card says "Learning platform / Such as Moodle". The plan says "Add the course to your learning platform", "In Moodle, add a File, upload the ZIP, unzip it and set START HERE.html as the main file.", with the ZIP button. No Kolibri or Google Classroom links.
 - [x] Online: "Share the link with learners", "Nothing to install. Needs internet.", button "Open the course" (arrow icon) → `/course/online/<language>/`.
 - [x] After the plan card the page goes straight to Common questions; there is no "All the files" section.
 
@@ -213,14 +213,14 @@ All on the deploy preview, at desktop (1280), tablet (768) and phone (375) width
 ## C8. The course itself
 
 **Computer ZIP** (English fully; spot-check Arabic or Urdu and one Swahili)
-- [ ] Unzipped and served from a local server, START HERE.html opens in Chrome, Edge and Firefox and makes no request to any outside host (every request is to the local folder).
+- [x] Unzipped and served from a local server, START HERE.html opens in Chromium and makes no request to any outside host (every request is to the local folder), for English, Arabic and Swahili (Kenya). Edge and Firefox are in H5.
 - [x] The lessons are listed on the left, "Start the course" on the right, matching the website screenshot.
 - [x] Lesson 1 plays its videos in order with captions; AI or Not works; the recap quiz gives a score. Lessons 2 to 4 the same.
-- [ ] NeuroPocket opens from the course and trains with the built-in pictures.
+- [x] NeuroPocket opens from the course with its 41 built-in pictures and starts training with no errors. Seeing it finish is in H5.
 - [x] The worksheet app keeps what was typed after closing and reopening. Progress is remembered.
 - [x] Resources contains the guide, slides, worksheet and example in that language.
 - [x] Arabic and Urdu are right-to-left, including inside the quizzes and the worksheet app.
-- [ ] The ZIP is a plain HTML package with START HERE.html at the top level, the shape a learning platform expects.
+- [x] ~~The ZIP has START HERE.html at the top level.~~ It has it one folder down, and that's fine: Moodle unzips it and lets you pick START HERE.html as the main file (H2). The Android app needs that folder, so the ZIP stays as it is.
 
 **Android app**
 - [x] The APK downloads from `app-latest`. The `course-latest` pointer the app reads points at v1.5 with the right sizes and hashes.
@@ -239,9 +239,9 @@ All on the deploy preview, at desktop (1280), tablet (768) and phone (375) width
 - [x] `?lang=fr` (and ar, ur, sw, hi, pt, es) switches the language; `?lang=ar` is right-to-left.
 
 **Install steps page** `/courses/ai-literacy-for-everyone/install-android`
-- [ ] "← AI Literacy for Everyone" goes back to the course page's Get the course section.
+- [x] "← AI Literacy for Everyone" goes back to the course page's Get the course section (`#get`). Fixed and re-checked 2 November 2026.
 - [x] Eight steps, each with a tall phone screenshot and short text; pictures load (first two straight away, the rest on scroll).
-- [ ] Step 1's "Download the app" downloads the APK. The sizes quoted ("120 to 200 MB") match the real package sizes. The last line says Android only.
+- [x] Step 1's "Download the app" downloads the APK. The install page now says "under 200 MB". The last line says Android only. Re-checked 2 November 2026.
 - [x] At phone width the picture is above the text and the page is not wider than the screen.
 
 ## C9. Introduction to Generative AI `/curriculum/intro-to-generative-ai`
@@ -264,7 +264,7 @@ All on the deploy preview, at desktop (1280), tablet (768) and phone (375) width
 - [x] "Teachers tell us the same. A school principal, after going through our course:" then the video in a framed box with the poster showing; the video is not downloaded before play (preload none).
 - [x] The captions file is anonymised: the name is replaced by "[He gives his name.]" and the school by "I'm the principal of a school." Nothing on the page names the principal or the school.
 - [x] "Video edited by Leah Sugg and Gabrielle Augier." under the video.
-- [ ] Gallery: 12 pictures; clicking opens a large view with the caption; × closes, clicking outside closes, Esc closes.
+- [x] Gallery: 12 pictures; clicking opens a large view with the caption; × closes, clicking outside closes, Esc closes. Re-checked 2 November 2026.
 - [x] Partner logos: Kiwix, Future Upgrade, Learning Equality, Learning Passport, AI Literacy Day, OLI. Each opens its site in a new tab; no logo is stretched.
 - [x] Contact Us button at the bottom.
 
@@ -276,9 +276,9 @@ All on the deploy preview, at desktop (1280), tablet (768) and phone (375) width
 
 ## C12. Accessibility, layout and speed
 
-- [ ] Every page at phone width (375) and tablet width (768): no sideways scrolling, nothing cut off, body text at least 16px.
+- [x] Every page at phone width (375) and tablet width (768): no sideways scrolling, nothing cut off, body text at least 16px (choice subtitles, captions and small labels are 13–14px on purpose). Re-checked 2 November 2026.
 - [x] Browser zoom at 200% on a laptop: the layout still works.
-- [ ] Keyboard only: Tab reaches every link and button in a sensible order, a visible focus ring shows, Enter activates, Esc closes the gallery modal.
+- [x] Keyboard only: Tab reaches every link and button in a sensible order (AI Courses is a real button, gallery pictures and Gen AI section headers are reachable, the hamburger is labelled "Menu"), a visible focus ring shows, Enter activates, Esc closes the gallery modal. Re-checked 2 November 2026.
 - [x] Every image has sensible alt text (the trailer cover is deliberately empty alt because the button has its own label).
 - [x] Colour contrast: the green note, the grey "To teach with" labels and the muted step text pass.
 - [x] Dark mode: nothing becomes unreadable (the site is designed light).
