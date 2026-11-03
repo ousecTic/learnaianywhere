@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import downloads from '../../course/downloads.json';
 import settings from '../../course/settings.json';
+import { SMALL_APP_URL, SMALL_APP_MB, languageApp } from './courseApps';
 import './AILiteracyForEveryone.css';
 import trailerCover from '../assets/images/ai-literacy/trailer-cover.jpg';
 import startHereImg from '../assets/images/ai-literacy/start-here.jpg';
@@ -22,8 +23,6 @@ import biasChallengeImg from '../assets/images/ai-literacy/lesson-4-bias-challen
 // it) and turns the answers into a short numbered plan, so a teacher is told
 // what to download and what to do first instead of being shown every option.
 
-const APP_URL = 'https://github.com/ousecTic/learnaianywhere/releases/download/app-latest/ai-literacy.apk';
-const APP_MB = 3;
 // The online kit: course/online/<package>/index.html, put into the site by
 // scripts/build-online.mjs. Set this to null to hide everything that points to it.
 const ONLINE_URL = (packageId) => `/course/online/${packageId}/`;
@@ -183,8 +182,12 @@ const makePlan = ({ mode, device, pkg, onlineUrl }) => {
 
   const zip = ['Download the course', megabytes(pkg.bytes), pkg.url];
   let get;
-  if (device === 'android') {
-    get = { h: 'Install the app on the learners’ phones or tablets', p: <>Install it and choose <strong>{lang}</strong>. On iPhone or iPad? Use it online.</>, big: ['Download the app', `${APP_MB} MB`, APP_URL], more: INSTALL_STEPS_URL && <a href={INSTALL_STEPS_URL}>See the install steps with pictures</a> };
+  const app = languageApp(pkg.id);
+  if (device === 'android' && app) {
+    // One app per language, with the course inside: download once, then share it phone to phone.
+    get = { h: 'Install the app on the learners’ phones or tablets', p: <>Download it once, on Wi-Fi: the whole {lang} course is inside. Then share it phone to phone with ShareIt, Xender or Files by Google; the other phones need no internet. On iPhone or iPad? Use it online.</>, big: ['Download the app', megabytes(app.bytes), app.latestUrl], more: INSTALL_STEPS_URL && <a href={`${INSTALL_STEPS_URL}?lang=${pkg.id}`}>See the install steps with pictures</a> };
+  } else if (device === 'android') {
+    get = { h: 'Install the app on the learners’ phones or tablets', p: <>Install it and choose <strong>{lang}</strong>. On iPhone or iPad? Use it online.</>, big: ['Download the app', `${SMALL_APP_MB} MB`, SMALL_APP_URL], more: INSTALL_STEPS_URL && <a href={INSTALL_STEPS_URL}>See the install steps with pictures</a> };
   } else if (device === 'online') {
     get = { h: 'Share the link with learners', p: 'Nothing to install. Needs internet.', big: ['Open the course', null, onlineUrl] };
   } else if (device === 'platform') {
