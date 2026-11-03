@@ -44,11 +44,6 @@ const trailerFor = (pkg) => settings.online.videoUrl
   .replace('{file}', `${pkg.id}-intro-01.mp4`);
 const TRAILER_EMBED = 'https://drive.google.com/file/d/1vitkG1eQ_6ks_EDyIg_ko6OfzTPrfg2i/preview';
 const YOUTUBE_URL = 'https://www.youtube.com/watch?v=tchN4xa4pfg';
-// How to add the course in Kolibri, on a computer and on Android.
-const KOLIBRI = {
-  computer: 'https://docs.google.com/document/d/10xXu_L2pvKAAREcTpuIpC9y6eGcPKi1L_rVNcicWPOg/edit?usp=sharing',
-  android: 'https://docs.google.com/document/d/1y9YVa08yoA3LaydCHUS5YfOz9vvb5bnPkW4U_111QBk/edit?usp=sharing',
-};
 const NEUROPOCKET = {
   android: 'https://github.com/ousecTic/neuropocket/releases/download/v1.8.0/neuropocket-android.apk',
   windows: 'https://github.com/ousecTic/neuropocket/releases/download/v1.8.0/neuropocket-windows.exe',
@@ -97,7 +92,7 @@ const MODES = [
 const DEVICES = [
   { id: 'computer', title: 'On a computer', sub: 'Windows, Mac or Linux', icon: 'computer' },
   { id: 'android', title: 'Android phone or tablet', sub: 'As an app', icon: 'phone' },
-  { id: 'platform', title: 'Learning platform', sub: 'Moodle, Kolibri, Google Classroom…', icon: 'school' },
+  { id: 'platform', title: 'Learning platform', sub: 'Such as Moodle', icon: 'school' },
   { id: 'online', title: 'Online', sub: 'Any device, needs internet', icon: 'globe', online: true },
 ];
 
@@ -193,7 +188,7 @@ const makePlan = ({ mode, device, pkg, onlineUrl }) => {
   } else if (device === 'online') {
     get = { h: 'Share the link with learners', p: 'Nothing to install. Needs internet.', big: ['Open the course', null, onlineUrl] };
   } else if (device === 'platform') {
-    get = { h: 'Upload the course to your platform', p: <>Add the ZIP as an HTML package. On Kolibri? See how: <a href={KOLIBRI.computer} target="_blank" rel="noopener noreferrer">computer</a> · <a href={KOLIBRI.android} target="_blank" rel="noopener noreferrer">Android</a>.</>, big: zip };
+    get = { h: 'Add the course to your learning platform', p: <>In Moodle, add a <strong>File</strong>, upload the ZIP, unzip it and set <strong>START HERE.html</strong> as the main file.</>, big: zip };
   } else {
     get = { h: 'Download the course to a computer', p: <>Unzip it and open <strong>START HERE</strong>.</>, big: zip };
   }

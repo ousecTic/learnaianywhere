@@ -31,10 +31,10 @@ Claude will confirm each of these is still true (C1). You decide what to do.
 
 The "Learning platform" plan tells people to add the ZIP as an HTML package. Nobody has done that with the v1.5 ZIP yet.
 
-- [ ] **Moodle.** Add the English ZIP to a course as a File resource (or as an HTML package if your Moodle has one), set it to open START HERE.html, and go through Lesson 1 as a learner: videos, AI or Not, quiz. Note exactly which resource type worked, so the plan's text can say so.
-- [ ] **Kolibri on a computer.** Follow the Google Doc the plan links to. Everything it says to click still exists in the current Kolibri. The course in the Kolibri library is the current one (or note which version it is).
-- [ ] **Kolibri on Android.** The same with the Android doc.
-- [ ] **Google Classroom.** Attach the ZIP, or the online link, as a material and open it as a student. Note which of the two works better; the plan currently suggests the ZIP.
+- [x] **Moodle.** Works on Henry's own Moodle (2 November 2026): add a File resource, upload the ZIP, unzip it, set START HERE.html as the main file. The plan now says exactly that. Moodle's public sandbox can't take it: its server rejects uploads this big with 413.
+- [ ] ~~Kolibri on a computer.~~ Left for later (2 November 2026): the plan no longer mentions Kolibri. Kolibri needs a ZIP with `index.html` at the top; a test copy is in `build/platform-test/`.
+- [ ] ~~Kolibri on Android.~~ Left for later, as above.
+- [ ] ~~Google Classroom.~~ Left for later (2 November 2026): the plan no longer mentions it.
 - [ ] One non-English language (French or Swahili) on whichever platform was easiest.
 - [ ] Tell Claude what you learned, so the "Learning platform" plan text and the FAQ match reality.
 
@@ -196,7 +196,7 @@ All on the deploy preview, at desktop (1280), tablet (768) and phone (375) width
 - [x] One step, no step number, no title, no closing note, the v1.5 START HERE screenshot (sidebar says Version 1.5, 39 activities) with no caption.
 - [x] Computer: "Download the course to a computer", "Unzip it and open START HERE.", button "Download the course · 116 MB" (no language in the button; size changes per language). Downloads straight away, no new tab.
 - [x] Android: "Install the app on the learners' phones or tablets", "Install it and choose English. On iPhone or iPad? Use it online.", button "Download the app · 3 MB" from the `app-latest` release, link "See the install steps with pictures" → `/courses/ai-literacy-for-everyone/install-android`.
-- [x] Learning platform: "Upload the course to your platform", "Add the ZIP as an HTML package. On Kolibri? See how: computer · Android.", the ZIP button, and the two Kolibri links open the right Google Docs in a new tab. Both docs are viewable without signing in.
+- [ ] Learning platform (changed 2 November 2026, re-check): the card says "Learning platform / Such as Moodle". The plan says "Add the course to your learning platform", "In Moodle, add a File, upload the ZIP, unzip it and set START HERE.html as the main file.", with the ZIP button. No Kolibri or Google Classroom links.
 - [x] Online: "Share the link with learners", "Nothing to install. Needs internet.", button "Open the course" (arrow icon) → `/course/online/<language>/`.
 - [x] After the plan card the page goes straight to Common questions; there is no "All the files" section.
 
@@ -207,7 +207,7 @@ All on the deploy preview, at desktop (1280), tablet (768) and phone (375) width
 - [x] The ZIP's size matches the label and its SHA-256 matches `course/downloads.json`.
 - [x] "Open in Google Drive" opens that language's video folder, viewable without signing in, with 25 videos.
 - [x] No button is greyed out "Coming soon".
-- [x] Downloads (ZIP, APK, EXE, Google exports) do not open a new tab; pages (Drive, YouTube, Kolibri docs, neuropocket.com) do.
+- [x] Downloads (ZIP, APK, EXE, Google exports) do not open a new tab; pages (Drive, YouTube, neuropocket.com) do.
 - [x] NeuroPocket buttons point at the 1.8.0 release and the APK/EXE exist.
 
 ## C8. The course itself
