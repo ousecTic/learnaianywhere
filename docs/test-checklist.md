@@ -24,8 +24,8 @@ Claude will confirm each of these is still true (C1). You decide what to do.
 - [x] ~~Switching back to English keeps the green note~~ ("Switched to English"). Decided 2 November 2026: fine as is.
 - [x] ~~Both Swahili versions share the same guide, slides and worksheet~~ but have different video folders. Decided 2 November 2026: keep as is and revisit once Swahili-speaking teachers give feedback.
 - [x] ~~Mini-app pages~~ (`/courses/ai-literacy-for-everyone/ai-or-not`, `recap-quiz-1` to `-4`) are not linked from the navbar. Decided 2 November 2026: keep as is. They are linked from the freeCodeCamp YouTube video, so these addresses must never move or break.
-- [ ] **About page gallery captions still say "students".** Change to match the course page wording ("learners")?
-- [ ] **Get Involved:** "Ensures AI courses relevance and alignment..." appears under both Teachers and Partners and reads oddly. Reword?
+- [x] ~~About page gallery captions still say "students".~~ Decided 2 November 2026: changed to "learners" in all 12 gallery captions and picture descriptions.
+- [x] ~~Get Involved: "Ensures AI courses relevance and alignment..."~~ Reworded 2 November 2026. Teachers: "Run our AI courses with your learners and tell us what works, so we can keep improving them." Partners: "Help us build, test and share our AI courses so they reach more communities."
 
 ## H2. Learning platforms
 

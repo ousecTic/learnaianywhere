@@ -69,43 +69,43 @@ const AboutUs = () => {
   const galleryImages = [
     {
       src: gallery1,
-      alt: 'Students collaborating on AI projects',
-      caption: 'Students in Colombia diving into the fundamentals of artificial intelligence during the \'Intro to AI\' course led by Laura'
+      alt: 'Learners collaborating on AI projects',
+      caption: 'Learners in Colombia diving into the fundamentals of artificial intelligence during the \'Intro to AI\' course led by Laura'
     },
     {
       src: gallery2,
-      alt: 'Students using mobile devices for AI learning',
-      caption: 'Students in Uganda getting hands-on experience with an introductory Generative AI app, exploring the core concepts using Markov chains'
+      alt: 'Learners using mobile devices for AI learning',
+      caption: 'Learners in Uganda getting hands-on experience with an introductory Generative AI app, exploring the core concepts using Markov chains'
     },
     {
       src: gallery3,
-      alt: 'Students working together',
-      caption: 'Students in Uganda preparing to present the projects they developed using a local language model'
+      alt: 'Learners working together',
+      caption: 'Learners in Uganda preparing to present the projects they developed using a local language model'
     },
     {
       src: gallery4,
-      alt: 'Teacher presenting to students',
+      alt: 'Teacher presenting to learners',
       caption: 'Sammy teaching the crucial concepts of misinformation and disinformation in our introductory Generative AI curriculum'
     },
     {
       src: gallery5,
-      alt: 'Students with project materials',
-      caption: 'Sammy introducing the core mechanics of generative image models to students in our AI literacy program.'
+      alt: 'Learners with project materials',
+      caption: 'Sammy introducing the core mechanics of generative image models to learners in our AI literacy program.'
     },
     {
       src: gallery6,
       alt: 'Classroom AI learning',
-      caption: 'Educators and students gathering local environmental data using the NeuroPocket app to build and train custom image classifiers offline'
+      caption: 'Educators and learners gathering local environmental data using the NeuroPocket app to build and train custom image classifiers offline'
     },
     {
       src: gallery7,
-      alt: 'Student engagement',
+      alt: 'Learner engagement',
       caption: 'Joseph explaining the rules of the interactive \'Acting like a language model\' game to the class'
     },
     {
       src: gallery8,
       alt: 'Group discussion',
-      caption: 'Students verifying AI results by transcribing and double-checking text from a local language model'
+      caption: 'Learners verifying AI results by transcribing and double-checking text from a local language model'
     },
     {
       src: gallery9,
@@ -114,18 +114,18 @@ const AboutUs = () => {
     },
     {
       src: gallery10,
-      alt: 'Students with generative AI',
+      alt: 'Learners with generative AI',
       caption: 'Bernadette teaching the importance of feature diversity for image classifiers during our introductory AI course'
     },
     {
       src: gallery11,
       alt: 'AI tools in classroom',
-      caption: 'Students cleaning and refining their image data to improve classifier performance.'
+      caption: 'Learners cleaning and refining their image data to improve classifier performance.'
     },
     {
       src: gallery12,
-      alt: 'Student presentation',
-      caption: 'Students playing the \'describer-drawer\' game, where they must guide their partners to recreate an image using only verbal instructions'
+      alt: 'Learner presentation',
+      caption: 'Learners playing the \'describer-drawer\' game, where they must guide their partners to recreate an image using only verbal instructions'
     }
   ];
 

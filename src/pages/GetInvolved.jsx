@@ -13,7 +13,7 @@ const GetInvolved = () => {
   const volunteerRoles = [
     {
       title: 'Teachers',
-      description: 'Ensures AI courses relevance and alignment with educational goals.',
+      description: 'Run our AI courses with your learners and tell us what works, so we can keep improving them.',
       responsibilities: [
         'Implement the AI courses in classrooms or community spaces.',
         'Provide before and after feedback to measure student learning outcomes.',
@@ -93,7 +93,7 @@ const GetInvolved = () => {
               <div className="role-cards">
                 <div className="role-card">
                   <h3>Partners</h3>
-                  <p>Ensures AI courses relevance and alignment with educational goals.</p>
+                  <p>Help us build, test and share our AI courses so they reach more communities.</p>
                   <ul>
                     <li>Expert Guidance: Provide expertise in educational design, pedagogy, and implementation strategies.</li>
                     <li>Technological Innovation: Collaborate on developing or improving offline-friendly educational tools.</li>
