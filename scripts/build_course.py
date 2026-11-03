@@ -46,20 +46,23 @@ assemble Puts each package together in build/course/packages/<package id>/<folde
          matching app, recognised by the English activity in the same place, and
          the NeuroPocket step moves after the how-to video. Needs export, compress
          and download first (download for en too, as the reference).
-zip      Zips each assembled package as build/course/zips/<slug>-<id>-v<version>.zip
+zip      Zips each assembled package as build/course/zips/<course>-<language>-v<version>.zip,
+         for example AI-Literacy-for-Everyone-French-v1.8.zip
          (one top-level folder; videos, PDFs and pictures stored as they are,
          everything else compressed), checks every zip opens and matches the
          folder, and writes build/course/zips/downloads.json: file, size, sha256
          and date for each package, for the release and the website.
 release  Uploads the zips to the GitHub release named in settings (release.repo,
-         tag course-v<version>) with the gh CLI, as a draft unless --publish, and
-         writes course/downloads.json (the zips' download links, sizes, dates and
-         sha256) for the website. The repo must be public for people to download.
+         tag course-v<version>) with the gh CLI, as a draft unless --publish, with
+         each language's guide, worksheet and example (PDF, Word) and slides (PDF,
+         PowerPoint) under clear names such as
+         AI-Literacy-for-Everyone-Teacher-Guide-French.pdf, and writes
+         course/downloads.json (the download links, sizes, dates and sha256) for
+         the website. The repo must be public for people to download.
 links    Adds each package's single files to course/downloads.json without a new
-         release: Google export links for the guide, worksheet and example (PDF,
-         Word) and slides (PDF, PowerPoint), with the sizes from the export
-         manifest, and the package's Drive folder for the videos. release does
-         this too. Needs export first.
+         release, as Google export links (always the current master), with the
+         sizes from the export manifest, and the package's Drive folder for the
+         videos. Needs export first.
 online   Writes the online kit, course/online/<package id>/index.html: the
          package's START HERE page with its videos streamed from online.videoUrl
          in the settings, its PDFs as Google previews of the masters, its apps from the
@@ -658,9 +661,39 @@ def cmd_assemble(settings, packages, out):
 STORED = (".mp4", ".pdf", ".png", ".jpg", ".jpeg", ".woff2")  # already compressed
 
 
+def file_words(text):
+    """'Swahili (Kenya)' -> 'Swahili-Kenya': release file names can't hold spaces (GitHub
+    turns them into dots), so words are joined with hyphens."""
+    small = {"for", "of", "and", "the"}
+    words = re.findall(r"[A-Za-z0-9]+", text)
+    return "-".join(w if (i and w in small) else w[:1].upper() + w[1:] for i, w in enumerate(words))
+
+
 def zip_name(settings, package):
+    """The package's zip, named for the course, the language and the version, for example
+    AI-Literacy-for-Everyone-French-v1.8.zip."""
     c = settings["course"]
-    return f"{c['slug']}-{package['id']}-v{c['version']}.zip"
+    return f"{file_words(c['name'])}-{file_words(package['name'])}-v{c['version']}.zip"
+
+
+def resource_language(package):
+    """The language in a single file's name. Packages that share a Resources folder share
+    the files too, so the two Swahili versions both use 'Swahili'."""
+    return re.sub(r"\s*\(.*\)", "", package["name"]) if package.get("sharedResources") else package["name"]
+
+
+def resource_file(settings, package, number, fmt):
+    """A single file's release name, for example
+    AI-Literacy-for-Everyone-Teacher-Guide-French.pdf."""
+    role = drive.RESOURCES[number][0]
+    return f"{file_words(settings['course']['name'])}-{file_words(role)}-{file_words(resource_language(package))}.{fmt}"
+
+
+def resource_source(out, package, master, fmt):
+    """The built copy of a master in one format: the shrunk PDF (as in the zip), or the
+    Word or PowerPoint export."""
+    folder = "pdfs" if fmt == "pdf" else "exports"
+    return os.path.join(out, folder, resources_key(package), master["files"][fmt]["file"])
 
 
 def cmd_zip(settings, packages, out):
@@ -715,17 +748,18 @@ def cmd_zip(settings, packages, out):
 
 RELEASE_URL = "https://github.com/{repo}/releases/download/{tag}/{file}"
 
-# The website's single-file buttons: master number -> (key, export formats). The
-# links export straight from the link-shared Google masters, so they always give
-# the current version with no sign-in.
+# The website's single-file buttons: master number -> (key, formats). A release puts
+# each file on the release under a clear name (resource_file); without a release
+# (the links command) they export straight from the link-shared Google masters.
 LINKS = {1: ("guide", ("pdf", "docx")), 2: ("worksheet", ("pdf", "docx")),
          3: ("example", ("pdf", "docx")), 4: ("slides", ("pdf", "pptx"))}
 DRIVE_FOLDER_URL = "https://drive.google.com/drive/folders/{id}"
 
 
-def resource_links(settings, package, out):
-    """A package's single files for the website: export links for the masters (from the
-    export manifest, with each file's size) and its Drive folder, which holds the videos."""
+def resource_links(settings, package, out, tag=None):
+    """A package's single files for the website, with each file's size: the release copies
+    when tag is given, otherwise export links for the masters; and its Drive folder, which
+    holds the videos."""
     manifest = read_json(out, "exports", resources_key(package), "manifest.json")
     links = {}
     for m in manifest["masters"]:
@@ -733,17 +767,23 @@ def resource_links(settings, package, out):
         mime = drive.RESOURCES[m["number"]][1]
         suffixes = {f: s for f, s, _sig in EXPORTS[mime]}
         for fmt in formats:
-            links[key + fmt.capitalize()] = {"url": EXPORT_BASE[mime].format(id=m["id"]) + suffixes[fmt],
-                                             "bytes": m["files"][fmt]["bytes"]}
+            if tag:
+                links[key + fmt.capitalize()] = {
+                    "url": RELEASE_URL.format(repo=settings["release"]["repo"], tag=tag,
+                                              file=resource_file(settings, package, m["number"], fmt)),
+                    "bytes": os.path.getsize(resource_source(out, package, m, fmt))}
+            else:
+                links[key + fmt.capitalize()] = {"url": EXPORT_BASE[mime].format(id=m["id"]) + suffixes[fmt],
+                                                 "bytes": m["files"][fmt]["bytes"]}
     links["videosFolder"] = {"url": DRIVE_FOLDER_URL.format(id=package_folder(settings, package)[1].id)}
     return links
 
 
-def write_downloads(settings, downloads, out):
+def write_downloads(settings, downloads, out, tag=None):
     """Writes course/downloads.json, with each package's single-file links added."""
     by_id = {p["id"]: p for p in settings["packages"]}
     for r in downloads["packages"]:
-        r["resources"] = resource_links(settings, by_id[r["id"]], out)
+        r["resources"] = resource_links(settings, by_id[r["id"]], out, tag)
     path = os.path.join(REPO, "course", "downloads.json")
     with open(path, "w", encoding="utf-8", newline="\n") as f:
         json.dump(downloads, f, ensure_ascii=False, indent=2)
@@ -942,17 +982,43 @@ def cmd_release(settings, publish, out):
     for path in files:
         gh("release", "upload", tag, path, "--clobber")
         print("uploaded", os.path.basename(path))
+    upload_resources(gh, settings, tag, out)
     if publish:
         gh("release", "edit", tag, "--draft=false")
 
     downloads = {"course": index["course"], "version": version, "release": tag, "packages": [
         {**r, "url": RELEASE_URL.format(repo=rel["repo"], tag=tag, file=r["file"])} for r in index["packages"]]}
-    downloads_path = write_downloads(settings, downloads, out)
+    downloads_path = write_downloads(settings, downloads, out, tag)
     if publish:
         publish_latest(gh, rel, settings, downloads_path)
     state = "published" if publish else "saved as a draft (publish with --publish)"
     print(f"release {tag} on {rel['repo']} {state}; wrote course/downloads.json")
     return 0
+
+
+def upload_resources(gh, settings, tag, out):
+    """Puts every language's guide, worksheet, example and slides (PDF and Word or
+    PowerPoint) on the release under clear names, so a download says what it is."""
+    import shutil
+    import tempfile
+
+    done = set()
+    for p in settings["packages"]:
+        key = resources_key(p)
+        if key in done:
+            continue
+        done.add(key)
+        manifest = read_json(out, "exports", key, "manifest.json")
+        with tempfile.TemporaryDirectory() as tmp:
+            for m in manifest["masters"]:
+                for fmt in LINKS[m["number"]][1]:
+                    src = resource_source(out, p, m, fmt)
+                    if not os.path.isfile(src):
+                        raise BuildError(f"{src}: missing; run export and compress first")
+                    dest = os.path.join(tmp, resource_file(settings, p, m["number"], fmt))
+                    shutil.copyfile(src, dest)
+                    gh("release", "upload", tag, dest, "--clobber")
+                    print("uploaded", os.path.basename(dest))
 
 
 def publish_latest(gh, rel, settings, downloads_path):
