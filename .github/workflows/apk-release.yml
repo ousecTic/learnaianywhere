@@ -1,0 +1,236 @@
+name: Release the language apps
+
+# Builds one Android app per course language package, with that language's whole course
+# inside, when a tag like apk-v1.5.0 is pushed. See "Apps with the course inside" in
+# course/app/README.md and docs/android-per-language-plan.md.
+#
+# - apk-v1.5.0       publishes the release apk-v1.5.0 with ai-literacy-<id>-1.5.0.apk for
+#                    every package, and puts ai-literacy-<id>.apk plus apps.json on the
+#                    apk-latest release, where the website and installed apps find them.
+# - apk-v1.5.0-test  (anything after the version) makes a draft only, for checking.
+#
+# The first two numbers must be the published course version in course/downloads.json (its
+# ZIPs are put in the apps); the last is the apps' own revision, for app-only fixes.
+# versionCode is major * 10000 + minor * 100 + revision, as in app-release.yml. Every app
+# is signed with the same permanent key as the small app (the same four secrets).
+on:
+  push:
+    tags:
+      - 'apk-v*'
+
+permissions:
+  contents: write
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  prepare:
+    name: Check the tag and start the release
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.v.outputs.version }}
+      code: ${{ steps.v.outputs.code }}
+      publish: ${{ steps.v.outputs.publish }}
+      packages: ${{ steps.v.outputs.packages }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Read the version from the tag
+        id: v
+        run: |
+          TAG="$GITHUB_REF_NAME"
+          if [[ ! "$TAG" =~ ^apk-v([0-9]+)\.([0-9]+)\.([0-9]+)(-.+)?$ ]]; then
+            echo "::error::Tag $TAG should look like apk-v1.5.0 (or apk-v1.5.0-test for a draft)."
+            exit 1
+          fi
+          MA=${BASH_REMATCH[1]} MI=${BASH_REMATCH[2]} RE=${BASH_REMATCH[3]}
+          COURSE=$(jq -r .version course/downloads.json)
+          if [ "$((10#$MA)).$((10#$MI))" != "$COURSE" ]; then
+            echo "::error::Tag $TAG is for course $((10#$MA)).$((10#$MI)), but course/downloads.json is version $COURSE. Tag apk-v$COURSE.<revision>."
+            exit 1
+          fi
+          echo "version=$((10#$MA)).$((10#$MI)).$((10#$RE))" >> "$GITHUB_OUTPUT"
+          echo "code=$((10#$MA * 10000 + 10#$MI * 100 + 10#$RE))" >> "$GITHUB_OUTPUT"
+          if [ -n "${BASH_REMATCH[4]}" ]; then echo "publish=false" >> "$GITHUB_OUTPUT"; else echo "publish=true" >> "$GITHUB_OUTPUT"; fi
+          echo "packages=$(jq -c '[.packages[].id]' course/downloads.json)" >> "$GITHUB_OUTPUT"
+
+      - name: Stop if this version is already published
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view "$GITHUB_REF_NAME" --json isDraft --jq .isDraft 2>/dev/null | grep -q false; then
+            echo "::error::$GITHUB_REF_NAME is already published; people may have installed it. Tag a new revision."
+            exit 1
+          fi
+
+      - name: Create the draft release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if ! gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
+            gh release create "$GITHUB_REF_NAME" --draft --verify-tag --latest=false \
+              --title "AI Literacy apps ${{ steps.v.outputs.version }}" \
+              --notes "The AI Literacy for Everyone apps for Android, version ${{ steps.v.outputs.version }}: one app per language, with the whole course inside (course version $(jq -r .version course/downloads.json)). Install the APK for your language; it works without internet. Share it with another phone with ShareIt, Xender or Files by Google."
+          fi
+
+  build:
+    name: Build ${{ matrix.package }}
+    needs: prepare
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        package: ${{ fromJson(needs.prepare.outputs.packages) }}
+    env:
+      PACKAGE: ${{ matrix.package }}
+      VERSION: ${{ needs.prepare.outputs.version }}
+      CODE: ${{ needs.prepare.outputs.code }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download the course package and check its fingerprint
+        run: |
+          FILE=$(jq -r --arg id "$PACKAGE" '.packages[] | select(.id == $id) | .file' course/downloads.json)
+          URL=$(jq -r --arg id "$PACKAGE" '.packages[] | select(.id == $id) | .url' course/downloads.json)
+          SHA=$(jq -r --arg id "$PACKAGE" '.packages[] | select(.id == $id) | .sha256' course/downloads.json)
+          mkdir -p "$RUNNER_TEMP/course"
+          curl -fsSL --retry 5 -o "$RUNNER_TEMP/course/$FILE" "$URL"
+          echo "$SHA  $RUNNER_TEMP/course/$FILE" | sha256sum -c -
+          echo "COURSE_ZIP=$RUNNER_TEMP/course/$FILE" >> "$GITHUB_ENV"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - uses: android-actions/setup-android@v3
+        with:
+          # The action's default also requests the legacy "tools" package, which is no
+          # longer in the SDK repository and makes sdkmanager fail.
+          packages: 'platform-tools'
+      - name: Install Android SDK packages
+        run: sdkmanager "platforms;android-34" "build-tools;34.0.0"
+
+      - name: Prepare the app
+        working-directory: course/app
+        run: |
+          npm ci
+          npm run sync
+
+      - name: Write the signing key
+        env:
+          KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+        run: |
+          if [ -z "$KEYSTORE_BASE64" ]; then
+            echo "::error::The ANDROID_KEYSTORE_BASE64 secret is missing. See 'Release the app' in course/app/README.md."
+            exit 1
+          fi
+          echo "$KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/ailiteracy-release.jks"
+          echo "APP_KEYSTORE_FILE=$RUNNER_TEMP/ailiteracy-release.jks" >> "$GITHUB_ENV"
+
+      - name: Build the signed release APK
+        working-directory: course/app/android
+        env:
+          APP_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          APP_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          APP_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          ./gradlew assembleRelease --no-daemon -PcoursePackage="$PACKAGE" -PcourseZip="$COURSE_ZIP" \
+            -PappVersionName="$VERSION" -PappVersionCode="$CODE"
+          rm -f "$COURSE_ZIP"
+
+      - name: Check the signature, name and version
+        run: |
+          APK=course/app/android/app/build/outputs/apk/release/app-release.apk
+          BT="$ANDROID_HOME/build-tools/34.0.0"
+          "$BT/apksigner" verify --print-certs "$APK" | grep -E "Signer #1 certificate (DN|SHA-256)"
+          rm -f "$APP_KEYSTORE_FILE"
+          "$BT/aapt" dump badging "$APK" | grep -E "^package|application-label:"
+          "$BT/aapt" dump badging "$APK" | grep -q "name='org.learnaianywhere.ailiteracy.${PACKAGE//-/_}' versionCode='$CODE'"
+          FILE="ai-literacy-$PACKAGE-$VERSION.apk"
+          mv "$APK" "$FILE"
+          echo "FILE=$FILE" >> "$GITHUB_ENV"
+
+      - name: Upload the APK to the draft release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release upload "$GITHUB_REF_NAME" "$FILE" --clobber
+          jq -n --arg id "$PACKAGE" --arg file "$FILE" --arg sha "$(sha256sum "$FILE" | cut -d' ' -f1)" \
+            --argjson bytes "$(stat -c %s "$FILE")" \
+            '{id: $id, file: $file, sha256: $sha, bytes: $bytes}' > "app-$PACKAGE.json"
+          cat "app-$PACKAGE.json"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: app-${{ matrix.package }}
+          path: app-${{ matrix.package }}.json
+
+  finish:
+    name: Write apps.json and publish
+    needs: [prepare, build]
+    runs-on: ubuntu-latest
+    env:
+      VERSION: ${{ needs.prepare.outputs.version }}
+      CODE: ${{ needs.prepare.outputs.code }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: app-*
+          path: built
+          merge-multiple: true
+
+      - name: Describe the APKs for the website and installed apps
+        run: |
+          BASE="https://github.com/${{ github.repository }}/releases/download"
+          jq -s --arg tag "$GITHUB_REF_NAME" --arg base "$BASE" --arg version "$VERSION" --argjson code "$CODE" \
+            --slurpfile course course/downloads.json '
+            {
+              versionName: $version, versionCode: $code, courseVersion: $course[0].version, release: $tag,
+              apps: [ $course[0].packages[].id as $id | (.[] | select(.id == $id)) | {
+                id, appId: ("org.learnaianywhere.ailiteracy." + (.id | gsub("-"; "_"))),
+                versionName: $version, versionCode: $code, file,
+                url: ($base + "/" + $tag + "/" + .file),
+                latestUrl: ($base + "/apk-latest/ai-literacy-" + .id + ".apk"),
+                sha256, bytes
+              } ]
+            }' built/app-*.json > apps.json
+          cat apps.json
+          test "$(jq '.apps | length' apps.json)" = "$(jq '.packages | length' course/downloads.json)"
+
+      - name: Add apps.json to the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "$GITHUB_REF_NAME" apps.json --clobber
+
+      - name: Publish the release
+        if: needs.prepare.outputs.publish == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release edit "$GITHUB_REF_NAME" --draft=false --latest=false
+
+      - name: Update apk-latest
+        if: needs.prepare.outputs.publish == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if ! gh release view apk-latest >/dev/null 2>&1; then
+            gh release create apk-latest --target "$GITHUB_SHA" --latest=false --title "AI Literacy apps: newest version" \
+              --notes "The newest AI Literacy app for each language, with the course inside. Every published apk-v* version replaces these files: ai-literacy-<language>.apk to install, and apps.json, where the website and installed apps look for updates."
+          fi
+          # One APK at a time, to keep the runner's disk small.
+          for FILE in $(jq -r '.apps[].file' apps.json); do
+            ID=$(jq -r --arg f "$FILE" '.apps[] | select(.file == $f) | .id' apps.json)
+            gh release download "$GITHUB_REF_NAME" --pattern "$FILE" --dir dl --clobber
+            mv "dl/$FILE" "dl/ai-literacy-$ID.apk"
+            gh release upload apk-latest "dl/ai-literacy-$ID.apk" --clobber
+            rm -f "dl/ai-literacy-$ID.apk"
+          done
+          # Last, so apps.json never points at an APK that isn't there yet.
+          gh release upload apk-latest apps.json --clobber
