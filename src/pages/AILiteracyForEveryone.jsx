@@ -141,8 +141,10 @@ const formatDate = (iso) => new Date(`${iso}T12:00:00`).toLocaleDateString('en-U
 // a button that shows but can't be pressed.
 const file = (label, link) => [link && link.bytes > 5e6 ? `${label} · ${megabytes(link.bytes)}` : label, link && link.url];
 
-// Pages open in a new tab; downloads (zips, apps, Google exports) don't need one.
-const external = (url) => /^https?:/.test(url) && !/\.(zip|apk|exe)$|\/export(\/|\?)/.test(url);
+// Pages open in a new tab, the online course included; downloads (zips, apps, the
+// course files, Google exports) don't need one.
+const isDownload = (url) => /\.(zip|apk|exe|pdf|docx|pptx)$|\/export(\/|\?)/.test(url);
+const external = (url) => (/^https?:/.test(url) || url.startsWith('/course/online/')) && !isDownload(url);
 
 const linkProps = (url) => (external(url) ? { target: '_blank', rel: 'noopener noreferrer' } : {});
 
@@ -238,7 +240,7 @@ const AILiteracyForEveryone = () => {
             <div className="alfe-hero-actions">
               {onlineUrl && (
                 <div className="alfe-split">
-                  <a href={onlineUrl} className="alfe-btn alfe-btn-primary alfe-split-main"><Icon name="globe" size={18} />Try it online in {pkg.name}</a>
+                  <a href={onlineUrl} className="alfe-btn alfe-btn-primary alfe-split-main" {...linkProps(onlineUrl)}><Icon name="globe" size={18} />Try it online in {pkg.name}</a>
                   <label className="alfe-btn alfe-btn-primary alfe-split-lang" title="Choose a language">
                     <span className="alfe-visually-hidden">Language of the course</span>
                     <Icon name="chevron" size={18} />
@@ -346,7 +348,7 @@ const AILiteracyForEveryone = () => {
           </div>
           <p className="alfe-dl-lead">Answer two questions and we’ll show you exactly what to download and what to do first.</p>
           {langChanged && (
-            <p className="alfe-lang-note" role="status"><Icon name="check" size={20} />Switched to {pkg.name}. Everything below, and all the files, are now in {pkg.name}.</p>
+            <p className="alfe-lang-note" role="status"><Icon name="check" size={20} />Switched to {pkg.name}. Everything you download will be in {pkg.name}.</p>
           )}
 
           <div className="alfe-card">
