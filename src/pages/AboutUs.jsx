@@ -134,8 +134,8 @@ const AboutUs = () => {
       <div className="container">
         <section className="about-section">
           <h1>About Learn AI Anywhere</h1>
-          <p>We saw a gap in existing AI literacy resources. Most of them assume you have reliable internet, enough computers to go around, and teachers with the ICT skills to use them. But the reality is that <a href="https://www.itu.int/en/ITU-D/Statistics/Pages/facts/default.aspx" target="_blank" rel="noopener noreferrer">2.2 billion people are still offline</a>, <a href="https://iite.unesco.org/wp-content/uploads/2023/07/Analytical-report-fnl5.pdf" target="_blank" rel="noopener noreferrer">two-thirds of educators surveyed across 59 countries</a> lack sufficient computers at their institution, and many places don’t have teachers with the technical training to run them. In sub-Saharan Africa, for example, <a href="https://www.unesco.org/en/articles/startling-digital-divides-distance-learning-emerge" target="_blank" rel="noopener noreferrer">only half of secondary teachers</a> have received even minimum training, and it often leaves out ICT skills. Teachers need support to teach with technology, and it is scarcest where it is needed most.</p>
-          <p>So we started Learn AI Anywhere and built a course to address all three: it works without internet, it runs on whatever devices a group or a person has, and it gives whoever runs or teaches it everything they need, with no prior AI knowledge.</p>
+          <p>Most AI literacy courses assume three things: reliable internet, enough computers, and teachers trained to use them. That isn’t the case in a lot of places. <a href="https://www.itu.int/en/ITU-D/Statistics/Pages/facts/default.aspx" target="_blank" rel="noopener noreferrer">2.2 billion people are still offline</a>. <a href="https://iite.unesco.org/wp-content/uploads/2023/07/Analytical-report-fnl5.pdf" target="_blank" rel="noopener noreferrer">Two-thirds of educators surveyed across 59 countries</a> say their school doesn’t have enough computers. And many teachers haven’t been trained to teach with technology. In sub-Saharan Africa, for example, <a href="https://www.unesco.org/en/articles/startling-digital-divides-distance-learning-emerge" target="_blank" rel="noopener noreferrer">only half of secondary teachers</a> have the minimum training, and it often leaves out ICT skills.</p>
+          <p>We wanted to remove these barriers so anyone can become AI literate, no matter what environment they are in. We built the course to work without internet, on whatever devices are available, even a single phone. Whoever runs it is guided by short videos that explain every idea, so they don’t need any previous AI knowledge.</p>
 
           <img
             src={ugandaClassroom}
@@ -144,9 +144,17 @@ const AboutUs = () => {
           />
           <p className="image-caption">This picture was taken in Uganda by Michael from Future Upgrade. A group of students is using Michael’s phone and data to play with ChatGPT. This photo is what inspired us to develop an offline-first AI literacy course.</p>
 
-          <p>We wanted to remove these barriers so anyone can develop AI literacy skills no matter what environment they are in. Even if you only have a smartphone and limited internet, you can still learn AI anywhere.</p>
+          <p>Our goal is to show anyone, anywhere, that AI is a product of human choices. We all have a say in how it’s used, what it’s used for, and who it’s built for, starting with the things and the people we care about.</p>
 
-          <p>Today we have learners in {countries.length} countries across the world:</p>
+          <p>Below is a note from one of our learners in Uganda. It’s what we hope every learner takes from our course.</p>
+
+          <img
+            src={studentTestimony}
+            alt="Handwritten note from a learner about understanding AI"
+            className="about-photo"
+          />
+
+          <p>Since then, learners in {countries.length} countries have used our course.</p>
 
           <img
             src={worldMap}
@@ -154,15 +162,7 @@ const AboutUs = () => {
             className="about-photo"
           />
 
-          <p>This message from one of our first learners in Uganda captures exactly what we hope every learner experiences:</p>
-
-          <img
-            src={studentTestimony}
-            alt="Handwritten student feedback about understanding AI"
-            className="about-photo"
-          />
-
-          <p>Teachers tell us the same. A school principal, after going through our course:</p>
+          <p>One of them is a school principal, who shared this after going through the course:</p>
 
           <div className="about-video-frame">
             <video
@@ -172,15 +172,16 @@ const AboutUs = () => {
               controls
               playsInline
               preload="none"
-            >
-              <track kind="captions" label="English" srcLang="en" src="/media/teacher-testimony.vtt" default />
-            </video>
+            />
+
           </div>
           <p className="image-caption">Video edited by Leah Sugg and Gabrielle Augier.</p>
+
+          <p>AI will be shaped by the people who understand it, and we want to make sure it’s shaped by anyone, anywhere.</p>
         </section>
 
         <section className="gallery-section">
-          <h2>Our Impact in Action</h2>
+          <h2>Photos from our courses</h2>
           <div className="gallery-grid">
             {galleryImages.map((image, index) => (
               <div 

@@ -58,7 +58,7 @@ Do each of these on both phones. Many of your teachers are on cheap Android phon
 - [x] **Get the course:** the two questions stack one card per row, the plan card's big button wraps as text ("Download the / course · 116 MB") with the size on one line, the START HERE picture sits under the step.
 - [x] **Download the course** on the phone: the ZIP downloads (you don't have to open it there).
 - [x] **Online kit** (`/course/online/en/`) in portrait: the sidebar opens and closes, videos fit the width and play with sound, a quiz works.
-- [x] **About page video:** plays with sound, captions (CC) can be turned on and are in sync.
+- [x] **About page video:** plays with sound. (It has no captions since 3 November 2026, by choice.)
 - [x] **Contact:** Copy Email copies the address (paste it somewhere) and the toast shows. Clipboard permissions differ on iPhone.
 - [x] **Landscape:** rotate the phone on the course page; the trailer and the plan card still fit.
 - [x] **Every page** at phone width: no sideways scrolling, nothing cut off, buttons big enough to tap.
@@ -263,7 +263,7 @@ All on the deploy preview, at desktop (1280), tablet (768) and phone (375) width
 - [x] "Today we have learners in 80 countries across the world:" with the same map as the home page.
 - [x] The handwritten learner note shows with its intro line.
 - [x] "Teachers tell us the same. A school principal, after going through our course:" then the video in a framed box with the poster showing; the video is not downloaded before play (preload none).
-- [x] The captions file is anonymised: the name is replaced by "[He gives his name.]" and the school by "I'm the principal of a school." Nothing on the page names the principal or the school.
+- [x] The video has no captions (removed 3 November 2026). Nothing on the page names the principal or the school.
 - [x] "Video edited by Leah Sugg and Gabrielle Augier." under the video.
 - [x] Gallery: 12 pictures; clicking opens a large view with the caption; × closes, clicking outside closes, Esc closes. Re-checked 2 November 2026.
 - [x] Partner logos: Kiwix, Future Upgrade, Learning Equality, Learning Passport, AI Literacy Day, OLI. Each opens its site in a new tab; no logo is stretched.
