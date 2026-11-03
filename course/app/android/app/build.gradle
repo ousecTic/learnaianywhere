@@ -92,8 +92,9 @@ if (bundled) {
             setVersionCode(bundled.versionCode)
             setVersionName(bundled.versionName)
         }
-        // Videos and PDFs stay uncompressed in the APK, so MainActivity can jump to any
-        // byte of a video (seeking) and copy a PDF out without unpacking it.
+        // Videos and PDFs stay uncompressed in the APK. When you drag a video's slider, the
+        // WebView skips to the byte it needs in what Capacitor serves; uncompressed, that
+        // skip is a jump instead of unpacking everything before it.
         androidResources {
             noCompress 'mp4', 'pdf'
         }
