@@ -385,6 +385,28 @@ emulator. **Not tested**: older Android (the Android 8.1 emulator image isn't in
 NeuroPocket, AI or Not, the recap quizzes, Arabic, the update screen with a real
 `apps.json`, the release workflow itself, signed release builds.
 
+### Tested on Henry's phone, 3 November 2026 (Galaxy A12, Android 12, WebView 156)
+
+Debug APKs installed over wireless debugging, with Wi-Fi on (wireless debugging needs it):
+
+- English: the course opens; a Lesson 3 video jumped to the middle (101 s of 196 s, about
+  2.7 s to jump) and kept playing; a PDF went to Android's "Open with" (OneDrive, Drive);
+  the settings page works; a tick survived a force-close.
+- Arabic (182 MB) and French (183 MB) installed next to English and the small app, about
+  20 s each: four icons. Free space fell by about 400 MB for 365 MB of APKs, so each course
+  is stored once. Each app starts at 0 of 39, so progress is separate. Arabic is right to
+  left in the course and on the settings page.
+- English 1.5.1 installed over 1.5.0: the tick was kept. 1.5.0 over 1.5.1:
+  `INSTALL_FAILED_VERSION_DOWNGRADE`.
+- "Check for updates" says it couldn't check, even online: `apk-latest/apps.json` doesn't
+  exist yet. The message says to connect to the internet, which is misleading until the
+  apps are published.
+
+Still to do by hand: the offline pass (airplane mode), dragging the slider with a finger,
+opening the PDFs in a viewer, AI or Not, the recap quizzes, the worksheet, NeuroPocket
+with the camera, storage in Settings → Apps, sharing to other phones, an old phone, and
+step 0 in the small app.
+
 ### What you need to test on a real phone (steps 1 to 5 above)
 
 To build test APKs on your PC: in `course/app` run `npm install` and `npm run sync`, then
