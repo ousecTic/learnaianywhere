@@ -19,10 +19,10 @@ Start with H2 (platforms) and H3 (Android app). They take the longest and need n
 Claude will confirm each of these is still true (C1). You decide what to do.
 
 - [x] ~~Slide 2 of the course deck says a camera is required.~~ No longer true: checked 2 November 2026, the word "camera" is in none of the 9 v1.5 decks (228 pages each). Nothing to decide.
-- [ ] **"8 languages" vs 9 packages.** The hero and the announcement banner say 8 languages. The language menu has 9 entries because Swahili comes in a Kenya and a Tanzania version. Keep "8"?
+- [x] **"8 languages" vs 9 packages.** Decided 2 November 2026: keep "8 languages" and both Swahili entries for now; revisit with feedback. The hero and the announcement banner say 8 languages. The language menu has 9 entries because Swahili comes in a Kenya and a Tanzania version. Keep "8"?
 - [x] ~~Unknown web addresses show an empty page.~~ Decided: add a simple page. Done 2 November 2026: `/this-does-not-exist` now shows "Page not found" with buttons to the course and the home page.
 - [x] ~~Switching back to English keeps the green note~~ ("Switched to English"). Decided 2 November 2026: fine as is.
-- [ ] **Both Swahili versions share the same guide, slides and worksheet** but have different video folders. Intended?
+- [x] ~~Both Swahili versions share the same guide, slides and worksheet~~ but have different video folders. Decided 2 November 2026: keep as is and revisit once Swahili-speaking teachers give feedback.
 - [ ] **Mini-app pages** (`/courses/ai-literacy-for-everyone/ai-or-not`, `recap-quiz-1` to `-4`) are not linked from the navbar. They exist for Kolibri and the course to link to. Intended?
 - [ ] **About page gallery captions still say "students".** Change to match the course page wording ("learners")?
 - [ ] **Get Involved:** "Ensures AI courses relevance and alignment..." appears under both Teachers and Partners and reads oddly. Reword?
