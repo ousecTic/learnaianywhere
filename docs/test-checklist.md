@@ -156,7 +156,7 @@ All on the deploy preview, at desktop (1280), tablet (768) and phone (375) width
 - [x] Heading and lead: "A 4-lesson course on how AI works. Learners train their own AI and learn to use it responsibly, with or without internet."
 - [x] **Try it online in English** opens `/course/online/en/`. The arrow next to it opens the "Language of the course" menu; picking a language changes the button text, the trailer, and the Get the course section below.
 - [x] **Get the course** scrolls to the section.
-- [x] Trailer: the cover picture shows as the poster, and one click plays that language's "Welcome to the Course" video (`course-videos-v1.5/<language>-intro-01.mp4`) with the browser's own controls. The `site-media` file is only a fallback for a language without its own video, and every language has one. Not tested: the Drive player that appears if the MP4 fails.
+- [x] Trailer: the cover picture shows as the poster, and one click plays that language's "Welcome to the Course" video (`course-videos-v1.6/<language>-intro-01.mp4`; all 9 re-checked 3 November 2026) with the browser's own controls. The `site-media` file is only a fallback for a language without its own video, and every language has one. Not tested: the Drive player that appears if the MP4 fails.
 - [x] The trailer video is not downloaded until play is clicked (Network tab).
 - [x] Nothing in the hero is crowded at laptop or phone width; at phone width the trailer sits under the text.
 
@@ -176,7 +176,7 @@ All on the deploy preview, at desktop (1280), tablet (768) and phone (375) width
 
 ## C6. Course page: Get the course
 
-- [x] Heading "Get the course in English", under it "Version 1.5" and the release date.
+- [x] Heading "Get the course in English", under it "Version 1.6" and the release date ("November 3, 2026"). Re-checked 3 November 2026.
 - [x] Language menu: 9 entries in this order: English, Français (French), Español (Spanish), Português (Portuguese), العربية (Arabic), हिन्दी (Hindi), اردو (Urdu), Kiswahili – Kenya (Swahili), Kiswahili – Tanzania (Swahili). Arrow keys change it.
 - [x] Choosing a language changes the heading and shows the green note "Switched to French. Everything below, and all the files, are now in French." The note stays visible when switching again.
 - [x] Question 1 "How do you want to use it?": I'll teach it (default) and Learners go through it on their own. With "I'll teach it" there is no question 2.
@@ -195,8 +195,8 @@ All on the deploy preview, at desktop (1280), tablet (768) and phone (375) width
 
 **"Learners go through it on their own"** (all four plans)
 - [x] One step, no step number, no title, no closing note, the v1.5 START HERE screenshot (sidebar says Version 1.5, 39 activities) with no caption.
-- [x] Computer: "Download the course to a computer", "Unzip it and open START HERE.", button "Download the course · 116 MB" (no language in the button; size changes per language). Downloads straight away, no new tab.
-- [x] Android: "Install the app on the learners' phones or tablets", "Install it and choose English. On iPhone or iPad? Use it online.", button "Download the app · 3 MB" from the `app-latest` release, link "See the install steps with pictures" → `/courses/ai-literacy-for-everyone/install-android`.
+- [x] Computer: "Download the course to a computer", "Unzip it and open START HERE.", button "Download the course · 116 MB" (from `course-v1.6`) (no language in the button; size changes per language). Downloads straight away, no new tab.
+- [x] Android: "Install the app on the learners' phones or tablets", "Download it once, on Wi-Fi: the whole English course is inside. Then share it phone to phone with ShareIt, Xender or Files by Google; the other phones need no internet. On iPhone or iPad? Use it online.", button "Download the app · 119 MB" from `apk-latest/ai-literacy-<language>.apk` (each language its own app and size, from `course/apps.json`), link "See the install steps with pictures" → `/courses/ai-literacy-for-everyone/install-android?lang=<language>`. Re-checked in all 9 languages 3 November 2026.
 - [x] Learning platform (re-checked on the deploy preview 2 November 2026): the card says "Learning platform / Such as Moodle". The plan says "Add the course to your learning platform", "In Moodle, add a File, upload the ZIP, unzip it and set START HERE.html as the main file.", with the ZIP button. No Kolibri or Google Classroom links.
 - [x] Online: "Share the link with learners", "Nothing to install. Needs internet.", button "Open the course" (arrow icon) → `/course/online/<language>/`.
 - [x] After the plan card the page goes straight to Common questions; there is no "All the files" section.
@@ -205,11 +205,11 @@ All on the deploy preview, at desktop (1280), tablet (768) and phone (375) width
 - [x] Teacher guide PDF and Word are the guide, in that language, 4 pages (5 in Hindi and Urdu), no heading stranded at the bottom of a page, no version number inside.
 - [x] Slides PDF and PowerPoint are the slides in that language.
 - [x] Worksheet PDF and Word, and the filled-in example PDF, are the right documents in that language; each worksheet is 1 page.
-- [x] The ZIP's size matches the label and its SHA-256 matches `course/downloads.json`.
+- [x] The ZIP's size matches the label and its SHA-256 matches `course/downloads.json`. Re-checked for the 9 v1.6 ZIPs and the 9 language apps (`course/apps.json` against `apk-latest`) 3 November 2026.
 - [x] "Open in Google Drive" opens that language's video folder, viewable without signing in, with 25 videos.
 - [x] No button is greyed out "Coming soon".
 - [x] Downloads (ZIP, APK, EXE, Google exports) do not open a new tab; pages (Drive, YouTube, neuropocket.com) do.
-- [x] NeuroPocket buttons point at the 1.8.0 release and the APK/EXE exist.
+- [x] NeuroPocket buttons point at the 1.9.0 release and the APK/EXE exist; step 4 says NeuroPocket needs at least 1 GB of memory (RAM). Re-checked 3 November 2026.
 
 ## C8. The course itself
 
@@ -224,11 +224,11 @@ All on the deploy preview, at desktop (1280), tablet (768) and phone (375) width
 - [x] ~~The ZIP has START HERE.html at the top level.~~ It has it one folder down, and that's fine: Moodle unzips it and lets you pick START HERE.html as the main file (H2). The Android app needs that folder, so the ZIP stays as it is.
 
 **Android app**
-- [x] The APK downloads from `app-latest`. The `course-latest` pointer the app reads points at v1.5 with the right sizes and hashes.
+- [x] The old small app's APK still downloads from `app-latest`, and the `course-latest` pointer it reads now points at v1.6 with the right sizes and hashes. The language apps: `apk-latest` holds all 9 and `apps.json` (1.6.0), signed with the same key as `app-v1.0.0`. Re-checked 3 November 2026.
 
 **Online kit** `/course/online/<language>/`
 - [x] All 9 addresses load, with and without the trailing slash.
-- [x] All 225 videos in the `course-videos-v1.5` release are reachable; captions show.
+- [x] All 225 videos in the `course-videos-v1.6` release are reachable; captions show. Re-checked 3 November 2026 (Swahili (Kenya) seeks and plays; its address redirects to lower case, `/course/online/sw-ke/`, and works).
 - [x] Quizzes, AI or Not, worksheet app and NeuroPocket work inside it. Progress is remembered on reload.
 - [x] Arabic and Urdu are right-to-left.
 - [x] At phone width the sidebar opens and closes and videos fit the width.
@@ -241,8 +241,8 @@ All on the deploy preview, at desktop (1280), tablet (768) and phone (375) width
 
 **Install steps page** `/courses/ai-literacy-for-everyone/install-android`
 - [x] "← AI Literacy for Everyone" goes back to the course page's Get the course section (`#get`). Fixed and re-checked 2 November 2026.
-- [x] Eight steps, each with a tall phone screenshot and short text; pictures load (first two straight away, the rest on scroll).
-- [x] Step 1's "Download the app" downloads the APK. The install page now says "under 200 MB". The last line says Android only. Re-checked 2 November 2026.
+- [x] Seven steps for the chosen language's app (menu at the top, `?lang=`), six with a tall phone screenshot (step 7 has none yet; pictures 1, 2, 5 and 6 still show the small app and are to be re-shot), then "Share it with another phone". Pictures load (first two straight away, the rest on scroll). Re-checked 3 November 2026.
+- [x] Step 1's "Download the … app" downloads that language's APK from `apk-latest`, with its size. The last line gives NeuroPocket's 1 GB memory need and says Android only. Re-checked 3 November 2026.
 - [x] At phone width the picture is above the text and the page is not wider than the screen.
 
 ## C9. Introduction to Generative AI `/curriculum/intro-to-generative-ai`
@@ -284,7 +284,7 @@ All on the deploy preview, at desktop (1280), tablet (768) and phone (375) width
 - [x] Colour contrast: the green note, the grey "To teach with" labels and the muted step text pass.
 - [x] Dark mode: nothing becomes unreadable (the site is designed light).
 - [x] Pictures lower on the course page load only when scrolled to.
-- [x] Content accuracy: every number on the course page matches reality (4 lessons, 25 videos, 1-page worksheet, 8 languages, version 1.5 and its date, 3 MB app, ZIP sizes, NeuroPocket 1.8.0). Nothing says "kit", "students", "class" or "classroom" where you wanted "course", "learners", "group". Nothing refers to things no longer on the page.
+- [x] Content accuracy: every number on the course page matches reality (4 lessons, 25 videos, 1-page worksheet, 8 languages, version 1.6 and its date, each language app's size, ZIP sizes, NeuroPocket 1.9.0; re-checked 3 November 2026). Nothing says "kit", "students", "class" or "classroom" where you wanted "course", "learners", "group". Nothing refers to things no longer on the page.
 
 ## C13. After the merge
 
