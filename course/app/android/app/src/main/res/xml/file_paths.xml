@@ -4,4 +4,6 @@
     <files-path name="courses" path="courses/" />
     <!-- A downloaded newer APK, for Android's installer (CoursePackPlugin.installApp). -->
     <cache-path name="apk" path="apk/" />
+    <!-- A PDF copied out of the APK, in the apps with the course inside (CoursePackPlugin.openFile). -->
+    <cache-path name="pdf" path="pdf/" />
 </paths>

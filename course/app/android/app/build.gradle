@@ -1,14 +1,57 @@
+import groovy.json.JsonOutput
+import groovy.json.JsonSlurper
+
 apply plugin: 'com.android.application'
+
+// Two apps are built from this project:
+//
+// - Without -PcoursePackage: the small app (org.learnaianywhere.ailiteracy, "AI Literacy"),
+//   which downloads a language package on the phone. Built by app-release.yml.
+// - With -PcoursePackage=<id> (en, fr, sw-KE, ...): one language's app with that whole
+//   course inside, read straight from the APK. Built by apk-release.yml. Its assets are
+//   the package ZIP (-PcourseZip, by default the one build_course.py made) unpacked
+//   without its top folder, plus the settings page in ../bundled. See "Apps with the
+//   course inside" in course/app/README.md.
+def coursePackage = project.findProperty('coursePackage')
+def courseRelease = new JsonSlurper().parse(rootProject.file('../../downloads.json'))
+def bundled = null
+if (coursePackage) {
+    def pkg = courseRelease.packages.find { it.id == coursePackage }
+    if (pkg == null) {
+        throw new GradleException("coursePackage '$coursePackage' is not in course/downloads.json (${courseRelease.packages*.id.join(', ')})")
+    }
+    def zip = project.findProperty('courseZip') ?: rootProject.file("../../../build/course/zips/${pkg.file}").path
+    // The course version (1.5) plus the app's own revision; the version code is worked out
+    // as in app-release.yml.
+    def versionName = project.findProperty('appVersionName') ?: "${courseRelease.version}.0"
+    def parts = versionName.tokenize('.')*.toInteger()
+    bundled = [
+        pkg: pkg,
+        zip: file(zip),
+        appId: "org.learnaianywhere.ailiteracy.${coursePackage.replace('-', '_')}",
+        // Short enough not to be cut on a home screen (about 14 characters).
+        label: "AI Literacy ${coursePackage.tokenize('-')[0].toUpperCase()}",
+        versionName: versionName,
+        versionCode: (project.findProperty('appVersionCode') ?: parts[0] * 10000 + parts[1] * 100 + parts[2]) as int,
+        assets: layout.buildDirectory.dir("course-assets/${coursePackage}").get().asFile,
+    ]
+}
 
 android {
     namespace "org.learnaianywhere.ailiteracy"
     compileSdk rootProject.ext.compileSdkVersion
+    buildFeatures {
+        buildConfig true
+    }
     defaultConfig {
         applicationId "org.learnaianywhere.ailiteracy"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        manifestPlaceholders = [appLabel: bundled ? bundled.label : '@string/app_name']
+        // Empty in the small app; the package id ("fr") in an app with the course inside.
+        buildConfigField 'String', 'COURSE_PACKAGE', JsonOutput.toJson(bundled ? coursePackage : '')
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
@@ -40,6 +83,70 @@ android {
             }
         }
     }
+}
+
+if (bundled) {
+    android {
+        defaultConfig {
+            applicationId bundled.appId
+            setVersionCode(bundled.versionCode)
+            setVersionName(bundled.versionName)
+        }
+        // Videos and PDFs stay uncompressed in the APK, so MainActivity can jump to any
+        // byte of a video (seeking) and copy a PDF out without unpacking it.
+        androidResources {
+            noCompress 'mp4', 'pdf'
+        }
+        // The course replaces the setup screens: the Capacitor config files come from
+        // src/main/assets (written by `npm run sync`), everything else from the course.
+        sourceSets.main.assets.srcDirs = [bundled.assets]
+    }
+
+    def prepareCourseAssets = tasks.register('prepareCourseAssets', Sync) {
+        def zipFile = bundled.zip
+        def top = bundled.pkg.folder + '/'
+        def info = JsonOutput.toJson([
+            id: bundled.pkg.id, name: bundled.pkg.name, lang: bundled.pkg.lang,
+            courseVersion: courseRelease.version, versionName: bundled.versionName, versionCode: bundled.versionCode,
+        ])
+        inputs.property('info', info)
+        doFirst {
+            if (!zipFile.isFile()) {
+                throw new GradleException("The course package $zipFile is missing. Run scripts/build_course.py, or pass -PcourseZip=<path to ${bundled.pkg.file}>.")
+            }
+        }
+        into bundled.assets
+        from('src/main/assets') {
+            include 'capacitor.config.json', 'capacitor.plugins.json'
+        }
+        // The package without its one top folder ("AI Literacy for Everyone - English/").
+        from(zipTree(zipFile)) {
+            include top + '**'
+            eachFile { it.path = 'public/' + it.sourcePath.substring(top.length()) }
+            includeEmptyDirs = false
+        }
+        // Capacitor opens index.html: the course's START HERE page.
+        from(zipTree(zipFile)) {
+            include top + 'START HERE.html'
+            eachFile { it.path = 'public/index.html' }
+        }
+        into('public') {
+            from('../../bundled')
+            from('../../../player/assets') {
+                include 'learn-ai-anywhere-logo.png', 'inter-latin.woff2'
+            }
+        }
+        doLast {
+            if (!new File(bundled.assets, 'public/index.html').isFile()) {
+                throw new GradleException("$zipFile has no '${top}START HERE.html'.")
+            }
+            if (!new File(bundled.assets, 'capacitor.config.json').isFile()) {
+                throw new GradleException('src/main/assets/capacitor.config.json is missing: run `npm run sync` in course/app first.')
+            }
+            new File(bundled.assets, 'public/app-info.json').text = info
+        }
+    }
+    tasks.named('preBuild') { dependsOn prepareCourseAssets }
 }
 
 repositories {

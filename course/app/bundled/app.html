@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AI Literacy for Everyone</title>
+<!--
+  The settings page of an app with one language's course inside (built with
+  -PcoursePackage, see "Apps with the course inside" in course/app/README.md). The course's
+  START HERE page is the app's start page; its "App settings" button opens this page.
+  There's no language list: another language is another app. app-info.json is written by
+  the build (language, versions); updates come from apps.json on the apk-latest release,
+  through CoursePackPlugin.getLatest.
+-->
+<style>
+  @font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400 800;
+    font-display: swap;
+    src: url(inter-latin.woff2) format("woff2");
+  }
+  /* The same brand tokens as the course page (course/player) and www/index.html. */
+  :root {
+    --bg: #ffffff;
+    --soft: #f2f8fc;
+    --line: #e5e7eb;
+    --text: #111827;
+    --body: #374151;
+    --muted: #4b5563;
+    --brand: #1c6e99;
+    --brand-dark: #14567a;
+    --danger: #b42318;
+    color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    background: var(--bg); color: var(--text);
+    font: 16px/1.5 Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", sans-serif;
+    -webkit-tap-highlight-color: transparent;
+  }
+  :lang(ur) body { line-height: 1.8; }
+  button { font: inherit; color: inherit; }
+  [hidden] { display: none !important; }
+  :focus-visible { outline: 3px solid var(--brand); outline-offset: 2px; }
+
+  .screen { display: none; min-height: 100%; flex-direction: column; }
+  .screen.on { display: flex; }
+  .pad {
+    padding-block: max(28px, env(safe-area-inset-top)) max(24px, env(safe-area-inset-bottom));
+    padding-inline: max(24px, env(safe-area-inset-left)) max(24px, env(safe-area-inset-right));
+  }
+  h1 { margin: 0; font-size: 26px; font-weight: 800; line-height: 1.2; }
+  p { margin: 0; }
+  .muted { color: var(--muted); }
+  .logo { height: 30px; width: auto; align-self: flex-start; display: block; }
+
+  .stack { display: flex; flex-direction: column; gap: 22px; flex: 1; }
+  .bar { height: 12px; border-radius: 99px; background: var(--line); overflow: hidden; }
+  .bar > span { display: block; height: 100%; width: 0; border-radius: inherit; background: var(--brand); transition: width .2s linear; }
+  .row { display: flex; justify-content: space-between; gap: 12px; font-size: 15px; color: var(--body); margin-top: 10px; }
+  .row b { font-weight: 600; }
+  .tip { padding: 14px 16px; background: var(--soft); border-radius: 12px; font-size: 15px; color: #1f2937; }
+  .tip.warn { background: #fef3f2; color: var(--danger); }
+  .bottom { margin-top: auto; display: flex; flex-direction: column; gap: 12px; }
+  .btn {
+    min-height: 52px; border-radius: 12px; border: 1.5px solid transparent; background: var(--brand); color: #fff;
+    font-size: 17px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 0 20px; cursor: pointer;
+  }
+  .btn:active { background: var(--brand-dark); }
+  .btn.secondary { background: #fff; color: var(--body); border-color: #d1d5db; font-weight: 600; }
+  .card { border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; display: flex; flex-direction: column; gap: 2px; }
+  .card .label { font-size: 13px; color: var(--muted); }
+  .card .value { font-size: 18px; font-weight: 700; }
+
+  .loading { flex: 1; display: grid; place-items: center; }
+  .spinner { width: 36px; height: 36px; border-radius: 50%; border: 4px solid var(--line); border-top-color: var(--brand); animation: spin 1s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) { .spinner { animation: none; } .bar > span { transition: none; } }
+</style>
+</head>
+<body>
+
+<section class="screen on" id="sLoading" aria-busy="true"><div class="loading"><div class="spinner"></div></div></section>
+
+<section class="screen pad" id="sSettings">
+  <div class="stack">
+    <img class="logo" src="learn-ai-anywhere-logo.png" alt="Learn AI Anywhere">
+    <h1 id="stTitle"></h1>
+    <div class="card">
+      <span class="label" id="stLangLabel"></span>
+      <span class="value" id="stLang" dir="auto"></span>
+      <span class="label" id="stVersion"></span>
+    </div>
+    <p class="tip" id="stShare"></p>
+    <p class="tip" id="stOther"></p>
+    <div class="bottom">
+      <button class="btn secondary" id="stCheck" type="button"></button>
+      <button class="btn" id="stBack" type="button"></button>
+    </div>
+  </div>
+</section>
+
+<section class="screen pad" id="sUpdate">
+  <div class="stack">
+    <h1 id="upTitle"></h1>
+    <div class="card" id="upApp"><p id="upAppText"></p><button class="btn" id="upGetApp" type="button" style="margin-top: 12px"></button></div>
+    <p class="tip" id="upNone"></p>
+    <div class="bottom">
+      <button class="btn secondary" id="upLater" type="button"></button>
+    </div>
+  </div>
+</section>
+
+<section class="screen pad" id="sDownload">
+  <div class="stack">
+    <div>
+      <h1 id="dlTitle"></h1>
+      <p class="muted" id="dlName" style="margin-top: 6px"></p>
+    </div>
+    <div>
+      <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" id="dlBar"><span></span></div>
+      <div class="row"><span id="dlStep"></span><b id="dlPct"></b></div>
+    </div>
+    <div class="bottom">
+      <p class="tip" id="dlTip"></p>
+      <button class="btn" id="dlRetry" type="button" hidden></button>
+      <button class="btn secondary" id="dlCancel" type="button"></button>
+      <button class="btn" id="dlBack" type="button" hidden></button>
+    </div>
+  </div>
+</section>
+
+<script>
+(function () {
+  'use strict';
+
+  // The keys shared with www/index.html keep its wording.
+  var TEXT = {
+    en: { settings: 'App settings', language: 'Course language', version: 'Version {v}', back: 'Back to the course',
+      share: 'To give this course to another phone, send this app with ShareIt, Xender or Files by Google. The other phone needs no internet.',
+      other: 'Each language is a separate app. Get other languages from learnaianywhere.org, or from someone who has them.',
+      checkUpdates: 'Check for updates', updateTitle: 'Updates', appNew: 'A new version of the app is ready: version {v} ({mb} MB).',
+      getApp: 'Get the new app', appDownloading: 'Downloading the new app', upToDate: 'You have the newest version.',
+      noCheck: 'Could not check for updates. Connect to the internet, then try again.', notNow: 'Not now',
+      installTip: 'Android will ask whether to install it. If it says this isn’t allowed, tap Settings, allow AI Literacy, then go back.',
+      wifi: 'Use Wi-Fi if you can. If the connection drops, the download carries on where it stopped.',
+      mb: '{done} of {total} MB', checking: 'Checking the files', cancel: 'Cancel', retry: 'Try again', stopped: 'The download stopped',
+      stoppedTip: 'Check your internet connection, then try again. It carries on where it stopped.', damaged: 'The download was damaged. Please try again.' },
+    fr: { settings: 'Paramètres de l’application', language: 'Langue du cours', version: 'Version {v}', back: 'Retour au cours',
+      share: 'Pour donner ce cours à un autre téléphone, envoyez cette application avec ShareIt, Xender ou Files by Google. L’autre téléphone n’a pas besoin d’internet.',
+      other: 'Chaque langue est une application à part. Obtenez les autres langues sur learnaianywhere.org, ou auprès de quelqu’un qui les a.',
+      checkUpdates: 'Rechercher des mises à jour', updateTitle: 'Mises à jour', appNew: 'Une nouvelle version de l’application est prête : version {v} ({mb} Mo).',
+      getApp: 'Obtenir la nouvelle application', appDownloading: 'Téléchargement de la nouvelle application', upToDate: 'Vous avez la version la plus récente.',
+      noCheck: 'Impossible de rechercher les mises à jour. Connectez-vous à internet, puis réessayez.', notNow: 'Plus tard',
+      installTip: 'Android vous demandera s’il faut l’installer. S’il indique que ce n’est pas autorisé, touchez Paramètres, autorisez AI Literacy, puis revenez.',
+      wifi: 'Utilisez le Wi-Fi si possible. Si la connexion coupe, le téléchargement reprend là où il s’est arrêté.',
+      mb: '{done} sur {total} Mo', checking: 'Vérification des fichiers', cancel: 'Annuler', retry: 'Réessayer', stopped: 'Le téléchargement s’est arrêté',
+      stoppedTip: 'Vérifiez votre connexion internet, puis réessayez. Il reprendra là où il s’est arrêté.', damaged: 'Le fichier téléchargé est endommagé. Veuillez réessayer.' },
+    es: { settings: 'Ajustes de la aplicación', language: 'Idioma del curso', version: 'Versión {v}', back: 'Volver al curso',
+      share: 'Para pasar este curso a otro teléfono, envía esta aplicación con ShareIt, Xender o Files by Google. El otro teléfono no necesita internet.',
+      other: 'Cada idioma es una aplicación aparte. Consigue otros idiomas en learnaianywhere.org o de alguien que los tenga.',
+      checkUpdates: 'Buscar actualizaciones', updateTitle: 'Actualizaciones', appNew: 'Hay una nueva versión de la aplicación: versión {v} ({mb} MB).',
+      getApp: 'Obtener la nueva aplicación', appDownloading: 'Descargando la nueva aplicación', upToDate: 'Tienes la versión más reciente.',
+      noCheck: 'No se pudo buscar actualizaciones. Conéctate a internet y vuelve a intentarlo.', notNow: 'Ahora no',
+      installTip: 'Android te preguntará si quieres instalarla. Si dice que no está permitido, toca Ajustes, permite AI Literacy y vuelve.',
+      wifi: 'Usa Wi-Fi si puedes. Si se corta la conexión, la descarga continúa donde se quedó.',
+      mb: '{done} de {total} MB', checking: 'Comprobando los archivos', cancel: 'Cancelar', retry: 'Volver a intentarlo', stopped: 'La descarga se detuvo',
+      stoppedTip: 'Comprueba tu conexión a internet y vuelve a intentarlo. Continuará donde se quedó.', damaged: 'La descarga está dañada. Vuelve a intentarlo.' },
+    pt: { settings: 'Configurações do app', language: 'Idioma do curso', version: 'Versão {v}', back: 'Voltar ao curso',
+      share: 'Para passar este curso para outro celular, envie este app pelo ShareIt, Xender ou Files by Google. O outro celular não precisa de internet.',
+      other: 'Cada idioma é um app separado. Consiga outros idiomas em learnaianywhere.org ou com alguém que já os tenha.',
+      checkUpdates: 'Procurar atualizações', updateTitle: 'Atualizações', appNew: 'Uma nova versão do app está pronta: versão {v} ({mb} MB).',
+      getApp: 'Obter o novo app', appDownloading: 'Baixando o novo app', upToDate: 'Você tem a versão mais recente.',
+      noCheck: 'Não foi possível procurar atualizações. Conecte-se à internet e tente de novo.', notNow: 'Agora não',
+      installTip: 'O Android vai perguntar se você quer instalar. Se disser que não é permitido, toque em Configurações, permita o AI Literacy e volte.',
+      wifi: 'Use Wi-Fi se puder. Se a conexão cair, o download continua de onde parou.',
+      mb: '{done} de {total} MB', checking: 'Verificando os arquivos', cancel: 'Cancelar', retry: 'Tentar de novo', stopped: 'O download parou',
+      stoppedTip: 'Verifique sua conexão com a internet e tente de novo. Ele continua de onde parou.', damaged: 'O arquivo baixado está danificado. Tente de novo.' },
+    ar: { settings: 'إعدادات التطبيق', language: 'لغة الدورة', version: 'الإصدار {v}', back: 'العودة إلى الدورة',
+      share: 'لإعطاء هذه الدورة لهاتف آخر، أرسل هذا التطبيق عبر ShareIt أو Xender أو Files by Google. لا يحتاج الهاتف الآخر إلى الإنترنت.',
+      other: 'كل لغة تطبيق مستقل. احصل على اللغات الأخرى من learnaianywhere.org أو من شخص لديه هذه التطبيقات.',
+      checkUpdates: 'البحث عن تحديثات', updateTitle: 'التحديثات', appNew: 'إصدار جديد من التطبيق جاهز: الإصدار {v} ({mb} ميغابايت).',
+      getApp: 'احصل على التطبيق الجديد', appDownloading: 'جارٍ تنزيل التطبيق الجديد', upToDate: 'لديك أحدث إصدار.',
+      noCheck: 'تعذر البحث عن تحديثات. اتصل بالإنترنت، ثم حاول مرة أخرى.', notNow: 'ليس الآن',
+      installTip: 'سيسألك Android عما إذا كنت تريد تثبيته. إذا ظهر أن ذلك غير مسموح، فاضغط على الإعدادات واسمح لتطبيق AI Literacy، ثم ارجع.',
+      wifi: 'استخدم شبكة Wi-Fi إن أمكن. إذا انقطع الاتصال، يستأنف التنزيل من حيث توقف.',
+      mb: '{done} من {total} ميغابايت', checking: 'جارٍ التحقق من الملفات', cancel: 'إلغاء', retry: 'حاول مرة أخرى', stopped: 'توقف التنزيل',
+      stoppedTip: 'تحقق من اتصالك بالإنترنت، ثم حاول مرة أخرى. سيستأنف من حيث توقف.', damaged: 'الملف الذي تم تنزيله تالف. يرجى المحاولة مرة أخرى.' },
+    hi: { settings: 'ऐप सेटिंग्स', language: 'कोर्स की भाषा', version: 'संस्करण {v}', back: 'कोर्स पर वापस जाएँ',
+      share: 'यह कोर्स किसी दूसरे फ़ोन को देने के लिए, यह ऐप ShareIt, Xender या Files by Google से भेजें। दूसरे फ़ोन को इंटरनेट की ज़रूरत नहीं है।',
+      other: 'हर भाषा एक अलग ऐप है। दूसरी भाषाएँ learnaianywhere.org से लें, या किसी ऐसे व्यक्ति से जिसके पास वे हों।',
+      checkUpdates: 'अपडेट देखें', updateTitle: 'अपडेट', appNew: 'ऐप का नया संस्करण तैयार है: संस्करण {v} ({mb} MB)।',
+      getApp: 'नया ऐप लें', appDownloading: 'नया ऐप डाउनलोड हो रहा है', upToDate: 'आपके पास सबसे नया संस्करण है।',
+      noCheck: 'अपडेट नहीं देखे जा सके। इंटरनेट से जुड़ें, फिर दोबारा कोशिश करें।', notNow: 'अभी नहीं',
+      installTip: 'Android पूछेगा कि इसे इंस्टॉल करना है या नहीं। अगर लिखा आए कि इसकी अनुमति नहीं है, तो सेटिंग्स पर टैप करें, AI Literacy को अनुमति दें, फिर वापस आएँ।',
+      wifi: 'हो सके तो Wi-Fi इस्तेमाल करें। कनेक्शन टूट जाए तो डाउनलोड वहीं से आगे चलता है जहाँ रुका था।',
+      mb: '{total} MB में से {done} MB', checking: 'फ़ाइलों की जाँच हो रही है', cancel: 'रद्द करें', retry: 'दोबारा कोशिश करें', stopped: 'डाउनलोड रुक गया',
+      stoppedTip: 'अपना इंटरनेट कनेक्शन जाँचें, फिर दोबारा कोशिश करें। यह वहीं से आगे चलेगा जहाँ रुका था।', damaged: 'डाउनलोड की गई फ़ाइल खराब है। कृपया दोबारा कोशिश करें।' },
+    ur: { settings: 'ایپ کی ترتیبات', language: 'کورس کی زبان', version: 'ورژن {v}', back: 'کورس پر واپس جائیں',
+      share: 'یہ کورس کسی دوسرے فون کو دینے کے لیے، یہ ایپ ShareIt، Xender یا Files by Google سے بھیجیں۔ دوسرے فون کو انٹرنیٹ کی ضرورت نہیں۔',
+      other: 'ہر زبان ایک الگ ایپ ہے۔ دوسری زبانیں learnaianywhere.org سے لیں، یا کسی ایسے شخص سے جس کے پاس وہ ہوں۔',
+      checkUpdates: 'اپ ڈیٹس دیکھیں', updateTitle: 'اپ ڈیٹس', appNew: 'ایپ کا نیا ورژن تیار ہے: ورژن {v} ({mb} MB)۔',
+      getApp: 'نئی ایپ حاصل کریں', appDownloading: 'نئی ایپ ڈاؤن لوڈ ہو رہی ہے', upToDate: 'آپ کے پاس سب سے نیا ورژن ہے۔',
+      noCheck: 'اپ ڈیٹس نہیں دیکھی جا سکیں۔ انٹرنیٹ سے جڑیں، پھر دوبارہ کوشش کریں۔', notNow: 'ابھی نہیں',
+      installTip: 'Android پوچھے گا کہ اسے انسٹال کرنا ہے یا نہیں۔ اگر لکھا آئے کہ اس کی اجازت نہیں ہے تو Settings پر ٹیپ کریں، AI Literacy کو اجازت دیں، پھر واپس آئیں۔',
+      wifi: 'ہو سکے تو Wi-Fi استعمال کریں۔ اگر کنکشن ٹوٹ جائے تو ڈاؤن لوڈ وہیں سے جاری رہتا ہے جہاں رکا تھا۔',
+      mb: '{total} MB میں سے {done} MB', checking: 'فائلوں کی جانچ ہو رہی ہے', cancel: 'منسوخ کریں', retry: 'دوبارہ کوشش کریں', stopped: 'ڈاؤن لوڈ رک گیا',
+      stoppedTip: 'اپنا انٹرنیٹ کنکشن چیک کریں، پھر دوبارہ کوشش کریں۔ یہ وہیں سے جاری رہے گا جہاں رکا تھا۔', damaged: 'ڈاؤن لوڈ کی گئی فائل خراب ہے۔ براہ کرم دوبارہ کوشش کریں۔' },
+    sw: { settings: 'Mipangilio ya programu', language: 'Lugha ya kozi', version: 'Toleo {v}', back: 'Rudi kwenye kozi',
+      share: 'Kumpa mtu mwingine kozi hii kwenye simu yake, tuma programu hii kwa ShareIt, Xender au Files by Google. Simu hiyo nyingine haihitaji intaneti.',
+      other: 'Kila lugha ni programu tofauti. Pata lugha nyingine kwenye learnaianywhere.org, au kutoka kwa mtu aliye nazo.',
+      checkUpdates: 'Angalia masasisho', updateTitle: 'Masasisho', appNew: 'Toleo jipya la programu liko tayari: toleo {v} (MB {mb}).',
+      getApp: 'Pata programu mpya', appDownloading: 'Inapakua programu mpya', upToDate: 'Una toleo jipya zaidi.',
+      noCheck: 'Imeshindwa kuangalia masasisho. Unganisha intaneti, kisha ujaribu tena.', notNow: 'Si sasa',
+      installTip: 'Android itauliza kama unataka kuisakinisha. Ikisema hairuhusiwi, gusa Mipangilio, ruhusu AI Literacy, kisha urudi.',
+      wifi: 'Tumia Wi-Fi ukiweza. Muunganisho ukikatika, upakuaji utaendelea pale ulipoishia.',
+      mb: 'MB {done} kati ya {total}', checking: 'Tunakagua faili', cancel: 'Ghairi', retry: 'Jaribu tena', stopped: 'Upakuaji umesimama',
+      stoppedTip: 'Angalia muunganisho wako wa intaneti, kisha ujaribu tena. Utaendelea pale ulipoishia.', damaged: 'Faili iliyopakuliwa imeharibika. Tafadhali jaribu tena.' }
+  };
+  var NATIVE = { en: 'English', fr: 'Français', es: 'Español', pt: 'Português', ar: 'العربية', hi: 'हिन्दी', ur: 'اردو',
+    'sw-KE': 'Kiswahili (Kenya)', 'sw-TZ': 'Kiswahili (Tanzania)' };
+  var RTL = { ar: true, ur: true };
+
+  var cap = window.Capacitor;
+  var CP = cap && cap.nativePromise && cap.isNativePlatform && cap.isNativePlatform()
+    ? nativePlugin()
+    : previewPlugin(); // opened in a normal browser, for trying the screens
+
+  // CoursePackPlugin.java, called through the bridge the app adds to every page.
+  function nativePlugin() {
+    function call(method, options) { return cap.nativePromise('CoursePack', method, options || {}); }
+    return {
+      getLatest: function (o) { return call('getLatest', o); },
+      installApp: function (o) { return call('installApp', o); },
+      dismissUpdate: function (o) { return call('dismissUpdate', o); },
+      cancel: function () { return call('cancel'); },
+      addListener: function (name, fn) { return cap.addListener('CoursePack', name, fn); }
+    };
+  }
+
+  var info = null;    // app-info.json: this app's package, language and version
+  var lang = 'en';
+  var found = null;   // the newer APK for this language, from apps.json
+  var checked = false;
+  var update = null;  // the APK being downloaded
+
+  function $(id) { return document.getElementById(id); }
+  function t(key, vars) {
+    var s = (TEXT[lang] || TEXT.en)[key] || TEXT.en[key];
+    Object.keys(vars || {}).forEach(function (k) { s = s.split('{' + k + '}').join(String(vars[k])); });
+    return s;
+  }
+  function show(id) {
+    Array.prototype.forEach.call(document.querySelectorAll('.screen'), function (s) { s.classList.toggle('on', s.id === id); });
+    window.scrollTo(0, 0);
+  }
+  function mb(bytes) { return Math.round(bytes / 1e6); }
+  function backToCourse() { location.href = 'index.html'; }
+
+  // ---------- Settings ----------
+  function showSettings() {
+    $('stTitle').textContent = t('settings');
+    $('stLangLabel').textContent = t('language');
+    $('stLang').textContent = NATIVE[info.id] || info.name;
+    $('stVersion').textContent = t('version', { v: info.versionName });
+    $('stShare').textContent = t('share');
+    $('stOther').textContent = t('other');
+    $('stCheck').textContent = t('checkUpdates');
+    $('stBack').textContent = t('back');
+    show('sSettings');
+  }
+  $('stCheck').addEventListener('click', function () {
+    show('sLoading');
+    checkLatest(15000).then(showUpdate);
+  });
+  $('stBack').addEventListener('click', backToCourse);
+
+  // ---------- Updates ----------
+  function checkLatest(waitMs) {
+    return CP.getLatest({ waitMs: waitMs }).then(function (l) {
+      var apps = l && l.apps && l.apps.apps;
+      checked = !!apps;
+      found = null;
+      (apps || []).forEach(function (a) {
+        if (a.id === info.id && a.versionCode > l.appVersionCode) found = a;
+      });
+    }, function () { checked = false; found = null; });
+  }
+  function showUpdate() {
+    $('upTitle').textContent = t('updateTitle');
+    $('upApp').hidden = !found;
+    $('upNone').hidden = !!found;
+    $('upNone').textContent = checked ? t('upToDate') : t('noCheck');
+    if (found) {
+      var app = found;
+      $('upAppText').textContent = t('appNew', { v: app.versionName, mb: mb(app.bytes) });
+      $('upGetApp').textContent = t('getApp');
+      $('upGetApp').onclick = function () { startAppUpdate(app); };
+    }
+    $('upLater').textContent = found ? t('notNow') : t('back');
+    $('upLater').onclick = function () {
+      // The app stops offering this version when it opens; a newer one is offered again.
+      if (found) CP.dismissUpdate({ versionCode: found.versionCode });
+      backToCourse();
+    };
+    show('sUpdate');
+  }
+
+  // ---------- The new APK: downloaded and checked here, then Android's installer takes over ----------
+  function setBar(fraction) {
+    var pct = Math.max(0, Math.min(100, Math.round(fraction * 100)));
+    $('dlBar').firstElementChild.style.width = pct + '%';
+    $('dlBar').setAttribute('aria-valuenow', String(pct));
+    $('dlPct').textContent = pct + '%';
+  }
+  function dlState(state, detail) {
+    var done = state === 'done', failed = state === 'failed';
+    $('dlTitle').textContent = failed ? t('stopped') : t('appDownloading');
+    $('dlRetry').hidden = !failed;
+    $('dlCancel').hidden = done;
+    $('dlBack').hidden = !done;
+    var tip = $('dlTip');
+    tip.classList.toggle('warn', failed);
+    tip.textContent = failed ? detail : done ? t('installTip') : t('wifi');
+  }
+  function startAppUpdate(app) {
+    update = app;
+    $('dlName').textContent = 'AI Literacy ' + app.versionName;
+    $('dlRetry').textContent = t('retry');
+    $('dlCancel').textContent = t('cancel');
+    $('dlBack').textContent = t('back');
+    $('dlStep').textContent = t('mb', { done: 0, total: mb(app.bytes) });
+    setBar(0);
+    dlState('busy');
+    show('sDownload');
+    CP.installApp({ url: app.url, sha256: app.sha256, bytes: app.bytes, versionCode: app.versionCode })
+      .then(function () { setBar(1); dlState('done'); })
+      .catch(function (e) {
+        var code = e && e.code;
+        if (code === 'cancelled') { showUpdate(); return; }
+        dlState('failed', code === 'badFile' ? t('damaged') : t('stoppedTip'));
+      });
+  }
+  CP.addListener('progress', function (e) {
+    if (!update) return;
+    if (e.phase === 'download') {
+      setBar(e.total ? e.done / e.total : 0);
+      $('dlStep').textContent = t('mb', { done: mb(e.done), total: mb(e.total) });
+    } else if (e.phase === 'verify') {
+      $('dlStep').textContent = t('checking');
+    }
+  });
+  $('dlRetry').addEventListener('click', function () { startAppUpdate(update); });
+  $('dlCancel').addEventListener('click', function () { CP.cancel(); });
+  $('dlBack').addEventListener('click', backToCourse);
+
+  // ---------- Start ----------
+  // app.html (from "App settings" in the course) shows the settings; app.html?screen=update
+  // (opened by the app when its check at start-up found a newer APK) shows that APK.
+  var params = new URLSearchParams(location.search);
+  fetch('app-info.json').then(function (r) { return r.json(); }, function () {
+    // Opened in a browser from course/app/bundled, where the build hasn't written it.
+    var id = params.get('id') || 'en';
+    return { id: id, name: id, lang: id.split('-')[0], versionName: '1.5.0', versionCode: 10500 };
+  }).then(function (i) {
+    info = i;
+    lang = TEXT[i.lang] ? i.lang : 'en';
+    document.documentElement.lang = i.lang;
+    document.documentElement.dir = RTL[lang] ? 'rtl' : 'ltr';
+    if (params.get('screen') === 'update') checkLatest(15000).then(function () { if (found) showUpdate(); else backToCourse(); });
+    else showSettings();
+  });
+
+  // A stand-in for the app's plugin when this page is opened in a browser. ?app=10600
+  // pretends that version code is on apk-latest, ?offline=1 that the check failed, and
+  // ?id=ar shows another language.
+  function previewPlugin() {
+    var listeners = [], timer = null, reject = null, q = new URLSearchParams(location.search);
+    function emit(e) { listeners.forEach(function (fn) { fn(e); }); }
+    return {
+      getLatest: function () {
+        if (q.get('offline')) return Promise.resolve({ appVersionCode: 10500 });
+        var code = +(q.get('app') || 10500);
+        return Promise.resolve({ appVersionCode: 10500, apps: { apps: [{ id: info.id, versionCode: code,
+          versionName: Math.floor(code / 10000) + '.' + Math.floor(code / 100) % 100 + '.' + code % 100, url: '', sha256: '', bytes: 182e6 }] } });
+      },
+      installApp: function (o) {
+        return new Promise(function (resolve, rej) {
+          var done = 0;
+          reject = rej;
+          timer = setInterval(function () {
+            done = Math.min(o.bytes, done + o.bytes / 20);
+            emit({ phase: 'download', done: done, total: o.bytes });
+            if (done >= o.bytes) { clearInterval(timer); resolve(); }
+          }, 100);
+        });
+      },
+      dismissUpdate: function () { return Promise.resolve(); },
+      cancel: function () { clearInterval(timer); if (reject) reject({ code: 'cancelled' }); return Promise.resolve(); },
+      addListener: function (name, fn) { listeners.push(fn); }
+    };
+  }
+})();
+</script>
+</body>
+</html>

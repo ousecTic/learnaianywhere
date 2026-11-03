@@ -46,6 +46,12 @@ import java.util.zip.ZipFile;
  * Files: downloads/<package>-v<version>.zip(.part) while downloading, then
  * courses/<package>-v<version>/ with the package's files and an index.html copy of
  * START HERE.html (the app loads index.html). Only the installed course is kept.
+ *
+ * In an app with the course inside (built with -PcoursePackage, see isBundled), there is
+ * nothing to download: the course is in the APK's assets, its START HERE page is the app's
+ * index.html and the settings page is app.html (course/app/bundled). openCourse, openShell
+ * and openFile keep their names, because the course page in published packages calls them,
+ * and the update check reads apps.json on apk-latest (appsLatestUrl) instead.
  */
 @CapacitorPlugin(name = "CoursePack")
 public class CoursePackPlugin extends Plugin {
@@ -64,9 +70,55 @@ public class CoursePackPlugin extends Plugin {
     // What the update check found: the newest course list and the newest APK's details.
     private Future<JSObject> latest;
 
+    /** True in an app with one language's course inside the APK. */
+    static boolean isBundled() {
+        return !BuildConfig.COURSE_PACKAGE.isEmpty();
+    }
+
     @Override
     public void load() {
+        if (isBundled()) {
+            // A course downloaded by an older app with this id would only take up space.
+            File root = getContext().getFilesDir();
+            deleteTree(new File(root, "courses"));
+            deleteTree(new File(root, "downloads"));
+        }
         latest = checker.submit(this::checkLatest);
+        if (isBundled()) new Thread(this::offerUpdateAtStart).start();
+    }
+
+    /**
+     * In an app with the course inside, the course opens straight away. If the update check
+     * finds a newer APK for this language within a few seconds (offline it fails at once),
+     * and it wasn't put off with "Not now" (dismissUpdate), the update screen is shown.
+     */
+    private void offerUpdateAtStart() {
+        try {
+            JSObject apps = latest.get(3, TimeUnit.SECONDS).getJSObject("apps");
+            org.json.JSONArray list = apps == null ? null : apps.getJSONArray("apps");
+            for (int i = 0; list != null && i < list.length(); i++) {
+                org.json.JSONObject app = list.getJSONObject(i);
+                long code = app.getLong("versionCode");
+                if (app.getString("id").equals(BuildConfig.COURSE_PACKAGE) && code > appVersionCode() && code != prefs().getLong("dismissed", 0)) {
+                    showPage("app.html?screen=update");
+                    return;
+                }
+            }
+        } catch (Exception e) {
+            // Offline, slow or nothing published yet: no news is fine.
+        }
+    }
+
+    /** "Not now" on the update screen: don't offer this version when the app opens again. */
+    @PluginMethod
+    public void dismissUpdate(PluginCall call) {
+        prefs().edit().putLong("dismissed", call.getInt("versionCode", 0)).apply();
+        call.resolve();
+    }
+
+    /** Shows a page of the app's own assets, such as "index.html" or "app.html". */
+    private void showPage(String page) {
+        getBridge().getWebView().post(() -> getBridge().getWebView().loadUrl(getBridge().getLocalUrl() + "/" + page));
     }
 
     private SharedPreferences prefs() {
@@ -111,6 +163,10 @@ public class CoursePackPlugin extends Plugin {
             call.reject("Missing url, sha256, id, version or bytes", "badInput");
             return;
         }
+        if (isBundled()) {
+            call.reject("This app has its course inside", "bundled");
+            return;
+        }
         if (busy) {
             call.reject("A download is already running", "busy");
             return;
@@ -142,7 +198,8 @@ public class CoursePackPlugin extends Plugin {
 
     /**
      * The result of the update check started when the app opened: "course" is the newest
-     * downloads.json and "app" the newest APK's app.json, when they could be read, and
+     * downloads.json and "app" the newest APK's app.json (in an app with the course inside,
+     * "apps": apps.json, every language's newest APK), when they could be read, and
      * "appVersionCode" this APK's version. Waits for the check up to "waitMs".
      */
     @PluginMethod
@@ -156,6 +213,7 @@ public class CoursePackPlugin extends Plugin {
                 // Offline, slow or not published yet: no news is fine.
             }
             ret.put("appVersionCode", appVersionCode());
+            ret.put("coursePackage", BuildConfig.COURSE_PACKAGE);
             call.resolve(ret);
         }).start();
     }
@@ -221,6 +279,11 @@ public class CoursePackPlugin extends Plugin {
     /** Shows the installed course (its index.html) as the app. */
     @PluginMethod
     public void openCourse(PluginCall call) {
+        if (isBundled()) {
+            call.resolve();
+            showPage("index.html");
+            return;
+        }
         File dir = installedDir();
         if (dir == null) {
             call.reject("No course installed", "notInstalled");
@@ -235,12 +298,20 @@ public class CoursePackPlugin extends Plugin {
     public void openShell(PluginCall call) {
         pendingScreen = call.getString("screen");
         call.resolve();
+        if (isBundled()) {
+            showPage("app.html");
+            return;
+        }
         getBridge().setServerAssetPath(SHELL_ASSETS);
     }
 
     /** Opens a file of the installed course, such as a PDF, in another app on the phone. */
     @PluginMethod
     public void openFile(PluginCall call) {
+        if (isBundled()) {
+            openBundledFile(call);
+            return;
+        }
         File dir = installedDir();
         String path = call.getString("path");
         String type = call.getString("type", "application/pdf");
@@ -267,11 +338,53 @@ public class CoursePackPlugin extends Plugin {
         }
     }
 
+    /**
+     * openFile in an app with the course inside: a file in the APK has no path another app
+     * can open, so it is copied to the cache first (only the last one opened is kept).
+     */
+    private void openBundledFile(PluginCall call) {
+        String path = call.getString("path");
+        String type = call.getString("type", "application/pdf");
+        if (path == null || path.startsWith("/") || path.contains("..") || path.contains("\\")) {
+            call.reject("File not found", "notFound");
+            return;
+        }
+        File dir = new File(getContext().getCacheDir(), "pdf");
+        dir.mkdirs();
+        File file = new File(dir, new File(path).getName());
+        deleteChildrenExcept(dir, file.getName());
+        try {
+            // Copied every time: a newer APK may have a newer version of the same file.
+            try (InputStream in = getContext().getAssets().open("public/" + path); OutputStream out = new FileOutputStream(file)) {
+                pipe(in, out);
+            }
+            Uri uri = FileProvider.getUriForFile(getContext(), getContext().getPackageName() + ".fileprovider", file);
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setDataAndType(uri, type);
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_ACTIVITY_NEW_TASK);
+            getContext().startActivity(intent);
+            call.resolve();
+        } catch (ActivityNotFoundException e) {
+            call.reject("No app on this phone opens this file", "noViewer");
+        } catch (IOException e) {
+            call.reject(String.valueOf(e.getMessage()), "notFound");
+        }
+    }
+
     // ---------- Work ----------
 
     /** Reads the newest course list and APK details from the addresses in capacitor.config.json. */
     private JSObject checkLatest() {
         JSObject ret = new JSObject();
+        if (isBundled()) {
+            String appsUrl = getConfig().getString("appsLatestUrl", null);
+            try {
+                if (appsUrl != null) ret.put("apps", new JSObject(fetchText(appsUrl)));
+            } catch (Exception e) {
+                // Offline or no apps published yet.
+            }
+            return ret;
+        }
         String courseUrl = getConfig().getString("courseLatestUrl", null);
         String appUrl = getConfig().getString("appLatestUrl", null);
         try {

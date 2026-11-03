@@ -8,7 +8,8 @@
   "plugins": {
     "CoursePack": {
       "courseLatestUrl": "https://github.com/ousecTic/learnaianywhere/releases/download/course-latest/downloads.json",
-      "appLatestUrl": "https://github.com/ousecTic/learnaianywhere/releases/download/app-latest/app.json"
+      "appLatestUrl": "https://github.com/ousecTic/learnaianywhere/releases/download/app-latest/app.json",
+      "appsLatestUrl": "https://github.com/ousecTic/learnaianywhere/releases/download/apk-latest/apps.json"
     }
   }
 }
