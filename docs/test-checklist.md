@@ -32,7 +32,7 @@ All decided on 2 November 2026.
 The "Learning platform" plan covers Moodle.
 
 - [x] **Moodle.** Works on Henry's own Moodle (2 November 2026): add a File resource, upload the ZIP, unzip it, set START HERE.html as the main file. The plan now says exactly that. Moodle's public sandbox can't take it: its server rejects uploads this big with 413.
-- [ ] **Moodle in another language.** The same Moodle steps with one more language's ZIP, ideally Arabic or Urdu (right to left) or else French. This checks that the text, captions and quizzes in that language still show correctly inside Moodle, not just in English.
+- [x] **Moodle in another language.** Arabic works in Moodle too, right to left included (2 November 2026).
 - [x] ~~Tell Claude what you learned.~~ Done: the plan now gives your Moodle steps.
 
 ## H3. Android app on a real phone
