@@ -3,7 +3,7 @@
   "course": {
     "name": "AI Literacy for Everyone",
     "slug": "ai-literacy-for-everyone",
-    "version": "1.6"
+    "version": "1.7"
   },
   "drive": {
     "root": "1icEyszg_HXjxPHUZmlp_1_Zb3icZpR1p"
@@ -14,9 +14,9 @@
     "latestTag": "course-latest"
   },
   "online": {
-    "_note": "The online kit's videos (build_course.py online and videos). videoRelease is the GitHub release the videos command uploads them to; videoUrl is where the online pages load each one from ({version}, {file}). To host the videos somewhere else, upload them there with the same file names and change videoUrl.",
-    "videoRelease": "course-videos-v{version}",
-    "videoUrl": "https://github.com/ousecTic/learnaianywhere/releases/download/course-videos-v{version}/{file}"
+    "_note": "The online kit's videos (build_course.py online and videos). videoRelease is the GitHub release the videos command uploads them to; videoUrl is where the online pages load each one from ({version}, {file}). The videos are pinned to the 1.6 release because they have not changed since; use {version} again when they do. To host the videos somewhere else, upload them there with the same file names and change videoUrl.",
+    "videoRelease": "course-videos-v1.6",
+    "videoUrl": "https://github.com/ousecTic/learnaianywhere/releases/download/course-videos-v1.6/{file}"
   },
   "packages": [
     { "id": "en", "name": "English", "lang": "en", "folder": ["en"] },
