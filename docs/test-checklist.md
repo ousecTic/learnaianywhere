@@ -73,9 +73,9 @@ Claude runs the same course from a local server (C8); you check the parts that n
 
 ## H6. Sound and video on a laptop
 
-- [ ] Trailer plays to the end with sound in Chrome, and in Firefox or Edge. It is the course trailer, not a lesson video.
-- [ ] About page testimony video plays with sound. Watch it through once with this in mind: nothing in the picture names the principal or the school.
-- [ ] One lesson video in the online kit, in a non-English language, with sound: it is the right language.
+- [x] Trailer plays to the end with sound in Chrome, and in Firefox or Edge. It is the course trailer, not a lesson video.
+- [x] About page testimony video plays with sound. Watch it through once with this in mind: nothing in the picture names the principal or the school.
+- [x] One lesson video in the online kit, in a non-English language, with sound: it is the right language.
 
 ## H7. Screen reader, speed and slow connections
 
