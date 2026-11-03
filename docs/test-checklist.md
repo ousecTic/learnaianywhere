@@ -64,18 +64,18 @@ Do each of these on both phones. Many of your teachers are on cheap Android phon
 
 ## H5. The computer ZIP, truly offline
 
-Claude runs the same course from a local server (C8); you check the parts that need a real machine.
+Claude runs the same course from a local server (C8); you check the parts that need a real machine. All passed (Henry, 2 November 2026).
 
-- [ ] Download the English ZIP, unzip it, **turn Wi-Fi off**, open START HERE.html in **Edge or Firefox** (Claude could only test Chromium). Go through Lesson 1: videos with captions, AI or Not, recap quiz with a score.
-- [ ] NeuroPocket opens from the course and **finishes** training with the built-in pictures, still with Wi-Fi off. (Claude saw training start but not finish, probably because its browser was in the background.)
-- [ ] Copy the unzipped folder to a USB stick and open it from another computer. Still works.
-- [ ] If you have access to a cheap or old laptop, the same there.
+- [x] Download the English ZIP, unzip it, **turn Wi-Fi off**, open START HERE.html in **Edge or Firefox** (Claude could only test Chromium). Go through Lesson 1: videos with captions, AI or Not, recap quiz with a score.
+- [x] NeuroPocket opens from the course and **finishes** training with the built-in pictures, still with Wi-Fi off. (Claude saw training start but not finish, probably because its browser was in the background.)
+- [x] Copy the unzipped folder to a USB stick and open it from another computer. Still works.
+- [x] If you have access to a cheap or old laptop, the same there.
 
 ## H6. Sound and video on a laptop
 
-- [ ] Trailer plays to the end with sound in Chrome, and in Firefox or Edge. It is the course trailer, not a lesson video.
-- [ ] About page testimony video plays with sound. Watch it through once with this in mind: nothing in the picture names the principal or the school.
-- [ ] One lesson video in the online kit, in a non-English language, with sound: it is the right language.
+- [x] Trailer plays to the end with sound in Chrome, and in Firefox or Edge. It is the course trailer, not a lesson video.
+- [x] About page testimony video plays with sound. Watch it through once with this in mind: nothing in the picture names the principal or the school.
+- [x] One lesson video in the online kit, in a non-English language, with sound: it is the right language.
 
 ## H7. Screen reader, speed and slow connections
 
