@@ -19,7 +19,7 @@ Henry asked for these fixes. Each was checked in the local dev server.
   - The Gen AI slides embed on a phone went from 219px to 299px wide.
 
 Still open:
-- **2:** the ZIP folder shape. It needs a package rebuild and a new release.
+- **2:** the ZIP folder shape. Decided: wait for Henry's Moodle test (H2). If Moodle can open START HERE inside the folder, only the "Learning platform" plan text needs a clearer sentence. Don't just flatten the main ZIP: the installed Android app drops the first folder of every path in the ZIP (`CoursePackPlugin.java:409`), so a flat ZIP would break the course in the app. v1.5 is also already published, and the build won't replace its files. If a flat ZIP is needed, add a separate platform ZIP for the "Learning platform" plan instead.
 - **9:** the H1 camera item. Close it.
 - **D1 to D3.**
 
