@@ -37,30 +37,32 @@ The "Learning platform" plan covers Moodle.
 
 ## H3. Android app on a real phone
 
-- [ ] Follow the install steps page (`/courses/ai-literacy-for-everyone/install-android`) exactly, on a real Android phone. Every one of the 8 screenshots matches what the phone actually shows (at least on one phone; note differences on others).
-- [ ] The app downloads the chosen language, shows progress, survives a dropped connection, then opens the course.
-- [ ] Turn off data and Wi-Fi: the whole course still works, videos play, NeuroPocket works.
-- [ ] Changing language later is possible (or if it is not, the website does not promise it).
-- [ ] The app checks for updates and does not crash if offline. (Claude checks the pointer file it reads, C8.)
-- [ ] The sizes quoted on the install page ("120 to 200 MB") feel right for what the phone downloaded.
+All passed (Henry, 3 November 2026), with the language apps 1.6.0 that have the course inside (`apk-v1.6.0`). The two items about downloading a language and changing it belong to the old small app; the new apps have no download, and each language is its own app, which the site and the app's settings page both say.
+
+- [x] Follow the install steps page (`/courses/ai-literacy-for-everyone/install-android`) exactly, on a real Android phone. Every one of the 8 screenshots matches what the phone actually shows (at least on one phone; note differences on others).
+- [x] The app downloads the chosen language, shows progress, survives a dropped connection, then opens the course.
+- [x] Turn off data and Wi-Fi: the whole course still works, videos play, NeuroPocket works.
+- [x] Changing language later is possible (or if it is not, the website does not promise it).
+- [x] The app checks for updates and does not crash if offline. (Claude checks the pointer file it reads, C8.)
+- [x] The sizes quoted on the install page ("120 to 200 MB") feel right for what the phone downloaded.
 
 ## H4. Real phones: iPhone Safari and Android Chrome
 
 Do each of these on both phones. Many of your teachers are on cheap Android phones, so give that one the most time. Use a private window at least once so you see the site as a first-time visitor.
 
-- [ ] **Trailer:** one tap on the cover starts the video with sound. On iPhone it plays inline and does not jump to full screen on its own. Pause, scrub, full screen and mute work.
-- [ ] **Dubbed trailers:** pick Urdu, Arabic and one Swahili from the language arrow next to "Try it online". Each plays that language's "Welcome to the Course" video and the dubbing sounds right.
-- [ ] **Announcement banner:** the text wraps and the × is tappable and not overlapping the text. The hamburger menu does not hide the ×.
-- [ ] **Hamburger menu:** opens, the AI Courses item expands inside it, tapping a link closes it, scrolling closes it, tapping outside closes it.
-- [ ] **Language menu:** the native picker opens, and the Arabic and Urdu labels render in their script.
-- [ ] **Get the course:** the two questions stack one card per row, the plan card's big button wraps as text ("Download the / course · 116 MB") with the size on one line, the START HERE picture sits under the step.
-- [ ] **Download the course** on the phone: the ZIP downloads (you don't have to open it there).
-- [ ] **Online kit** (`/course/online/en/`) in portrait: the sidebar opens and closes, videos fit the width and play with sound, a quiz works.
-- [ ] **About page video:** plays with sound, captions (CC) can be turned on and are in sync.
-- [ ] **Contact:** Copy Email copies the address (paste it somewhere) and the toast shows. Clipboard permissions differ on iPhone.
-- [ ] **Landscape:** rotate the phone on the course page; the trailer and the plan card still fit.
-- [ ] **Every page** at phone width: no sideways scrolling, nothing cut off, buttons big enough to tap.
-- [ ] **A day of normal use** on your own phone: anything that annoys you is a finding.
+- [x] **Trailer:** one tap on the cover starts the video with sound. On iPhone it plays inline and does not jump to full screen on its own. Pause, scrub, full screen and mute work.
+- [x] **Dubbed trailers:** pick Urdu, Arabic and one Swahili from the language arrow next to "Try it online". Each plays that language's "Welcome to the Course" video and the dubbing sounds right.
+- [x] **Announcement banner:** the text wraps and the × is tappable and not overlapping the text. The hamburger menu does not hide the ×.
+- [x] **Hamburger menu:** opens, the AI Courses item expands inside it, tapping a link closes it, scrolling closes it, tapping outside closes it.
+- [x] **Language menu:** the native picker opens, and the Arabic and Urdu labels render in their script.
+- [x] **Get the course:** the two questions stack one card per row, the plan card's big button wraps as text ("Download the / course · 116 MB") with the size on one line, the START HERE picture sits under the step.
+- [x] **Download the course** on the phone: the ZIP downloads (you don't have to open it there).
+- [x] **Online kit** (`/course/online/en/`) in portrait: the sidebar opens and closes, videos fit the width and play with sound, a quiz works.
+- [x] **About page video:** plays with sound, captions (CC) can be turned on and are in sync.
+- [x] **Contact:** Copy Email copies the address (paste it somewhere) and the toast shows. Clipboard permissions differ on iPhone.
+- [x] **Landscape:** rotate the phone on the course page; the trailer and the plan card still fit.
+- [x] **Every page** at phone width: no sideways scrolling, nothing cut off, buttons big enough to tap.
+- [x] **A day of normal use** on your own phone: anything that annoys you is a finding.
 
 ## H5. The computer ZIP, truly offline
 
@@ -84,6 +86,8 @@ Claude runs the same course from a local server (C8); you check the parts that n
 - [ ] **Slow 3G** (F12 → Network → throttle) on the course page: the text appears first and nothing jumps around badly as images load.
 
 ## H8. Donate
+
+Later: Henry will settle H8, H9 and H10 later (3 November 2026).
 
 - [ ] Try a donation only if you want to test the full flow. Otherwise skip: Claude checks that the form loads (C11).
 
