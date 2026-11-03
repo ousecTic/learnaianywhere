@@ -12,6 +12,7 @@ import GetInvolved from './pages/GetInvolved';
 import AboutUs from './pages/AboutUs';
 import Contact from './pages/Contact';
 import Donation from './pages/Donation';
+import NotFound from './pages/NotFound';
 import CourseApp from './components/CourseApp';
 import './App.css';
 
@@ -43,6 +44,7 @@ function App() {
             <Route path="/about" element={<AboutUs />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/donate" element={<Donation />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
         <Footer />
