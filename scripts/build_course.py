@@ -16,6 +16,7 @@ release stays a separate step). See course/README.md for releasing a version.
     python -I scripts/build_course.py links [--out build/course]
     python -I scripts/build_course.py online [--package ID ...] [--out build/course]
     python -I scripts/build_course.py videos [--package ID ...] [--out build/course]
+    python -I scripts/build_course.py apps
 
 export   Exports the 4 Google masters of each package's Resources folder:
          PDF for the offline package; DOCX/PPTX and PDF for the website.
@@ -68,6 +69,10 @@ videos   Uploads each package's videos as <package id>-<section>-<NN>.mp4 to the
          release named by online.videoRelease in the settings (created the first
          time, public, never marked Latest), for the online kit; ones already
          there with the same size are skipped.
+apps     Reads apps.json from the apk-latest release (written by
+         .github/workflows/apk-release.yml when an apk-v* tag is published) and
+         writes course/apps.json: each language app's download link, size and
+         sha256, for the website's Android plan. Run it after the apps are published.
 
 Drive is read without credentials, through the link-shared course folder, with
 the helpers in check_course.py. Downloaded files are only checked in memory
@@ -859,6 +864,48 @@ def cmd_links(settings, out):
     return 0
 
 
+APPS_LATEST_TAG = "apk-latest"
+
+
+def cmd_apps(settings):
+    """Writes course/apps.json from the newest published language apps (apk-latest/apps.json)."""
+    import urllib.error
+    import urllib.request
+
+    url = RELEASE_URL.format(repo=settings["release"]["repo"], tag=APPS_LATEST_TAG, file="apps.json")
+    try:
+        with urllib.request.urlopen(url, timeout=60) as r:
+            apps = json.load(r)
+    except urllib.error.HTTPError as e:
+        if e.code == 404:
+            raise BuildError(f"{url} doesn't exist yet: the language apps haven't been published. Push the tag "
+                             f"apk-v{settings['course']['version']}.0 and wait for the 'Release the language apps' "
+                             "workflow to finish (see course/app/README.md), then run this again.")
+        raise BuildError(f"couldn't read {url}: {e}")
+    except urllib.error.URLError as e:
+        raise BuildError(f"couldn't read {url}: {e.reason}")
+    downloads = read_json(REPO, "course", "downloads.json")
+    have = {a.get("id") for a in apps.get("apps", [])}
+    missing = [p["id"] for p in downloads["packages"] if p["id"] not in have]
+    if missing:
+        raise BuildError(f"{url} has no app for: " + ", ".join(missing))
+    for a in apps["apps"]:
+        for key in ("url", "latestUrl", "bytes", "sha256", "versionName"):
+            if key not in a:
+                raise BuildError(f"{url}: the {a['id']} app has no {key}")
+    if apps.get("courseVersion") != downloads["version"]:
+        print(f"Note: the published apps hold course {apps.get('courseVersion')}, course/downloads.json is "
+              f"{downloads['version']}. Push apk-v{downloads['version']}.0 to bring them up to date.")
+    path = os.path.join(REPO, "course", "apps.json")
+    with open(path, "w", encoding="utf-8", newline="\n") as f:
+        json.dump(apps, f, ensure_ascii=False, indent=2)
+        f.write("\n")
+    for a in apps["apps"]:
+        print(f"{a['id']:6} {a['versionName']}  {a['bytes'] / 1e6:.0f} MB  {a['latestUrl']}")
+    print("wrote course/apps.json")
+    return 0
+
+
 def cmd_release(settings, publish, out):
     import subprocess
     import tempfile
@@ -924,7 +971,7 @@ def publish_latest(gh, rel, settings, downloads_path):
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     ap.add_argument("command", choices=["all", "export", "compress", "download", "assemble", "zip", "release", "links",
-                                        "online", "videos"])
+                                        "online", "videos", "apps"])
     ap.add_argument("--publish", action="store_true", help="release: publish instead of leaving a draft")
     ap.add_argument("--package", action="append", help="only this package id (repeatable)")
     ap.add_argument("--out", default=os.path.join(REPO, "build", "course"), help="output folder")
@@ -976,6 +1023,8 @@ def main():
             return cmd_online(settings, packages, args.out)
         if args.command == "videos":
             return cmd_videos(settings, packages, args.out)
+        if args.command == "apps":
+            return cmd_apps(settings)
         return cmd_export(settings, packages, args.out)
     except BuildError as e:
         print("ERROR", e)
