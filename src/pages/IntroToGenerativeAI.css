@@ -361,6 +361,18 @@
   padding: 2rem;
 }
 
+/* On a phone the nested paddings left the slides and documents too narrow to read */
+@media (max-width: 640px) {
+  .overview-content {
+    padding: 1.5rem 0;
+  }
+
+  .overview-content .section-content {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+
 .accordion {
   border: 1px solid var(--border-color);
   border-radius: 8px;

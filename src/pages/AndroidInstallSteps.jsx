@@ -30,7 +30,7 @@ const STEPS = [
   { img: step6, alt: 'App installed, with Done and Open buttons',
     title: 'Open the app', text: <>When it says <strong>App installed</strong>, tap <strong>Open</strong>. The app is also on your home screen as <strong>AI Literacy</strong>.</> },
   { img: step7, alt: 'The app’s first screen: choose your language, with the size of each',
-    title: 'Choose your language', text: <>Do this while you still have internet, ideally on Wi-Fi: the app now downloads the course in that language, 120 to 200 MB.</> },
+    title: 'Choose your language', text: <>Do this while you still have internet, ideally on Wi-Fi: the app now downloads the course in that language, under 200 MB.</> },
   { img: step8, alt: 'Getting your course ready: a progress bar',
     title: 'Wait for the download', text: <>If the connection drops, it carries on where it stopped. When it’s done, the course opens, and from then on it works without internet.</> },
 ];
@@ -39,7 +39,7 @@ const AndroidInstallSteps = () => (
   <div className="alfe">
     <section className="alfe-section alfe-install">
       <div className="alfe-wrap alfe-narrow">
-        <p className="alfe-back"><Link to="/courses/ai-literacy-for-everyone#download">← AI Literacy for Everyone</Link></p>
+        <p className="alfe-back"><Link to="/courses/ai-literacy-for-everyone#get">← AI Literacy for Everyone</Link></p>
         <h1>Install the AI Literacy app on Android</h1>
         <p className="alfe-section-lead">The app isn’t on the Play Store, so Android asks a few extra questions the first time. It takes about 2 minutes. Your phone may look a little different from these pictures.</p>
         <ol className="alfe-install-steps">

@@ -4,19 +4,13 @@ import classroomWorkshop from '../assets/images/about/classroom-workshop.png';
 
 const Donation = () => {
   useEffect(() => {
-    // Load DonorBox script
+    // Load the DonorBox script once and keep it: it declares globals, so loading it
+    // again on a later visit to this page throws, and the first copy keeps working.
+    if (document.querySelector('script[src="https://donorbox.org/widget.js"]')) return;
     const script = document.createElement('script');
     script.src = 'https://donorbox.org/widget.js';
     script.setAttribute('paypalExpress', 'false');
     document.head.appendChild(script);
-
-    return () => {
-      // Cleanup script on unmount
-      const existingScript = document.querySelector('script[src="https://donorbox.org/widget.js"]');
-      if (existingScript) {
-        document.head.removeChild(existingScript);
-      }
-    };
   }, []);
 
   return (
@@ -39,7 +33,7 @@ const Donation = () => {
           <div className="donation-info">
             <h2>How Your Donation Helps</h2>
             <p className="donation-description">
-              Your support enables our distributed team to continuously test and refine our curriculum across diverse environments worldwide, ensuring AI education works anywhere.
+              Your support enables our distributed team to continuously test and refine our courses across diverse environments worldwide, ensuring AI education works anywhere.
             </p>
             <div className="donation-image-container">
               <img 
@@ -59,7 +53,7 @@ const Donation = () => {
               <iframe 
                 src="https://donorbox.org/embed/learn-ai-anywhere?show_content=true" 
                 name="donorbox" 
-                allowPaymentRequest="allowpaymentrequest" 
+                allowpaymentrequest="allowpaymentrequest" 
                 seamless="seamless" 
                 frameBorder="0" 
                 scrolling="no" 

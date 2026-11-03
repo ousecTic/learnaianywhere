@@ -186,7 +186,16 @@ const AboutUs = () => {
               <div 
                 key={index} 
                 className="gallery-item"
+                role="button"
+                tabIndex={0}
+                aria-label={`Open picture: ${image.alt}`}
                 onClick={() => setSelectedImage(image)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setSelectedImage(image);
+                  }
+                }}
               >
                 <img src={image.src} alt={image.alt} />
 

@@ -4,6 +4,25 @@ Checked 2 November 2026 against the deploy preview https://deploy-preview-1--sil
 
 **Result:** 119 items in C1 to C12. 105 pass and are ticked in `test-checklist.md`. 11 fail and 3 are doubts (not ticked). They are listed below, most important first. Passes are not listed.
 
+## Fixed after the test (same day, not yet re-checked on the deploy preview)
+
+Henry asked for these fixes. Each was checked in the local dev server.
+- **1:** the banner and the install page's back link now go to `#get`, and land on Get the course.
+- **3:** the install page now says "under 200 MB". The guide masters on Drive still say "120 to 200 MB"; change them there too.
+- **4:** the DonorBox script is loaded once and kept, so returning to Donate no longer throws. Its iframe attribute is now spelled `allowpaymentrequest`, which stops a React dev warning.
+- **5, 6:** Esc closes the gallery picture and focus goes back to it. AI Courses is a real button (Esc closes the menu). Gallery pictures and the Gen AI section headers open with Tab and Enter. Get Involved tabs show a focus ring. The hamburger is labelled "Menu".
+- **7:** question 1 stacks its two choices below 900px wide, and question 2 goes one per row below 640px. No title wraps between 641 and 1280px. A smaller font couldn't fix it alone: it would have had to drop to about 13px.
+- **8:** card, lesson, plan and FAQ text is 16px. The question subtitles went from 13 to 14px. The home statistics went from 13/14 to 16px. Only captions and the small uppercase labels stay smaller.
+- **Noticed in passing:**
+  - The About captions are now #4B5563 (7.6:1 contrast).
+  - Donate says "courses" instead of "curriculum".
+  - The Gen AI slides embed on a phone went from 219px to 299px wide.
+
+Still open:
+- **2:** the ZIP folder shape. It needs a package rebuild and a new release.
+- **9:** the H1 camera item. Close it.
+- **D1 to D3.**
+
 ## Failures
 
 ### 1. The banner and the install page link to `#download`, which doesn't exist

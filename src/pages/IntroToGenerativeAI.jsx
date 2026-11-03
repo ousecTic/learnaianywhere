@@ -10,7 +10,19 @@ const CourseSection = ({ title, children, defaultOpen = false }) => {
 
   return (
     <div className="course-section">
-      <div className="section-header" onClick={() => setIsOpen(!isOpen)}>
+      <div
+        className="section-header"
+        role="button"
+        tabIndex={0}
+        aria-expanded={isOpen}
+        onClick={() => setIsOpen(!isOpen)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            setIsOpen(!isOpen);
+          }
+        }}
+      >
         <h2>{title}</h2>
         <span className="toggle-icon">{isOpen ? '−' : '+'}</span>
       </div>

@@ -26,9 +26,18 @@ const Navbar = () => {
     };
     window.addEventListener('scroll', handleScroll);
 
+    const handleEscape = (event) => {
+      if (event.key === 'Escape') {
+        setIsMenuOpen(false);
+        setIsDropdownOpen(false);
+      }
+    };
+    document.addEventListener('keydown', handleEscape);
+
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
       window.removeEventListener('scroll', handleScroll);
+      document.removeEventListener('keydown', handleEscape);
     };
   }, [isMenuOpen]);
 
@@ -42,6 +51,11 @@ const Navbar = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
+  const closeAll = () => {
+    setIsMenuOpen(false);
+    setIsDropdownOpen(false);
+  };
+
   return (
     <nav className="navbar" ref={navRef}>
       <div className="container">
@@ -49,7 +63,7 @@ const Navbar = () => {
           <img src={logo} alt="Learn AI Anywhere" style={{ width: '180px', height: 'auto' }} />
         </Link>
 
-        <button className="menu-btn" onClick={toggleMenu}>
+        <button type="button" className="menu-btn" onClick={toggleMenu} aria-label="Menu" aria-expanded={isMenuOpen}>
           <div className="hamburger">
             <span></span>
             <span></span>
@@ -59,7 +73,7 @@ const Navbar = () => {
 
         <div className={`nav-links ${isMenuOpen ? 'open' : ''}`}>
           <div className={`nav-item-dropdown ${isDropdownOpen ? 'open' : ''}`}>
-            <span className="nav-item" onClick={toggleDropdown}>
+            <button type="button" className="nav-item" onClick={toggleDropdown} aria-expanded={isDropdownOpen}>
               AI Courses
               <svg 
                 xmlns="http://www.w3.org/2000/svg" 
@@ -76,16 +90,16 @@ const Navbar = () => {
               >
                 <polyline points="6 9 12 15 18 9"></polyline>
               </svg>
-            </span>
+            </button>
             <div className="dropdown-content">
-              <Link to="/courses/ai-literacy-for-everyone" onClick={() => setIsMenuOpen(false)}>AI Literacy for Everyone</Link>
-              <Link to="/curriculum/intro-to-generative-ai" onClick={() => setIsMenuOpen(false)}>Introduction to Generative AI</Link>
+              <Link to="/courses/ai-literacy-for-everyone" onClick={closeAll}>AI Literacy for Everyone</Link>
+              <Link to="/curriculum/intro-to-generative-ai" onClick={closeAll}>Introduction to Generative AI</Link>
             </div>
           </div>
-          <Link to="/get-involved" className="nav-link" onClick={() => setIsMenuOpen(false)}>Get Involved</Link>
-          <Link to="/about" className="nav-link" onClick={() => setIsMenuOpen(false)}>About Us</Link>
-          <Link to="/donate" className="nav-link" onClick={() => setIsMenuOpen(false)}>Donate</Link>
-          <Button to="/contact" variant="primary" size="small" onClick={() => setIsMenuOpen(false)}>Contact</Button>
+          <Link to="/get-involved" className="nav-link" onClick={closeAll}>Get Involved</Link>
+          <Link to="/about" className="nav-link" onClick={closeAll}>About Us</Link>
+          <Link to="/donate" className="nav-link" onClick={closeAll}>Donate</Link>
+          <Button to="/contact" variant="primary" size="small" onClick={closeAll}>Contact</Button>
         </div>
       </div>
     </nav>

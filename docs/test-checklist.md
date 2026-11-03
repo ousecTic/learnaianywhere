@@ -181,7 +181,7 @@ All on the deploy preview, at desktop (1280), tablet (768) and phone (375) width
 - [x] Question 1 "How do you want to use it?": I'll teach it (default) and Learners go through it on their own. With "I'll teach it" there is no question 2.
 - [x] Choosing "on their own" shows question 2 "Where will learners use it?" with On a computer (default), Android phone or tablet, Learning platform, Online. Switching back hides it and the plan changes back.
 - [x] The selected choice is highlighted; choices work with Tab and Enter and announce aria-pressed.
-- [ ] Both questions show 2 choices per row (question 2 is 2×2) at desktop and tablet; one per row below about 520px; no card alone in a row; every title on one line.
+- [ ] Question 2 shows 2 choices per row (2×2) down to 640px wide and one per row below; question 1 shows its 2 choices side by side above 900px and stacked below (its long title needs the width); no card alone in a row; every title on one line except on a phone.
 - [x] At phone width the big plan button wraps as text and the size never splits across lines.
 
 ## C7. Course page: the plan cards and every button in every language

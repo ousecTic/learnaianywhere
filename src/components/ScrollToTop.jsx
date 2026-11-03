@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 // On a new page, start at the top, or at the section named after # in the address
-// (for links like /courses/ai-literacy-for-everyone#download).
+// (for links like /courses/ai-literacy-for-everyone#get).
 const ScrollToTop = () => {
   const { pathname, hash } = useLocation();
 
