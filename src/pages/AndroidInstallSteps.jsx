@@ -117,7 +117,7 @@ const AndroidInstallSteps = () => {
           ) : (
             <StepList steps={STEPS} />
           )}
-          <p className="alfe-muted">Using an iPhone or iPad? The app is for Android only.</p>
+          <p className="alfe-muted">NeuroPocket, the part of the course where learners train their own AI, needs a phone with at least 1 GB of memory (RAM). Using an iPhone or iPad? The app is for Android only.</p>
         </div>
       </section>
     </div>

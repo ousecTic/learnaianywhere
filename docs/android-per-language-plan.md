@@ -439,16 +439,37 @@ publishing, with a later revision).
 - `3-settings.jpg` and `4-allow.jpg` stay. `7-language.jpg` and `8-downloading.jpg` are
   only used while the small app is still offered.
 
+### NeuroPocket 1.9.0 (added 3 November 2026)
+
+NeuroPocket v1.9.0 (faster: runs on WebAssembly) is now pinned in `course/settings.json`,
+and the website's NeuroPocket Android and Windows links point to v1.9.0. The published
+course 1.5 ZIPs still hold 1.8.0 and can't change, so the apps should ship it as **course
+1.6**: the apps are built from the course ZIPs. The test apps on Henry's phone
+(`build/test-apk/ai-literacy-<id>-1.6.0-np190-debug.apk`, en, ar, fr) were built from copies
+of the 1.5 ZIPs with only `neuropocket.html` swapped for 1.9.0. That is what course 1.6
+will contain if nothing else changes.
+
+The website now says NeuroPocket needs a device with at least 1 GB of memory (RAM), on the
+course page and on the install page. The teacher guide masters on Drive still say "at least
+2 GB of memory": change them to 1 GB.
+
 ### Publishing, in order
 
-1. Merge this branch into `redesign` (it changes nothing on the website until step 4).
-2. Test run: `git tag apk-v1.5.0-test` and `git push origin apk-v1.5.0-test`. In the draft
-   `apk-v1.5.0-test`, check that three or four APKs open in their language with the right
+1. Merge this branch into `redesign` (it changes nothing on the website's Android plan
+   until step 6).
+2. Release course 1.6 with NeuroPocket 1.9.0: set `course.version` to `1.6` in
+   `course/settings.json`, then `python -I scripts/build_course.py all` and
+   `python -I scripts/build_course.py release --publish` (as for every course version).
+   Commit `course/downloads.json`.
+3. Test run: `git tag apk-v1.6.0-test` and `git push origin apk-v1.6.0-test`. In the draft
+   `apk-v1.6.0-test`, check that three or four APKs open in their language with the right
    name. Then delete the draft and the tag.
-3. Publish: `git tag apk-v1.5.0` and `git push origin apk-v1.5.0`.
-4. `python -I scripts/build_course.py apps`, commit `course/apps.json`, deploy.
-5. Take the new pictures; update the teacher guide masters on Drive (they describe the
-   language download and "120 to 200 MB").
+4. Publish: `git tag apk-v1.6.0` and `git push origin apk-v1.6.0`.
+5. (If you'd rather ship the apps before course 1.6, use `apk-v1.5.0` in steps 3 and 4
+   instead: they then hold NeuroPocket 1.8.0.)
+6. `python -I scripts/build_course.py apps`, commit `course/apps.json`, deploy.
+7. Take the new pictures; update the teacher guide masters on Drive (they describe the
+   language download and "120 to 200 MB", and NeuroPocket's memory as 2 GB instead of 1 GB).
 
 Developer verification (Google's registration for sideloaded apps) is yours to handle:
 register the nine new app ids with the existing signing key before it reaches your

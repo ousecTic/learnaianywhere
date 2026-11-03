@@ -30,8 +30,8 @@
     { "id": "sw-TZ", "name": "Swahili (Tanzania)", "lang": "sw", "folder": ["sw", "sw-TZ"], "sharedResources": true }
   ],
   "neuropocket": {
-    "version": "1.8.0",
+    "version": "1.9.0",
     "file": "neuropocket-offline.html",
-    "sha256": "68d3fc8e15ea73718ed699a94833f977536cf51d687048f3f862f65dcde56f20"
+    "sha256": "585db08a8c43352235ee4e6805739935e72470165a88922e1d626ca115d881f2"
   }
 }

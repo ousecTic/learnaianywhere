@@ -44,8 +44,8 @@ const trailerFor = (pkg) => settings.online.videoUrl
 const TRAILER_EMBED = 'https://drive.google.com/file/d/1vitkG1eQ_6ks_EDyIg_ko6OfzTPrfg2i/preview';
 const YOUTUBE_URL = 'https://www.youtube.com/watch?v=tchN4xa4pfg';
 const NEUROPOCKET = {
-  android: 'https://github.com/ousecTic/neuropocket/releases/download/v1.8.0/neuropocket-android.apk',
-  windows: 'https://github.com/ousecTic/neuropocket/releases/download/v1.8.0/neuropocket-windows.exe',
+  android: 'https://github.com/ousecTic/neuropocket/releases/download/v1.9.0/neuropocket-android.apk',
+  windows: 'https://github.com/ousecTic/neuropocket/releases/download/v1.9.0/neuropocket-windows.exe',
   online: 'https://neuropocket.com',
 };
 const LICENSE_URL = 'https://creativecommons.org/licenses/by-nc-sa/4.0/';
@@ -166,7 +166,7 @@ const makePlan = ({ mode, device, pkg, onlineUrl }) => {
   const guide = { h: 'Read the teacher guide', p: 'How the course works and what each lesson covers.', buttons: [file('PDF', r.guidePdf), file('Word', r.guideDocx)] };
   const slides = { h: 'Get the slides', p: 'One deck for all 4 lessons. Show it or print it.', buttons: [file('PDF', r.slidesPdf), file('PowerPoint', r.slidesPptx)] };
   const worksheet = { h: 'Print the worksheet', p: 'A 1-page project for the 4 lessons, with a filled-in example.', buttons: [file('Worksheet (PDF)', r.worksheetPdf), file('Worksheet (Word)', r.worksheetDocx), file('Filled-in example (PDF)', r.examplePdf)] };
-  const neuropocket = { h: 'Put NeuroPocket on one device per group', p: 'Learners train their own AI. Works offline once installed.', buttons: [['Android app', NEUROPOCKET.android], ['Windows app', NEUROPOCKET.windows], ['Online at neuropocket.com', NEUROPOCKET.online]] };
+  const neuropocket = { h: 'Put NeuroPocket on one device per group', p: 'Learners train their own AI. Works offline once installed. Needs a device with at least 1 GB of memory (RAM).', buttons: [['Android app', NEUROPOCKET.android], ['Windows app', NEUROPOCKET.windows], ['Online at neuropocket.com', NEUROPOCKET.online]] };
 
   const videos = { h: 'Watch the lesson videos', p: '25 short videos with captions. Watch them to prepare, or play them to the group.', buttons: [
     ['Open in Google Drive', r.videosFolder && r.videosFolder.url],
