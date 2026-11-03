@@ -29,6 +29,53 @@ background, the two addresses in `capacitor.config.json`:
 The check waits at most 2.5 seconds before opening the course (offline it fails at once).
 "Not now" hides an update until a newer one appears; App settings has "Check for updates".
 
+## Apps with the course inside
+
+The same project also builds one app per language package, with that language's whole
+course inside the APK, so it can be shared phone to phone (ShareIt, Xender, Files by
+Google) and the other phone needs no internet. These are what the website offers once
+they are published; the small app above stays as it is for the people who have it.
+
+| What | Where |
+| --- | --- |
+| Which app is built | `-PcoursePackage=<id>` (`en`, `fr`, ..., `sw-KE`), read in `android/app/build.gradle` |
+| App ID, home-screen name | `org.learnaianywhere.ailiteracy.<id>` (`-` becomes `_`), "AI Literacy EN" (the language code; both Swahili apps are "AI Literacy SW") |
+| Version | `-PappVersionName=1.5.0 -PappVersionCode=10500`; by default the course version plus `.0` |
+| The course | `-PcourseZip=<package zip>`, by default `build/course/zips/<file>` as `scripts/build_course.py` makes it; unpacked without its top folder into the APK's assets |
+| Settings page (language, version, updates, sharing, other languages) | `bundled/app.html`, opened by "App settings" in the course |
+| Opening PDFs, update check, `openCourse` / `openShell` | `CoursePackPlugin.java`, when `BuildConfig.COURSE_PACKAGE` isn't empty |
+
+How it works on the phone: START HERE.html is the app's start page (copied to `index.html`),
+and Capacitor serves the course straight from the APK, so it's stored once. Videos and PDFs
+are stored uncompressed (`noCompress`); when you drag a video's slider the WebView asks for
+"the bytes from N on" and skips to N itself in what Capacitor sends, which is a jump for an
+uncompressed file. A PDF is copied to the app's cache before the phone's PDF viewer gets it.
+Progress is in the page's `localStorage`, which an update of the same app keeps.
+
+Updates: when the app opens it reads `apk-latest/apps.json` (`appsLatestUrl` in
+`capacitor.config.json`). If that lists a higher `versionCode` for this language within 3
+seconds, the update screen opens; "Not now" stops offering that version. App settings has
+"Check for updates" too.
+
+Build a test APK (debug, signed with a throwaway key):
+
+```
+npm install
+npm run sync
+cd android
+./gradlew assembleDebug -PcoursePackage=en -PcourseZip=<path to ai-literacy-for-everyone-en-v1.5.zip>
+```
+
+Release: push a tag `apk-v<course version>.<revision>`, for example `apk-v1.5.0` after
+course 1.5 is published (`apk-v1.5.0-test` makes a draft only). GitHub
+(`.github/workflows/apk-release.yml`) downloads each package ZIP from the course release,
+checks its SHA-256 against `course/downloads.json`, builds and signs the nine APKs with the
+same key as the small app, and publishes `ai-literacy-<id>-1.5.0.apk` on `apk-v1.5.0`, plus
+`ai-literacy-<id>.apk` and `apps.json` on `apk-latest`. Then run
+`python -I scripts/build_course.py apps` and commit `course/apps.json`: the website switches
+to the language apps when that file exists. A published `apk-v*` version can't be published
+again; tag a higher revision for an app-only fix.
+
 ## Icon
 
 The icon is made from `resources/` (the LAIA logo; the foreground fits inside a round mask).

@@ -1,7 +1,8 @@
 # Android: one app per language, with the course inside
 
-Plan written 2 November 2026 on the `redesign` branch. Analysis only: nothing in the app,
-the build or the website has been changed yet.
+Plan written 2 November 2026 on the `redesign` branch. Built on 3 November 2026 on the
+branch `claude/android-per-language-3e8b8a`: see the hand-over at the end, which also says
+what turned out differently from this plan (marked **Update** below).
 
 ## The recommendation
 
@@ -50,6 +51,14 @@ phone needs no internet at all.
   uncompressed inside the APK. `.mp4` files are stored that way by default, and we will
   say so explicitly in `build.gradle`. AndroidX's `WebViewAssetLoader` has the same gap
   and doesn't help.
+
+  **Update, 3 November 2026: no handler needed.** Tested on an emulator (Android 14,
+  WebView 113): the WebView itself skips to byte N in whatever stream it gets back, so
+  Capacitor's "whole file" answer seeks correctly. A handler that sends only the part
+  asked for actually breaks seeking (the WebView then skips N bytes past the end of
+  it). So the app lets Capacitor serve the videos, and only keeps them uncompressed in
+  the APK, which makes that skip a jump. The same is true of today's app, so step 0
+  will very likely show that seeking already works there.
 - **PDFs need one change.** The PDF viewer is another app, and today we hand it a file
   path (`CoursePackPlugin.java:242-268`). A PDF inside the APK has no file path, so on tap
   the app copies that one PDF (7 MB at most) to its cache and hands that copy over.
@@ -99,8 +108,8 @@ Storage today: about 2.2 times the ZIP while installing, then once the ZIP's siz
   `assets/public/` next to the setup screens. START HERE.html becomes the app's start page,
   and the setup screens move to their own page (say `app.html`). "App settings" then goes
   there instead.
-- **Reading from the APK.** Capacitor serves everything from the APK. Our own small
-  handler answers video range requests (see above).
+- **Reading from the APK.** Capacitor serves everything from the APK, videos included
+  (see the update above: no handler of our own).
 - **What the plugin keeps and drops.** Downloading, verifying and unzipping the course go
   away. The plugin keeps `openFile` (copying the PDF to the cache first) and, if you want
   it, the update check and `installApp`.
@@ -266,8 +275,9 @@ your PC by `scripts/build_course.py all`. `release --publish` uploads them to
 
 ## Risks and open questions
 
-- **Seeking.** If our own video handler misbehaves on some WebView versions, the fallback
-  is unpacking, at twice the storage. Step 0 and an old phone in step 4 tell us early.
+- **Seeking.** It works through Capacitor on the emulator (see the update above). If it
+  misbehaves on some older WebView, the fallback is unpacking, at twice the storage. An old
+  phone in step 4 tells us early.
 - **Google's developer verification.** Google announced that from 2026 phones with Google
   Play will only install apps, sideloaded ones included, from developers registered with
   Google. It starts in a few countries and goes worldwide in 2027. This affects the current
@@ -291,6 +301,12 @@ your PC by `scripts/build_course.py all`. `release --publish` uploads them to
 
 ## What you need to decide
 
+Decided 3 November 2026, all as recommended: one app id per language
+(`org.learnaianywhere.ailiteracy.<id>`, `-` as `_`, English too); short home-screen names
+("AI Literacy EN"); keep the in-app update check, pointed at `apk-latest/apps.json`; leave
+the small app, `app-latest` and `app-v1.0.0` frozen; keep Android 5.1; developer
+verification is Henry's to handle.
+
 1. **App ids:** one id per language (recommended) or one id for all.
 2. **Home-screen name** per language, for example "AI Literacy (Français)". Phones cut
    names at about 12 characters, so maybe "AI Literacy FR".
@@ -300,3 +316,118 @@ your PC by `scripts/build_course.py all`. `release --publish` uploads them to
    pointer to the new apps.
 5. **Oldest Android:** keep Android 5.1 as the minimum, or raise it.
 6. **Developer verification:** whether to register with Google, and under which name.
+
+## Hand-over, 3 November 2026
+
+Branch `claude/android-per-language-3e8b8a` (cut from `redesign`, not merged, no PR). No
+tag pushed, no release touched.
+
+### What was built
+
+- **The app** (`course/app`). `./gradlew assembleRelease -PcoursePackage=<id>` builds one
+  language's app; without `-PcoursePackage` the small app builds as before (checked: same
+  id, name, version lines and assets; `app-release.yml`'s version stamping still only
+  touches its two lines).
+  - `android/app/build.gradle`: app id `org.learnaianywhere.ailiteracy.<id>` (`sw_KE`,
+    `sw_TZ`), home-screen name, version (`-PappVersionName`, `-PappVersionCode`; by
+    default the course version plus `.0`), the package ZIP (`-PcourseZip`, by default
+    `build/course/zips/<file>`) unpacked without its top folder into the APK's assets,
+    START HERE.html copied to `index.html` (the start page), `noCompress 'mp4', 'pdf'`.
+  - `bundled/app.html`: the settings page, in the 8 app languages: course language,
+    version, how to share the app, where to get other languages, "Check for updates"
+    (downloads and checks the newer APK of the same language, then Android's installer),
+    "Back to the course".
+  - `CoursePackPlugin.java`: in a language app, `openShell` opens `app.html`, `openCourse`
+    opens `index.html`, `openFile` copies the PDF to the cache first, `download` is
+    refused, the update check reads `apk-latest/apps.json`, and leftover `files/courses`
+    and `files/downloads` folders are deleted. If the check finds a newer APK for this
+    language within 3 seconds of opening, the update screen opens ("Not now" stops
+    offering that version). The course page in the published packages calls the same
+    method names, so the v1.5 packages work unchanged.
+- **The workflow** `.github/workflows/apk-release.yml`: tag `apk-v<major>.<minor>.<rev>`
+  (must match `course/downloads.json`), one job per package (download the ZIP, SHA-256
+  check, build, sign with the same four secrets, check the signature, id and versionCode,
+  upload to a draft), then `apps.json` and, unless the tag has a suffix such as `-test`,
+  publish and copy `ai-literacy-<id>.apk` plus `apps.json` to `apk-latest`. Checked with
+  actionlint 1.7.7 (with shellcheck); the `apps.json` jq program was run on sample data.
+- **`scripts/build_course.py apps`**: reads `apk-latest/apps.json`, checks every package
+  has an app, writes `course/apps.json`. Today it stops with "doesn't exist yet: the
+  language apps haven't been published. Push the tag apk-v1.5.0 ...".
+- **The website**: `src/pages/courseApps.js` loads `course/apps.json` only if it exists
+  (`import.meta.glob`). With it, the course page's Android plan links the chosen language's
+  `apk-latest/ai-literacy-<id>.apk` with its size and the sharing text, and the install
+  page (`?lang=<id>`, with a language menu) has the new steps and "Share it with another
+  phone". Without it, both pages are exactly as now (checked with a build and in the
+  browser both ways), so the branch can merge before the apps are published.
+- `course/app/README.md` has a new section, "Apps with the course inside".
+
+### What turned out differently from the plan
+
+- **No video handler of our own.** See the update under "Can the course load and play
+  straight from the APK?": the WebView does the skipping itself, Capacitor's answer seeks
+  fine, and a "send only the part asked for" handler breaks it. Step 0 on your phone will
+  very likely show that today's app seeks fine too.
+- **Both Swahili apps are named "AI Literacy SW"** on the home screen: "AI Literacy
+  SW-KE" is 17 characters and would be cut. The settings page says Kiswahili (Kenya) or
+  (Tanzania). To change the names, edit `label` in `build.gradle` and `appLabel` in
+  `src/pages/courseApps.js`.
+
+### What was tested (emulator: Android 14, WebView 113, Wi-Fi and mobile data off)
+
+Debug English APK `build/test-apk/ai-literacy-en-debug.apk` (120 MB, id
+`org.learnaianywhere.ailiteracy.en`, "AI Literacy EN", 1.5.0 / 10500; videos and PDFs
+stored uncompressed): the course opens with no network; a Lesson 3 video jumped to the
+middle (100 s of 196 s) and kept playing with captions; the teacher guide PDF opened in
+the phone's PDF viewer; App settings opened the settings page, and "Check for updates"
+said it couldn't check (offline); a ticked activity survived closing the app and
+installing the APK over itself. It installed next to the small app already on the
+emulator. **Not tested**: older Android (the Android 8.1 emulator image isn't installed),
+NeuroPocket, AI or Not, the recap quizzes, Arabic, the update screen with a real
+`apps.json`, the release workflow itself, signed release builds.
+
+### What you need to test on a real phone (steps 1 to 5 above)
+
+To build test APKs on your PC: in `course/app` run `npm install` and `npm run sync`, then
+in `course/app/android` run `./gradlew assembleDebug -PcoursePackage=en` (or `ar`). This
+uses the ZIPs in `build/course/zips/`; the APK is `app/build/outputs/apk/debug/app-debug.apk`
+(copy it away before the next build). Debug APKs use a throwaway key: uninstall them before
+installing a release APK of the same language.
+
+1. English, Wi-Fi off: videos, drag the slider, captions on and off, AI or Not, a recap
+   quiz, a worksheet, NeuroPocket with the camera, each of the 4 PDFs, App settings and
+   Back. Close and reopen: ticks still there.
+2. Arabic: right to left in the course and the settings page, Arabic in the quizzes.
+3. APK size and install time; Settings → Apps → storage about the APK size, not twice.
+4. Sharing: ShareIt or Xender, then Files by Google, then Bluetooth, to a phone with no SIM
+   and no Wi-Fi; then on to a third phone; an old phone (Android 7 or older) with little
+   space, including dragging a video's slider there.
+5. Updates: build 1.5.0 and 1.5.1 (`-PappVersionName=1.5.1 -PappVersionCode=10501`).
+   Install 1.5.1 over 1.5.0 (received by sharing): ticks kept. French next to English:
+   two icons, two sets of ticks. 1.5.0 over 1.5.1: Android refuses.
+
+The in-app update screen can only be tried once `apk-latest/apps.json` exists (after
+publishing, with a later revision).
+
+### Screenshots to take again (`src/assets/images/ai-literacy/install/`, 432 × 936)
+
+- `1-download-anyway.jpg` and `2-open.jpg`: the file is now `ai-literacy-<id>.apk`.
+- `5-install.jpg` and `6-open-app.jpg`: the app is now "AI Literacy EN".
+- A new picture for step 7, "The course opens" (it has none yet; add it to
+  `languageSteps` in `src/pages/AndroidInstallSteps.jsx`).
+- `3-settings.jpg` and `4-allow.jpg` stay. `7-language.jpg` and `8-downloading.jpg` are
+  only used while the small app is still offered.
+
+### Publishing, in order
+
+1. Merge this branch into `redesign` (it changes nothing on the website until step 4).
+2. Test run: `git tag apk-v1.5.0-test` and `git push origin apk-v1.5.0-test`. In the draft
+   `apk-v1.5.0-test`, check that three or four APKs open in their language with the right
+   name. Then delete the draft and the tag.
+3. Publish: `git tag apk-v1.5.0` and `git push origin apk-v1.5.0`.
+4. `python -I scripts/build_course.py apps`, commit `course/apps.json`, deploy.
+5. Take the new pictures; update the teacher guide masters on Drive (they describe the
+   language download and "120 to 200 MB").
+
+Developer verification (Google's registration for sideloaded apps) is yours to handle:
+register the nine new app ids with the existing signing key before it reaches your
+learners' countries.
