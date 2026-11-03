@@ -29,12 +29,9 @@ All decided on 2 November 2026.
 
 ## H2. Learning platforms
 
-The "Learning platform" plan now covers Moodle only. Kolibri and Google Classroom are left for later.
+The "Learning platform" plan covers Moodle.
 
 - [x] **Moodle.** Works on Henry's own Moodle (2 November 2026): add a File resource, upload the ZIP, unzip it, set START HERE.html as the main file. The plan now says exactly that. Moodle's public sandbox can't take it: its server rejects uploads this big with 413.
-- [ ] ~~Kolibri on a computer.~~ Left for later (2 November 2026): the plan no longer mentions Kolibri. Kolibri needs a ZIP with `index.html` at the top; a test copy is in `build/platform-test/`.
-- [ ] ~~Kolibri on Android.~~ Left for later, as above.
-- [ ] ~~Google Classroom.~~ Left for later (2 November 2026): the plan no longer mentions it.
 - [ ] **Moodle in another language.** The same Moodle steps with one more language's ZIP, ideally Arabic or Urdu (right to left) or else French. This checks that the text, captions and quizzes in that language still show correctly inside Moodle, not just in English.
 - [x] ~~Tell Claude what you learned.~~ Done: the plan now gives your Moodle steps.
 
