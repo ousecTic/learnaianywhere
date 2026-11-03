@@ -18,7 +18,7 @@ Start with H2 (platforms) and H3 (Android app). They take the longest and need n
 
 Claude will confirm each of these is still true (C1). You decide what to do.
 
-- [ ] **Slide 2 of the course deck says a camera is required.** All 9 language decks. The website now says a camera is optional. Fix the slides before launch, or accept the mismatch? This one needs a decision before the decks are final.
+- [x] ~~Slide 2 of the course deck says a camera is required.~~ No longer true: checked 2 November 2026, the word "camera" is in none of the 9 v1.5 decks (228 pages each). Nothing to decide.
 - [ ] **"8 languages" vs 9 packages.** The hero and the announcement banner say 8 languages. The language menu has 9 entries because Swahili comes in a Kenya and a Tanzania version. Keep "8"?
 - [ ] **Unknown web addresses show an empty page.** There is no "page not found" route: `/this-does-not-exist` shows the navbar and footer with nothing in between. Acceptable for launch?
 - [ ] **Switching back to English keeps the green note** ("Switched to English"). Fine as is?
