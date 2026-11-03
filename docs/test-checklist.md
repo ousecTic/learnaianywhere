@@ -23,7 +23,7 @@ Claude will confirm each of these is still true (C1). You decide what to do.
 - [x] ~~Unknown web addresses show an empty page.~~ Decided: add a simple page. Done 2 November 2026: `/this-does-not-exist` now shows "Page not found" with buttons to the course and the home page.
 - [x] ~~Switching back to English keeps the green note~~ ("Switched to English"). Decided 2 November 2026: fine as is.
 - [x] ~~Both Swahili versions share the same guide, slides and worksheet~~ but have different video folders. Decided 2 November 2026: keep as is and revisit once Swahili-speaking teachers give feedback.
-- [ ] **Mini-app pages** (`/courses/ai-literacy-for-everyone/ai-or-not`, `recap-quiz-1` to `-4`) are not linked from the navbar. They exist for Kolibri and the course to link to. Intended?
+- [x] ~~Mini-app pages~~ (`/courses/ai-literacy-for-everyone/ai-or-not`, `recap-quiz-1` to `-4`) are not linked from the navbar. Decided 2 November 2026: keep as is. They are linked from the freeCodeCamp YouTube video, so these addresses must never move or break.
 - [ ] **About page gallery captions still say "students".** Change to match the course page wording ("learners")?
 - [ ] **Get Involved:** "Ensures AI courses relevance and alignment..." appears under both Teachers and Partners and reads oddly. Reword?
 
