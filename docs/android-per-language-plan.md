@@ -454,6 +454,16 @@ The website now says NeuroPocket needs a device with at least 1 GB of memory (RA
 course page and on the install page. The teacher guide masters on Drive still say "at least
 2 GB of memory": change them to 1 GB.
 
+### Released, 3 November 2026
+
+Steps 2 to 4 and 6 below are done: course 1.6 (NeuroPocket 1.9.0) is published as
+`course-v1.6`, with `course-latest` pointing at it and the online kit's videos on
+`course-videos-v1.6`. The nine apps are published as `apk-v1.6.0` (signed with the same key
+as `app-v1.0.0`, certificate SHA-256 `db3fa0e6…52f1`) and copied to `apk-latest` with
+`apps.json`, and `course/apps.json` is committed. The released English app installed on
+Henry's phone. Left: merge into `redesign` (step 1), delete the `apk-v1.6.0-test` draft and
+tag, and step 7.
+
 ### Publishing, in order
 
 1. Merge this branch into `redesign` (it changes nothing on the website's Android plan
