@@ -1,0 +1,88 @@
+{
+  "_note": "Do not translate keys or the correctAnswer values ('ai' / 'not_ai'). Preserve {placeholder} tokens exactly as written.",
+  "ui": {
+    "pageTitle": "Quiz : IA ou Pas ? - Apprendre l'IA Partout",
+    "title": "Jouons à IA ou Pas ?!",
+    "subtitle": "Testez votre compréhension des concepts de l'IA",
+    "introStep1": "Je vais décrire une situation",
+    "introStep2": "Observez si elle implique de l'autonomie et de l'adaptabilité",
+    "introStep3": "Décidez si c'est de l'IA ou Non",
+    "introStep4": "Partagez votre raisonnement",
+    "startBtn": "Démarrer le jeu",
+    "questionHeading": "IA ou Pas ?",
+    "progress": "Manche {n} sur {total}",
+    "progressReview": "Manche {n} sur {total} (Mode Révision)",
+    "answerAi": "C'est de l'IA",
+    "answerNotAi": "Ce n'est pas de l'IA",
+    "imageAlt": "Illustration de la question {n}",
+    "feedbackCorrect": "✓ Correct ! {answer}.",
+    "feedbackIncorrect": "✗ Incorrect. La bonne réponse est : {answer}.",
+    "explanationHeading": "Explication :",
+    "nextBtn": "Question suivante",
+    "gameComplete": "Jeu terminé !",
+    "hereIsHowYouDid": "Voici vos résultats",
+    "scoreDisplay": "Vous avez obtenu {score} bonnes réponses sur {total} !",
+    "reviewRound": "Manche {n}",
+    "reviewCorrect": "✓ Correct",
+    "reviewIncorrect": "✗ Incorrect",
+    "reviewYourAnswer": "Votre réponse : {userAnswer} | Bonne réponse : {correctAnswer}",
+    "playAgainBtn": "Rejouer",
+    "backToReviewBtn": "Retour à la révision",
+    "footerBrand": "Apprendre l'IA Partout",
+    "footerTagline": "5 questions • Jeu éducatif",
+    "footerKeepLearning": "Continuez à apprendre sur l'IA !"
+  },
+  "explanationLabels": {
+    "autonomous_positive": "Autonomie : Oui, c'est Autonome",
+    "autonomous_negative": "Autonomie : Non, ce n'est pas Autonome",
+    "adaptive_positive": "Adaptabilité : Oui, c'est Adaptatif",
+    "adaptive_negative": "Adaptabilité : Non, ce n'est pas Adaptatif"
+  },
+  "questions": [
+    {
+      "id": 1,
+      "question": "Lorsque vous tapez un message à un ami, votre téléphone suggère le mot suivant que vous pourriez vouloir utiliser. Il corrige également votre orthographe si vous faites une erreur.",
+      "correctAnswer": "ai",
+      "explanation": {
+        "autonomous": { "positive": true,  "content": "Il détecte vos erreurs et propose une correction tout seul, avant même que vous ne remarquiez la faute de frappe." },
+        "adaptive":   { "positive": true,  "content": "Il s'améliore dans les suggestions de mots en fonction de ce que vous avez tapé auparavant." }
+      }
+    },
+    {
+      "id": 2,
+      "question": "Un téléphone qui vous permet de passer des appels uniquement lorsque vous composez ou tapez vous-même le numéro",
+      "correctAnswer": "not_ai",
+      "explanation": {
+        "autonomous": { "positive": false, "content": "Vous devez tout faire vous-même à chaque fois." },
+        "adaptive":   { "positive": false, "content": "Il n'analyse pas de nouvelles données pour s'améliorer. Il fonctionne toujours de la même manière." }
+      }
+    },
+    {
+      "id": 3,
+      "question": "Vous pouvez déverrouiller votre téléphone en montrant votre visage. Plus il analyse de photos, meilleur il devient pour vous reconnaître.",
+      "correctAnswer": "ai",
+      "explanation": {
+        "autonomous": { "positive": true,  "content": "Il vous aide en déverrouillant votre téléphone tout seul. Vous n'avez même pas à appuyer sur un bouton !" },
+        "adaptive":   { "positive": true,  "content": "Il analyse davantage de photos de votre visage pour améliorer la reconnaissance, même si votre apparence change." }
+      }
+    },
+    {
+      "id": 4,
+      "question": "Une lumière à détecteur de mouvement s'allume quand elle détecte du mouvement et s'éteint quand personne n'est là. Elle réagit de la même façon à chaque fois.",
+      "correctAnswer": "not_ai",
+      "explanation": {
+        "autonomous": { "positive": true,  "content": "Elle s'allume et s'éteint toute seule lorsqu'elle détecte un mouvement." },
+        "adaptive":   { "positive": false, "content": "Elle réagit toujours de la même façon, peu importe ce qui bouge." }
+      }
+    },
+    {
+      "id": 5,
+      "question": "Vous discutez avec une application qui vous aide à planifier des projets. Vous décrivez votre projet et elle suggère des étapes pour le réaliser. Elle améliore ses suggestions au fil de vos échanges.",
+      "correctAnswer": "ai",
+      "explanation": {
+        "autonomous": { "positive": true,  "content": "Elle vous aide en créant un plan toute seule à partir de votre description." },
+        "adaptive":   { "positive": true,  "content": "Elle affine ses suggestions au fur et à mesure qu'elle en apprend davantage sur votre projet spécifique et votre façon de travailler." }
+      }
+    }
+  ]
+}

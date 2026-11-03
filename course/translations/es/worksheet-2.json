@@ -1,0 +1,27 @@
+{
+  "_note": "Do not translate keys. Preserve {placeholder} tokens exactly as written.",
+  "ui": {
+    "pageTitle": "Lección 2: Recopilación de Datos - Diseña tu Propio Clasificador de IA",
+    "mainHeading": "Diseña tu Propio Clasificador de IA",
+    "lessonTitle": "Lección 2: Recopilación de Datos",
+    "question": "¿Qué elementos clasificarás y cómo recopilarás tus datos?",
+    "example": "Ejemplo: si vas a clasificar tipos de útiles escolares, podrías tomar fotos de lápices, cuadernos y pupitres en tu aula",
+    "responseLabel": "Tu Respuesta:",
+    "placeholder": "Escribe tu respuesta aquí...",
+    "ariaLabel": "Tu respuesta a la pregunta de la lección",
+    "clearBtn": "Borrar Respuesta",
+    "footerBrand": "Aprende IA en Cualquier Lugar",
+    "footerSave": "Tus respuestas se guardan localmente en este dispositivo",
+    "statusInit": "Empieza a escribir: tu trabajo se guardará automáticamente",
+    "statusSaving": "Guardando...",
+    "statusSaved": "Guardado a las {time}",
+    "statusLastSaved": "Guardado por última vez a las {time}",
+    "errorStorage": "El almacenamiento local no está disponible en tu navegador",
+    "errorSave": "Error al guardar: inténtalo de nuevo",
+    "errorLoad": "Error al cargar la respuesta guardada",
+    "confirmClear": "¿Estás seguro de que quieres borrar tu respuesta? Esto no se puede deshacer.",
+    "errorNothingToClear": "No hay nada que borrar",
+    "successCleared": "Respuesta borrada correctamente",
+    "errorClearing": "Error al borrar la respuesta"
+  }
+}

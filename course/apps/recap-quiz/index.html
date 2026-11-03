@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<!--
+  Recap quiz for Lessons 1-4 of AI Literacy for Everyone, in every course language.
+  Source page: scripts/build-apps.mjs replaces COURSE_TEXT below with the text in
+  course/translations/<lang>/recap-quiz-<n>.json and writes a single self-contained file
+  that works offline from a folder (file://).
+
+  Open with ?quiz=<1-4> to pick the lesson (default 1) and ?lang=<code> to pick the
+  language (default: the last language chosen in the menu, else English).
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recap Quiz - Learn AI Anywhere</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+      line-height: 1.6;
+      color: #000000;
+      background: white;
+      overflow-x: hidden;
+      width: 100%;
+      min-height: 100vh;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      padding: 32px;
+      padding: 2rem;
+    }
+
+    .container {
+      max-width: 800px;
+      width: 100%;
+    }
+
+    .card {
+      background: #FFFFFF;
+      border: 1px solid #E5E7EB;
+      border-radius: 16px;
+      padding: 48px 32px;
+      padding: 3rem 2rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+
+    .lang-selector {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: end;
+      -ms-flex-pack: end;
+      justify-content: flex-end;
+      margin-bottom: 0.75rem;
+    }
+
+    .lang-selector select {
+      font-size: 0.8rem;
+      border: 1px solid #E5E7EB;
+      border-radius: 6px;
+      padding: 0.25rem 0.5rem;
+      color: #71717A;
+      background: white;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .lang-selector select:hover {
+      border-color: #258EC2;
+      color: #258EC2;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 32px;
+      margin-bottom: 2rem;
+    }
+
+    h1 {
+      color: #258EC2;
+      font-size: 28px;
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      color: #71717A;
+      font-size: 18px;
+      font-size: 1.125rem;
+      margin-bottom: 24px;
+      margin-bottom: 1.5rem;
+    }
+
+    .progress {
+      text-align: center;
+      color: #71717A;
+      font-size: 14px;
+      font-size: 0.875rem;
+      margin-bottom: 16px;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .question-text {
+      font-size: 18px;
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: #000000;
+      margin-bottom: 24px;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .answer-options {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      gap: 12px;
+      margin: 24px 0;
+      margin: 1.5rem 0;
+    }
+
+    .answer-option {
+      padding: 16px 20px;
+      padding: 1rem 1.25rem;
+      font-size: 16px;
+      font-size: 1rem;
+      border: 2px solid #E5E7EB;
+      border-radius: 8px;
+      background: #FFFFFF;
+      color: #000000;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: inherit;
+      width: 100%;
+      text-align: left;
+    }
+
+    .answer-option:hover {
+      background: #F9FAFB;
+      border-color: #258EC2;
+    }
+
+    .answer-option:disabled {
+      cursor: not-allowed;
+    }
+
+    .answer-option.correct {
+      background: #D1FAE5;
+      border-color: #6EE7B7;
+      color: #065F46;
+      font-weight: 600;
+    }
+
+    .answer-option.incorrect {
+      background: #FEE2E2;
+      border-color: #FCA5A5;
+      color: #991B1B;
+      font-weight: 600;
+    }
+
+    .answer-option.neutral {
+      background: #F9FAFB;
+      border-color: #E5E7EB;
+      color: #71717A;
+    }
+
+    .feedback-message {
+      text-align: center;
+      padding: 16px 24px;
+      padding: 1rem 1.5rem;
+      margin: 24px 0 16px;
+      margin: 1.5rem 0 1rem;
+      border-radius: 8px;
+      font-size: 18px;
+      font-size: 1.125rem;
+      font-weight: 700;
+      display: none;
+    }
+
+    .feedback-message.show {
+      display: block;
+    }
+
+    .feedback-message.correct {
+      background: #D1FAE5;
+      color: #065F46;
+      border: 2px solid #6EE7B7;
+    }
+
+    .feedback-message.incorrect {
+      background: #FEE2E2;
+      color: #991B1B;
+      border: 2px solid #FCA5A5;
+    }
+
+    .correct-answer {
+      text-align: center;
+      padding: 12px 20px;
+      padding: 0.75rem 1.25rem;
+      margin: 16px 0;
+      margin: 1rem 0;
+      background: #F9FAFB;
+      border-radius: 8px;
+      border-left: 3px solid #258EC2;
+      display: none;
+    }
+
+    .correct-answer.show {
+      display: block;
+    }
+
+    .correct-answer-label {
+      font-weight: 700;
+      color: #258EC2;
+      font-size: 14px;
+      font-size: 0.875rem;
+      margin-bottom: 4px;
+      margin-bottom: 0.25rem;
+    }
+
+    .correct-answer-text {
+      color: #000000;
+      font-size: 16px;
+      font-size: 1rem;
+    }
+
+    .btn-primary {
+      padding: 12px 32px;
+      padding: 0.75rem 2rem;
+      background: #258EC2;
+      color: #FFFFFF;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      font-family: inherit;
+      display: block;
+      margin: 24px auto 0;
+      margin: 1.5rem auto 0;
+    }
+
+    .btn-primary:hover {
+      background: #1c6e99;
+    }
+
+    .score-display {
+      text-align: center;
+      font-size: 32px;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #258EC2;
+      margin: 24px 0;
+      margin: 1.5rem 0;
+    }
+
+    .review-list {
+      margin: 24px 0;
+      margin: 1.5rem 0;
+    }
+
+    .review-item {
+      background: #F9FAFB;
+      border: 1px solid #E5E7EB;
+      border-radius: 8px;
+      padding: 16px;
+      padding: 1rem;
+      margin-bottom: 16px;
+      margin-bottom: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .review-item:hover {
+      border-color: #258EC2;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .review-item-header {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+      justify-content: space-between;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      margin-bottom: 8px;
+      margin-bottom: 0.5rem;
+    }
+
+    .review-item-title {
+      font-weight: 600;
+      color: #000000;
+      font-size: 16px;
+      font-size: 1rem;
+    }
+
+    .review-item-result {
+      font-weight: 600;
+      font-size: 14px;
+      font-size: 0.875rem;
+    }
+
+    .review-item-result.correct {
+      color: #065F46;
+    }
+
+    .review-item-result.incorrect {
+      color: #991B1B;
+    }
+
+    .review-item-details {
+      font-size: 14px;
+      font-size: 0.875rem;
+      color: #71717A;
+      line-height: 1.5;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .footer {
+      margin-top: 32px;
+      margin-top: 2rem;
+      padding-top: 24px;
+      padding-top: 1.5rem;
+      border-top: 1px solid #E5E7EB;
+      text-align: center;
+      color: #71717A;
+      font-size: 14px;
+      font-size: 0.875rem;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 12px;
+        padding: 0.75rem;
+      }
+
+      .card {
+        padding: 24px 16px;
+        padding: 1.5rem 1rem;
+      }
+
+      h1 {
+        font-size: 22px;
+        font-size: 1.35rem;
+      }
+
+      .subtitle {
+        font-size: 16px;
+        font-size: 1rem;
+      }
+
+      .question-text {
+        font-size: 16px;
+        font-size: 1rem;
+      }
+
+      .answer-option {
+        padding: 14px 16px;
+        padding: 0.875rem 1rem;
+        font-size: 15px;
+        font-size: 0.9375rem;
+      }
+
+      .feedback-message {
+        font-size: 16px;
+        font-size: 1rem;
+        padding: 12px 16px;
+        padding: 0.75rem 1rem;
+      }
+
+      .score-display {
+        font-size: 24px;
+        font-size: 1.5rem;
+      }
+    }
+
+    /* Right-to-left (Arabic, Urdu): mirror the parts placed with "left" above. */
+    html[dir="rtl"] .answer-option {
+      text-align: right;
+    }
+
+    html[dir="rtl"] .correct-answer {
+      border-left: 0;
+      border-right: 3px solid #258EC2;
+    }
+
+    /* Shown inside another page (the website): size to the content, not the window. */
+    html.embedded body {
+      min-height: 0;
+    }
+  </style>
+  <script>
+    // Inside a frame (the website shows the apps this way), drop the full-window height.
+    try { if (window.self !== window.top) { document.documentElement.className += ' embedded'; } } catch (e) { document.documentElement.className += ' embedded'; }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="lang-selector">
+        <select id="langSelect" onchange="setLanguage(this.value)"></select>
+      </div>
+
+      <!-- Introduction Screen -->
+      <div id="introScreen">
+        <div class="header">
+          <h1>Recap Quiz</h1>
+          <p class="subtitle"></p>
+        </div>
+
+        <button class="btn-primary" id="startBtn">Start Quiz</button>
+
+        <div class="footer">
+          <p>Learn AI Anywhere</p>
+          <p></p>
+        </div>
+      </div>
+
+      <!-- Question Screen -->
+      <div id="questionScreen" class="hidden">
+        <p class="progress" id="progressText">Question 1 of 4</p>
+
+        <div class="header">
+          <h1>Recap Quiz</h1>
+        </div>
+
+        <p class="question-text" id="questionText"></p>
+
+        <div class="answer-options" id="answerOptions"></div>
+
+        <div class="feedback-message hidden" id="feedbackMessage"></div>
+
+        <div class="correct-answer hidden" id="correctAnswer">
+          <div class="correct-answer-label">Correct Answer:</div>
+          <div class="correct-answer-text" id="correctAnswerText"></div>
+        </div>
+
+        <button class="btn-primary hidden" id="nextBtn">Next Question</button>
+      </div>
+
+      <!-- Review Screen -->
+      <div id="reviewScreen" class="hidden">
+        <div class="header">
+          <h1>Quiz Complete!</h1>
+          <p class="subtitle">Here's how you did</p>
+        </div>
+
+        <div class="score-display" id="scoreDisplay"></div>
+
+        <div class="review-list" id="reviewList"></div>
+
+        <button class="btn-primary" id="retakeBtn">Retake Quiz</button>
+
+        <div class="footer">
+          <p>Learn AI Anywhere</p>
+          <p>Great job completing the quiz!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Filled in by scripts/build-apps.mjs:
+    // { languages: [{ code, label, dir }], quizzes: { "1": { en: {...}, fr: {...}, ... }, ... } }
+    var COURSE_TEXT = /*COURSE_TEXT*/null;
+
+    function readParam(name) {
+      var m = new RegExp('[?&]' + name + '=([^&#]*)').exec(window.location.search);
+      return m ? decodeURIComponent(m[1]) : null;
+    }
+
+    // localStorage can be missing or blocked (private windows, some file:// setups).
+    function loadSavedLang() {
+      try { return window.localStorage.getItem('quiz_lang'); } catch (e) { return null; }
+    }
+    function saveLang(lang) {
+      try { window.localStorage.setItem('quiz_lang', lang); } catch (e) { /* not saved */ }
+    }
+
+    var QUIZ = COURSE_TEXT.quizzes[readParam('quiz')] ? readParam('quiz') : '1';
+    var TRANSLATIONS = COURSE_TEXT.quizzes[QUIZ];
+    var LANGUAGES = COURSE_TEXT.languages;
+
+    function isKnownLang(code) { return !!(code && TRANSLATIONS[code]); }
+    function isRtl(code) {
+      for (var i = 0; i < LANGUAGES.length; i++) {
+        if (LANGUAGES[i].code === code) { return LANGUAGES[i].dir === 'rtl'; }
+      }
+      return false;
+    }
+    function applyDirection(code) {
+      document.documentElement.lang = code;
+      document.documentElement.dir = isRtl(code) ? 'rtl' : 'ltr';
+    }
+
+    var currentLang = isKnownLang(readParam('lang')) ? readParam('lang')
+      : isKnownLang(loadSavedLang()) ? loadSavedLang() : 'en';
+    applyDirection(currentLang);
+
+    (function fillLanguageMenu() {
+      var select = document.getElementById('langSelect');
+      for (var i = 0; i < LANGUAGES.length; i++) {
+        if (!TRANSLATIONS[LANGUAGES[i].code]) { continue; }
+        var option = document.createElement('option');
+        option.value = LANGUAGES[i].code;
+        option.textContent = LANGUAGES[i].label;
+        select.appendChild(option);
+      }
+    })();
+
+    function t(key) {
+      var parts = key.split('.');
+      var lang = TRANSLATIONS[currentLang] || TRANSLATIONS.en;
+      var val = lang[parts[0]] && lang[parts[0]][parts[1]];
+      return val || (TRANSLATIONS.en[parts[0]] && TRANSLATIONS.en[parts[0]][parts[1]]) || key;
+    }
+
+    function tFmt(key, vars) {
+      var str = t(key);
+      var keys = Object.keys(vars);
+      for (var i = 0; i < keys.length; i++) {
+        str = str.split('{' + keys[i] + '}').join(String(vars[keys[i]]));
+      }
+      return str;
+    }
+
+    function getQuizData() {
+      var lang = TRANSLATIONS[currentLang];
+      return (lang && lang.questions) ? lang.questions : TRANSLATIONS.en.questions;
+    }
+
+    function applyTranslations() {
+      document.title = t('ui.pageTitle');
+      document.querySelector('#introScreen h1').textContent = t('ui.introTitle');
+      document.querySelector('#introScreen .subtitle').textContent = t('ui.introSubtitle');
+      document.getElementById('startBtn').textContent = t('ui.startBtn');
+      document.getElementById('nextBtn').textContent = t('ui.nextBtn');
+      var introFooterPs = document.querySelectorAll('#introScreen .footer p');
+      introFooterPs[0].textContent = t('ui.footerBrand');
+      introFooterPs[1].textContent = t('ui.footerTagline');
+      document.querySelector('#questionScreen h1').textContent = t('ui.questionHeading');
+      document.querySelector('.correct-answer-label').textContent = t('ui.correctAnswerLabel');
+      document.querySelector('#reviewScreen h1').textContent = t('ui.reviewTitle');
+      document.querySelector('#reviewScreen .subtitle').textContent = t('ui.reviewSubtitle');
+      document.getElementById('retakeBtn').textContent = t('ui.retakeBtn');
+      var reviewFooterPs = document.querySelectorAll('#reviewScreen .footer p');
+      reviewFooterPs[0].textContent = t('ui.footerBrand');
+      reviewFooterPs[1].textContent = t('ui.footerComplete');
+      document.getElementById('langSelect').value = currentLang;
+    }
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      saveLang(lang);
+      applyDirection(lang);
+      var retakeBtn = document.getElementById('retakeBtn');
+      if (retakeBtn) { retakeBtn.click(); }
+      applyTranslations();
+    }
+
+    applyTranslations();
+  </script>
+
+  <script>
+    // ES5 compatible code for maximum browser support
+    (function() {
+      'use strict';
+
+      // State
+      var currentQuestionIndex = 0;
+      var userAnswers = [];
+      var score = 0;
+      var inReviewMode = false;
+
+      // DOM elements
+      var introScreen = document.getElementById('introScreen');
+      var questionScreen = document.getElementById('questionScreen');
+      var reviewScreen = document.getElementById('reviewScreen');
+      var startBtn = document.getElementById('startBtn');
+      var nextBtn = document.getElementById('nextBtn');
+      var retakeBtn = document.getElementById('retakeBtn');
+      var progressText = document.getElementById('progressText');
+      var questionText = document.getElementById('questionText');
+      var answerOptions = document.getElementById('answerOptions');
+      var feedbackMessage = document.getElementById('feedbackMessage');
+      var correctAnswer = document.getElementById('correctAnswer');
+      var correctAnswerText = document.getElementById('correctAnswerText');
+      var scoreDisplay = document.getElementById('scoreDisplay');
+      var reviewList = document.getElementById('reviewList');
+
+      // Helper functions
+      function hideAllScreens() {
+        introScreen.className = 'hidden';
+        questionScreen.className = 'hidden';
+        reviewScreen.className = 'hidden';
+      }
+
+      function showScreen(screen) {
+        hideAllScreens();
+        screen.className = '';
+      }
+
+      function loadQuestion(index) {
+        var data = getQuizData();
+        var question = data[index];
+        progressText.textContent = tFmt('ui.progress', {n: index + 1, total: data.length});
+        questionText.textContent = question.question;
+
+        // Clear previous options
+        answerOptions.innerHTML = '';
+
+        // Create option buttons
+        for (var i = 0; i < question.options.length; i++) {
+          var button = document.createElement('button');
+          button.className = 'answer-option';
+          button.textContent = question.options[i];
+          button.setAttribute('data-answer', question.options[i]);
+
+          // Add click handler using closure
+          (function(answer) {
+            if (button.addEventListener) {
+              button.addEventListener('click', function() {
+                handleAnswer(answer);
+              });
+            } else if (button.attachEvent) {
+              button.attachEvent('onclick', function() {
+                handleAnswer(answer);
+              });
+            }
+          })(question.options[i]);
+
+          answerOptions.appendChild(button);
+        }
+
+        // Hide feedback and next button
+        feedbackMessage.className = 'feedback-message hidden';
+        correctAnswer.className = 'correct-answer hidden';
+        nextBtn.className = 'btn-primary hidden';
+      }
+
+      function handleAnswer(selectedAnswer) {
+        var data = getQuizData();
+        var question = data[currentQuestionIndex];
+        var isCorrect = selectedAnswer === question.correctAnswer;
+
+        // Disable all buttons
+        var buttons = answerOptions.getElementsByTagName('button');
+        for (var i = 0; i < buttons.length; i++) {
+          buttons[i].disabled = true;
+
+          var buttonAnswer = buttons[i].getAttribute('data-answer');
+
+          if (buttonAnswer === selectedAnswer) {
+            buttons[i].className = isCorrect ? 'answer-option correct' : 'answer-option incorrect';
+          } else if (buttonAnswer === question.correctAnswer) {
+            buttons[i].className = 'answer-option correct';
+          } else {
+            buttons[i].className = 'answer-option neutral';
+          }
+        }
+
+        // Store answer
+        userAnswers.push({
+          questionId: question.id,
+          userAnswer: selectedAnswer,
+          correctAnswer: question.correctAnswer,
+          isCorrect: isCorrect
+        });
+
+        if (isCorrect) {
+          score = score + 1;
+        }
+
+        // Show feedback message
+        if (isCorrect) {
+          feedbackMessage.textContent = t('ui.feedbackCorrect');
+          feedbackMessage.className = 'feedback-message correct show';
+        } else {
+          feedbackMessage.textContent = t('ui.feedbackIncorrect');
+          feedbackMessage.className = 'feedback-message incorrect show';
+        }
+
+        // Show correct answer
+        correctAnswerText.textContent = question.correctAnswer;
+        correctAnswer.className = 'correct-answer show';
+
+        // Show next button
+        nextBtn.className = 'btn-primary';
+      }
+
+      function nextQuestion() {
+        if (inReviewMode) {
+          inReviewMode = false;
+          nextBtn.textContent = t('ui.nextBtn');
+          showReview();
+          return;
+        }
+
+        currentQuestionIndex = currentQuestionIndex + 1;
+
+        var data = getQuizData();
+        if (currentQuestionIndex < data.length) {
+          loadQuestion(currentQuestionIndex);
+        } else {
+          showReview();
+        }
+      }
+
+      function viewQuestionFromReview(index) {
+        currentQuestionIndex = index;
+        var data = getQuizData();
+        var question = data[index];
+        var answer = userAnswers[index];
+
+        showScreen(questionScreen);
+
+        progressText.textContent = tFmt('ui.progressReview', {n: index + 1, total: data.length});
+        questionText.textContent = question.question;
+
+        // Clear and recreate options
+        answerOptions.innerHTML = '';
+
+        for (var i = 0; i < question.options.length; i++) {
+          var button = document.createElement('button');
+          button.className = 'answer-option';
+          button.textContent = question.options[i];
+          button.disabled = true;
+
+          var optionText = question.options[i];
+
+          if (optionText === answer.userAnswer) {
+            button.className = answer.isCorrect ? 'answer-option correct' : 'answer-option incorrect';
+          } else if (optionText === question.correctAnswer) {
+            button.className = 'answer-option correct';
+          } else {
+            button.className = 'answer-option neutral';
+          }
+
+          answerOptions.appendChild(button);
+        }
+
+        // Show feedback message
+        if (answer.isCorrect) {
+          feedbackMessage.textContent = t('ui.feedbackCorrect');
+          feedbackMessage.className = 'feedback-message correct show';
+        } else {
+          feedbackMessage.textContent = t('ui.feedbackIncorrect');
+          feedbackMessage.className = 'feedback-message incorrect show';
+        }
+
+        // Show correct answer
+        correctAnswerText.textContent = question.correctAnswer;
+        correctAnswer.className = 'correct-answer show';
+
+        // Show back to review button
+        inReviewMode = true;
+        nextBtn.textContent = t('ui.backToReview');
+        nextBtn.className = 'btn-primary';
+      }
+
+      function showReview() {
+        showScreen(reviewScreen);
+
+        var data = getQuizData();
+        var percentage = Math.round((score / data.length) * 100);
+        scoreDisplay.textContent = tFmt('ui.scoreDisplay', {score: score, total: data.length, percent: percentage});
+
+        // Build review list
+        reviewList.innerHTML = '';
+
+        for (var i = 0; i < data.length; i++) {
+          var question = data[i];
+          var answer = userAnswers[i];
+
+          var item = document.createElement('div');
+          item.className = 'review-item';
+          item.setAttribute('data-question-index', i);
+
+          var header = document.createElement('div');
+          header.className = 'review-item-header';
+
+          var title = document.createElement('div');
+          title.className = 'review-item-title';
+          title.textContent = tFmt('ui.reviewQuestion', {n: i + 1});
+
+          var result = document.createElement('div');
+          result.className = 'review-item-result ' + (answer.isCorrect ? 'correct' : 'incorrect');
+          result.textContent = answer.isCorrect ? t('ui.reviewCorrect') : t('ui.reviewIncorrect');
+
+          header.appendChild(title);
+          header.appendChild(result);
+
+          var details = document.createElement('div');
+          details.className = 'review-item-details';
+          details.textContent = tFmt('ui.reviewDetails', {userAnswer: answer.userAnswer, correctAnswer: answer.correctAnswer});
+
+          item.appendChild(header);
+          item.appendChild(details);
+
+          // Add click handler
+          (function(idx) {
+            if (item.addEventListener) {
+              item.addEventListener('click', function() {
+                viewQuestionFromReview(idx);
+              });
+            } else if (item.attachEvent) {
+              item.attachEvent('onclick', function() {
+                viewQuestionFromReview(idx);
+              });
+            }
+          })(i);
+
+          reviewList.appendChild(item);
+        }
+      }
+
+      function resetQuiz() {
+        currentQuestionIndex = 0;
+        userAnswers = [];
+        score = 0;
+        inReviewMode = false;
+        showScreen(introScreen);
+      }
+
+      // Event listeners
+      if (startBtn.addEventListener) {
+        startBtn.addEventListener('click', function() {
+          showScreen(questionScreen);
+          loadQuestion(0);
+        });
+
+        nextBtn.addEventListener('click', nextQuestion);
+
+        retakeBtn.addEventListener('click', resetQuiz);
+      } else if (startBtn.attachEvent) {
+        // IE8 fallback
+        startBtn.attachEvent('onclick', function() {
+          showScreen(questionScreen);
+          loadQuestion(0);
+        });
+
+        nextBtn.attachEvent('onclick', nextQuestion);
+
+        retakeBtn.attachEvent('onclick', resetQuiz);
+      }
+    })();
+  </script>
+</body>
+</html>

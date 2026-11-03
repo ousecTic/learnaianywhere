@@ -1,0 +1,74 @@
+{
+  "_note": "Do not translate keys. Preserve {placeholder} tokens exactly as written.",
+  "ui": {
+    "pageTitle": "Quiz de Revisão da Lição 3 - Aprenda IA em Qualquer Lugar",
+    "introTitle": "Quiz de Revisão da Lição 3",
+    "introSubtitle": "Teste seus conhecimentos sobre algoritmos e treinamento",
+    "startBtn": "Iniciar Quiz",
+    "footerTagline": "4 perguntas • Múltipla escolha",
+    "questionHeading": "Quiz de Revisão",
+    "correctAnswerLabel": "Resposta Correta:",
+    "nextBtn": "Próxima Pergunta",
+    "reviewTitle": "Quiz Concluído!",
+    "reviewSubtitle": "Veja como você se saiu",
+    "retakeBtn": "Refazer Quiz",
+    "footerComplete": "Ótimo trabalho ao concluir o quiz!",
+    "footerBrand": "Aprenda IA em Qualquer Lugar",
+    "progress": "Pergunta {n} de {total}",
+    "progressReview": "Pergunta {n} de {total} (Modo Revisão)",
+    "feedbackCorrect": "✓ Correto!",
+    "feedbackIncorrect": "✗ Incorreto",
+    "scoreDisplay": "Você acertou {score} de {total}! ({percent}%)",
+    "reviewQuestion": "Pergunta {n}",
+    "reviewCorrect": "✓ Correto",
+    "reviewIncorrect": "✗ Incorreto",
+    "reviewDetails": "Sua resposta: {userAnswer} | Resposta correta: {correctAnswer}",
+    "backToReview": "Voltar à Revisão"
+  },
+  "questions": [
+    {
+      "id": 1,
+      "question": "O que é um algoritmo?",
+      "options": [
+        "Um tipo de computador",
+        "Um palpite aleatório que uma máquina faz",
+        "Uma maneira passo a passo de concluir uma tarefa",
+        "Uma regra que nunca muda"
+      ],
+      "correctAnswer": "Uma maneira passo a passo de concluir uma tarefa"
+    },
+    {
+      "id": 2,
+      "question": "Por que uma máquina precisa de algoritmos claros e detalhados?",
+      "options": [
+        "Para poder conversar naturalmente com humanos",
+        "Porque não consegue entender como os humanos e precisa de passos exatos a seguir",
+        "Para poder decidir sozinha sem ajuda",
+        "Para poder trabalhar rapidamente sem instruções claras"
+      ],
+      "correctAnswer": "Porque não consegue entender como os humanos e precisa de passos exatos a seguir"
+    },
+    {
+      "id": 3,
+      "question": "O que acontece durante o treinamento de uma máquina?",
+      "options": [
+        "Ela memoriza cada exemplo sem verificar erros",
+        "Ela espera que os humanos corrijam os erros e digam as respostas certas",
+        "Ela calcula uma previsão, mede seu erro e ajusta sua equação",
+        "Ela continua fazendo a mesma previsão sem melhorar"
+      ],
+      "correctAnswer": "Ela calcula uma previsão, mede seu erro e ajusta sua equação"
+    },
+    {
+      "id": 4,
+      "question": "Como humanos e máquinas processam características de forma diferente?",
+      "options": [
+        "Os humanos focam no que parece importante, e as máquinas usam números",
+        "Os humanos transformam características em números, e as máquinas dependem do sentimento",
+        "Humanos e máquinas adivinham aleatoriamente",
+        "As máquinas entendem emoções melhor do que os humanos"
+      ],
+      "correctAnswer": "Os humanos focam no que parece importante, e as máquinas usam números"
+    }
+  ]
+}

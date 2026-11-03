@@ -9,9 +9,9 @@ const Hero = () => {
         <div className="hero-grid">
           <div className="hero-content">
             <h1 className="text-4xl font-bold">AI Education That Works Anywhere</h1>
-            <p className="text-lg">Offline first AI lessons that work in fully connected classrooms and areas with limited technology access.</p>
+            <p className="text-lg">Offline-first AI courses that work in fully connected classrooms and areas with limited technology access.</p>
             <div className="hero-buttons">
-              <Button to="/curriculum" variant="primary">View AI Lessons</Button>
+              <Button to="/courses/ai-literacy-for-everyone" variant="primary">See the courses</Button>
               <Button to="/about" variant="secondary">About Us</Button>
             </div>
           </div>

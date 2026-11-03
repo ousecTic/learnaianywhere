@@ -1,0 +1,5 @@
+node_modules
+# Copied from elsewhere in course/ by scripts/prepare-www.mjs
+www/downloads.json
+www/logo.png
+www/inter-latin.woff2

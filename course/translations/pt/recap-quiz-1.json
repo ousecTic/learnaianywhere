@@ -1,0 +1,72 @@
+{
+  "_note": "Do not translate keys. Preserve {placeholder} tokens exactly as written.",
+  "ui": {
+    "pageTitle": "Quiz de Revisão da Lição 1 - Aprenda IA em Qualquer Lugar",
+    "introTitle": "Quiz de Revisão da Lição 1",
+    "introSubtitle": "Teste seus conhecimentos sobre os fundamentos da IA",
+    "startBtn": "Iniciar Quiz",
+    "footerTagline": "4 perguntas • Múltipla escolha e Verdadeiro/Falso",
+    "questionHeading": "Quiz de Revisão",
+    "correctAnswerLabel": "Resposta Correta:",
+    "nextBtn": "Próxima Pergunta",
+    "reviewTitle": "Quiz Concluído!",
+    "reviewSubtitle": "Veja como você se saiu",
+    "retakeBtn": "Refazer Quiz",
+    "footerComplete": "Ótimo trabalho ao concluir o quiz!",
+    "footerBrand": "Aprenda IA em Qualquer Lugar",
+    "progress": "Pergunta {n} de {total}",
+    "progressReview": "Pergunta {n} de {total} (Modo Revisão)",
+    "feedbackCorrect": "✓ Correto!",
+    "feedbackIncorrect": "✗ Incorreto",
+    "scoreDisplay": "Você acertou {score} de {total}! ({percent}%)",
+    "reviewQuestion": "Pergunta {n}",
+    "reviewCorrect": "✓ Correto",
+    "reviewIncorrect": "✗ Incorreto",
+    "reviewDetails": "Sua resposta: {userAnswer} | Resposta correta: {correctAnswer}",
+    "backToReview": "Voltar à Revisão"
+  },
+  "questions": [
+    {
+      "id": 1,
+      "question": "O que é Inteligência Artificial (IA)?",
+      "options": [
+        "A) Ensinar humanos a agir como robôs",
+        "B) Fazer as máquinas calcularem mais rápido",
+        "C) Fazer a tecnologia simular inteligência",
+        "D) Dar emoções às máquinas"
+      ],
+      "correctAnswer": "C) Fazer a tecnologia simular inteligência"
+    },
+    {
+      "id": 2,
+      "question": "Quais duas qualidades descrevem a capacidade de IA de uma tecnologia?",
+      "options": [
+        "A) Autonomia e adaptabilidade",
+        "B) Velocidade e tamanho",
+        "C) Memória e conexão com a internet",
+        "D) Duração da bateria e armazenamento"
+      ],
+      "correctAnswer": "A) Autonomia e adaptabilidade"
+    },
+    {
+      "id": 3,
+      "question": "Qual destes é um exemplo de IA?",
+      "options": [
+        "A) Uma calculadora que resolve contas quando você aperta botões",
+        "B) Uma luz com sensor de movimento que acende quando você entra",
+        "C) Um telefone que permite ligar para alguém digitando o número",
+        "D) Nenhuma das anteriores"
+      ],
+      "correctAnswer": "D) Nenhuma das anteriores"
+    },
+    {
+      "id": 4,
+      "question": "Verdadeiro ou Falso: as ferramentas de IA estão sempre corretas em suas previsões.",
+      "options": [
+        "Verdadeiro",
+        "Falso"
+      ],
+      "correctAnswer": "Falso"
+    }
+  ]
+}

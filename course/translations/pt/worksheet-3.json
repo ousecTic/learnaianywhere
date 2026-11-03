@@ -1,0 +1,27 @@
+{
+  "_note": "Do not translate keys. Preserve {placeholder} tokens exactly as written.",
+  "ui": {
+    "pageTitle": "Lição 3: Identificando Características - Crie seu Próprio Classificador de IA",
+    "mainHeading": "Crie seu Próprio Classificador de IA",
+    "lessonTitle": "Lição 3: Identificando Características",
+    "question": "Quais características seu classificador usará para categorizar os dados?",
+    "example": "Exemplo: Para materiais escolares, considere características como forma, cor, tamanho, textura, posição",
+    "responseLabel": "Sua Resposta:",
+    "placeholder": "Digite sua resposta aqui...",
+    "ariaLabel": "Sua resposta à pergunta da lição",
+    "clearBtn": "Limpar Resposta",
+    "footerBrand": "Aprenda IA em Qualquer Lugar",
+    "footerSave": "Suas respostas são salvas localmente neste dispositivo",
+    "statusInit": "Comece a digitar - seu trabalho será salvo automaticamente",
+    "statusSaving": "Salvando...",
+    "statusSaved": "Salvo às {time}",
+    "statusLastSaved": "Salvo pela última vez às {time}",
+    "errorStorage": "O armazenamento local não está disponível no seu navegador",
+    "errorSave": "Erro ao salvar - por favor, tente novamente",
+    "errorLoad": "Erro ao carregar a resposta salva",
+    "confirmClear": "Tem certeza de que deseja limpar sua resposta? Isso não pode ser desfeito.",
+    "errorNothingToClear": "Nada para limpar",
+    "successCleared": "Resposta limpa com sucesso",
+    "errorClearing": "Erro ao limpar a resposta"
+  }
+}

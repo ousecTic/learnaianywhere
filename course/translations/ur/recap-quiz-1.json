@@ -1,0 +1,72 @@
+{
+  "_note": "Do not translate keys. Preserve {placeholder} tokens exactly as written.",
+  "ui": {
+    "pageTitle": "سبق 1 جائزہ کوئز - کہیں بھی AI سیکھیں",
+    "introTitle": "سبق 1 جائزہ کوئز",
+    "introSubtitle": "مصنوعی ذہانت کی بنیادی باتوں کے بارے میں اپنی معلومات جانچیں",
+    "startBtn": "کوئز شروع کریں",
+    "footerTagline": "4 سوالات • کثیر انتخابی اور صحیح/غلط",
+    "questionHeading": "جائزہ کوئز",
+    "correctAnswerLabel": "درست جواب:",
+    "nextBtn": "اگلا سوال",
+    "reviewTitle": "کوئز مکمل!",
+    "reviewSubtitle": "آپ کی کارکردگی یہ رہی",
+    "retakeBtn": "کوئز دوبارہ کریں",
+    "footerComplete": "کوئز مکمل کرنے پر شاباش!",
+    "footerBrand": "کہیں بھی AI سیکھیں",
+    "progress": "سوال {n} از {total}",
+    "progressReview": "سوال {n} از {total} (جائزہ موڈ)",
+    "feedbackCorrect": "✓ درست!",
+    "feedbackIncorrect": "✗ غلط",
+    "scoreDisplay": "آپ نے {total} میں سے {score} درست جواب دیے! ({percent}%)",
+    "reviewQuestion": "سوال {n}",
+    "reviewCorrect": "✓ درست",
+    "reviewIncorrect": "✗ غلط",
+    "reviewDetails": "آپ کا جواب: {userAnswer} | درست جواب: {correctAnswer}",
+    "backToReview": "جائزے پر واپس جائیں"
+  },
+  "questions": [
+    {
+      "id": 1,
+      "question": "مصنوعی ذہانت (AI) کیا ہے؟",
+      "options": [
+        "A) انسانوں کو روبوٹ کی طرح برتاؤ کرنا سکھانا",
+        "B) مشینوں سے تیزی سے حساب کروانا",
+        "C) ٹیکنالوجی کو ذہانت کی نقل کرنے کے قابل بنانا",
+        "D) مشینوں کو جذبات دینا"
+      ],
+      "correctAnswer": "C) ٹیکنالوجی کو ذہانت کی نقل کرنے کے قابل بنانا"
+    },
+    {
+      "id": 2,
+      "question": "کون سی دو خوبیاں کسی ٹیکنالوجی کی AI صلاحیت کو بیان کرتی ہیں؟",
+      "options": [
+        "A) خود مختاری اور مطابقت پذیری",
+        "B) رفتار اور سائز",
+        "C) یادداشت اور انٹرنیٹ کنکشن",
+        "D) بیٹری لائف اور اسٹوریج"
+      ],
+      "correctAnswer": "A) خود مختاری اور مطابقت پذیری"
+    },
+    {
+      "id": 3,
+      "question": "ان میں سے کون سی AI کی مثال ہے؟",
+      "options": [
+        "A) ایک کیلکولیٹر جو بٹن دبانے پر حساب حل کرتا ہے",
+        "B) ایک موشن سینسر لائٹ جو آپ کے اندر آنے پر جل جاتی ہے",
+        "C) ایک فون جو نمبر ٹائپ کر کے کسی کو کال کرنے دیتا ہے",
+        "D) ان میں سے کوئی نہیں"
+      ],
+      "correctAnswer": "D) ان میں سے کوئی نہیں"
+    },
+    {
+      "id": 4,
+      "question": "صحیح یا غلط: AI ٹولز کی پیش گوئیاں ہمیشہ درست ہوتی ہیں۔",
+      "options": [
+        "صحیح",
+        "غلط"
+      ],
+      "correctAnswer": "غلط"
+    }
+  ]
+}

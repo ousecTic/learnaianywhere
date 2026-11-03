@@ -1,0 +1,74 @@
+{
+  "_note": "Do not translate keys. Preserve {placeholder} tokens exactly as written.",
+  "ui": {
+    "pageTitle": "Cuestionario de Repaso Lección 2 - Aprende IA en Cualquier Lugar",
+    "introTitle": "Cuestionario de Repaso Lección 2",
+    "introSubtitle": "Pon a prueba tus conocimientos sobre los fundamentos del Aprendizaje Automático",
+    "startBtn": "Comenzar Cuestionario",
+    "footerTagline": "4 preguntas • Opción múltiple",
+    "questionHeading": "Cuestionario de Repaso",
+    "correctAnswerLabel": "Respuesta Correcta:",
+    "nextBtn": "Siguiente Pregunta",
+    "reviewTitle": "¡Cuestionario Completado!",
+    "reviewSubtitle": "Así te fue",
+    "retakeBtn": "Repetir Cuestionario",
+    "footerComplete": "¡Buen trabajo al completar el cuestionario!",
+    "footerBrand": "Aprende IA en Cualquier Lugar",
+    "progress": "Pregunta {n} de {total}",
+    "progressReview": "Pregunta {n} de {total} (Modo Revisión)",
+    "feedbackCorrect": "✓ ¡Correcto!",
+    "feedbackIncorrect": "✗ Incorrecto",
+    "scoreDisplay": "¡Respondiste {score} de {total} correctamente! ({percent}%)",
+    "reviewQuestion": "Pregunta {n}",
+    "reviewCorrect": "✓ Correcto",
+    "reviewIncorrect": "✗ Incorrecto",
+    "reviewDetails": "Tu respuesta: {userAnswer} | Respuesta correcta: {correctAnswer}",
+    "backToReview": "Volver a la Revisión"
+  },
+  "questions": [
+    {
+      "id": 1,
+      "question": "¿Cuáles son las cuatro partes clave del Aprendizaje Automático?",
+      "options": [
+        "Modelo, Datos, Entrenamiento y Modelo Entrenado",
+        "Modelo, Datos, Programación y Hardware",
+        "Entrenamiento, Datos, Internet y Modelo",
+        "Modelo, Programación, Entrenamiento y Hardware"
+      ],
+      "correctAnswer": "Modelo, Datos, Entrenamiento y Modelo Entrenado"
+    },
+    {
+      "id": 2,
+      "question": "¿Cuál es el propósito del \"entrenamiento\" en el aprendizaje automático?",
+      "options": [
+        "Almacenar datos para usarlos más tarde",
+        "Enviar comandos a la máquina",
+        "Encontrar patrones en los datos",
+        "Diseñar cómo interactuará el usuario"
+      ],
+      "correctAnswer": "Encontrar patrones en los datos"
+    },
+    {
+      "id": 3,
+      "question": "¿Qué es un \"modelo entrenado\" en el aprendizaje automático?",
+      "options": [
+        "Un diagrama de cómo se construyó la máquina",
+        "El proceso en el que la máquina se entrena con datos",
+        "Una representación visual de los pasos de entrenamiento",
+        "La parte final que hace predicciones"
+      ],
+      "correctAnswer": "La parte final que hace predicciones"
+    },
+    {
+      "id": 4,
+      "question": "¿Por qué un clasificador de IA podría dar una predicción incorrecta?",
+      "options": [
+        "Analizó una cantidad limitada de datos",
+        "No entendió la pregunta",
+        "No estaba conectado a internet",
+        "Procesó la entrada demasiado rápido"
+      ],
+      "correctAnswer": "Analizó una cantidad limitada de datos"
+    }
+  ]
+}

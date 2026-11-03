@@ -1,0 +1,74 @@
+{
+  "_note": "Do not translate keys. Preserve {placeholder} tokens exactly as written.",
+  "ui": {
+    "pageTitle": "Cuestionario de Repaso Lección 3 - Aprende IA en Cualquier Lugar",
+    "introTitle": "Cuestionario de Repaso Lección 3",
+    "introSubtitle": "Pon a prueba tus conocimientos sobre algoritmos y entrenamiento",
+    "startBtn": "Comenzar Cuestionario",
+    "footerTagline": "4 preguntas • Opción múltiple",
+    "questionHeading": "Cuestionario de Repaso",
+    "correctAnswerLabel": "Respuesta Correcta:",
+    "nextBtn": "Siguiente Pregunta",
+    "reviewTitle": "¡Cuestionario Completado!",
+    "reviewSubtitle": "Así te fue",
+    "retakeBtn": "Repetir Cuestionario",
+    "footerComplete": "¡Buen trabajo al completar el cuestionario!",
+    "footerBrand": "Aprende IA en Cualquier Lugar",
+    "progress": "Pregunta {n} de {total}",
+    "progressReview": "Pregunta {n} de {total} (Modo Revisión)",
+    "feedbackCorrect": "✓ ¡Correcto!",
+    "feedbackIncorrect": "✗ Incorrecto",
+    "scoreDisplay": "¡Respondiste {score} de {total} correctamente! ({percent}%)",
+    "reviewQuestion": "Pregunta {n}",
+    "reviewCorrect": "✓ Correcto",
+    "reviewIncorrect": "✗ Incorrecto",
+    "reviewDetails": "Tu respuesta: {userAnswer} | Respuesta correcta: {correctAnswer}",
+    "backToReview": "Volver a la Revisión"
+  },
+  "questions": [
+    {
+      "id": 1,
+      "question": "¿Qué es un algoritmo?",
+      "options": [
+        "Un tipo de computadora",
+        "Una conjetura aleatoria que hace una máquina",
+        "Una manera paso a paso de completar una tarea",
+        "Una regla que nunca cambia"
+      ],
+      "correctAnswer": "Una manera paso a paso de completar una tarea"
+    },
+    {
+      "id": 2,
+      "question": "¿Por qué una máquina necesita algoritmos claros y detallados?",
+      "options": [
+        "Para poder hablar con los humanos de forma natural",
+        "Porque no puede entender como los humanos y necesita pasos exactos a seguir",
+        "Para poder decidir por sí sola sin ayuda",
+        "Para poder trabajar rápido sin instrucciones claras"
+      ],
+      "correctAnswer": "Porque no puede entender como los humanos y necesita pasos exactos a seguir"
+    },
+    {
+      "id": 3,
+      "question": "¿Qué sucede durante el entrenamiento de una máquina?",
+      "options": [
+        "Memoriza cada ejemplo sin comprobar errores",
+        "Espera a que los humanos corrijan los errores y le digan las respuestas correctas",
+        "Calcula una predicción, mide su error y ajusta su ecuación",
+        "Sigue haciendo la misma predicción sin mejorar"
+      ],
+      "correctAnswer": "Calcula una predicción, mide su error y ajusta su ecuación"
+    },
+    {
+      "id": 4,
+      "question": "¿Cómo procesan los humanos y las máquinas las características de manera diferente?",
+      "options": [
+        "Los humanos se enfocan en lo que les parece importante, y las máquinas usan números",
+        "Los humanos convierten las características en números, y las máquinas se basan en sentimientos",
+        "Los humanos y las máquinas adivinan al azar",
+        "Las máquinas entienden las emociones mejor que los humanos"
+      ],
+      "correctAnswer": "Los humanos se enfocan en lo que les parece importante, y las máquinas usan números"
+    }
+  ]
+}

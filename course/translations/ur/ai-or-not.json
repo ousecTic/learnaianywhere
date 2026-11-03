@@ -1,0 +1,118 @@
+{
+  "_note": "Do not translate keys or the correctAnswer values ('ai' / 'not_ai'). Preserve {placeholder} tokens exactly as written.",
+  "ui": {
+    "pageTitle": "AI ہے یا نہیں کوئز - کہیں بھی AI سیکھیں",
+    "title": "آئیے کھیلیں: AI ہے یا نہیں!",
+    "subtitle": "AI کے تصورات کے بارے میں اپنی سمجھ جانچیں",
+    "introStep1": "ایک صورتحال بیان کی جائے گی",
+    "introStep2": "دیکھیں کہ کیا اس میں خود مختاری اور مطابقت پذیری شامل ہے",
+    "introStep3": "فیصلہ کریں کہ یہ AI ہے یا نہیں",
+    "introStep4": "اپنی وجہ بتائیں",
+    "startBtn": "کھیل شروع کریں",
+    "questionHeading": "AI ہے یا نہیں؟",
+    "progress": "راؤنڈ {n} از {total}",
+    "progressReview": "راؤنڈ {n} از {total} (جائزہ موڈ)",
+    "answerAi": "یہ AI ہے",
+    "answerNotAi": "یہ AI نہیں ہے",
+    "imageAlt": "سوال {n} کی تصویر",
+    "feedbackCorrect": "✓ درست! {answer}۔",
+    "feedbackIncorrect": "✗ غلط۔ درست جواب ہے: {answer}۔",
+    "explanationHeading": "وضاحت:",
+    "nextBtn": "اگلا سوال",
+    "gameComplete": "کھیل مکمل!",
+    "hereIsHowYouDid": "آپ کی کارکردگی یہ رہی",
+    "scoreDisplay": "آپ نے {total} میں سے {score} درست جواب دیے!",
+    "reviewRound": "راؤنڈ {n}",
+    "reviewCorrect": "✓ درست",
+    "reviewIncorrect": "✗ غلط",
+    "reviewYourAnswer": "آپ کا جواب: {userAnswer} | درست جواب: {correctAnswer}",
+    "playAgainBtn": "دوبارہ کھیلیں",
+    "backToReviewBtn": "جائزے پر واپس جائیں",
+    "footerBrand": "کہیں بھی AI سیکھیں",
+    "footerTagline": "5 سوالات • تعلیمی کھیل",
+    "footerKeepLearning": "AI کے بارے میں سیکھتے رہیں!"
+  },
+  "explanationLabels": {
+    "autonomous_positive": "خود مختاری: ہاں، یہ خود مختار ہے",
+    "autonomous_negative": "خود مختاری: نہیں، یہ خود مختار نہیں ہے",
+    "adaptive_positive": "مطابقت پذیری: ہاں، یہ مطابقت پذیر ہے",
+    "adaptive_negative": "مطابقت پذیری: نہیں، یہ مطابقت پذیر نہیں ہے"
+  },
+  "questions": [
+    {
+      "id": 1,
+      "question": "جب آپ کسی دوست کو پیغام لکھ رہے ہوتے ہیں تو آپ کا فون وہ اگلا لفظ تجویز کرتا ہے جو آپ استعمال کرنا چاہیں۔ اگر آپ سے غلطی ہو جائے تو یہ آپ کی ہجے بھی درست کر دیتا ہے۔",
+      "correctAnswer": "ai",
+      "explanation": {
+        "autonomous": {
+          "positive": true,
+          "content": "یہ آپ کی غلطیاں پکڑ لیتا ہے اور اس سے پہلے کہ آپ کو ٹائپنگ کی غلطی کا پتہ چلے، خود ہی درستی پیش کر دیتا ہے۔"
+        },
+        "adaptive": {
+          "positive": true,
+          "content": "یہ آپ کی پہلے لکھی ہوئی باتوں کی بنیاد پر الفاظ تجویز کرنے میں بہتر ہوتا جاتا ہے۔"
+        }
+      }
+    },
+    {
+      "id": 2,
+      "question": "ایک فون جو صرف اسی وقت کال کرنے دیتا ہے جب آپ خود نمبر ٹائپ یا ڈائل کریں",
+      "correctAnswer": "not_ai",
+      "explanation": {
+        "autonomous": {
+          "positive": false,
+          "content": "آپ کو ہر بار سب کچھ خود کرنا پڑتا ہے۔"
+        },
+        "adaptive": {
+          "positive": false,
+          "content": "یہ بہتر ہونے کے لیے نئے ڈیٹا کا تجزیہ نہیں کرتا۔ یہ ہمیشہ ایک ہی طرح کام کرتا ہے۔"
+        }
+      }
+    },
+    {
+      "id": 3,
+      "question": "آپ اپنا چہرہ دکھا کر اپنا فون کھول سکتے ہیں۔ یہ جتنی زیادہ تصاویر کا تجزیہ کرتا ہے، آپ کو پہچاننے میں اتنا ہی بہتر ہوتا جاتا ہے۔",
+      "correctAnswer": "ai",
+      "explanation": {
+        "autonomous": {
+          "positive": true,
+          "content": "یہ خود ہی آپ کا فون کھول کر آپ کی مدد کرتا ہے۔ آپ کو بٹن تک دبانا نہیں پڑتا!"
+        },
+        "adaptive": {
+          "positive": true,
+          "content": "یہ پہچان بہتر بنانے کے لیے آپ کے چہرے کی مزید تصاویر کا تجزیہ کرتا ہے، چاہے آپ کی شکل بدل جائے۔"
+        }
+      }
+    },
+    {
+      "id": 4,
+      "question": "ایک موشن سینسر لائٹ حرکت محسوس ہونے پر جل جاتی ہے اور جب کوئی موجود نہ ہو تو بجھ جاتی ہے۔ یہ ہر بار ایک ہی طرح ردعمل دیتی ہے۔",
+      "correctAnswer": "not_ai",
+      "explanation": {
+        "autonomous": {
+          "positive": true,
+          "content": "حرکت محسوس ہونے پر یہ خود ہی جلتی اور بجھتی ہے۔"
+        },
+        "adaptive": {
+          "positive": false,
+          "content": "یہ ہمیشہ ایک ہی طرح ردعمل دیتی ہے، چاہے کچھ بھی حرکت کرے۔"
+        }
+      }
+    },
+    {
+      "id": 5,
+      "question": "آپ ایک ایسی ایپ سے بات کرتے ہیں جو پروجیکٹس کی منصوبہ بندی میں مدد کرتی ہے۔ آپ اپنا پروجیکٹ بیان کرتے ہیں، اور یہ اسے مکمل کرنے کے مراحل تجویز کرتی ہے۔ جیسے جیسے آپ اس سے بات کرتے ہیں، یہ مراحل تجویز کرنے میں بہتر ہوتی جاتی ہے۔",
+      "correctAnswer": "ai",
+      "explanation": {
+        "autonomous": {
+          "positive": true,
+          "content": "یہ آپ کی بیان کردہ تفصیل کی بنیاد پر خود ہی ایک منصوبہ بنا کر آپ کی مدد کرتی ہے۔"
+        },
+        "adaptive": {
+          "positive": true,
+          "content": "جیسے جیسے یہ آپ کے مخصوص پروجیکٹ اور آپ کے کام کرنے کے طریقے کے بارے میں مزید سیکھتی ہے، اپنی تجاویز بہتر بناتی جاتی ہے۔"
+        }
+      }
+    }
+  ]
+}

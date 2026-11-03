@@ -1,0 +1,88 @@
+{
+  "_note": "Do not translate keys or the correctAnswer values ('ai' / 'not_ai'). Preserve {placeholder} tokens exactly as written.",
+  "ui": {
+    "pageTitle": "¿IA o No? - Aprende IA en Cualquier Lugar",
+    "title": "¡Juguemos ¿IA o No?!",
+    "subtitle": "Pon a prueba tu comprensión de los conceptos de IA",
+    "introStep1": "Describiré una situación",
+    "introStep2": "Observa si involucra autonomía y adaptabilidad",
+    "introStep3": "Decide si es IA o No",
+    "introStep4": "Comparte tu razonamiento",
+    "startBtn": "Comenzar",
+    "questionHeading": "¿IA o No?",
+    "progress": "Ronda {n} de {total}",
+    "progressReview": "Ronda {n} de {total} (Modo Revisión)",
+    "answerAi": "Esto Es IA",
+    "answerNotAi": "Esto No Es IA",
+    "imageAlt": "Ilustración de la pregunta {n}",
+    "feedbackCorrect": "✓ ¡Correcto! {answer}.",
+    "feedbackIncorrect": "✗ Incorrecto. La respuesta correcta es: {answer}.",
+    "explanationHeading": "Explicación:",
+    "nextBtn": "Siguiente Pregunta",
+    "gameComplete": "¡Juego Completado!",
+    "hereIsHowYouDid": "Así te fue",
+    "scoreDisplay": "¡Respondiste {score} de {total} correctamente!",
+    "reviewRound": "Ronda {n}",
+    "reviewCorrect": "✓ Correcto",
+    "reviewIncorrect": "✗ Incorrecto",
+    "reviewYourAnswer": "Tu respuesta: {userAnswer} | Respuesta correcta: {correctAnswer}",
+    "playAgainBtn": "Jugar de Nuevo",
+    "backToReviewBtn": "Volver a la Revisión",
+    "footerBrand": "Aprende IA en Cualquier Lugar",
+    "footerTagline": "5 preguntas • Juego educativo",
+    "footerKeepLearning": "¡Sigue aprendiendo sobre IA!"
+  },
+  "explanationLabels": {
+    "autonomous_positive": "Autonomía: Sí, es Autónomo",
+    "autonomous_negative": "Autonomía: No, no es Autónomo",
+    "adaptive_positive": "Adaptabilidad: Sí, es Adaptativo",
+    "adaptive_negative": "Adaptabilidad: No, no es Adaptativo"
+  },
+  "questions": [
+    {
+      "id": 1,
+      "question": "Mientras escribes un mensaje a un amigo, tu teléfono sugiere la siguiente palabra que podrías querer usar. También corrige tu ortografía si cometes un error.",
+      "correctAnswer": "ai",
+      "explanation": {
+        "autonomous": { "positive": true,  "content": "Detecta tus errores y ofrece una corrección por sí solo, antes de que notes el error tipográfico." },
+        "adaptive":   { "positive": true,  "content": "Mejora sus sugerencias de palabras basándose en lo que escribiste antes." }
+      }
+    },
+    {
+      "id": 2,
+      "question": "Un teléfono que solo te permite hacer llamadas cuando tú marcas o discar el número",
+      "correctAnswer": "not_ai",
+      "explanation": {
+        "autonomous": { "positive": false, "content": "Tienes que hacerlo todo tú mismo cada vez." },
+        "adaptive":   { "positive": false, "content": "No analiza datos nuevos para mejorar. Siempre funciona de la misma manera." }
+      }
+    },
+    {
+      "id": 3,
+      "question": "Puedes desbloquear tu teléfono mostrando tu cara. Cuantas más fotos analiza, mejor reconociéndote se vuelve.",
+      "correctAnswer": "ai",
+      "explanation": {
+        "autonomous": { "positive": true,  "content": "Te ayuda desbloqueando tu teléfono por sí solo. ¡Ni siquiera tienes que presionar un botón!" },
+        "adaptive":   { "positive": true,  "content": "Analiza más fotos de tu cara para mejorar el reconocimiento, incluso si tu apariencia cambia." }
+      }
+    },
+    {
+      "id": 4,
+      "question": "Una luz con sensor de movimiento se enciende cuando detecta movimiento y se apaga cuando no hay nadie. Reacciona de la misma manera cada vez.",
+      "correctAnswer": "not_ai",
+      "explanation": {
+        "autonomous": { "positive": true,  "content": "Se enciende y apaga sola cuando detecta movimiento." },
+        "adaptive":   { "positive": false, "content": "Siempre reacciona de la misma manera, sin importar qué se mueva." }
+      }
+    },
+    {
+      "id": 5,
+      "question": "Hablas con una aplicación que te ayuda a planificar proyectos. Describes tu proyecto y te sugiere los pasos para completarlo. Mejora sus sugerencias a medida que hablas con ella.",
+      "correctAnswer": "ai",
+      "explanation": {
+        "autonomous": { "positive": true,  "content": "Te ayuda creando un plan por sí sola basándose en tu descripción." },
+        "adaptive":   { "positive": true,  "content": "Mejora sus sugerencias a medida que aprende más sobre tu proyecto específico y cómo trabajas." }
+      }
+    }
+  ]
+}

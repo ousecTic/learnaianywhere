@@ -1,0 +1,27 @@
+{
+  "_note": "Do not translate keys. Preserve {placeholder} tokens exactly as written.",
+  "ui": {
+    "pageTitle": "Lesson 3: Identifying Features - Design Your Own AI Classifier",
+    "mainHeading": "Design Your Own AI Classifier",
+    "lessonTitle": "Lesson 3: Identifying Features",
+    "question": "What features will your classifier use to categorize the data?",
+    "example": "Example: For school supplies, consider features like shape, color, size, texture, position",
+    "responseLabel": "Your Response:",
+    "placeholder": "Type your answer here...",
+    "ariaLabel": "Your response to the lesson question",
+    "clearBtn": "Clear Response",
+    "footerBrand": "Learn AI Anywhere",
+    "footerSave": "Your responses are saved locally on this device",
+    "statusInit": "Start typing - your work will be saved automatically",
+    "statusSaving": "Saving...",
+    "statusSaved": "Saved at {time}",
+    "statusLastSaved": "Last saved at {time}",
+    "errorStorage": "Local storage is not available in your browser",
+    "errorSave": "Error saving - please try again",
+    "errorLoad": "Error loading saved response",
+    "confirmClear": "Are you sure you want to clear your response? This cannot be undone.",
+    "errorNothingToClear": "Nothing to clear",
+    "successCleared": "Response cleared successfully",
+    "errorClearing": "Error clearing response"
+  }
+}

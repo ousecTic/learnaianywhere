@@ -12,7 +12,7 @@ const Mission = () => {
           <div className="stat-card">
             <div className="stat-number">2.2B</div>
             <p className="stat-description">
-              people remain offline worldwide (
+              people remain offline, most of them in low- and middle-income countries (
               <a href="https://www.itu.int/en/ITU-D/Statistics/Pages/facts/default.aspx" target="_blank" rel="noopener noreferrer">ITU, 2025</a>
               )
             </p>
@@ -20,16 +20,16 @@ const Mission = () => {
           <div className="stat-card">
             <div className="stat-number">2/3</div>
             <p className="stat-description">
-              of educators surveyed across 59 countries lacked sufficient computers at their institution (
-              <a href="https://iite.unesco.org/wp-content/uploads/2025/12/Guidelines-Gender-ICT-Global-South-Edu-fnl.pdf" target="_blank" rel="noopener noreferrer">UNESCO IITE, 2022</a>
+              of educators surveyed across 59 countries lacked sufficient computers for their students (
+              <a href="https://iite.unesco.org/wp-content/uploads/2023/07/Analytical-report-fnl5.pdf" target="_blank" rel="noopener noreferrer">UNESCO IITE, 2022</a>
               )
             </p>
           </div>
           <div className="stat-card">
-            <div className="stat-number">41%</div>
+            <div className="stat-number">50%</div>
             <p className="stat-description">
-              of teachers in low-income countries receive practical ICT guidance (
-              <a href="https://teachertaskforce.org/blog/improve-state-education-around-world-we-need-support-teachers-how" target="_blank" rel="noopener noreferrer">UNESCO Teacher Task Force</a>
+              of secondary teachers in sub-Saharan Africa have had even minimum training, and it rarely covers technology (
+              <a href="https://www.unesco.org/en/articles/startling-digital-divides-distance-learning-emerge" target="_blank" rel="noopener noreferrer">UNESCO, 2020</a>
               )
             </p>
           </div>

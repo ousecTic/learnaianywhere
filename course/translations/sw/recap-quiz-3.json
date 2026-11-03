@@ -1,0 +1,74 @@
+{
+  "_note": "Do not translate keys. Preserve {placeholder} tokens exactly as written.",
+  "ui": {
+    "pageTitle": "Jaribio la Mapitio Somo la 3 - Jifunze AI Popote",
+    "introTitle": "Jaribio la Mapitio Somo la 3",
+    "introSubtitle": "Pima ujuzi wako wa algoria na mafunzo",
+    "startBtn": "Anza Jaribio",
+    "footerTagline": "Maswali 4 • Chaguo nyingi",
+    "questionHeading": "Jaribio la Mapitio",
+    "correctAnswerLabel": "Jibu Sahihi:",
+    "nextBtn": "Swali Linalofuata",
+    "reviewTitle": "Jaribio Limekamilika!",
+    "reviewSubtitle": "Hivi ndivyo ulivyofanya",
+    "retakeBtn": "Rudia Jaribio",
+    "footerComplete": "Kazi nzuri kukamilisha jaribio!",
+    "footerBrand": "Jifunze AI Popote",
+    "progress": "Swali {n} kati ya {total}",
+    "progressReview": "Swali {n} kati ya {total} (Hali ya Mapitio)",
+    "feedbackCorrect": "✓ Sahihi!",
+    "feedbackIncorrect": "✗ Si Sahihi",
+    "scoreDisplay": "Umepata {score} kati ya {total} sahihi! ({percent}%)",
+    "reviewQuestion": "Swali {n}",
+    "reviewCorrect": "✓ Sahihi",
+    "reviewIncorrect": "✗ Si Sahihi",
+    "reviewDetails": "Jibu lako: {userAnswer} | Jibu sahihi: {correctAnswer}",
+    "backToReview": "Rudi kwa Mapitio"
+  },
+  "questions": [
+    {
+      "id": 1,
+      "question": "Algoria ni nini?",
+      "options": [
+        "Aina ya kompyuta",
+        "Kisio la nasibu ambalo mashine hufanya",
+        "Njia ya hatua kwa hatua ya kukamilisha kazi",
+        "Sheria ambayo haibadiliki kamwe"
+      ],
+      "correctAnswer": "Njia ya hatua kwa hatua ya kukamilisha kazi"
+    },
+    {
+      "id": 2,
+      "question": "Kwa nini mashine inahitaji algoria zilizo wazi na za kina?",
+      "options": [
+        "Ili iweze kuzungumza na wanadamu kwa njia ya kawaida",
+        "Kwa sababu haiwezi kuelewa kama wanadamu na inahitaji hatua kamili za kufuata",
+        "Ili iweze kuamua yenyewe bila msaada",
+        "Ili iweze kufanya kazi haraka bila maagizo yaliyo wazi"
+      ],
+      "correctAnswer": "Kwa sababu haiwezi kuelewa kama wanadamu na inahitaji hatua kamili za kufuata"
+    },
+    {
+      "id": 3,
+      "question": "Nini hutokea wakati wa mafunzo ya mashine?",
+      "options": [
+        "Inakariri kila mfano bila kuangalia makosa",
+        "Inasubiri wanadamu kurekebisha makosa na kuiambia majibu sahihi",
+        "Inakokotoa utabiri, inapima kosa lake, na kurekebisha mlinganyo wake",
+        "Inaendelea kufanya utabiri uleule bila kuboresha"
+      ],
+      "correctAnswer": "Inakokotoa utabiri, inapima kosa lake, na kurekebisha mlinganyo wake"
+    },
+    {
+      "id": 4,
+      "question": "Wanadamu na mashine huchakata sifa kwa njia tofauti vipi?",
+      "options": [
+        "Wanadamu huzingatia kile kinachoonekana muhimu, na mashine hutumia nambari",
+        "Wanadamu hubadilisha sifa kuwa nambari, na mashine hutegemea hisia",
+        "Wanadamu na mashine wote hukisia kwa nasibu",
+        "Mashine huelewa hisia bora kuliko wanadamu"
+      ],
+      "correctAnswer": "Wanadamu huzingatia kile kinachoonekana muhimu, na mashine hutumia nambari"
+    }
+  ]
+}

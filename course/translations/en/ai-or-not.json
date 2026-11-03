@@ -1,0 +1,88 @@
+{
+  "_note": "Do not translate keys or the correctAnswer values ('ai' / 'not_ai'). Preserve {placeholder} tokens exactly as written.",
+  "ui": {
+    "pageTitle": "AI or Not Quiz - Learn AI Anywhere",
+    "title": "Let's Play AI or Not!",
+    "subtitle": "Test your understanding of AI concepts",
+    "introStep1": "I will describe a situation",
+    "introStep2": "Observe whether it involves autonomy and adaptivity",
+    "introStep3": "Decide if it is AI or Not",
+    "introStep4": "Share your reasoning",
+    "startBtn": "Start Game",
+    "questionHeading": "AI or Not?",
+    "progress": "Round {n} of {total}",
+    "progressReview": "Round {n} of {total} (Review Mode)",
+    "answerAi": "This Is AI",
+    "answerNotAi": "This Is Not AI",
+    "imageAlt": "Question {n} illustration",
+    "feedbackCorrect": "✓ Correct! {answer}.",
+    "feedbackIncorrect": "✗ Incorrect. The correct answer is: {answer}.",
+    "explanationHeading": "Explanation:",
+    "nextBtn": "Next Question",
+    "gameComplete": "Game Complete!",
+    "hereIsHowYouDid": "Here's how you did",
+    "scoreDisplay": "You got {score} out of {total} correct!",
+    "reviewRound": "Round {n}",
+    "reviewCorrect": "✓ Correct",
+    "reviewIncorrect": "✗ Incorrect",
+    "reviewYourAnswer": "Your answer: {userAnswer} | Correct answer: {correctAnswer}",
+    "playAgainBtn": "Play Again",
+    "backToReviewBtn": "Back to Review",
+    "footerBrand": "Learn AI Anywhere",
+    "footerTagline": "5 questions • Educational game",
+    "footerKeepLearning": "Keep learning about AI!"
+  },
+  "explanationLabels": {
+    "autonomous_positive": "Autonomy: Yes, it is Autonomous",
+    "autonomous_negative": "Autonomy: No, it is not Autonomous",
+    "adaptive_positive": "Adaptivity: Yes, it is Adaptive",
+    "adaptive_negative": "Adaptivity: No, it is not Adaptive"
+  },
+  "questions": [
+    {
+      "id": 1,
+      "question": "As you type a message to a friend, your phone suggests the next word you might want to use. It also fixes your spelling if you make a mistake.",
+      "correctAnswer": "ai",
+      "explanation": {
+        "autonomous": { "positive": true,  "content": "It catches your mistakes and offers a fix on its own before you even notice the typo." },
+        "adaptive":   { "positive": true,  "content": "It gets better at suggesting words based on what you typed before." }
+      }
+    },
+    {
+      "id": 2,
+      "question": "A phone that lets you make calls only when you type or dial yourself",
+      "correctAnswer": "not_ai",
+      "explanation": {
+        "autonomous": { "positive": false, "content": "You have to do everything yourself each time." },
+        "adaptive":   { "positive": false, "content": "It doesn't analyze new data to improve. It always works the same way." }
+      }
+    },
+    {
+      "id": 3,
+      "question": "You can unlock your phone by showing your face. The more pictures it analyzes, the better it gets at recognizing you.",
+      "correctAnswer": "ai",
+      "explanation": {
+        "autonomous": { "positive": true,  "content": "It assists you by unlocking your phone on its own. You don't even have to press a button!" },
+        "adaptive":   { "positive": true,  "content": "It analyzes more pictures of your face to improve recognition, even if your appearance changes." }
+      }
+    },
+    {
+      "id": 4,
+      "question": "A motion sensor light turns on when it detects movement and turns off when no one is there. It reacts the same way every time.",
+      "correctAnswer": "not_ai",
+      "explanation": {
+        "autonomous": { "positive": true,  "content": "It turns on and off on its own when it senses movement." },
+        "adaptive":   { "positive": false, "content": "It always reacts the same way, no matter what moves." }
+      }
+    },
+    {
+      "id": 5,
+      "question": "You talk to an app that helps you plan projects. You describe your project, and it suggests steps to complete it. It gets better at suggesting steps as you talk to it.",
+      "correctAnswer": "ai",
+      "explanation": {
+        "autonomous": { "positive": true,  "content": "It assists you by creating a plan on its own based on your description." },
+        "adaptive":   { "positive": true,  "content": "It improves its suggestions as it learns more about your specific project and how you work." }
+      }
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "_note": "Do not translate keys. Preserve {placeholder} tokens exactly as written.",
+  "ui": {
+    "pageTitle": "Somo la 4: Kujenga AI Inayowajibika - Buni Kiainishaji Chako cha AI",
+    "mainHeading": "Buni Kiainishaji Chako cha AI",
+    "lessonTitle": "Somo la 4: Kujenga AI Inayowajibika",
+    "question": "Unaweza kufanya nini ili kuongeza uanuwai zaidi kwenye sifa zako ili kupunguza upendeleo?",
+    "example": "Vidokezo: Pata maoni kutoka kwa watu wengine kuhusu kiainishaji chako. Na kumbuka, ikiwa data yako inajumuisha taarifa za faragha kama uso wa mtu, hakikisha unaomba ruhusa",
+    "responseLabel": "Jibu Lako:",
+    "placeholder": "Andika jibu lako hapa...",
+    "ariaLabel": "Jibu lako kwa swali la somo",
+    "clearBtn": "Futa Jibu",
+    "footerBrand": "Jifunze AI Popote",
+    "footerSave": "Majibu yako yamehifadhiwa kwenye kifaa hiki",
+    "statusInit": "Anza kuandika - kazi yako itahifadhiwa kiotomatiki",
+    "statusSaving": "Inahifadhi...",
+    "statusSaved": "Imehifadhiwa saa {time}",
+    "statusLastSaved": "Ilihifadhiwa mwisho saa {time}",
+    "errorStorage": "Hifadhi ya ndani haipatikani kwenye kivinjari chako",
+    "errorSave": "Hitilafu wakati wa kuhifadhi - tafadhali jaribu tena",
+    "errorLoad": "Hitilafu wakati wa kupakia jibu lililohifadhiwa",
+    "confirmClear": "Una uhakika unataka kufuta jibu lako? Hili haliwezi kutenduliwa.",
+    "errorNothingToClear": "Hakuna cha kufuta",
+    "successCleared": "Jibu limefutwa kwa mafanikio",
+    "errorClearing": "Hitilafu wakati wa kufuta jibu"
+  }
+}

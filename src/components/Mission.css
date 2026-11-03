@@ -41,7 +41,7 @@
 }
 
 .stat-description {
-  font-size: 14px;
+  font-size: 16px;
   color: var(--subtext-color);
   line-height: 1.5;
   margin: 0;
@@ -86,10 +86,6 @@
 
   .stat-number {
     font-size: 40px;
-  }
-
-  .stat-description {
-    font-size: 13px;
   }
 
   .mission-solution {

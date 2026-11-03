@@ -1,0 +1,74 @@
+{
+  "_note": "Do not translate keys. Preserve {placeholder} tokens exactly as written.",
+  "ui": {
+    "pageTitle": "Lesson 4 Recap Quiz - Learn AI Anywhere",
+    "introTitle": "Lesson 4 Recap Quiz",
+    "introSubtitle": "Test your knowledge of AI ethics and responsibility",
+    "startBtn": "Start Quiz",
+    "footerTagline": "4 questions • Multiple choice",
+    "questionHeading": "Recap Quiz",
+    "correctAnswerLabel": "Correct Answer:",
+    "nextBtn": "Next Question",
+    "reviewTitle": "Quiz Complete!",
+    "reviewSubtitle": "Here's how you did",
+    "retakeBtn": "Retake Quiz",
+    "footerComplete": "Great job completing the quiz!",
+    "footerBrand": "Learn AI Anywhere",
+    "progress": "Question {n} of {total}",
+    "progressReview": "Question {n} of {total} (Review Mode)",
+    "feedbackCorrect": "✓ Correct!",
+    "feedbackIncorrect": "✗ Incorrect",
+    "scoreDisplay": "You got {score} out of {total} correct! ({percent}%)",
+    "reviewQuestion": "Question {n}",
+    "reviewCorrect": "✓ Correct",
+    "reviewIncorrect": "✗ Incorrect",
+    "reviewDetails": "Your answer: {userAnswer} | Correct answer: {correctAnswer}",
+    "backToReview": "Back to Review"
+  },
+  "questions": [
+    {
+      "id": 1,
+      "question": "Why can bias in data lead to wrong predictions?",
+      "options": [
+        "The machine refuses to process new data",
+        "The model focuses on feelings instead of numbers",
+        "The machine bases its prediction on a limited perspective",
+        "The machine forgets its training over time"
+      ],
+      "correctAnswer": "The machine bases its prediction on a limited perspective"
+    },
+    {
+      "id": 2,
+      "question": "Who is responsible when an AI tool makes a harmful mistake?",
+      "options": [
+        "The AI tool",
+        "The humans who created or used it",
+        "The data alone",
+        "No one is responsible"
+      ],
+      "correctAnswer": "The humans who created or used it"
+    },
+    {
+      "id": 3,
+      "question": "What are ways humans can reduce harm from AI predictions?",
+      "options": [
+        "Let the AI fix its own mistakes",
+        "Double-check AI predictions",
+        "Ignore errors and hope they improve",
+        "Use more AI models without changing anything"
+      ],
+      "correctAnswer": "Double-check AI predictions"
+    },
+    {
+      "id": 4,
+      "question": "Which of the following respects people's data privacy?",
+      "options": [
+        "Collecting data without telling people",
+        "Sharing personal data with anyone who asks",
+        "Getting permission and using the data for the reason it was collected",
+        "Using data even if it's sensitive, as long as it helps the AI"
+      ],
+      "correctAnswer": "Getting permission and using the data for the reason it was collected"
+    }
+  ]
+}
