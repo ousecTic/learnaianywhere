@@ -1,50 +1,50 @@
 {
   "course": "AI Literacy for Everyone",
-  "version": "1.8",
-  "release": "course-v1.8",
+  "version": "1.9",
+  "release": "course-v1.9",
   "packages": [
     {
       "id": "en",
       "name": "English",
       "lang": "en",
-      "file": "AI-Literacy-for-Everyone-English-v1.8.zip",
+      "file": "AI-Literacy-for-Everyone-English-v1.9.zip",
       "folder": "AI Literacy for Everyone - English",
       "bytes": 116302647,
-      "sha256": "aa8b8ef70b980ca01e51d15795efa14b68ac0855a23ab860e1691f84330af4e6",
-      "date": "2026-11-03",
-      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-English-v1.8.zip",
+      "sha256": "f5223ec14670b3dc3e6063bdb73a63e3989b53abad437f925b2700ae2a99a9c1",
+      "date": "2026-11-13",
+      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-English-v1.9.zip",
       "resources": {
         "guidePdf": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Teacher-Guide-English.pdf",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Teacher-Guide-English.pdf",
           "bytes": 85990
         },
         "guideDocx": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Teacher-Guide-English.docx",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Teacher-Guide-English.docx",
           "bytes": 10634
         },
         "worksheetPdf": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Worksheet-English.pdf",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Worksheet-English.pdf",
           "bytes": 59465
         },
         "worksheetDocx": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Worksheet-English.docx",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Worksheet-English.docx",
           "bytes": 8151
         },
         "examplePdf": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Worksheet-Example-English.pdf",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Worksheet-Example-English.pdf",
           "bytes": 69507
         },
         "exampleDocx": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Worksheet-Example-English.docx",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Worksheet-Example-English.docx",
           "bytes": 8523
         },
         "slidesPdf": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Slides-English.pdf",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Slides-English.pdf",
           "bytes": 7433206
         },
         "slidesPptx": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Slides-English.pptx",
-          "bytes": 95119334
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Slides-English.pptx",
+          "bytes": 95119346
         },
         "videosFolder": {
           "url": "https://drive.google.com/drive/folders/18Lg1huoFHzZTZKKpwCthQ-crESn75Rha"
@@ -55,44 +55,44 @@
       "id": "fr",
       "name": "French",
       "lang": "fr",
-      "file": "AI-Literacy-for-Everyone-French-v1.8.zip",
+      "file": "AI-Literacy-for-Everyone-French-v1.9.zip",
       "folder": "AI Literacy for Everyone - French",
-      "bytes": 180371468,
-      "sha256": "1c2f83c1a4dc0575f215d02efd1336d55d6aedf2dc0fbdcf39f1aac1d10d3ff9",
-      "date": "2026-11-03",
-      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-French-v1.8.zip",
+      "bytes": 180371467,
+      "sha256": "079f34f26164b33564f61377b3cd17c042b24ffe7d5808a907f2b878c21a6bfd",
+      "date": "2026-11-13",
+      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-French-v1.9.zip",
       "resources": {
         "guidePdf": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Teacher-Guide-French.pdf",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Teacher-Guide-French.pdf",
           "bytes": 83848
         },
         "guideDocx": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Teacher-Guide-French.docx",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Teacher-Guide-French.docx",
           "bytes": 11176
         },
         "worksheetPdf": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Worksheet-French.pdf",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Worksheet-French.pdf",
           "bytes": 55904
         },
         "worksheetDocx": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Worksheet-French.docx",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Worksheet-French.docx",
           "bytes": 8425
         },
         "examplePdf": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Worksheet-Example-French.pdf",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Worksheet-Example-French.pdf",
           "bytes": 66836
         },
         "exampleDocx": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Worksheet-Example-French.docx",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Worksheet-Example-French.docx",
           "bytes": 8837
         },
         "slidesPdf": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Slides-French.pdf",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Slides-French.pdf",
           "bytes": 7437659
         },
         "slidesPptx": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Slides-French.pptx",
-          "bytes": 95124439
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Slides-French.pptx",
+          "bytes": 95124442
         },
         "videosFolder": {
           "url": "https://drive.google.com/drive/folders/1xkbhDEt4AtkmnOUpoO84yxTF0ikzd1Mi"
@@ -103,44 +103,44 @@
       "id": "es",
       "name": "Spanish",
       "lang": "es",
-      "file": "AI-Literacy-for-Everyone-Spanish-v1.8.zip",
+      "file": "AI-Literacy-for-Everyone-Spanish-v1.9.zip",
       "folder": "AI Literacy for Everyone - Spanish",
       "bytes": 178246461,
-      "sha256": "705d7f8fab8049b8641276edd4417735383a1ebc4dc36152c6b5021aab1f9e7a",
-      "date": "2026-11-03",
-      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Spanish-v1.8.zip",
+      "sha256": "632c0f6d1f6e4ed25302ad3f1610335f27b6b5bb1ae431d54dc5deea5cabc133",
+      "date": "2026-11-13",
+      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Spanish-v1.9.zip",
       "resources": {
         "guidePdf": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Teacher-Guide-Spanish.pdf",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Teacher-Guide-Spanish.pdf",
           "bytes": 91418
         },
         "guideDocx": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Teacher-Guide-Spanish.docx",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Teacher-Guide-Spanish.docx",
           "bytes": 10924
         },
         "worksheetPdf": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Worksheet-Spanish.pdf",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Worksheet-Spanish.pdf",
           "bytes": 60483
         },
         "worksheetDocx": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Worksheet-Spanish.docx",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Worksheet-Spanish.docx",
           "bytes": 8418
         },
         "examplePdf": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Worksheet-Example-Spanish.pdf",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Worksheet-Example-Spanish.pdf",
           "bytes": 70430
         },
         "exampleDocx": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Worksheet-Example-Spanish.docx",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Worksheet-Example-Spanish.docx",
           "bytes": 8810
         },
         "slidesPdf": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Slides-Spanish.pdf",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Slides-Spanish.pdf",
           "bytes": 7437217
         },
         "slidesPptx": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Slides-Spanish.pptx",
-          "bytes": 95122635
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Slides-Spanish.pptx",
+          "bytes": 95122662
         },
         "videosFolder": {
           "url": "https://drive.google.com/drive/folders/1Sjfe7aJE2CkMlSAh7D4wAJOH3mRppPII"
@@ -151,44 +151,44 @@
       "id": "pt",
       "name": "Portuguese",
       "lang": "pt",
-      "file": "AI-Literacy-for-Everyone-Portuguese-v1.8.zip",
+      "file": "AI-Literacy-for-Everyone-Portuguese-v1.9.zip",
       "folder": "AI Literacy for Everyone - Portuguese",
       "bytes": 179466577,
-      "sha256": "acf4207b4abe0864563939e6691b14aa4410ed7f0119bc02b2e461ef02d6b2e1",
-      "date": "2026-11-03",
-      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Portuguese-v1.8.zip",
+      "sha256": "e255839db101431bdd289f877f775ad313329021aac57e0f784ccaef236ec2ac",
+      "date": "2026-11-13",
+      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Portuguese-v1.9.zip",
       "resources": {
         "guidePdf": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Teacher-Guide-Portuguese.pdf",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Teacher-Guide-Portuguese.pdf",
           "bytes": 91027
         },
         "guideDocx": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Teacher-Guide-Portuguese.docx",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Teacher-Guide-Portuguese.docx",
           "bytes": 10909
         },
         "worksheetPdf": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Worksheet-Portuguese.pdf",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Worksheet-Portuguese.pdf",
           "bytes": 61264
         },
         "worksheetDocx": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Worksheet-Portuguese.docx",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Worksheet-Portuguese.docx",
           "bytes": 8408
         },
         "examplePdf": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Worksheet-Example-Portuguese.pdf",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Worksheet-Example-Portuguese.pdf",
           "bytes": 70498
         },
         "exampleDocx": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Worksheet-Example-Portuguese.docx",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Worksheet-Example-Portuguese.docx",
           "bytes": 8763
         },
         "slidesPdf": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Slides-Portuguese.pdf",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Slides-Portuguese.pdf",
           "bytes": 7437806
         },
         "slidesPptx": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Slides-Portuguese.pptx",
-          "bytes": 95122645
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Slides-Portuguese.pptx",
+          "bytes": 95122636
         },
         "videosFolder": {
           "url": "https://drive.google.com/drive/folders/19xaZwmfNEz2eZDnMuOT8ChHjLItfKwxj"
@@ -199,44 +199,44 @@
       "id": "ar",
       "name": "Arabic",
       "lang": "ar",
-      "file": "AI-Literacy-for-Everyone-Arabic-v1.8.zip",
+      "file": "AI-Literacy-for-Everyone-Arabic-v1.9.zip",
       "folder": "AI Literacy for Everyone - Arabic",
-      "bytes": 179385564,
-      "sha256": "0da5e48e03ed2027d20dd53e5e5ef6e4988006161dab63faab19b41992ecfdfb",
-      "date": "2026-11-03",
-      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Arabic-v1.8.zip",
+      "bytes": 179384382,
+      "sha256": "1cd08985f44a49adaf1a4cc89470f7c75b8428b9e4f0c5de9770f9fe9153e24f",
+      "date": "2026-11-13",
+      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Arabic-v1.9.zip",
       "resources": {
         "guidePdf": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Teacher-Guide-Arabic.pdf",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Teacher-Guide-Arabic.pdf",
           "bytes": 136743
         },
         "guideDocx": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Teacher-Guide-Arabic.docx",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Teacher-Guide-Arabic.docx",
           "bytes": 13998
         },
         "worksheetPdf": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Worksheet-Arabic.pdf",
-          "bytes": 66586
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Worksheet-Arabic.pdf",
+          "bytes": 66044
         },
         "worksheetDocx": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Worksheet-Arabic.docx",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Worksheet-Arabic.docx",
           "bytes": 9239
         },
         "examplePdf": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Worksheet-Example-Arabic.pdf",
-          "bytes": 71311
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Worksheet-Example-Arabic.pdf",
+          "bytes": 70671
         },
         "exampleDocx": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Worksheet-Example-Arabic.docx",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Worksheet-Example-Arabic.docx",
           "bytes": 10257
         },
         "slidesPdf": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Slides-Arabic.pdf",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Slides-Arabic.pdf",
           "bytes": 7514847
         },
         "slidesPptx": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Slides-Arabic.pptx",
-          "bytes": 95136853
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Slides-Arabic.pptx",
+          "bytes": 95136846
         },
         "videosFolder": {
           "url": "https://drive.google.com/drive/folders/1Es5Np1Iwl3VnHL91qiQxqSimVXF-Z0mR"
@@ -247,44 +247,44 @@
       "id": "hi",
       "name": "Hindi",
       "lang": "hi",
-      "file": "AI-Literacy-for-Everyone-Hindi-v1.8.zip",
+      "file": "AI-Literacy-for-Everyone-Hindi-v1.9.zip",
       "folder": "AI Literacy for Everyone - Hindi",
-      "bytes": 182593596,
-      "sha256": "b9f03c0e7ba200a3bbf6c7a58b4e85ec88a5abbe388f107ff5352fc8bddb67a2",
-      "date": "2026-11-03",
-      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Hindi-v1.8.zip",
+      "bytes": 182593597,
+      "sha256": "6047c8fdfaab431665541265944e3e6e8b291e531d0d36109dd40674f5958550",
+      "date": "2026-11-13",
+      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Hindi-v1.9.zip",
       "resources": {
         "guidePdf": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Teacher-Guide-Hindi.pdf",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Teacher-Guide-Hindi.pdf",
           "bytes": 119115
         },
         "guideDocx": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Teacher-Guide-Hindi.docx",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Teacher-Guide-Hindi.docx",
           "bytes": 423888
         },
         "worksheetPdf": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Worksheet-Hindi.pdf",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Worksheet-Hindi.pdf",
           "bytes": 79969
         },
         "worksheetDocx": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Worksheet-Hindi.docx",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Worksheet-Hindi.docx",
           "bytes": 420769
         },
         "examplePdf": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Worksheet-Example-Hindi.pdf",
-          "bytes": 90272
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Worksheet-Example-Hindi.pdf",
+          "bytes": 90273
         },
         "exampleDocx": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Worksheet-Example-Hindi.docx",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Worksheet-Example-Hindi.docx",
           "bytes": 421390
         },
         "slidesPdf": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Slides-Hindi.pdf",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Slides-Hindi.pdf",
           "bytes": 7548390
         },
         "slidesPptx": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Slides-Hindi.pptx",
-          "bytes": 95142903
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Slides-Hindi.pptx",
+          "bytes": 95142922
         },
         "videosFolder": {
           "url": "https://drive.google.com/drive/folders/1RrWoPqu_ir04N5k3wvTZXM-cbRXbAh1Q"
@@ -295,44 +295,44 @@
       "id": "ur",
       "name": "Urdu",
       "lang": "ur",
-      "file": "AI-Literacy-for-Everyone-Urdu-v1.8.zip",
+      "file": "AI-Literacy-for-Everyone-Urdu-v1.9.zip",
       "folder": "AI Literacy for Everyone - Urdu",
-      "bytes": 197315173,
-      "sha256": "cbee5707019895add00a2a36db944b1550ae0310c7eda212f6717cccc64d9b8b",
-      "date": "2026-11-03",
-      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Urdu-v1.8.zip",
+      "bytes": 197314146,
+      "sha256": "b70183c1427e7094370b26a3411c97fafb47ad718a3e2744db90c5ae8bde4437",
+      "date": "2026-11-13",
+      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Urdu-v1.9.zip",
       "resources": {
         "guidePdf": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Teacher-Guide-Urdu.pdf",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Teacher-Guide-Urdu.pdf",
           "bytes": 147187
         },
         "guideDocx": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Teacher-Guide-Urdu.docx",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Teacher-Guide-Urdu.docx",
           "bytes": 14929
         },
         "worksheetPdf": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Worksheet-Urdu.pdf",
-          "bytes": 75863
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Worksheet-Urdu.pdf",
+          "bytes": 75389
         },
         "worksheetDocx": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Worksheet-Urdu.docx",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Worksheet-Urdu.docx",
           "bytes": 9445
         },
         "examplePdf": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Worksheet-Example-Urdu.pdf",
-          "bytes": 82279
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Worksheet-Example-Urdu.pdf",
+          "bytes": 81726
         },
         "exampleDocx": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Worksheet-Example-Urdu.docx",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Worksheet-Example-Urdu.docx",
           "bytes": 11143
         },
         "slidesPdf": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Slides-Urdu.pdf",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Slides-Urdu.pdf",
           "bytes": 7546360
         },
         "slidesPptx": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Slides-Urdu.pptx",
-          "bytes": 95139983
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Slides-Urdu.pptx",
+          "bytes": 95139981
         },
         "videosFolder": {
           "url": "https://drive.google.com/drive/folders/1WxfIzu6Xx6LTmibL9RzmM5ESElBl28pb"
@@ -343,44 +343,44 @@
       "id": "sw-KE",
       "name": "Swahili (Kenya)",
       "lang": "sw",
-      "file": "AI-Literacy-for-Everyone-Swahili-Kenya-v1.8.zip",
+      "file": "AI-Literacy-for-Everyone-Swahili-Kenya-v1.9.zip",
       "folder": "AI Literacy for Everyone - Swahili (Kenya)",
       "bytes": 180823216,
-      "sha256": "5a51f9831b7977d827d0f6fbfb979537e69ca2e5afdb85b75adbd1a5c210ee61",
-      "date": "2026-11-03",
-      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Swahili-Kenya-v1.8.zip",
+      "sha256": "ca3d8835b3237d1657a9adeab63f2218e33fb0fc5b6fcae19656f45408299532",
+      "date": "2026-11-13",
+      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Swahili-Kenya-v1.9.zip",
       "resources": {
         "guidePdf": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Teacher-Guide-Swahili.pdf",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Teacher-Guide-Swahili.pdf",
           "bytes": 85110
         },
         "guideDocx": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Teacher-Guide-Swahili.docx",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Teacher-Guide-Swahili.docx",
           "bytes": 10743
         },
         "worksheetPdf": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Worksheet-Swahili.pdf",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Worksheet-Swahili.pdf",
           "bytes": 50800
         },
         "worksheetDocx": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Worksheet-Swahili.docx",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Worksheet-Swahili.docx",
           "bytes": 8225
         },
         "examplePdf": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Worksheet-Example-Swahili.pdf",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Worksheet-Example-Swahili.pdf",
           "bytes": 54075
         },
         "exampleDocx": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Worksheet-Example-Swahili.docx",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Worksheet-Example-Swahili.docx",
           "bytes": 8554
         },
         "slidesPdf": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Slides-Swahili.pdf",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Slides-Swahili.pdf",
           "bytes": 7430041
         },
         "slidesPptx": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Slides-Swahili.pptx",
-          "bytes": 95120283
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Slides-Swahili.pptx",
+          "bytes": 95120272
         },
         "videosFolder": {
           "url": "https://drive.google.com/drive/folders/1j3SzbKVf8qf4Zx4ZEJ7Xg3Qwmc1l3U5m"
@@ -391,44 +391,44 @@
       "id": "sw-TZ",
       "name": "Swahili (Tanzania)",
       "lang": "sw",
-      "file": "AI-Literacy-for-Everyone-Swahili-Tanzania-v1.8.zip",
+      "file": "AI-Literacy-for-Everyone-Swahili-Tanzania-v1.9.zip",
       "folder": "AI Literacy for Everyone - Swahili (Tanzania)",
       "bytes": 183417866,
-      "sha256": "333d89fab762a24c8c7102d9fd95b642f11e2faed8e4c892c767d5b3a0bdb2f2",
-      "date": "2026-11-03",
-      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Swahili-Tanzania-v1.8.zip",
+      "sha256": "6746b38a4e53c2aa291ee6ea7c9a223c24ceafd933ca6682bf8e71d814b76838",
+      "date": "2026-11-13",
+      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Swahili-Tanzania-v1.9.zip",
       "resources": {
         "guidePdf": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Teacher-Guide-Swahili.pdf",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Teacher-Guide-Swahili.pdf",
           "bytes": 85110
         },
         "guideDocx": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Teacher-Guide-Swahili.docx",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Teacher-Guide-Swahili.docx",
           "bytes": 10743
         },
         "worksheetPdf": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Worksheet-Swahili.pdf",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Worksheet-Swahili.pdf",
           "bytes": 50800
         },
         "worksheetDocx": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Worksheet-Swahili.docx",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Worksheet-Swahili.docx",
           "bytes": 8225
         },
         "examplePdf": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Worksheet-Example-Swahili.pdf",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Worksheet-Example-Swahili.pdf",
           "bytes": 54075
         },
         "exampleDocx": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Worksheet-Example-Swahili.docx",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Worksheet-Example-Swahili.docx",
           "bytes": 8554
         },
         "slidesPdf": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Slides-Swahili.pdf",
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Slides-Swahili.pdf",
           "bytes": 7430041
         },
         "slidesPptx": {
-          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.8/AI-Literacy-for-Everyone-Slides-Swahili.pptx",
-          "bytes": 95120283
+          "url": "https://github.com/ousecTic/learnaianywhere/releases/download/course-v1.9/AI-Literacy-for-Everyone-Slides-Swahili.pptx",
+          "bytes": 95120272
         },
         "videosFolder": {
           "url": "https://drive.google.com/drive/folders/1drV-nHw5ZFO2JnaeCxLe5-mD6aKKreNq"

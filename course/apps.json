@@ -1,107 +1,107 @@
 {
-  "versionName": "1.8.0",
-  "versionCode": 10800,
-  "courseVersion": "1.8",
-  "release": "apk-v1.8.0",
+  "versionName": "1.9.0",
+  "versionCode": 10900,
+  "courseVersion": "1.9",
+  "release": "apk-v1.9.0",
   "apps": [
     {
       "id": "en",
       "appId": "org.learnaianywhere.ailiteracy.en",
-      "versionName": "1.8.0",
-      "versionCode": 10800,
-      "file": "ai-literacy-en-1.8.0.apk",
-      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/apk-v1.8.0/ai-literacy-en-1.8.0.apk",
+      "versionName": "1.9.0",
+      "versionCode": 10900,
+      "file": "ai-literacy-en-1.9.0.apk",
+      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/apk-v1.9.0/ai-literacy-en-1.9.0.apk",
       "latestUrl": "https://github.com/ousecTic/learnaianywhere/releases/download/apk-latest/ai-literacy-en.apk",
-      "sha256": "72276debfe1217e1f5340ac3f5d5b0a8aa5248ea37a5e9227a04733fe3204724",
-      "bytes": 119293874
+      "sha256": "02f6b3c2c61e479887a278a713af10a6f7ff5c4c2b7bab7520fa7b537659feb2",
+      "bytes": 119293893
     },
     {
       "id": "fr",
       "appId": "org.learnaianywhere.ailiteracy.fr",
-      "versionName": "1.8.0",
-      "versionCode": 10800,
-      "file": "ai-literacy-fr-1.8.0.apk",
-      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/apk-v1.8.0/ai-literacy-fr-1.8.0.apk",
+      "versionName": "1.9.0",
+      "versionCode": 10900,
+      "file": "ai-literacy-fr-1.9.0.apk",
+      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/apk-v1.9.0/ai-literacy-fr-1.9.0.apk",
       "latestUrl": "https://github.com/ousecTic/learnaianywhere/releases/download/apk-latest/ai-literacy-fr.apk",
-      "sha256": "7f86446fb5790b579840139e7c17c9b8ff5f0f037676a69b98ab598417aaaa94",
-      "bytes": 183370329
+      "sha256": "0abe43f6f320c5178f04884e312d9a5dbfb34a971c66d499a297e144d2350afd",
+      "bytes": 183370345
     },
     {
       "id": "es",
       "appId": "org.learnaianywhere.ailiteracy.es",
-      "versionName": "1.8.0",
-      "versionCode": 10800,
-      "file": "ai-literacy-es-1.8.0.apk",
-      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/apk-v1.8.0/ai-literacy-es-1.8.0.apk",
+      "versionName": "1.9.0",
+      "versionCode": 10900,
+      "file": "ai-literacy-es-1.9.0.apk",
+      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/apk-v1.9.0/ai-literacy-es-1.9.0.apk",
       "latestUrl": "https://github.com/ousecTic/learnaianywhere/releases/download/apk-latest/ai-literacy-es.apk",
-      "sha256": "3c9e3396ccd9b281655c18669bda7784c967c32db3eb1e4781845f333efe605f",
-      "bytes": 181239471
+      "sha256": "60b0aec206ae03781dbde06738ea0d3ad26f6a199571b7223295129e85c4c9b2",
+      "bytes": 181239483
     },
     {
       "id": "pt",
       "appId": "org.learnaianywhere.ailiteracy.pt",
-      "versionName": "1.8.0",
-      "versionCode": 10800,
-      "file": "ai-literacy-pt-1.8.0.apk",
-      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/apk-v1.8.0/ai-literacy-pt-1.8.0.apk",
+      "versionName": "1.9.0",
+      "versionCode": 10900,
+      "file": "ai-literacy-pt-1.9.0.apk",
+      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/apk-v1.9.0/ai-literacy-pt-1.9.0.apk",
       "latestUrl": "https://github.com/ousecTic/learnaianywhere/releases/download/apk-latest/ai-literacy-pt.apk",
-      "sha256": "d45b4597523445da3e6978cee8e61e8da8c24880f338748c2ab28f7bae4b01c0",
-      "bytes": 182459129
+      "sha256": "af9be250d0c74d29368c9981a4626cbf638e7be3e3e0d3205d56f9b1b0bb7f97",
+      "bytes": 182459135
     },
     {
       "id": "ar",
       "appId": "org.learnaianywhere.ailiteracy.ar",
-      "versionName": "1.8.0",
-      "versionCode": 10800,
-      "file": "ai-literacy-ar-1.8.0.apk",
-      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/apk-v1.8.0/ai-literacy-ar-1.8.0.apk",
+      "versionName": "1.9.0",
+      "versionCode": 10900,
+      "file": "ai-literacy-ar-1.9.0.apk",
+      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/apk-v1.9.0/ai-literacy-ar-1.9.0.apk",
       "latestUrl": "https://github.com/ousecTic/learnaianywhere/releases/download/apk-latest/ai-literacy-ar.apk",
-      "sha256": "d81992dcd8251c443a35ab14755124e142632029517ea9b3c61d9473fb565e1e",
-      "bytes": 182383202
+      "sha256": "d460dc946bc4c174b033a4b5da92c515f852928baa216fc5dde8b7f197110447",
+      "bytes": 182382033
     },
     {
       "id": "hi",
       "appId": "org.learnaianywhere.ailiteracy.hi",
-      "versionName": "1.8.0",
-      "versionCode": 10800,
-      "file": "ai-literacy-hi-1.8.0.apk",
-      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/apk-v1.8.0/ai-literacy-hi-1.8.0.apk",
+      "versionName": "1.9.0",
+      "versionCode": 10900,
+      "file": "ai-literacy-hi-1.9.0.apk",
+      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/apk-v1.9.0/ai-literacy-hi-1.9.0.apk",
       "latestUrl": "https://github.com/ousecTic/learnaianywhere/releases/download/apk-latest/ai-literacy-hi.apk",
-      "sha256": "74dc7f614c2fabe1fd579ad15cad7b5986b9bad983928c2d5907d073f0e39ac6",
-      "bytes": 185597652
+      "sha256": "c9dc0a7fdc10c6c1201a1c885fd51e6cb41a4dca60acae24a4c44acc27509119",
+      "bytes": 185597673
     },
     {
       "id": "ur",
       "appId": "org.learnaianywhere.ailiteracy.ur",
-      "versionName": "1.8.0",
-      "versionCode": 10800,
-      "file": "ai-literacy-ur-1.8.0.apk",
-      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/apk-v1.8.0/ai-literacy-ur-1.8.0.apk",
+      "versionName": "1.9.0",
+      "versionCode": 10900,
+      "file": "ai-literacy-ur-1.9.0.apk",
+      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/apk-v1.9.0/ai-literacy-ur-1.9.0.apk",
       "latestUrl": "https://github.com/ousecTic/learnaianywhere/releases/download/apk-latest/ai-literacy-ur.apk",
-      "sha256": "d79b37fc96b040d2c622c0a85382a042ecbd49a510f2dbb8fdaacea3797cd82a",
-      "bytes": 200313388
+      "sha256": "80b7dc53b57511e2aee78c29b0ff05ed86bd17f227aca724281225d1f7f76005",
+      "bytes": 200312371
     },
     {
       "id": "sw-KE",
       "appId": "org.learnaianywhere.ailiteracy.sw_KE",
-      "versionName": "1.8.0",
-      "versionCode": 10800,
-      "file": "ai-literacy-sw-KE-1.8.0.apk",
-      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/apk-v1.8.0/ai-literacy-sw-KE-1.8.0.apk",
+      "versionName": "1.9.0",
+      "versionCode": 10900,
+      "file": "ai-literacy-sw-KE-1.9.0.apk",
+      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/apk-v1.9.0/ai-literacy-sw-KE-1.9.0.apk",
       "latestUrl": "https://github.com/ousecTic/learnaianywhere/releases/download/apk-latest/ai-literacy-sw-KE.apk",
-      "sha256": "464514450285f3faa1546ddb93630071cd84125d71fa97f6e96897a37dfbcf0f",
-      "bytes": 183813469
+      "sha256": "8c494fda1d64785f0b43bd8baca97005cdd2ece17739e14c78d29ca674c0a78c",
+      "bytes": 183813490
     },
     {
       "id": "sw-TZ",
       "appId": "org.learnaianywhere.ailiteracy.sw_TZ",
-      "versionName": "1.8.0",
-      "versionCode": 10800,
-      "file": "ai-literacy-sw-TZ-1.8.0.apk",
-      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/apk-v1.8.0/ai-literacy-sw-TZ-1.8.0.apk",
+      "versionName": "1.9.0",
+      "versionCode": 10900,
+      "file": "ai-literacy-sw-TZ-1.9.0.apk",
+      "url": "https://github.com/ousecTic/learnaianywhere/releases/download/apk-v1.9.0/ai-literacy-sw-TZ-1.9.0.apk",
       "latestUrl": "https://github.com/ousecTic/learnaianywhere/releases/download/apk-latest/ai-literacy-sw-TZ.apk",
-      "sha256": "130fee603ae33896b30ee9111990ea97f0fe60a2a89c9326cb0c3dade923b564",
-      "bytes": 186411674
+      "sha256": "2c89d97ac608390ce3a4e997fc0154ee6612963c30d5021bbe408a78a7c1b3ae",
+      "bytes": 186411686
     }
   ]
 }
