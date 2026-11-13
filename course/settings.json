@@ -3,7 +3,7 @@
   "course": {
     "name": "AI Literacy for Everyone",
     "slug": "ai-literacy-for-everyone",
-    "version": "1.8"
+    "version": "1.9"
   },
   "drive": {
     "root": "1icEyszg_HXjxPHUZmlp_1_Zb3icZpR1p"
@@ -30,8 +30,8 @@
     { "id": "sw-TZ", "name": "Swahili (Tanzania)", "lang": "sw", "folder": ["sw", "sw-TZ"], "sharedResources": true }
   ],
   "neuropocket": {
-    "version": "1.9.0",
+    "version": "1.9.1",
     "file": "neuropocket-offline.html",
-    "sha256": "585db08a8c43352235ee4e6805739935e72470165a88922e1d626ca115d881f2"
+    "sha256": "754a8f1d604a614718f524936564f60ccf3e961b96de47c41480d3ce0eb272ad"
   }
 }
